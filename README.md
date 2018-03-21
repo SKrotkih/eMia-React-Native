@@ -13,6 +13,7 @@ eMia uses Firebase database, storage, authentication and cloud messages.
 ## Requirements
 
 iOS
+- macOS 10.13
 - Xcode 9.2
 - Swift 4
 
@@ -34,12 +35,31 @@ Create a new project. Then follow documentations. As a result you need to downlo
 
 ## Installation
 
-For iOS
-Clone or unzip the repository. Go to the ios folder. Make
+Clone or unzip the repository.
+In root direcory:
+
+npm install
+
+Build iOS app.
+
+In the ios direcory:
 
 pod install
 
 Open eMia.xcworkspace
+
+build the project
+
+Note. For the current react-native version 0.51.0 you will see error like
+
+#import <fishhook/fishhook.h>  file not found
+
+fix it:
+
+#import "fishhook.h"
+
+repead the build.
+
 
 03-21-2018
 
