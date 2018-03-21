@@ -1,0 +1,44 @@
+<resources>
+    <dimen name="nav_bar_height">192dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="recycler_padding">3dp</dimen>
+    <dimen name="horisont" />
+    <dimen name="lanscapePhotoWidth">30</dimen>
+    <dimen name="landscapePhotoHeight">60dp</dimen>
+    <dimen name="toolbar_text_size">15sp</dimen>
+    <dimen name="horizontal_photo_height">90dp</dimen>
+    <dimen name="vertical_photo_height">248dp</dimen>
+    <item name="lineSpacingMultiplier" type="dimen" format="float">1.3</item>
+    <dimen name="navbar_height">58dp</dimen>
+    <dimen name="gender_selector_text_size">16sp</dimen>
+
+    <dimen name="toolbar_padding_right">15sp</dimen>
+    <dimen name="toolbar_padding_left">15sp</dimen>
+    <dimen name="toolbar_action_text_size">16sp</dimen>
+
+    <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="profile_management_wrapper">230dp</dimen>
+    <dimen name="post_details_photo_height">180dp</dimen>
+
+    <dimen name="post_title_text_size">15sp</dimen>
+    <dimen name="post_description_text_size">10sp</dimen>
+    <dimen name="toolbar_icon_width">60sp</dimen>
+
+    <dimen name="nav_title_text_size">18sp</dimen>
+    <dimen name="nav_horizontal_margin">5dp</dimen>
+    <dimen name="nav_vertical_margin">5dp</dimen>
+    <dimen name="post_send_email_button_size">10sp</dimen>
+
+    <dimen name="radio_buttons_font_size">16sp</dimen>
+    <dimen name="gender_selector_rb_padding_left">20dp</dimen>
+    <dimen name="gender_selector_rb_padding_right">20dp</dimen>
+    <dimen name="gender_selector_rb_padding_top">10dp</dimen>
+    <dimen name="gender_selector_rb_padding_bottom">10dp</dimen>
+
+    <dimen name="switch_thumb_size">25dp</dimen>
+    <dimen name="switch_thumb_radius">15dp</dimen>
+    <dimen name="switch_track_width">50dp</dimen>
+
+</resources>

@@ -1,0 +1,53 @@
+platform :ios, '10.0'
+use_frameworks!
+
+target 'eMia' do
+    pod 'Firebase/Core'
+    pod 'Firebase/Database'
+    pod 'Firebase/Storage'
+    pod 'Firebase/Auth'
+    pod 'Firebase/RemoteConfig'
+    pod 'Firebase/Messaging'
+    pod 'IQKeyboardManagerSwift'
+    pod 'SwiftyJSON'
+    pod 'NextGrowingTextView'
+    pod 'NVActivityIndicatorView'
+    
+    pod 'SwiftyNotifications', '~>0.2'
+    pod 'ReachabilitySwift', '~> 3'
+    pod 'DTCollectionViewManager', '~> 6.0'
+    
+    pod 'AwesomeCache'
+    
+    pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'CxxBridge', # Include this for RN >= 0.47
+    'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
+    'RCTText',
+    'RCTNetwork',
+    'RCTWebSocket', # needed for debugging
+    # Add any other subspecs you want to use in your project
+    ]
+    # Explicitly include Yoga if you are using RN >= 0.42.0
+    pod "yoga", :path => "../node_modules/react-native/ReactCommon/yoga"
+    
+    # Third party deps podspec link
+    pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+    pod 'GLog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
+    pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+    
+end
+
+# The workaround starts here !!!!!
+
+post_install do |installer|
+    Dir.glob(installer.sandbox.target_support_files_root + "Pods-*/*.sh").each do |script|
+        flag_name = File.basename(script, ".sh") + "-Installation-Flag"
+        folder = "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+        file = File.join(folder, flag_name)
+        content = File.read(script)
+        content.gsub!(/set -e/, "set -e\nKG_FILE=\"#{file}\"\nif [ -f \"$KG_FILE\" ]; then exit 0; fi\nmkdir -p \"#{folder}\"\ntouch \"$KG_FILE\"")
+        File.write(script, content)
+    end
+end
+

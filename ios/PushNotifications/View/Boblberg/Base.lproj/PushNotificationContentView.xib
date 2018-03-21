@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="PushNotificationContentView" customModule="MeetCity" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iP0-7V-Ire" customClass="GradientView" customModule="MeetCity" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="75"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vnr-Ui-rAd">
+                            <rect key="frame" x="17" y="10" width="55" height="55"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="vnr-Ui-rAd" secondAttribute="height" multiplier="1:1" id="Fpj-l3-rhb"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="22Y-fk-f5E">
+                            <rect key="frame" x="89" y="38.5" width="269" height="19.5"/>
+                            <fontDescription key="fontDescription" name="Avenir-Light" family="Avenir" pointSize="14"/>
+                            <color key="textColor" red="1" green="0.20000000000000001" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EwS-pj-hcy">
+                            <rect key="frame" x="89" y="11.5" width="269" height="25"/>
+                            <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="18"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="EwS-pj-hcy" secondAttribute="trailing" constant="17" id="3Vk-ZI-oRW"/>
+                        <constraint firstItem="vnr-Ui-rAd" firstAttribute="centerY" secondItem="EwS-pj-hcy" secondAttribute="bottom" constant="1" id="7y8-f6-F73"/>
+                        <constraint firstItem="EwS-pj-hcy" firstAttribute="leading" secondItem="vnr-Ui-rAd" secondAttribute="trailing" constant="17" id="Ezw-vU-oHK"/>
+                        <constraint firstItem="22Y-fk-f5E" firstAttribute="top" secondItem="vnr-Ui-rAd" secondAttribute="centerY" constant="1" id="Nt9-ry-1mY"/>
+                        <constraint firstItem="vnr-Ui-rAd" firstAttribute="leading" secondItem="iP0-7V-Ire" secondAttribute="leading" constant="17" id="Tjf-Nd-Uov"/>
+                        <constraint firstItem="vnr-Ui-rAd" firstAttribute="top" secondItem="iP0-7V-Ire" secondAttribute="top" constant="10" id="are-Fk-PTc"/>
+                        <constraint firstAttribute="bottom" secondItem="vnr-Ui-rAd" secondAttribute="bottom" constant="10" id="b38-Go-ZQI"/>
+                        <constraint firstItem="22Y-fk-f5E" firstAttribute="trailing" secondItem="EwS-pj-hcy" secondAttribute="trailing" id="tRg-2I-s6m"/>
+                        <constraint firstItem="22Y-fk-f5E" firstAttribute="leading" secondItem="EwS-pj-hcy" secondAttribute="leading" id="wrE-Da-8jd"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aa5-oT-B0h" customClass="GradientView" customModule="MeetCity" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="75" width="375" height="5"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="aa5-oT-B0h" firstAttribute="top" secondItem="iP0-7V-Ire" secondAttribute="bottom" id="F2j-IO-RpZ"/>
+                <constraint firstItem="iP0-7V-Ire" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MkF-k6-JZN"/>
+                <constraint firstItem="iP0-7V-Ire" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TnT-eA-6Bf"/>
+                <constraint firstAttribute="trailing" secondItem="aa5-oT-B0h" secondAttribute="trailing" id="VBg-dm-IDN"/>
+                <constraint firstAttribute="bottom" secondItem="aa5-oT-B0h" secondAttribute="bottom" id="dJc-7g-27R"/>
+                <constraint firstItem="aa5-oT-B0h" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kPe-pk-5Kt"/>
+                <constraint firstAttribute="bottom" secondItem="iP0-7V-Ire" secondAttribute="bottom" constant="5" id="wYS-o0-BhQ"/>
+                <constraint firstAttribute="trailing" secondItem="iP0-7V-Ire" secondAttribute="trailing" id="yU2-Zm-sye"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="contentView" destination="iP0-7V-Ire" id="jTF-AR-wlO"/>
+                <outlet property="detailLabel" destination="22Y-fk-f5E" id="8HC-fD-e3g"/>
+                <outlet property="imageView" destination="vnr-Ui-rAd" id="2ks-YR-59d"/>
+                <outlet property="shadowView" destination="aa5-oT-B0h" id="yMe-DW-irb"/>
+                <outlet property="textLabel" destination="EwS-pj-hcy" id="1xe-Fj-xOI"/>
+            </connections>
+            <point key="canvasLocation" x="-206.5" y="-432.5"/>
+        </view>
+    </objects>
+</document>

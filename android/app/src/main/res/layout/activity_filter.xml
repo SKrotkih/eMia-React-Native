@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="dk.coded.emia.View.activity.PostFilterActivity">
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:rsb="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rlFilterWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#f2ffffff"
+        android:visibility="visible">
+
+        <include
+            android:id="@+id/nav_header"
+            layout="@layout/post_detail_nav_header"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/navbar_height"
+            android:layout_alignParentTop="true" />
+
+        <LinearLayout
+            android:id="@+id/llFilterWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nav_header">
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/llFilterBg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp"
+                android:background="#f2ffffff">
+
+                <!-- SHOW ME FILTER -->
+
+                <TextView
+                    android:text="@string/filter_show_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/gender_selector_text_size"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/rbFilterSex"
+                    android:background="@drawable/filter_radio_group">
+
+                    <RadioButton
+                        android:id="@+id/rbGuys"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/filter_show_me_guis"
+                        android:checked="true"
+                        android:button="@null"
+                        android:layout_weight="1"
+                        android:background="@drawable/filter_radio_button"
+                        android:textColor="@drawable/filter_radio_text"
+                        android:textSize="@dimen/radio_buttons_font_size"
+                        android:textAlignment="center"/>
+                    <RadioButton
+                        android:id="@+id/rbGirls"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/filter_show_me_girls"
+                        android:textColor="@drawable/filter_radio_text"
+                        android:button="@null"
+                        android:layout_weight="1"
+                        android:background="@drawable/filter_radio_button"
+                        android:textSize="@dimen/radio_buttons_font_size"
+                        android:textAlignment="center"/>
+                    <RadioButton
+                        android:id="@+id/rbBoth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="@string/filter_show_me_both"
+                        android:textColor="@drawable/filter_radio_text"
+                        android:button="@null"
+                        android:layout_weight="1"
+                        android:background="@drawable/filter_radio_button"
+                        android:textSize="@dimen/radio_buttons_font_size"
+                        android:textAlignment="center"/>
+                </RadioGroup>
+
+                <!-- WITH STATUS -->
+
+                <TextView
+                    android:text="@string/filter_with_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/gender_selector_text_size"/>
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:id="@+id/rbFilterStatus"
+                    android:background="@drawable/filter_radio_group"
+                    android:weightSum="2">
+
+                    <RadioButton
+                        android:id="@+id/rbAll"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/filter_status_all"
+                        android:checked="true"
+                        android:button="@null"
+                        android:layout_weight="1"
+                        android:background="@drawable/filter_radio_button"
+                        android:textColor="@drawable/filter_radio_text"
+                        android:textSize="@dimen/radio_buttons_font_size"
+                        android:textAlignment="center"/>
+                    <RadioButton
+                        android:id="@+id/rbMyFavorite"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="@string/filter_status_favorite"
+                        android:textColor="@drawable/filter_radio_text"
+                        android:button="@null"
+                        android:layout_weight="1"
+                        android:background="@drawable/filter_radio_button"
+                        android:textSize="@dimen/radio_buttons_font_size"
+                        android:textAlignment="center"/>
+                </RadioGroup>
+
+                <!-- AGE-->
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        android:text="@string/filter_age"
+                        android:textSize="@dimen/gender_selector_text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:id="@+id/tvAge"
+                        android:text="20-34"
+                        android:textSize="@dimen/gender_selector_text_size"
+                        android:textColor="@color/colorPrimary"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <org.florescu.android.rangeseekbar.RangeSeekBar
+                    android:id="@+id/mlAge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    rsb:absoluteMaxValue="150"
+                    rsb:absoluteMinValue="0"
+                    rsb:thumbShadow="true"
+                    rsb:valuesAboveThumbs="false"
+                    rsb:activeColor="@color/colorPrimary"
+                    rsb:barHeight="1dp"
+                    rsb:alwaysActive="true"
+                    rsb:showLabels="false"
+                    rsb:thumbNormal="@drawable/filter_thumb"
+                    rsb:thumbPressed="@drawable/filter_thumb"
+                    rsb:thumbDisabled="@drawable/filter_thumb"
+                    />
+
+                <!-- WITH STATUS -->
+
+                <TextView
+                    android:text="@string/filter_municipality"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/gender_selector_text_size"/>
+
+                <Spinner
+                    android:id="@+id/municipalities_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:entries="@array/gender_arrays" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/vDivider"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_below="@id/llFilterBg"
+                android:background="@color/colorPrimary"/>
+        </LinearLayout>
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/run_filter_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_done_black_24dp"
+            android:layout_margin="16dp"/>
+
+
+    </RelativeLayout>
+
+    <include
+        layout="@layout/notification"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"/>
+
+
+</RelativeLayout>
