@@ -73,7 +73,8 @@ class LogInViewController: UIViewController {
    
    @IBAction func signUpButtonPressed(_ sender: Any) {
     
-      startReactNativeScreen()
+    
+        startReactNativeScreen()
     
 //      eventHandler.signUp(emailTextField.text, passwordTextField.text) { error in
 //         guard let error = error else {
@@ -94,7 +95,7 @@ class LogInViewController: UIViewController {
    
    private func startReactNativeScreen() {
       
-      let jsCodeLocation = URL(string: "http://localhost:8081/index.ios.bundle?platform=ios")
+      let jsCodeLocation = URL(string: "http://192.168.0.102:8081/index.ios.bundle?platform=ios")
       let mockData:NSDictionary = ["scores":
          [
             ["name":"Alex", "value":"42"],
