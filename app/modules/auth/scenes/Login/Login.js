@@ -34,7 +34,7 @@ const error = {
 }
 
 class Login extends React.Component {
-  constructor() {
+  constructor () {
     super()
     this.state = {
       error: error
@@ -45,22 +45,22 @@ class Login extends React.Component {
     this.onError = this.onError.bind(this)
   }
 
-  onForgotPassword() {
+  onForgotPassword () {
     Actions.ForgotPassword()
   }
 
-  onSubmit(data) {
-    this.setState({error: error}) //clear out error messages
+  onSubmit (data) {
+    this.setState({error: error}) // clear out error messages
 
     this.props.login(data, this.onSuccess, this.onError)
   }
 
-  onSuccess({exists, user}) {
+  onSuccess ({exists, user}) {
     if (exists) Actions.Main()
     else Actions.CompleteProfile({user})
   }
 
-  onError(error) {
+  onError (error) {
     let errObj = this.state.error
 
     if (error.hasOwnProperty('message')) {
@@ -74,7 +74,7 @@ class Login extends React.Component {
     this.setState({error: errObj})
   }
 
-  render() {
+  render () {
     return (
       <Form fields={fields}
         showLabel={false}

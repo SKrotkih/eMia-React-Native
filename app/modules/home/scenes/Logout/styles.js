@@ -23,16 +23,6 @@ const styles = StyleSheet.create({
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center'
-  },
-
-  item: {
-    flex: 1,
-    height: 160,
-    margin: 1
-  },
-
-  list: {
-    flex: 1
   }
 })
 

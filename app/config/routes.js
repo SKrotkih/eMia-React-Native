@@ -10,7 +10,7 @@ import Register from '../modules/auth/scenes/Register'
 import CompleteProfile from '../modules/auth/scenes/CompleteProfile'
 import Login from '../modules/auth/scenes/Login'
 import ForgotPassword from '../modules/auth/scenes/ForgotPassword'
-import Home from '../modules/home/scenes/Home'
+import Home from '../modules/home/scenes/Home/Home'
 
 // Import Store, actions
 import store from '../redux/store'

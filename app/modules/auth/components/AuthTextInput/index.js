@@ -1,3 +1,3 @@
 import AuthTextInput from './AuthTextInput'
 
-export default AuthTextInput;
+export default AuthTextInput

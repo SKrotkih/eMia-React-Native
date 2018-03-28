@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
     paddingBottom: padding * 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FF553F',
+    backgroundColor: '#FF553F'
   },
 
   image: {
