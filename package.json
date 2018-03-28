@@ -2,15 +2,39 @@
   "name": "eMia",
   "version": "0.0.1",
   "private": true,
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "react-native-scripts start",    
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "node node_modules/jest/bin/jest.js"
+  },
+  "jest": {
+    "preset": "jest-expo"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "expo": "^25.0.0",
     "eslint": "^4.19.1",
+    "firebase": "^4.12.0",
+    "moment": "^2.21.0",
     "react": "16.2.0",
-    "react-native": "^0.51.0"
+    "react-native": "0.52.0",
+    "react-native-elements": "^0.19.0",
+    "react-native-keyboard-spacer": "^0.4.1",
+    "react-native-loading-spinner-overlay": "^0.5.2",
+    "react-native-redux-listener": "^0.3.0",
+    "react-native-router-flux": "^4.0.0-beta.28",
+    "react-native-size-matters": "^0.1.0",
+    "react-redux": "^5.0.7",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
+    "jest-expo": "25.0.0",
+    "react-native-scripts": "1.11.1",
+    "react-test-renderer": "16.2.0",
     "eslint-config-google": "^0.9.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.9.0",

@@ -22,6 +22,7 @@ DerivedData
 #React Native
 node_modules/
 package-lock.json
+.expo
 
 # CocoaPods
 Pods/

@@ -1,0 +1,26 @@
+
+https://medium.com/@mosesesan/how-to-build-a-react-native-app-using-firebase-part-1-1210fa206714
+
+yarn global add create-react-native-app
+
+create-react-native-app firebase-auth-app
+cd firebase-auth-app/
+
+yarn add redux
+yarn add react-redux 
+yarn add redux-thunk 
+yarn add react-native-elements
+yarn add react-native-router-flux
+yarn add axios
+yarn add react-native-redux-listener
+yarn add react-native-loading-spinner-overlay
+yarn add react-native-keyboard-spacer
+yarn add moment
+yarn add firebase
+yarn add react-native-size-matters
+
+---or---
+
+
+yarn start
+
