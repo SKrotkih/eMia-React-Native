@@ -1,3 +1,3 @@
 import CompleteProfile from "./CompleteProfile"
 
-export default CompleteProfile;
+export default CompleteProfile

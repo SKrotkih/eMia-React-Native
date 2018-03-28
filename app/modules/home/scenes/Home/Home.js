@@ -1,51 +1,50 @@
-import React from 'react';
-var { View, StyleSheet, Alert } = require('react-native');
-
+import React from 'react'
+import { actions as auth, theme } from '../../../auth/index'
 import {Button} from 'react-native-elements'
-import {Actions} from 'react-native-router-flux';
-import {connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux'
+import {connect} from 'react-redux'
+import styles from './styles'
 
-import styles from "./styles"
+var { View, StyleSheet, Alert } = require('react-native')
 
-import { actions as auth, theme } from "../../../auth/index"
-const { signOut } = auth;
+const { signOut } = auth
 
-const { color } = theme;
+const { color } = theme
 
 class Home extends React.Component {
-    constructor(){
-        super();
-        this.state = { }
-        
-        this.onSignOut = this.onSignOut.bind(this);
-    }
+  constructor () {
+    super()
+    this.state = { }
 
-    onSignOut() {
-        this.props.signOut(this.onSuccess.bind(this), this.onError.bind(this))
-    }
+    this.onSignOut = this.onSignOut.bind(this)
+  }
 
-    onSuccess() {
-        Actions.reset("Auth")
-    }
+  onSignOut () {
+    this.props.signOut(this.onSuccess.bind(this), this.onError.bind(this))
+  }
 
-    onError(error) {
-        Alert.alert('Oops!', error.message);
-    }
+  onSuccess () {
+    Actions.reset('Auth')
+  }
 
-    render() {
-        return (
-            <View style={styles.container}>
-                <Button
-                    raised
-                    borderRadius={4}
-                    title={'LOG OUT'}
-                    containerViewStyle={[styles.containerView]}
-                    buttonStyle={[styles.button]}
-                    textStyle={styles.buttonText}
-                    onPress={this.onSignOut}/>
-            </View>
-        );
-    }
+  onError (error) {
+    Alert.alert('Oops!', error.message)
+  }
+
+  render () {
+    return (
+      <View style={styles.container}>
+        <Button
+          raised
+          borderRadius={4}
+          title={'LOG OUT'}
+          containerViewStyle={[styles.containerView]}
+          buttonStyle={[styles.button]}
+          textStyle={styles.buttonText}
+          onPress={this.onSignOut}/>
+      </View>
+    )
+  }
 }
 
-export default connect(null, { signOut })(Home);
+export default connect(null, { signOut })(Home)

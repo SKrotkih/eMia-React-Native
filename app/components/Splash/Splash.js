@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, ActivityIndicator, Image } from 'react-native';
+import React from 'react'
+import { View, Text, ActivityIndicator, Image } from 'react-native'
 
 import styles from './styles'
 
@@ -15,6 +15,6 @@ export default class extends React.Component {
                     <ActivityIndicator animating={true}/>
                 </View>
             </View>
-        );
-    }
+    )
+  }
 }
