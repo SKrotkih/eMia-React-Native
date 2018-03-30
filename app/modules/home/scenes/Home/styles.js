@@ -33,7 +33,33 @@ const styles = StyleSheet.create({
 
   list: {
     flex: 1
+  },
+
+  postImage: {
+    height: 10,
+    width: 10,
+    resizeMode: 'cover'  // or 'stretch'    
+},
+
+  postTitle: {
+    fontSize: 12,
+    marginBottom: 4,
+    fontWeight: 'bold',    
+    textAlign: 'center'
+  },
+  postBody: {
+    fontSize: 10,
+    marginBottom: 4,
+    textAlign: 'center'
+  },
+  postYear: {
+    textAlign: 'center'
+  },
+  postThumbnail: {
+    width: 53,
+    height: 81
   }
-})
+
+});
 
 export default styles;

@@ -10,13 +10,13 @@ const color = {
   grey: '#ccc',
   red: 'red',
   underlayColor: '#ddd'
-}
+};
 
 const fontSize = {
   small: normalize(12),
   regular: normalize(14),
   large: normalize(21)
-}
+};
 
 const customfontFamily = {
   extrabold: 'RobotoBlack',
@@ -24,7 +24,7 @@ const customfontFamily = {
   medium: 'RobotoMedium',
   regular: 'RobotoRegular',
   light: 'RobotoLight'
-}
+};
 
 const fontFamily = {
   Verdana: {
@@ -39,18 +39,18 @@ const fontFamily = {
       Italic: 'italic'
     }
   }
-}
+};
 
-const padding = 8
-const navbarHeight = (Platform.OS === 'ios') ? 64 : 54
-const windowWidth = Dimensions.get('window').width
-const windowHeight = Dimensions.get('window').height
+const padding = 8;
+const navbarHeight = (Platform.OS === 'ios') ? 64 : 54;
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
-const tabColor = (Platform.OS === 'ios') ? 'rgba(73,75,76, .5)' : 'rgba(255,255,255,.8)'
-const selectedTabColor = (Platform.OS === 'ios') ? 'rgb(73,75,76)' : '#fff'
+const tabColor = (Platform.OS === 'ios') ? 'rgba(73,75,76, .5)' : 'rgba(255,255,255,.8)';
+const selectedTabColor = (Platform.OS === 'ios') ? 'rgb(73,75,76)' : '#fff';
 
-const tabIconStyle = { size: 21, color: tabColor, selected: selectedTabColor }
-const navTitleStyle = { fontSize: fontSize.regular, fontFamily: fontFamily.extrabold, color: color.black }
+const tabIconStyle = { size: 21, color: tabColor, selected: selectedTabColor };
+const navTitleStyle = { fontSize: fontSize.large, fontFamily: fontFamily.extrabold, color: color.white };
 
 export {
   color,
@@ -63,4 +63,4 @@ export {
   tabIconStyle,
   navTitleStyle,
   normalize
-}
+};

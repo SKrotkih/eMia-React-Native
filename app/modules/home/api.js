@@ -17,3 +17,21 @@ export function fetchAllUsers (callback) {
     })
     .catch(error => callback(null, error));
 }
+
+export function fetchAllPosts (callback) {
+  database.ref('main').child('posts').once('value')
+    .then(function (snapshot) {
+      var items = [];
+      if (snapshot.val() !== null) {
+        snapshot.forEach((child) => {
+          items.push({
+            value: child.val(),
+            key: child.key
+          });
+        });
+      }
+      const data = { items };
+      callback(data, null);
+    })
+    .catch(error => callback(null, error));
+}

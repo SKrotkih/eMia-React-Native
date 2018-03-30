@@ -24,13 +24,13 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
 import styles from './styles';
-import Movie from './components/grid_item';
+import GridItem from './components/GridItem';
 
 import { actions as home } from '../../index';
 import { config as global } from '../../index';
 import { actions as auth } from '../../../auth/index';
 
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text } from 'native-base'
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
 
 const {
   AppRegistry,
@@ -38,7 +38,8 @@ const {
   StyleSheet,
   View,
   Alert,
-  TouchableHighlight
+  TouchableHighlight,
+  TouchableOpacity
 } = ReactNative;
 
 const {
@@ -46,7 +47,8 @@ const {
 } = React;
 
 const {
-  fetchUsers
+  fetchUsers,
+  fetchPosts
 } = home;
 const {
   login
@@ -66,6 +68,7 @@ export class Home extends Component {
     };
     this.onCompletion = this.onCompletion.bind(this);
     this.onFailed = this.onFailed.bind(this);
+    this.handlePress = this.handlePress.bind(this);
   }
 
   componentDidMount () {
@@ -73,7 +76,7 @@ export class Home extends Component {
   }
 
   fetchData () {
-    this.props.fetchUsers(this.onCompletion, this.onFailed);
+    this.props.fetchPosts(this.onCompletion, this.onFailed);
   }
 
   onCompletion (items) {
@@ -135,23 +138,36 @@ export class Home extends Component {
     return (
       <View style={styles.item}>
         <Text>
-          Placeholder
         </Text>
       </View>
     )
   }
 
   renderItem (item) {
-    var name = item.value.username
+    // console.log(item.value)
+    // return <GridItem postItem={item.value} />
+    var title = item.value.title
+    var body = item.value.body
     var key = item.key
     return (
       <View style={styles.item} key={key}>
-        <Text>
-          {name}
-        </Text>
+        <TouchableOpacity onPress={this.handlePress} style={{flexDirection:'row'}} activeOpacity={0.5} />
+        <Thumbnail style={{ backgroundColor: '#eee', alignSelf: 'center' }} square large  source={require('../../../../images/splash.png')} />
+        <Body>
+          <Text style={styles.postTitle} numberOfLines={1}>
+            {title}
+          </Text>
+          <Text style={styles.postBody} numberOfLines={3}>
+            {body}
+          </Text>
+        </Body>        
       </View>
     ) 
   }
+
+  handlePress(){
+    Alert.alert('Pressed!!!', '======')
+  }
 }
 
-export default connect(null, { login, fetchUsers })(Home)
+export default connect(null, { login, fetchPosts })(Home)
