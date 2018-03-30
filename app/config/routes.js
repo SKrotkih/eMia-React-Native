@@ -1,26 +1,26 @@
-import React from 'react'
-import { Scene, Router, ActionConst, Stack, Modal, Tabs } from 'react-native-router-flux'
+import React from 'react';
+import { Scene, Router, ActionConst, Stack, Modal, Tabs } from 'react-native-router-flux';
 
 // Splash Component
-import Splash from '../components/Splash/Splash'
+import Splash from '../components/Splash/Splash';
 
 // Authentication Scenes
-import Welcome from '../modules/auth/scenes/Welcome'
-import Register from '../modules/auth/scenes/Register'
-import CompleteProfile from '../modules/auth/scenes/CompleteProfile'
-import Login from '../modules/auth/scenes/Login'
-import ForgotPassword from '../modules/auth/scenes/ForgotPassword'
-import Home from '../modules/home/scenes/Home/Home'
+import Welcome from '../modules/auth/scenes/Welcome';
+import Register from '../modules/auth/scenes/Register';
+import CompleteProfile from '../modules/auth/scenes/CompleteProfile';
+import Login from '../modules/auth/scenes/Login';
+import ForgotPassword from '../modules/auth/scenes/ForgotPassword';
+import Home from '../modules/home/scenes/Home/Home';
 
 // Import Store, actions
-import store from '../redux/store'
-import { checkLoginStatus } from '../modules/auth/actions'
+import store from '../redux/store';
+import { checkLoginStatus } from '../modules/auth/actions';
 
-import { color, navTitleStyle } from '../styles/theme'
+import { color, navTitleStyle } from '../styles/theme';
 
 export default class extends React.Component {
   constructor () {
-    super()
+    super();
     this.state = {
       isReady: false,
       isLoggedIn: false
@@ -28,9 +28,9 @@ export default class extends React.Component {
   }
 
   componentDidMount () {
-    let _this = this
+    let _this = this;
     store.dispatch(checkLoginStatus((isLoggedIn) => {
-      _this.setState({isReady: true, isLoggedIn})
+      _this.setState({isReady: true, isLoggedIn});
     }))
   }
 

@@ -1,69 +1,69 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import {Text, View} from 'react-native'
-import {Button} from 'react-native-elements'
+import {Text, View} from 'react-native';
+import {Button} from 'react-native-elements';
 
-import {isEmpty, validate} from '../../utils/validate'
+import {isEmpty, validate} from '../../utils/validate';
 
-import styles from './styles'
+import styles from './styles';
 
-import AuthTextInput from '../AuthTextInput'
+import AuthTextInput from '../AuthTextInput';
 
 class Form extends React.Component {
   constructor (props) {
-    super(props)
+    super(props);
 
-    const { fields, error } = props
+    const { fields, error } = props;
 
-    this.state = this.createState(fields, error)
+    this.state = this.createState(fields, error);
 
     // bind functions
-    this.onChange = this.onChange.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   createState (fields, error) {
     // create the state
     const state = {}
     fields.forEach((field) => {
-      let {key, type, value} = field
-      state[key] = {type: type, value: value}
+      let {key, type, value} = field;
+      state[key] = {type: type, value: value};
     })
 
-    state['error'] = error
-    return state
+    state['error'] = error;
+    return state;
   }
 
   onSubmit () {
-    const data = this.state
-    const result = validate(data)
+    const data = this.state;
+    const result = validate(data);
 
-    if (!result.success) this.setState({error: result.error})
-    else this.props.onSubmit(this.extractData(data))
+    if (!result.success) this.setState({error: result.error});
+    else this.props.onSubmit(this.extractData(data));
   }
 
   extractData (data) {
-    const retData = {}
+    const retData = {};
 
     Object.keys(data).forEach(function (key) {
       if (key !== 'error') {
-        let {value} = data[key]
-        retData[key] = value
+        let {value} = data[key];
+        retData[key] = value;
       }
     })
 
-    return retData
+    return retData;
   }
 
   onChange (key, text) {
-    const state = this.state
-    state[key]['value'] = text
-    this.setState(state)
+    const state = this.state;
+    state[key]['value'] = text;
+    this.setState(state);
   }
 
   render () {
-    const { fields, showLabel, buttonTitle, onForgotPassword } = this.props
+    const { fields, showLabel, buttonTitle, onForgotPassword } = this.props;
 
     return (
       <View style={styles.container}>

@@ -1,8 +1,8 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 
-import { color, fontFamily, padding, fontSize } from '../../styles/theme'
+import { color, fontFamily, padding, fontSize } from '../../styles/theme';
 
-const resizeMode = 'contain'
+const resizeMode = 'contain';
 
 const styles = StyleSheet.create({
   container: {
@@ -51,4 +51,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default styles
+export default styles;
