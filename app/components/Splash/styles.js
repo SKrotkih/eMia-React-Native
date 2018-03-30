@@ -1,8 +1,14 @@
-import { StyleSheet } from 'react-native';
 
-import { color, fontFamily, padding, fontSize } from '../../styles/theme';
+import { 
+  StyleSheet 
+} from 'react-native';
 
-const resizeMode = 'contain';
+import { 
+  color, 
+  fontFamily, 
+  padding, 
+  fontSize 
+} from '../../styles/theme';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,26 +18,16 @@ const styles = StyleSheet.create({
     backgroundColor: color.white
   },
 
-  wrapper: {
-    paddingHorizontal: 15,
-    paddingBottom: padding * 2,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  image: {
-    height: 100,
-    width: 100,
-    backgroundColor: color.grey,
-    marginBottom: padding,
-    resizeMode
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover'  // or 'stretch'    
   },
 
   title: {
     fontSize: fontSize.large + 5,
     lineHeight: fontSize.large + 7,
     fontFamily: fontFamily.medium,
-    color: '#FF553F',
+    color: '#FFFFFF',
     letterSpacing: 1
   },
 
@@ -39,16 +35,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 16,
+    bottom: 50,
     height: 50
   },
-
-  activityIndicator: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 80
-  }
-})
+});
 
 export default styles;

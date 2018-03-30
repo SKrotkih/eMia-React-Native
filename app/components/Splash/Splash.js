@@ -7,10 +7,7 @@ export default class extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <View style={styles.wrapper}>
-          <Image style={styles.image} source={{uri: ''}}/>
-          <Text style={styles.title}>eMia</Text>
-        </View>
+        <Image style={styles.backgroundImage} source={require('../../images/splash.png')} />
         <View style={styles.activityIndicatorContainer}>
           <ActivityIndicator animating={true}/>
         </View>

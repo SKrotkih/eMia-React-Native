@@ -99,11 +99,6 @@ export class Home extends Component {
     }
     return (
       <Container>
-        <Header>
-          <Body>
-            <Title children={APP_NAME} />
-          </Body>
-        </Header>
         <Content
           contentContainerStyle={{ flex: 1, backgroundColor: '#fff' }}
           padder={false}>
