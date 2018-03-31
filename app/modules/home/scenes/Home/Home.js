@@ -176,7 +176,7 @@ export class Home extends Component {
 function selectPostItem(item) {
   var title = item.value.title
   console.log('========PRESSED ON '+title+'========')
-  //Actions.PostPreview();
+  Actions.PostPreview({ item });
 }
 
 export default connect(null, { login, fetchPosts })(Home)

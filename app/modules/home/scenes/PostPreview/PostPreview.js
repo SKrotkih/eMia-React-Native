@@ -34,10 +34,18 @@ export class PostPreview extends Component {
   }
 
   render () {
+
+    const { item } = this.props;
+    var title = item.value.title;
+    var body = item.value.body;
+    
     return (
       <View>
         <Text>
-          Loading topics...
+          {title}
+        </Text>
+        <Text>
+          {body}
         </Text>
       </View>
     )

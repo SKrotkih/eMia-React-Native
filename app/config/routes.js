@@ -11,6 +11,8 @@ import CompleteProfile from '../modules/auth/scenes/CompleteProfile';
 import Login from '../modules/auth/scenes/Login';
 import ForgotPassword from '../modules/auth/scenes/ForgotPassword';
 import Home from '../modules/home/scenes/Home/Home';
+
+// Main Scenes
 import PostPreview from '../modules/home/scenes/PostPreview/PostPreview';
 
 // Import Store, actions
@@ -25,14 +27,14 @@ export default class extends React.Component {
     this.state = {
       isReady: false,
       isLoggedIn: false
-    }
+    };
   }
 
   componentDidMount () {
     let _this = this;
     store.dispatch(checkLoginStatus((isLoggedIn) => {
       _this.setState({isReady: true, isLoggedIn});
-    }))
+    }));
   }
 
   render () {
@@ -55,7 +57,7 @@ export default class extends React.Component {
 
           <Stack key="Main" initial={this.state.isLoggedIn}>
             <Scene key="Home" component={Home} title="eMia" initial={true} type={ActionConst.REPLACE}/>
-            {/* <Scene key="PostPreview" component={PostPreview} title="Post Preview"/> */}
+            <Scene key="PostPreview" component={PostPreview} title="Post Preview" back={true}/>
           </Stack>
         </Scene>
       </Router>
