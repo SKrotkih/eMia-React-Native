@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 
 import {
   Dimensions,
@@ -6,7 +6,7 @@ import {
   WebView,
   Share,
   Image
-} from 'react-native'
+} from 'react-native';
 
 import {
   Header,
@@ -17,19 +17,19 @@ import {
   Right,
   Title,
   Button
-} from 'native-base'
+} from 'native-base';
 
-const webViewHeight = Dimensions.get('window').height - 56
+const webViewHeight = Dimensions.get('window').height - 56;
 
 export default class ModalComponent extends PureComponent {
   constructor (props) {
-    super(props)
-    this._handleClose = this._handleClose.bind(this)
-    this._handleShare = this._handleShare.bind(this)
+    super(props);
+    this._handleClose = this._handleClose.bind(this);
+    this._handleShare = this._handleShare.bind(this);
   }
 
   _handleClose () {
-    return this.props.onClose()
+    return this.props.onClose();
   }
 
   _handleShare () {
@@ -37,12 +37,12 @@ export default class ModalComponent extends PureComponent {
     return Share.share(
       {title, message, url: message},
       {dialogTitle: `Share ${title}`}
-    )
+    );
   }
 
   render () {
-    const { showModal, articleData } = this.props
-    const { url } = articleData
+    const { showModal, articleData } = this.props;
+    const { url } = articleData;
     if (url !== undefined) {
       return (
         <Modal onRequestClose={this._handleClose} visible={showModal} transparent animationType="slide">

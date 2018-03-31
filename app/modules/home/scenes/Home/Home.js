@@ -24,7 +24,6 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
 import styles from './styles';
-import GridItem from './components/GridItem';
 
 import { actions as home } from '../../index';
 import { config as global } from '../../index';
@@ -41,11 +40,9 @@ const {
   TouchableHighlight,
   TouchableOpacity
 } = ReactNative;
-
 const {
   Component
 } = React;
-
 const {
   fetchUsers,
   fetchPosts
@@ -57,7 +54,6 @@ const {
   APP_NAME
 } = global;
 
-
 export class Home extends Component {
   constructor (props) {
     super(props);
@@ -68,7 +64,6 @@ export class Home extends Component {
     };
     this.onCompletion = this.onCompletion.bind(this);
     this.onFailed = this.onFailed.bind(this);
-    this.handlePress = this.handlePress.bind(this);
   }
 
   componentDidMount () {
@@ -108,6 +103,7 @@ export class Home extends Component {
           <Grid
             style={styles.list}
             renderItem={this.renderItem}
+            renderSeparator={this.renderSeparator.bind(this)}            
             renderPlaceholder={this.renderPlaceholder}
             data={this.state.dataSource}
             itemsPerRow={2}
@@ -134,40 +130,53 @@ export class Home extends Component {
     )
   }
 
-  renderPlaceholder () {
+  renderPlaceholder (sectionID, rowID) {
+    // TODO: create properly key
+    var key = ''+sectionID+'-9'
     return (
-      <View style={styles.item}>
+      <View style={styles.item} key={key}>
         <Text>
         </Text>
       </View>
     )
   }
 
-  renderItem (item) {
-    // console.log(item.value)
-    // return <GridItem postItem={item.value} />
+  renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
+    // TODO: The same. Need key
+    var key = ''+sectionID+'-'+rowID
+    return (
+      <View style={styles.separator} key={key} />
+    )
+  }            
+
+  renderItem (item, sectionID, rowID) {
     var title = item.value.title
     var body = item.value.body
     var key = item.key
     return (
       <View style={styles.item} key={key}>
-        <TouchableOpacity onPress={this.handlePress} style={{flexDirection:'row'}} activeOpacity={0.5} />
-        <Thumbnail style={{ backgroundColor: '#eee', alignSelf: 'center' }} square large  source={require('../../../../images/splash.png')} />
+        <TouchableOpacity key={key} style={{flexDirection:'row'}} activeOpacity={0.5} onPress={() => {
+          selectPostItem(item)        
+        }}>
         <Body>
+          <Thumbnail style={{ backgroundColor: '#eee', alignSelf: 'center' }} square large source={require('../../../../images/splash.png')} />
           <Text style={styles.postTitle} numberOfLines={1}>
             {title}
           </Text>
           <Text style={styles.postBody} numberOfLines={3}>
             {body}
           </Text>
-        </Body>        
+        </Body>
+        </TouchableOpacity>
       </View>
     ) 
   }
+}
 
-  handlePress(){
-    Alert.alert('Pressed!!!', '======')
-  }
+function selectPostItem(item) {
+  var title = item.value.title
+  console.log('========PRESSED ON '+title+'========')
+  //Actions.PostPreview();
 }
 
 export default connect(null, { login, fetchPosts })(Home)
