@@ -2,16 +2,15 @@ import React from 'react';
 import { View, Text, ActivityIndicator, Image } from 'react-native';
 
 import styles from './styles';
+const splashscreen = require("../../images/splash.png");
 
 export default class extends React.Component {
   render () {
     return (
-      <View style={styles.container}>
-        <Image style={styles.backgroundImage} source={require('../../images/splash.png')} />
-        <View style={styles.activityIndicatorContainer}>
-          <ActivityIndicator animating={true}/>
-        </View>
+      <Image style={{ flex: 1, height: null, width: null }} source={splashscreen} />
+      <View style={styles.activityIndicatorContainer}>
+        <ActivityIndicator animating={true}/>
       </View>
-    )
+    );
   }
 }
