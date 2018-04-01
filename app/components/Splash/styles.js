@@ -32,12 +32,9 @@ const styles = StyleSheet.create({
   },
 
   activityIndicatorContainer: {
+    flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 50,
-    height: 50
-  },
+  }
 });
 
 export default styles;

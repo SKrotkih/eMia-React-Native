@@ -36,13 +36,6 @@ const styles = StyleSheet.create({
     width: 10,
     resizeMode: 'cover'  // or 'stretch'    
   },
-  activityIndicatorContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 50,
-    height: 50
-  },
   postTitle: {
     fontSize: 12,
     marginBottom: 4,
@@ -65,8 +58,11 @@ const styles = StyleSheet.create({
   postThumbnail: {
     width: 53,
     height: 81
+  },
+  emptyContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFFF'
   }
-
 });
 
 export default styles;

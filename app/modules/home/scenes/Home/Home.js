@@ -25,11 +25,13 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
 import styles from './styles';
+import { YellowBox } from 'react-native';
+import _ from 'lodash';
+import Loader from '../../../../components/Loader/loader';
 
 import { actions as home } from '../../index';
 import { config as global } from '../../index';
 import { actions as auth } from '../../../auth/index';
-
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
 
 const {
@@ -56,6 +58,16 @@ const {
   APP_NAME
 } = global;
 
+function setUpIgnoreYellowBox() {
+  YellowBox.ignoreWarnings(['Setting a timer']);
+  const _console = _.clone(console);
+  console.warn = message => {
+    if (message.indexOf('Setting a timer') <= -1) {
+      _console.warn(message);
+    }
+  };  
+}
+
 export class Home extends Component {
   constructor (props) {
     super(props);
@@ -66,6 +78,10 @@ export class Home extends Component {
     };
     this.onCompletion = this.onCompletion.bind(this);
     this.onFailed = this.onFailed.bind(this);
+  }
+
+  componentWillMount () {
+    setUpIgnoreYellowBox();
   }
 
   componentDidMount () {
@@ -124,8 +140,8 @@ export class Home extends Component {
 
   renderLoadingView () {
     return (
-      <View style={styles.activityIndicatorContainer}>
-        <ActivityIndicator animating={true}/>
+      <View style={styles.emptyContainer}>
+        <Loader loading={true} />
       </View>
     );
   }
