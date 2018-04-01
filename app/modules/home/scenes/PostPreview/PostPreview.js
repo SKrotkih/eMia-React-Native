@@ -12,6 +12,7 @@ import styles from './styles';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
 
 const {
+  Dimensions,  
   AppRegistry,
   Image,
   StyleSheet,
@@ -22,6 +23,9 @@ const {
 const {
   Component
 } = React;
+
+const previewContentHeight = Dimensions.get('window').height;
+const screenWidth = Dimensions.get('window').width;
 
 export class PostPreview extends Component {
   constructor (props) {
@@ -38,16 +42,22 @@ export class PostPreview extends Component {
     const { item } = this.props;
     var title = item.value.title;
     var body = item.value.body;
+    var url = item.url;
     
     return (
-      <View>
-        <Text>
-          {title}
-        </Text>
-        <Text>
-          {body}
-        </Text>
-      </View>
+      <Container style={{margin: 15, marginBottom: 15, backgroundColor: '#ffffff'}}>
+        <Header>
+          <Text style={styles.postTitle}>
+            {title}
+          </Text>
+        </Header>
+        <Content contentContainerStyle={{height: previewContentHeight}}>
+          <Image style={{width: screenWidth - 30, height: screenWidth - 30}} source={{uri: url}} />
+          <Text>
+            {body}
+          </Text>
+        </Content>
+      </Container>
     )
   }
 }
