@@ -1,3 +1,3 @@
-import Home from './Home';
+import PostPreview from './PostPreview';
 
-export default Home;
+export default PostPreview;

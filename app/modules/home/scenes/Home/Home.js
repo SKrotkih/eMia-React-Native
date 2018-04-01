@@ -15,6 +15,7 @@
 // https://www.npmjs.com/package/react-native-grid-component?activeTab=readme
 // npm install react-native-grid-component --save
 
+
 import React from 'react';
 import ReactNative from 'react-native';
 import Grid from 'react-native-grid-component';
@@ -38,7 +39,8 @@ const {
   View,
   Alert,
   TouchableHighlight,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator  
 } = ReactNative;
 const {
   Component
@@ -122,12 +124,10 @@ export class Home extends Component {
 
   renderLoadingView () {
     return (
-      <View>
-        <Text>
-          Loading topics...
-        </Text>
+      <View style={styles.activityIndicatorContainer}>
+        <ActivityIndicator animating={true}/>
       </View>
-    )
+    );
   }
 
   renderPlaceholder (sectionID, rowID) {
@@ -150,16 +150,17 @@ export class Home extends Component {
   }            
 
   renderItem (item, sectionID, rowID) {
-    var title = item.value.title
-    var body = item.value.body
-    var key = item.key
+    var title = item.value.title;
+    var body = item.value.body;
+    var key = item.key;
+    var url = item.url;
     return (
       <View style={styles.item} key={key}>
         <TouchableOpacity key={key} style={{flexDirection:'row'}} activeOpacity={0.5} onPress={() => {
           selectPostItem(item)        
         }}>
         <Body>
-          <Thumbnail style={{ backgroundColor: '#eee', alignSelf: 'center' }} square large source={require('../../../../images/splash.png')} />
+          <Thumbnail style={{ backgroundColor: '#eee', alignSelf: 'center' }} square large  source={{ cache:'force-cache', uri: url }} />
           <Text style={styles.postTitle} numberOfLines={1}>
             {title}
           </Text>
@@ -174,8 +175,6 @@ export class Home extends Component {
 }
 
 function selectPostItem(item) {
-  var title = item.value.title
-  console.log('========PRESSED ON '+title+'========')
   Actions.PostPreview({ item });
 }
 

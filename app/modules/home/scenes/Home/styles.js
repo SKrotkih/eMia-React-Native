@@ -19,28 +19,30 @@ const styles = StyleSheet.create({
       width: 0
     }
   },
-
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center'
   },
-
   item: {
     flex: 1,
     height: 160,
     margin: 1
   },
-
   list: {
     flex: 1
   },
-
   postImage: {
     height: 10,
     width: 10,
     resizeMode: 'cover'  // or 'stretch'    
-},
-
+  },
+  activityIndicatorContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: 50,
+    height: 50
+  },
   postTitle: {
     fontSize: 12,
     marginBottom: 4,

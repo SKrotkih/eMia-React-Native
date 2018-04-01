@@ -1,7 +1,7 @@
 import * as api from './api';
 const {
   fetchAllUsers,
-  fetchAllPosts  
+  fetchAllPosts
 } = api;
 
 export function fetchUsers (completion, failed) {
