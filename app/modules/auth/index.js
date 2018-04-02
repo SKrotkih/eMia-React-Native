@@ -1,7 +1,7 @@
-import * as actions from './actions';
-import * as constants from './constants';
-import * as actionTypes from './actionTypes';
-import reducer from './reducer';
+import * as actions from '../../model/auth/actions';
+import * as constants from '../../model/auth/constants';
+import * as actionTypes from '../../model/auth/actionTypes';
+import reducer from '../../model/auth/reducer';
 
 import * as theme from '../../styles/theme';
 

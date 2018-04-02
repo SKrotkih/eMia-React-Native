@@ -1,8 +1,9 @@
-import * as constants from './constants';
-import * as actionTypes from './actionTypes';
-import reducer from './reducer';
+import * as actions from '../../model/topics/actions';
+import * as constants from '../../model/topics/constants';
+import * as actionTypes from '../../model/topics/actionTypes';
+import reducer from '../../model/topics/reducer';
+
 import * as theme from '../../styles/theme';
-import * as actions from './actions';
 import * as config from '../../config/constants';
 
 export { actions, constants, actionTypes, reducer, theme, config };

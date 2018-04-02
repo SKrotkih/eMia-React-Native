@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux';
 import { Font, AppLoading } from 'expo';
 
-import Router from './app/config/routes';
+import Router from './app/router/routes';
 import store from './app/redux/store';
 
 import { YellowBox } from 'react-native';

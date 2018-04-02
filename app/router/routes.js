@@ -2,7 +2,7 @@ import React from 'react';
 import { Scene, Router, ActionConst, Stack, Modal, Tabs } from 'react-native-router-flux';
 
 // Splash Component
-import Splash from '../components/Splash/Splash';
+import Splash from '../modules/splash/Splash';
 
 // Authentication Scenes
 import Welcome from '../modules/auth/scenes/Welcome';
@@ -17,7 +17,7 @@ import PostPreview from '../modules/home/scenes/PostPreview/PostPreview';
 
 // Import Store, actions
 import store from '../redux/store';
-import { checkLoginStatus } from '../modules/auth/actions';
+import { checkLoginStatus } from '../model/auth/actions';
 
 import { color, navTitleStyle } from '../styles/theme';
 
