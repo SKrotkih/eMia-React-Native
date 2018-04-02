@@ -1,7 +1,8 @@
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions, Platform, StatusBar } from 'react-native';
 import { moderateScale as normalize } from 'react-native-size-matters';
 
 const color = {
+  brand: '#21AEED',
   black: '#3B3031',
   light_black: '#414141',
   main: 'rgb(99,139,250)',
@@ -43,6 +44,7 @@ const fontFamily = {
 
 const padding = 8;
 const navbarHeight = (Platform.OS === 'ios') ? 64 : 54;
+const statusBarHeight = Platform.OS === "ios" ? 0 : 20;
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -51,6 +53,7 @@ const selectedTabColor = (Platform.OS === 'ios') ? 'rgb(73,75,76)' : '#fff';
 
 const tabIconStyle = { size: 21, color: tabColor, selected: selectedTabColor };
 const navTitleStyle = { fontSize: fontSize.large, fontFamily: fontFamily.extrabold, color: color.white };
+const navBarStyle = { backgroundColor: color.brand, marginTop: statusBarHeight };
 
 export {
   color,
@@ -62,5 +65,15 @@ export {
   windowHeight,
   tabIconStyle,
   navTitleStyle,
-  normalize
+  normalize,
+  navBarStyle
+};
+
+export default {
+  
+  get statusBarColor() {
+    return color(color.brand)
+      .darken(0.2)
+      .hex();
+    },
 };

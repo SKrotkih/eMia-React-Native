@@ -23,7 +23,7 @@ import NativeBase from 'native-base';
 
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
-import { YellowBox } from 'react-native';
+import { YellowBox, StatusBar } from 'react-native';
 import _ from 'lodash';
 
 import styles from './styles';
@@ -115,8 +115,9 @@ export class Home extends Component {
     }
     return (
       <Container>
+        <StatusBar backgroundColor='#21AEED' barStyle="light-content" />
         <Content
-          contentContainerStyle={{ flex: 1, backgroundColor: '#fff' }}
+          contentContainerStyle={styles.maincontainer}
           padder={false}>
           <Grid
             style={styles.list}
@@ -140,7 +141,7 @@ export class Home extends Component {
 
   renderLoadingView () {
     return (
-      <View style={styles.emptyContainer}>
+      <View style={styles.loadingContainer}>
         <Loader loading={true} />
       </View>
     );

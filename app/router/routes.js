@@ -19,7 +19,7 @@ import PostPreview from '../modules/home/scenes/PostPreview/PostPreview';
 import store from '../redux/store';
 import { checkLoginStatus } from '../model/auth/actions';
 
-import { color, navTitleStyle } from '../styles/theme';
+import { color, navTitleStyle, navBarStyle } from '../styles/theme';
 
 export default class extends React.Component {
   constructor () {
@@ -43,10 +43,11 @@ export default class extends React.Component {
     }
     return (
       <Router>
-        <Scene key="root" hideNavBar
-          navigationBarStyle={{backgroundColor: '#0074C2'}}
+        <Scene key="root" 
+          hideNavBar
+          navigationBarStyle={navBarStyle}
           titleStyle={navTitleStyle}
-          backButtonTintColor={color.black}>
+          backButtonTintColor={color.white}>
           <Stack key="Auth" initial={!this.state.isLoggedIn}>
             <Scene key="Welcome" component={Welcome} title="" initial={true} hideNavBar/>
             <Scene key="Register" component={Register} title="Register" back/>
