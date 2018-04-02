@@ -23,10 +23,10 @@ import NativeBase from 'native-base';
 
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
-
-import styles from './styles';
 import { YellowBox } from 'react-native';
 import _ from 'lodash';
+
+import styles from './styles';
 import Loader from '../../../../components/Loader/loader';
 
 import { actions as home } from '../../index';

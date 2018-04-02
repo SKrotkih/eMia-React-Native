@@ -72,4 +72,4 @@ export const USERFIELDS = [
     value: '',
     type: 'text'
   }
-]
+];

@@ -33,7 +33,7 @@ export default class ModalComponent extends PureComponent {
   }
 
   _handleShare () {
-    const { url, title } = this.props.articleData, message = `${title}\n\nRead more @\n${url}\n\nshared via RN News App`
+    const { url, title } = this.props.articleData, message = `${title}\n\nRead more @\n${url}\n\nshared via RN News App`;
     return Share.share(
       {title, message, url: message},
       {dialogTitle: `Share ${title}`}
@@ -50,7 +50,7 @@ export default class ModalComponent extends PureComponent {
             <Header>
               <Left>
                 <Button transparent onPress={this._handleClose}>
-                  <Image resizeMode="center" style={{ width: 18, height: 18 }} source={require('../../../../../assets/images/ic_close_white_18dp.png')} />
+                  <Image resizeMode="center" style={{ width: 18, height: 18 }} source={require('../assets/images/ic_close_white_18dp.png')} />
                 </Button>
               </Left>
               <Body>
@@ -58,8 +58,7 @@ export default class ModalComponent extends PureComponent {
               </Body>
               <Right>
                 <Button transparent onPress={this._handleShare}>
-                  <Image style={{ width: 18, height: 18 }}
-                    source={require('../../../../../assets/images/ic_share_white_18dp.png') />
+                  <Image style={{ width: 18, height: 18 }} source={require('../assets/images/ic_share_white_18dp.png')} />
                 </Button>
               </Right>
             </Header>

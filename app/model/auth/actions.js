@@ -20,8 +20,8 @@ export function createUser (user, successCB, errorCB) {
   return (dispatch) => {
     api.createUser(user, function (success, data, error) {
       if (success) {
-        dispatch({type: t.LOGGED_IN, data: user})
-        successCB()
+        dispatch({type: t.LOGGED_IN, data: user});
+        successCB();
       } else if (error) {
         errorCB(error);
       }
@@ -34,7 +34,7 @@ export function login (data, successCB, errorCB) {
     api.login(data, function (success, data, error) {
       if (success) {
         if (data.exists) {
-          dispatch({type: t.LOGGED_IN, data: data.user})
+          dispatch({type: t.LOGGED_IN, data: data.user});
         }
         successCB(data);
       } else if (error) {
@@ -52,15 +52,15 @@ export function resetPassword (data, successCB, errorCB) {
       } else if (error) {
         errorCB(error);
       }
-    })
-  }
+    });
+  };
 }
 
 export function signOut (successCB, errorCB) {
   return (dispatch) => {
     api.signOut(function (success, data, error) {
       if (success) {
-        dispatch({type: t.LOGGED_OUT})
+        dispatch({type: t.LOGGED_OUT});
         successCB();
       } else if (error) {
         errorCB(error);
@@ -78,10 +78,10 @@ export function checkLoginStatus (callback) {
           if (user === null || err !== null) {
             isLoggedIn = false; // set the loggedIn value to false
           } else {
-            dispatch({ type: t.LOGGED_IN, data: JSON.parse(user) })
+            dispatch({ type: t.LOGGED_IN, data: JSON.parse(user) });
           }
-          callback(isLoggedIn)
-        }
+          callback(isLoggedIn);
+        };
         const newLocal = newLocal1;
         // get the user object from the Async storage
         AsyncStorage.getItem('user', newLocal);

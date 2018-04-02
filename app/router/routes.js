@@ -39,7 +39,7 @@ export default class extends React.Component {
 
   render () {
     if (!this.state.isReady) {
-      return <Splash/>
+      return <Splash/>;
     }
     return (
       <Router>

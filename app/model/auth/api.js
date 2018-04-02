@@ -12,7 +12,7 @@ export function register (data, callback) {
 export function createUser (user, callback) {
   database.ref('users').child(user.uid).update({ ...user })
     .then(() => callback(true, null, null))
-    .catch((error) => callback(false, null, {message: error}))
+    .catch((error) => callback(false, null, {message: error}));
 }
 
 // Sign the user in with their email and password

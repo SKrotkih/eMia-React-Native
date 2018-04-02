@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
 
-import {isEmpty, validate} from '../../utils/validate';
+import {isEmpty, validate} from '../../../../utils/validate';
 
 import styles from './styles';
 
@@ -25,7 +25,7 @@ class Form extends React.Component {
 
   createState (fields, error) {
     // create the state
-    const state = {}
+    const state = {};
     fields.forEach((field) => {
       let {key, type, value} = field;
       state[key] = {type: type, value: value};
@@ -51,14 +51,14 @@ class Form extends React.Component {
         let {value} = data[key];
         retData[key] = value;
       }
-    })
+    });
 
     return retData;
   }
 
   onChange (key, text) {
     const state = this.state;
-    state[key]['value'] = text;
+    state.key.value = text;
     this.setState(state);
   }
 

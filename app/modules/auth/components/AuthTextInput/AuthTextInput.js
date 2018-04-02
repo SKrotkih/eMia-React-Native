@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { View } from 'react-native';
 
 import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-import { isEmpty } from '../../utils/validate';
+import { isEmpty } from '../../../../utils/validate';
 import styles from './styles';
 
 class AuthTextInput extends Component {

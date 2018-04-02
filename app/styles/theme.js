@@ -1,5 +1,5 @@
-import { Dimensions, Platform } from 'react-native'
-import { moderateScale as normalize } from 'react-native-size-matters'
+import { Dimensions, Platform } from 'react-native';
+import { moderateScale as normalize } from 'react-native-size-matters';
 
 const color = {
   black: '#3B3031',
