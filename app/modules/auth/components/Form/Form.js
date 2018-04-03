@@ -18,29 +18,29 @@ class Form extends React.Component {
 
     this.state = this.createState(fields, error);
 
-    // bind functions
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
   createState (fields, error) {
-    // create the state
     const state = {};
     fields.forEach((field) => {
       let {key, type, value} = field;
       state[key] = {type: type, value: value};
-    })
-
-    state['error'] = error;
+    });
+    state.error = error;
     return state;
   }
 
   onSubmit () {
     const data = this.state;
     const result = validate(data);
-
-    if (!result.success) this.setState({error: result.error});
-    else this.props.onSubmit(this.extractData(data));
+    if (!result.success) {
+      this.setState({error: result.error});
+    }
+    else {
+      this.props.onSubmit(this.extractData(data));
+    }
   }
 
   extractData (data) {
@@ -58,7 +58,7 @@ class Form extends React.Component {
 
   onChange (key, text) {
     const state = this.state;
-    state.key.value = text;
+    state[key].value = text;
     this.setState(state);
   }
 
@@ -75,13 +75,15 @@ class Form extends React.Component {
 
           {
             fields.map((data, idx) => {
-              let {key, label, placeholder, autoFocus, secureTextEntry} = data
+              let {key, label, placeholder, autoFocus, secureTextEntry, type} = data
               return (
-                <AuthTextInput key={key}
+                <AuthTextInput 
+                  key={key}
                   label={label}
                   showLabel={showLabel}
                   placeholder={placeholder}
                   autoFocus={autoFocus}
+                  type={type}
                   onChangeText={(text) => this.onChange(key, text)}
                   secureTextEntry={secureTextEntry}
                   value={this.state[key]['value']}
@@ -111,7 +113,6 @@ class Form extends React.Component {
 }
 
 Form.propTypes = {
-  // fields: PropTypes.object,
   showLabel: PropTypes.bool,
   buttonTitle: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,

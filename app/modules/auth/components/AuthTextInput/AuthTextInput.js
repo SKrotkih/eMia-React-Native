@@ -9,7 +9,9 @@ import styles from './styles';
 
 class AuthTextInput extends Component {
   render () {
-    const { showLabel, placeholder, autoFocus, onChangeText, secureTextEntry } = this.props;
+    const { showLabel, placeholder, autoFocus, onChangeText, secureTextEntry, type } = this.props;
+
+    console.log('type='+type);
 
     return (
       <View style={styles.container}>
@@ -26,7 +28,7 @@ class AuthTextInput extends Component {
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}
           inputStyle={styles.inputContainer}
-
+          keyboardType={type}
           value={this.props.value}/>
         {
           (!isEmpty(this.props.error)) &&

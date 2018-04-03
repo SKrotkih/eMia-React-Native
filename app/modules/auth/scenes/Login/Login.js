@@ -14,7 +14,7 @@ const fields = [
     autoFocus: false,
     secureTextEntry: false,
     value: '',
-    type: 'email'
+    type: 'email-address'
   },
   {
     key: 'password',
@@ -23,7 +23,7 @@ const fields = [
     autoFocus: false,
     secureTextEntry: true,
     value: '',
-    type: 'password'
+    type: 'default'
   }
 ];
 
@@ -56,20 +56,24 @@ class Login extends React.Component {
   }
 
   onSuccess ({exists, user}) {
-    if (exists) Actions.Main();
-    else Actions.CompleteProfile({user});
+    if (exists) {
+      Actions.Main();
+    }
+    else {
+      Actions.CompleteProfile({user});
+    }
   }
 
   onError (error) {
     let errObj = this.state.error;
 
     if (error.hasOwnProperty('message')) {
-      errObj['general'] = error.message;
+      errObj.general = error.message;
     } else {
       let keys = Object.keys(error);
       keys.map((key, index) => {
         errObj[key] = error[key];
-      })
+      });
     }
     this.setState({error: errObj});
   }

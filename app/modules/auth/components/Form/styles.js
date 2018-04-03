@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: '#FF553F',
+    backgroundColor: color.brand,
     height: normalize(55)
   },
 

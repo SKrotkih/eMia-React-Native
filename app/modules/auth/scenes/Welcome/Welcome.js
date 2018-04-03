@@ -6,22 +6,17 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {actions as auth} from '../../index';
 
-const {
-  
-} = auth;
-
 class Welcome extends React.Component {
   constructor () {
     super();
-    this.state = {}
-    ;
+    this.state = {};
   }
 
   render () {
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
-          <Image style={styles.image} source={{uri: ''}}/>
+          <Image style={styles.image} source={require('../../../../assets/images/logo.png')} />
           <Text style={styles.title}>eMia</Text>
         </View>
 
