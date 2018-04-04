@@ -32,7 +32,22 @@ import Loader from '../../../../components/Loader/loader';
 import { actions as home } from '../../index';
 import { config as global } from '../../index';
 import { actions as auth } from '../../../auth/index';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
+import { 
+  Container, 
+  Header, 
+  Title, 
+  Content, 
+  Footer, 
+  FooterTab, 
+  Button, 
+  Left, 
+  Right, 
+  Body, 
+  Icon, 
+  Text, 
+  Thumbnail,
+  Segment
+} from 'native-base';
 
 const {
   AppRegistry,
@@ -74,7 +89,8 @@ export class Home extends Component {
     this.state = {
       dataSource: null,
       loaded: false,
-      data: null
+      data: null,
+      seg: 1
     };
     this.onCompletion = this.onCompletion.bind(this);
     this.onFailed = this.onFailed.bind(this);
@@ -114,28 +130,61 @@ export class Home extends Component {
       return this.renderLoadingView();
     }
     return (
+
       <Container>
-        <StatusBar backgroundColor='#21AEED' barStyle="light-content" />
-        <Content
-          contentContainerStyle={styles.maincontainer}
-          padder={false}>
-          <Grid
-            style={styles.list}
-            renderItem={this.renderItem}
-            renderSeparator={this.renderSeparator.bind(this)}            
-            renderPlaceholder={this.renderPlaceholder}
-            data={this.state.dataSource}
-            itemsPerRow={2}
-            itemHasChanged={(d1, d2) => d1 !== d2}
-          // callback on reaching the end of the available data
-          // onEndReached={() =>
-          //   this.setState({
-          //     data: [...this.state.data, ...dataSource],
-          //   })
-          // }
-          />
+        <StatusBar backgroundColor="#21AEED" barStyle="light-content" />      
+        <Header hasSegment>
+          <Body>
+            <Segment>
+              <Button
+                active={this.state.seg === 1 ? true : false}
+                first
+                onPress={() => this.setState({ seg: 1 })}
+              >
+                <Text>Recent</Text>
+              </Button>
+              <Button
+                last
+                active={this.state.seg === 2 ? true : false}
+                onPress={() => this.setState({ seg: 2 })}
+              >
+                <Text>My Posts</Text>
+              </Button>
+            </Segment>
+          </Body>
+        </Header>
+
+        <Content padder contentContainerStyle={styles.maincontainer}>
+          {this.state.seg === 1 && this.renderTab1()}
+          {this.state.seg === 2 && this.renderTab2()}
         </Content>
       </Container>
+    );
+  }
+
+  renderTab1 () {
+    return (    
+      <Grid
+        style={styles.list}
+        renderItem={this.renderItem}
+        renderSeparator={this.renderSeparator.bind(this)}            
+        renderPlaceholder={this.renderPlaceholder}
+        data={this.state.dataSource}
+        itemsPerRow={2}
+        itemHasChanged={(d1, d2) => d1 !== d2}
+      // callback on reaching the end of the available data
+      // onEndReached={() =>
+      //   this.setState({
+      //     data: [...this.state.data, ...dataSource],
+      //   })
+      // }
+      />
+    )
+  }
+
+  renderTab2 () {
+    return (
+      <Text>My Posts</Text>
     )
   }
 
