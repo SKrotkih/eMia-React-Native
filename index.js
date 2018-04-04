@@ -1,4 +1,4 @@
-import { AppRegistry } from 'react-native'
-import { app } from './App'
+import { AppRegistry } from 'react-native';
+import { app } from './App';
 
-AppRegistry.registerComponent('eMia', () => app)
+AppRegistry.registerComponent('eMia', () => app);
