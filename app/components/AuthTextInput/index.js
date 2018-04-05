@@ -10,9 +10,6 @@ import styles from './styles';
 class AuthTextInput extends Component {
   render () {
     const { showLabel, placeholder, autoFocus, onChangeText, secureTextEntry, type } = this.props;
-
-    console.log('type='+type);
-
     return (
       <View style={styles.container}>
         {

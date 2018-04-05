@@ -42,6 +42,7 @@ const fontFamily = {
   }
 };
 
+const padding = 8;
 const navbarHeight = (Platform.OS === 'ios') ? 64 : 54;
 const statusBarHeight = Platform.OS === "ios" ? 0 : 20;
 const windowWidth = Dimensions.get('window').width;
@@ -55,6 +56,7 @@ const navTitleStyle = { fontSize: fontSize.large, fontFamily: fontFamily.extrabo
 const navBarStyle = { backgroundColor: color.brand, marginTop: statusBarHeight };
 
 export {
+  padding,  
   color,
   fontSize,
   fontFamily,

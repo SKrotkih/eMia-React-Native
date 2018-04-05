@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { color, windowWidth, normalize, fontSize, fontFamily } from '../../theme/styles';
+import { padding, color, windowWidth, normalize, fontSize, fontFamily } from '../../theme/styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   },
 
   containerView: {
-    marginVertical: 8 * 3,
+    marginVertical: padding * 3,
     width: windowWidth - 40
   },
 
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   forgotText: {
     textAlign: 'center',
     color: color.black,
-    marginBottom: 8,
+    marginBottom: padding,
     fontSize: fontSize.regular,
     fontFamily: fontFamily.medium
   }

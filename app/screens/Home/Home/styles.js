@@ -1,5 +1,5 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
-import { color, fontSize, fontFamily, windowWidth, normalize } from '../../../theme/styles';
+import { padding,color, fontSize, fontFamily, windowWidth, normalize } from '../../../theme/styles';
 
 const resizeMode = 'contain';
 
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
 
   bottomContainer: {
     backgroundColor: 'white',
-    paddingVertical: 8 * 3,
+    paddingVertical: padding * 3,
     shadowColor: '#000000',
     shadowOpacity: 0.8,
     shadowRadius: 2,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
   },
   postBody: {
     fontSize: 10,
-    marginBottom: 0,
+    marginBottom: padding,
     textAlign: 'center'
   },
   separator: {

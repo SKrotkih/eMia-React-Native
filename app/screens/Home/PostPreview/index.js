@@ -34,7 +34,24 @@ export class PostPreview extends Component {
     };
   }
 
-  componentDidMount () {
+  setTitle(titleText) {
+    const {setParams} = this.props.navigation;
+    setParams({ title: titleText });
+  }
+
+  // static navigationOptions = ({ navigation }) => {
+  //   title: `${navigation.state.params.title}`,
+  //   headerTitleStyle: {
+  //     textAlign: 'center', 
+  //     alignSelf:'center'},
+  //     headerStyle: {
+  //       backgroundColor:'white',
+  //     },
+  // };
+
+  componentWillMount () {
+    var title = this.props.item.value.title;
+    this.setTitle(title);
   }
 
   render () {
