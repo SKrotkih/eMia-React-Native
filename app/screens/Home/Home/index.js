@@ -32,6 +32,7 @@ import Loader from '../../../components/Loader';
 import { actions as home } from '../index';
 import { config as global } from '../index';
 import { actions as auth } from '../../Auth/index';
+
 import { 
   Container, 
   Header, 
@@ -46,7 +47,10 @@ import {
   Icon, 
   Text, 
   Thumbnail,
-  Segment
+  Segment,
+  Tabs,
+  Tab,
+  ScrollableTab  
 } from 'native-base';
 
 const {
@@ -125,12 +129,12 @@ export class Home extends Component {
     });
   }
 
-  render () {
+  // Segmented Control 
+  render_Segment () {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
     return (
-
       <Container>
         <StatusBar backgroundColor="#21AEED" barStyle="light-content" />      
         <Header hasSegment>
@@ -158,6 +162,34 @@ export class Home extends Component {
           {this.state.seg === 1 && this.renderTab1()}
           {this.state.seg === 2 && this.renderTab2()}
         </Content>
+      </Container>
+    );
+  }
+
+  render() {
+    if (!this.state.loaded) {
+      return this.renderLoadingView();
+    }
+    return (
+      <Container>
+        <StatusBar backgroundColor="#21AEED" barStyle="light-content" />      
+        <Tabs renderTabBar={() => <ScrollableTab />}>
+          <Tab heading="Recent">
+            {this.renderTab1()}
+          </Tab>
+          <Tab heading="My Posts">
+            {this.renderTab2()}
+          </Tab>
+          <Tab heading="Tab3">
+            {this.renderTab2()}
+          </Tab>
+          <Tab heading="Tab4">
+            {this.renderTab2()}
+          </Tab>
+          <Tab heading="Tab5">
+            {this.renderTab2()}
+          </Tab>
+        </Tabs>
       </Container>
     );
   }
@@ -226,7 +258,7 @@ export class Home extends Component {
           selectPostItem(item)        
         }}>
         <Body>
-          <Thumbnail style={{ backgroundColor: '#eee', alignSelf: 'center' }} square large  source={{ cache:'force-cache', uri: url }} />
+          <Thumbnail style={styles.postImageThumbnail} square large  source={{ cache:'force-cache', uri: url }} />
           <Text style={styles.postTitle} numberOfLines={1}>
             {title}
           </Text>

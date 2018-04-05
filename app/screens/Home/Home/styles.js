@@ -34,11 +34,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  // Post item 
   item: {
     flex: 1,
-    height: 160,
+    height: 200,
     margin: 1
   },
+  postImageThumbnail: { 
+    backgroundColor: '#eee', 
+    alignSelf: 'center', 
+    height: 110, 
+    width: 110 },
+
   postImage: {
     height: 10,
     width: 10,
