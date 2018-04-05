@@ -40,7 +40,7 @@ Then, in the root direcory:
 
 npm install
 
-Follow the next steps for building the iOS app.
+Follow the next steps for building iOS app.
 
 In the ios directory:
 
@@ -50,21 +50,11 @@ Open eMia.xcworkspace
 
 Build the project
 
-Note. For the current react-native version 0.51.0 you will see the next error:
-
-#import <fishhook/fishhook.h>  file not found...
-
-fix:
-
-#import "fishhook.h"
-
-Repead the build.
-
 Go to the project's root directory. Start server in console:
 
 npm start
 
-Start the app in Xcode.
+Run the iOS app.
 
 03-21-2018
 
