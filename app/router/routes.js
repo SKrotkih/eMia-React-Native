@@ -1,25 +1,27 @@
 import React from 'react';
 import { Scene, Router, ActionConst, Stack, Modal, Tabs } from 'react-native-router-flux';
 
-// Splash Component
-import Splash from '../modules/splash/Splash';
+// Launch Component
+import Launch from '../screens/Launch';
+
+// Start screen
+import Welcome from '../screens/Welcome';
 
 // Authentication Scenes
-import Welcome from '../modules/auth/scenes/Welcome';
-import Register from '../modules/auth/scenes/Register';
-import CompleteProfile from '../modules/auth/scenes/CompleteProfile';
-import Login from '../modules/auth/scenes/Login';
-import ForgotPassword from '../modules/auth/scenes/ForgotPassword';
-import Home from '../modules/home/scenes/Home/Home';
+import Register from '../screens/Auth/Register';
+import CompleteProfile from '../screens/Auth/CompleteProfile';
+import Login from '../screens/Auth/Login';
+import ForgotPassword from '../screens/Auth/ForgotPassword';
 
 // Main Scenes
-import PostPreview from '../modules/home/scenes/PostPreview/PostPreview';
+import Home from '../screens/Home/Home';
+import PostPreview from '../screens/Home/PostPreview';
 
 // Import Store, actions
 import store from '../redux/store';
-import { checkLoginStatus } from '../model/auth/actions';
 
-import { color, navTitleStyle, navBarStyle } from '../styles/theme';
+import { checkLoginStatus } from '../model/auth/actions';
+import { color, navTitleStyle, navBarStyle } from '../theme/styles';
 
 export default class extends React.Component {
   constructor () {
@@ -39,7 +41,7 @@ export default class extends React.Component {
 
   render () {
     if (!this.state.isReady) {
-      return <Splash/>;
+      return <Launch/>;
     }
     return (
       <Router>
