@@ -26,6 +26,8 @@ import {connect} from 'react-redux';
 import { YellowBox, StatusBar } from 'react-native';
 import _ from 'lodash';
 
+import { color } from '../../../theme/styles';
+
 import {styles, gridItemStyles} from './styles';
 import Loader from '../../../components/Loader';
 
@@ -50,7 +52,9 @@ import {
   Segment,
   Tabs,
   Tab,
-  ScrollableTab  
+  ScrollableTab,
+  Fab,
+  IconNB
 } from 'native-base';
 
 const {
@@ -94,7 +98,8 @@ export class Home extends Component {
       dataSource: null,
       loaded: false,
       data: null,
-      seg: 1
+      seg: 1,
+      active: false      
     };
     this.onCompletion = this.onCompletion.bind(this);
     this.onFailed = this.onFailed.bind(this);
@@ -136,7 +141,7 @@ export class Home extends Component {
     }
     return (
       <Container>
-        <StatusBar backgroundColor="#21AEED" barStyle="light-content" />      
+        <StatusBar backgroundColor={color.brand} barStyle="light-content" />
         <Header hasSegment>
           <Body>
             <Segment>
@@ -157,7 +162,6 @@ export class Home extends Component {
             </Segment>
           </Body>
         </Header>
-
         <Content padder contentContainerStyle={styles.container}>
           {this.state.seg === 1 && this.renderTab1()}
           {this.state.seg === 2 && this.renderTab2()}
@@ -190,8 +194,26 @@ export class Home extends Component {
             {this.renderTab2()}
           </Tab>
         </Tabs>
+        <Fab
+          active={this.state.active}
+          direction="up"
+          containerStyle={{}}
+          style={{ backgroundColor: color.brand }}
+          position="bottomRight"
+          onPress={() => this.setState({ active: !this.state.active })}
+        >
+          <IconNB name="md-share" />
+          <Button style={{ backgroundColor: color.brand }}
+            onPress={() => this.createNewPostButtonPressed()}  >
+            <IconNB name="logo-facebook" />
+          </Button>
+        </Fab>
       </Container>
     );
+  }
+
+  createNewPostButtonPressed() {
+    Actions.AddNewPost();
   }
 
   renderTab1 () {

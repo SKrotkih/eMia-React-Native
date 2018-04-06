@@ -27,14 +27,14 @@ const gridItemStyles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    height: 200,
+    height: 220,
     margin: 1
   },
   image: { 
     alignSelf: 'center', 
     resizeMode: 'cover',
-    height: 140, 
-    width: 140 
+    height: 160, 
+    width: (windowWidth - 8) / 2
   },
   title: {
     fontSize: 12,

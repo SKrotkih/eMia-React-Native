@@ -16,6 +16,7 @@ import ForgotPassword from '../screens/Auth/ForgotPassword';
 // Main Scenes
 import Home from '../screens/Home/Home';
 import PostPreview from '../screens/Home/PostPreview';
+import AddNewPost from '../screens/Home/AddNewPost';
 
 // Import Store, actions
 import store from '../redux/store';
@@ -61,6 +62,7 @@ export default class extends React.Component {
           <Stack key="Main" initial={this.state.isLoggedIn}>
             <Scene key="Home" component={Home} title="eMia" initial={true} type={ActionConst.REPLACE}/>
             <Scene key="PostPreview" component={PostPreview} title="" back={true}/>
+            <Scene key="AddNewPost" component={AddNewPost} title="" back={true}/>            
           </Stack>
         </Scene>
       </Router>
