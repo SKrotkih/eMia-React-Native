@@ -26,7 +26,7 @@ import {connect} from 'react-redux';
 import { YellowBox, StatusBar } from 'react-native';
 import _ from 'lodash';
 
-import styles from './styles';
+import {styles, gridItemStyles} from './styles';
 import Loader from '../../../components/Loader';
 
 import { actions as home } from '../index';
@@ -158,7 +158,7 @@ export class Home extends Component {
           </Body>
         </Header>
 
-        <Content padder contentContainerStyle={styles.maincontainer}>
+        <Content padder contentContainerStyle={styles.container}>
           {this.state.seg === 1 && this.renderTab1()}
           {this.state.seg === 2 && this.renderTab2()}
         </Content>
@@ -222,7 +222,7 @@ export class Home extends Component {
 
   renderLoadingView () {
     return (
-      <View style={styles.loadingContainer}>
+      <View style={styles.loading}>
         <Loader loading={true} />
       </View>
     );
@@ -232,7 +232,7 @@ export class Home extends Component {
     // TODO: create properly key
     var key = ''+sectionID+'-9'
     return (
-      <View style={styles.item} key={key}>
+      <View style={gridItemStyles.container} key={key}>
         <Text>
         </Text>
       </View>
@@ -253,16 +253,16 @@ export class Home extends Component {
     var key = item.key;
     var url = item.url;
     return (
-      <View style={styles.item} key={key}>
+      <View style={gridItemStyles.container} key={key}>
         <TouchableOpacity key={key} style={{flexDirection:'row'}} activeOpacity={0.5} onPress={() => {
           selectPostItem(item)        
         }}>
         <Body>
-          <Thumbnail style={styles.postImageThumbnail} square large  source={{ cache:'force-cache', uri: url }} />
-          <Text style={styles.postTitle} numberOfLines={1}>
+          <Image style={gridItemStyles.image} source={{ cache:'force-cache', uri: url }} />
+          <Text style={gridItemStyles.title} numberOfLines={1}>
             {title}
           </Text>
-          <Text style={styles.postBody} numberOfLines={3}>
+          <Text style={gridItemStyles.description} numberOfLines={3}>
             {body}
           </Text>
         </Body>

@@ -7,7 +7,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1
   },
+
   bottomContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: 'white',
     paddingVertical: 8 * 3,
     shadowColor: '#000000',
@@ -17,11 +20,6 @@ const styles = StyleSheet.create({
       height: 1,
       width: 0
     }
-  },
-
-  buttonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
   },
 
   item: {
