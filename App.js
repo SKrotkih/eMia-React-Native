@@ -1,15 +1,16 @@
+import Expo from "expo";
 import React, { Component } from 'react';
 import { Provider } from 'react-redux';
-import { Font, AppLoading } from 'expo';
+
+import { StyleProvider } from "native-base";
+import getTheme from './app/theme/components';
+import variables from './app/theme/variables/commonColor';
 
 import Router from './app/router/routes';
 import store from './app/redux/store';
 
 import { YellowBox } from 'react-native';
-
-function cacheFonts (fonts) {
-  return fonts.map(font => Font.loadAsync(font));
-}
+import Loader from './app/components/Loader';
 
 function setUpIgnoreYellowMessage () {
   YellowBox.ignoreWarnings(['Setting a timer']);
@@ -29,34 +30,35 @@ export default class App extends Component {
     };
   }
 
-  async _loadAssetsAsync () {
-    const fontAssets = cacheFonts([
-      {RobotoExtraBold: require('./app/assets/fonts/Roboto-Black.ttf')},
-      {RobotoBold: require('./app/assets/fonts/Roboto-Bold.ttf')},
-      {RobotoMedium: require('./app/assets/fonts/Roboto-Medium.ttf')},
-      {RobotoRegular: require('./app/assets/fonts/Roboto-Regular.ttf')},
-      {RobotoLight: require('./app/assets/fonts/Roboto-Light.ttf')}
-    ]);
+  async componentWillMount() {
+    setUpIgnoreYellowMessage();
 
-    await Promise.all([...fontAssets]);
+    await Expo.Font.loadAsync({
+      "Roboto": require("native-base/Fonts/Roboto.ttf"),
+      "Roboto_medium": require("native-base/Fonts/Roboto_medium.ttf"),
+      "RobotoExtraBold": require('./app/assets/fonts/Roboto-Black.ttf'),
+      "RobotoBold": require('./app/assets/fonts/Roboto-Bold.ttf'),
+      "RobotoMedium": require('./app/assets/fonts/Roboto-Medium.ttf'),
+      "RobotoRegular": require('./app/assets/fonts/Roboto-Regular.ttf'),
+      "RobotoLight": require('./app/assets/fonts/Roboto-Light.ttf'),
+      "Ionicons": require("native-base/Fonts/Ionicons.ttf")
+    });
+    this.setState({ isReady: true });
   }
 
   render () {
     if (!this.state.isReady) {
-      setUpIgnoreYellowMessage();      
       return (
-        <AppLoading
-          startAsync={this._loadAssetsAsync}
-          onFinish={() => this.setState({isReady: true})}
-          onError={console.warn}
-        />
+        <Loader loading={true} />
+      )
+    } else {
+      return (
+        <Provider store={store}>
+          <StyleProvider style={getTheme(variables)}>
+            <Router/>
+          </StyleProvider>
+        </Provider>
       )
     }
-
-    return (
-      <Provider store={store}>
-        <Router/>
-      </Provider>
-    )
   }
 }

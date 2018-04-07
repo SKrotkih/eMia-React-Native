@@ -62,15 +62,17 @@ export class PostPreview extends Component {
     var url = item.url;
     
     return (
-      <Container style={{margin: 15, marginBottom: 15, backgroundColor: '#ffffff'}}>
+      <Container style={styles.container}>
         <Header>
-          <Text style={styles.postTitle}>
+          <Text style={styles.title}>
             {title}
           </Text>
         </Header>
-        <Content contentContainerStyle={{height: previewContentHeight}}>
-          <Image style={{width: screenWidth - 30, height: screenWidth - 30}} source={{uri: url}} />
-          <Text>
+        
+        
+        <Content contentContainerStyle={styles.content}>
+          <Image style={styles.photo} source={{uri: url}} />
+          <Text  style={styles.description}>
             {body}
           </Text>
         </Content>
