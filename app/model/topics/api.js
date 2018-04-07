@@ -43,6 +43,7 @@ function parsePosts(snapshot, items) {
       items.push({
         value: child.val(),
         url: '',
+        avatarUrl: '',        
         key: child.key
       });
     });
@@ -53,13 +54,18 @@ function putUrlsPhoto(items, completion) {
   var counter = items.length;
   if (counter > 0) {
     items.forEach((item) => {
-      getDownloadURL(item, (function(url) {
+      var photoName = item.value.id+'.jpg';      
+      getDownloadURL(photoName, (function(url) {
         item.url = url;
-        counter -= 1;
-        if (counter === 0) {
-          const data = { items };
-          completion(data, null);
-        } 
+        var avatarName = item.value.uid+'.jpg';      
+        getDownloadURL(avatarName, (function(url) {
+          item.avatarUrl = url;
+          counter -= 1;
+          if (counter === 0) {
+            const data = { items };
+            completion(data, null);
+          } 
+        }));  
       }));
     });
   } else {
@@ -68,9 +74,8 @@ function putUrlsPhoto(items, completion) {
   }
 }
 
-function getDownloadURL(item, callback) {
-  var fileName = item.value.id+'.jpg';
-  const imageRef = storage.ref(fileName);
+function getDownloadURL(photoName, callback) {
+  const imageRef = storage.ref(photoName);
 
   imageRef.getDownloadURL().then(function(url) {
     callback(url);

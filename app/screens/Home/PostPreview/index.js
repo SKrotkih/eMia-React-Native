@@ -61,7 +61,9 @@ export class PostPreview extends Component {
     var title = item.value.title;
     var body = item.value.body;
     var url = item.url;
+    var avatarUrl = item.avatarUrl;
     var publishedAt = new Date(1000*item.value.created);
+    var userName = 'User';
 
     return (
       <Container style={styles.container}>
@@ -70,11 +72,17 @@ export class PostPreview extends Component {
             {title}
           </Text>
         </Header>
-        <Content contentContainerStyle={styles.content}>
-          <Image style={styles.photo} source={{uri: url}} />
+        <Content>
+          <View style={styles.thumbnail}>
+            <Thumbnail circular size={55} source={{uri: avatarUrl}} />
+            <Text style={{marginHorizontal: 8, fontWeight: 'bold', alignSelf: 'center'}}>
+              {userName}
+            </Text>            
+          </View>          
           <Text  style={styles.description}>
             {body}
           </Text>
+          <Image style={styles.photo} source={{uri: url}} />
           <Text style={{ marginHorizontal: 8, marginVertical: 8, fontWeight: 'bold' }}>
             <Time date={publishedAt} />
           </Text>

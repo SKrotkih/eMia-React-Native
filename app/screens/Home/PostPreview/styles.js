@@ -13,7 +13,11 @@ const styles = StyleSheet.create({
   content: {
     height: windowHeight
   },
-
+  thumbnail: {
+    marginLeft: 4,
+    marginTop: 4,
+    flexDirection: 'row'    
+  },
   photo: {
     width: windowWidth - 30, 
     height: windowWidth - 30,
@@ -30,7 +34,8 @@ const styles = StyleSheet.create({
 
   description: {
     fontSize: 14,
-    textAlign: 'center'
+    textAlign: 'center',
+    marginVertical: 8    
   },
 });
 
