@@ -8,6 +8,7 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
 import styles from './styles';
+import Time from '../../../components/Time';
 
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
 
@@ -60,7 +61,8 @@ export class PostPreview extends Component {
     var title = item.value.title;
     var body = item.value.body;
     var url = item.url;
-    
+    var publishedAt = new Date(1000*item.value.created);
+
     return (
       <Container style={styles.container}>
         <Header>
@@ -68,12 +70,13 @@ export class PostPreview extends Component {
             {title}
           </Text>
         </Header>
-        
-        
         <Content contentContainerStyle={styles.content}>
           <Image style={styles.photo} source={{uri: url}} />
           <Text  style={styles.description}>
             {body}
+          </Text>
+          <Text style={{ marginHorizontal: 8, marginVertical: 8, fontWeight: 'bold' }}>
+            <Time date={publishedAt} />
           </Text>
         </Content>
       </Container>

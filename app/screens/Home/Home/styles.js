@@ -31,7 +31,7 @@ const gridItemStyles = StyleSheet.create({
     margin: 1
   },
   image: { 
-    alignSelf: 'center', 
+    alignSelf: 'center',  // 'stretch'􏰸 'contain'􏰸 'cover'􏰸 'repeat' 'center'
     resizeMode: 'cover',
     height: 160, 
     width: (windowWidth - 8) / 2
