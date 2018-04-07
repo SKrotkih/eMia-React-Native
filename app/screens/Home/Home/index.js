@@ -174,6 +174,9 @@ export class Home extends Component {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
+    // Icons
+    //  https://oblador.github.io/react-native-vector-icons/
+    // 
     return (
       <Container>
         <StatusBar backgroundColor="#21AEED" barStyle="light-content" />      
@@ -202,10 +205,14 @@ export class Home extends Component {
           position="bottomRight"
           onPress={() => this.setState({ active: !this.state.active })}
         >
-          <IconNB name="md-share" />
+          <IconNB name="ios-menu" />
           <Button style={{ backgroundColor: color.brand }}
             onPress={() => this.createNewPostButtonPressed()}  >
-            <IconNB name="logo-facebook" />
+            <IconNB name="ios-create" />
+          </Button>
+          <Button style={{ backgroundColor: color.brand }}
+            onPress={() => this.filterButtonPressed()}  >
+            <IconNB name="ios-options" />
           </Button>
         </Fab>
       </Container>
@@ -213,6 +220,10 @@ export class Home extends Component {
   }
 
   createNewPostButtonPressed() {
+    Actions.AddNewPost();
+  }
+
+  filterButtonPressed() {
     Actions.AddNewPost();
   }
 

@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   thumbnail: {
     marginLeft: 4,
     marginTop: 4,
-    flexDirection: 'row'    
+    flexDirection: 'row'
   },
   photo: {
     width: windowWidth - 30, 
