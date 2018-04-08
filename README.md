@@ -5,7 +5,8 @@ It's been developing with using [React Native](https://facebook.github.io/react-
 
 ## Introduction
 
-It is an code example of the React Native application.
+There are two native apps. They are: [eMia-iOS](https://github.com/SKrotkih/eMia-iOS) and [eMia-Android](https://github.com/SKrotkih/eMia-Android). Here you can see the React Native code example which summarizes them.
+The project is in process.
 
 eMia is an application like a forum. 
 You can be registered as an user database on the Firebase. 
@@ -16,17 +17,9 @@ eMia uses Firebase database, storage, authentication and cloud messages.
 
 ## Requirements
 
-iOS
-- macOS 10.13
-- Xcode 9.2
-- Swift 4
-
-Android
-- Android Studio 3.0.1
-
 ## Preparing for using
 
-If you want to try eMia, please following next steps.
+If you wish to try eMia, please following next steps.
 
 For iOS
 Sign in your Google account, then open Firebase console https://console.firebase.google.com
