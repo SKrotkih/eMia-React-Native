@@ -105,7 +105,24 @@ export class Home extends Component {
     this.onFailed = this.onFailed.bind(this);
   }
 
+  setUpNavigationBar() {
+    var title = 'eMia';
+    const {setParams} = this.props.navigation;
+    setParams({ 
+      title: title,
+      left: 
+      <Icon style={{marginLeft: 8, color: "#fff"}} name={'ios-menu'}
+      onPress={ () => { menuButtonPressed() }} />,
+      right: 
+      <Icon style={{marginRight: 8, color: "#fff"}} name={'ios-options'}
+      onPress={ () => { optionsButtonPressed() }} />
+    });
+  }
+
   componentWillMount () {
+    this.setUpNavigationBar();
+    
+    // Fix on bottom yellow warning
     setUpIgnoreYellowBox();
   }
 
@@ -179,7 +196,6 @@ export class Home extends Component {
     // 
     return (
       <Container>
-        <StatusBar backgroundColor="#21AEED" barStyle="light-content" />      
         <Tabs renderTabBar={() => <ScrollableTab />}>
           <Tab heading="Recent">
             {this.renderTab1()}
@@ -207,24 +223,12 @@ export class Home extends Component {
         >
           <IconNB name="ios-menu" />
           <Button style={{ backgroundColor: color.brand }}
-            onPress={() => this.createNewPostButtonPressed()}  >
+            onPress={() => createNewPostButtonPressed()}  >
             <IconNB name="ios-create" />
-          </Button>
-          <Button style={{ backgroundColor: color.brand }}
-            onPress={() => this.filterButtonPressed()}  >
-            <IconNB name="ios-options" />
           </Button>
         </Fab>
       </Container>
     );
-  }
-
-  createNewPostButtonPressed() {
-    Actions.AddNewPost();
-  }
-
-  filterButtonPressed() {
-    Actions.AddNewPost();
   }
 
   renderTab1 () {
@@ -305,8 +309,21 @@ export class Home extends Component {
   }
 }
 
+// Handlers on the button pressing.
 function selectPostItem(item) {
   Actions.PostPreview({ item });
+}
+
+function createNewPostButtonPressed() {
+  Actions.AddNewPost();
+}
+
+function optionsButtonPressed() {
+  Actions.AddNewPost();
+}
+
+function menuButtonPressed() {
+  Actions.AddNewPost();
 }
 
 export default connect(null, { login, fetchPosts })(Home)
