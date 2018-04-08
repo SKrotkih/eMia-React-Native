@@ -1,11 +1,15 @@
 # eMia
 
 This is the entire source code of the cross-platform (iOS and Android) app. 
-It is developing with the React Native.
+It's been developing with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
 
-It is an application like a forum. 
-You can register as an user and then sign in. You can edit your profile.
-You can post topics with a title, description and a body, attach a photo.
+## Introduction
+
+It is an code example of the React Native application.
+
+eMia is an application like a forum. 
+You can be registered as an user database on the Firebase. 
+You can edit your profile, post new topic with a title, description and a photo.
 The App will sends you push-notification if another user likes your post.
 
 eMia uses Firebase database, storage, authentication and cloud messages.
@@ -20,7 +24,7 @@ iOS
 Android
 - Android Studio 3.0.1
 
-## Introduction
+## Preparing for using
 
 If you want to try eMia, please following next steps.
 
@@ -56,7 +60,6 @@ npm start
 
 Run the iOS app.
 
-03-21-2018
+Last edited on 04-07-2018
 
 Sergey Krotkih
-
