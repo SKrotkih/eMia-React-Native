@@ -69,6 +69,12 @@ export function signOut (successCB, errorCB) {
   };
 }
 
+export function getCurrentUser (callback) {
+  api.getCurrentUser(function (user) {
+    callback(user);
+  });
+}
+
 export function checkLoginStatus (callback) {
   return (dispatch) => {
     auth.onAuthStateChanged((user) => {

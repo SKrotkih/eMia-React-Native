@@ -318,12 +318,12 @@ function createNewPostButtonPressed() {
   Actions.AddNewPost();
 }
 
-function optionsButtonPressed() {
-  Actions.AddNewPost();
+function menuButtonPressed() {
+  Actions.MainMenu();
 }
 
-function menuButtonPressed() {
-  Actions.AddNewPost();
+function optionsButtonPressed() {
+  Actions.Options();
 }
 
 export default connect(null, { login, fetchPosts })(Home)

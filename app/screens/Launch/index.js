@@ -9,9 +9,6 @@ export default class LaunchScreen extends Component {
     return (
       <ImageBackground style={styles.container} source={require('../../assets/images/splash.png')}>
         <StatusBar translucent barStyle="dark-content" />
-        <Text style={styles.logo}>
-          Loading...
-        </Text>
       </ImageBackground>
     )
   }

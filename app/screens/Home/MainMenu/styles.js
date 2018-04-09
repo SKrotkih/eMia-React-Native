@@ -24,7 +24,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',     
     resizeMode: 'contain'    
   },
-
+  loading: {
+    flex: 1,
+    backgroundColor: '#FFFFFF'
+  },
   title: {
     fontSize: 16,
     marginBottom: 4,

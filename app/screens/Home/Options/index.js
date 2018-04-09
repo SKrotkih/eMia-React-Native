@@ -41,7 +41,6 @@ export class Options extends Component {
   }
 
   render () {
-    
     return (
       <Container style={{margin: 15, marginBottom: 15, backgroundColor: '#ffffff'}}>
         <Header>
