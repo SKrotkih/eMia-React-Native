@@ -1,9 +1,6 @@
 import React from 'react';
 import { Scene, Router, ActionConst, Stack, Modal, Tabs } from 'react-native-router-flux';
 
-// Launch Component
-import Launch from '../screens/Launch';
-
 // Start screen
 import Welcome from '../screens/Welcome';
 
@@ -24,29 +21,17 @@ import Options from '../screens/Home/Options';
 // Import Store, actions
 import store from '../redux/store';
 
-import { checkLoginStatus } from '../model/auth/actions';
 import { color, navTitleStyle, navBarStyle } from '../theme/styles';
 
 export default class extends React.Component {
   constructor () {
     super();
     this.state = {
-      isReady: false,
-      isLoggedIn: false
     };
   }
 
-  componentDidMount () {
-    let _this = this;
-    store.dispatch(checkLoginStatus((isLoggedIn) => {
-      _this.setState({isReady: true, isLoggedIn});
-    }));
-  }
-
   render () {
-    if (!this.state.isReady) {
-      return <Launch/>;
-    }
+    var isLoggedIn = this.props.isLoggedIn; 
     return (
       <Router>
         <Scene key="root" 
@@ -54,7 +39,7 @@ export default class extends React.Component {
           navigationBarStyle={navBarStyle}
           titleStyle={navTitleStyle}
           backButtonTintColor={color.white}>
-          <Stack key="Auth" initial={!this.state.isLoggedIn}>
+          <Stack key="Auth" initial={!isLoggedIn}>
             <Scene key="Welcome" component={Welcome} title="" initial={true} hideNavBar/>
             <Scene key="Register" component={Register} title="Register" back/>
             <Scene key="CompleteProfile" component={CompleteProfile} title="Select Username" back={false}/>
@@ -62,7 +47,7 @@ export default class extends React.Component {
             <Scene key="ForgotPassword" component={ForgotPassword} title="Forgot Password"/>
           </Stack>
 
-          <Stack key="Main" initial={this.state.isLoggedIn}>
+          <Stack key="Main" initial={isLoggedIn}>
             <Scene key="Home" component={Home} title="eMia" initial={true} type={ActionConst.REPLACE}/>
             <Scene key="PostPreview" component={PostPreview} title="" back={true}/>
             <Scene key="AddNewPost" component={AddNewPost} title="" back={true}/>

@@ -1,4 +1,9 @@
-import { Dimensions, Platform, StatusBar } from 'react-native';
+import { 
+  Dimensions, 
+  Platform, 
+  StatusBar 
+} from 'react-native';
+
 import { moderateScale as normalize } from 'react-native-size-matters';
 
 const color = {
