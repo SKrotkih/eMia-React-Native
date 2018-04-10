@@ -1,6 +1,7 @@
 import React from 'react';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
+import { config } from '../index';
 
 import {
   Text, 
@@ -15,8 +16,7 @@ import {
   Divider
 } from 'react-native-elements';
 
-import {actions as auth} from '../Auth/index';
-
+import {actions as auth} from '../../Auth/index';
 import styles from './styles';
 
 class Welcome extends React.Component {
@@ -30,29 +30,12 @@ class Welcome extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
-          <Image style={styles.image} source={require('../../assets/images/logo.png')} />
-          <Text style={styles.title}>eMia</Text>
+          <Image style={styles.image} source={require('../../../assets/images/logo.png')} />
+          <Text style={styles.title}>{config.APP_NAME}</Text>
         </View>
 
         <View style={styles.bottomContainer}>
           <View style={[styles.buttonContainer]}>
-            <SocialIcon
-              raised
-              button
-              type='facebook'
-              title='SIGN UP WITH FACEBOOK'
-              iconSize={19}
-              style={[styles.containerView, styles.socialButton]}
-              fontStyle={styles.buttonText}
-              onPress={this.onSignInWithFacebook}/>
-
-            <View style={styles.orContainer}>
-              <Divider style={styles.divider}/>
-              <Text style={styles.orText}>
-                                Or
-              </Text>
-            </View>
-
             <Button
               raised
               borderRadius={4}

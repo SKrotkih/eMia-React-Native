@@ -32,7 +32,7 @@ import {styles, gridItemStyles} from './styles';
 import Loader from '../../../components/Loader';
 
 import { actions as home } from '../index';
-import { config as global } from '../index';
+import { config } from '../index';
 import { actions as auth } from '../../Auth/index';
 
 import { 
@@ -77,19 +77,6 @@ const {
 const {
   login
 } = auth;
-const {
-  APP_NAME
-} = global;
-
-function setUpIgnoreYellowBox() {
-  YellowBox.ignoreWarnings(['Setting a timer']);
-  const _console = _.clone(console);
-  console.warn = message => {
-    if (message.indexOf('Setting a timer') <= -1) {
-      _console.warn(message);
-    }
-  };  
-}
 
 export class Home extends Component {
   constructor (props) {
@@ -106,7 +93,7 @@ export class Home extends Component {
   }
 
   setUpNavigationBar() {
-    var title = 'eMia';
+    var title = config.APP_NAME;
     const {setParams} = this.props.navigation;
     setParams({ 
       title: title,
@@ -121,9 +108,6 @@ export class Home extends Component {
 
   componentWillMount () {
     this.setUpNavigationBar();
-    
-    // Fix on bottom yellow warning
-    setUpIgnoreYellowBox();
   }
 
   componentDidMount () {

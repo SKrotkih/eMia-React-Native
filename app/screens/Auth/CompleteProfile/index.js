@@ -59,7 +59,7 @@ class CompleteProfile extends React.Component {
       let keys = Object.keys(error);
       keys.map((key, index) => {
         errObj[key] = error[key];
-      })
+      });
     }
 
     this.setState({error: errObj});

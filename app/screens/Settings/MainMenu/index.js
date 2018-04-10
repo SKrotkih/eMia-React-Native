@@ -9,6 +9,7 @@ import {getCurrentUser, signOut} from '../../../model/auth/actions';
 
 import styles from './styles';
 import { windowWidth, windowHeight } from '../../../theme/styles';
+import { config } from '../index';
 
 import { 
   Container, 

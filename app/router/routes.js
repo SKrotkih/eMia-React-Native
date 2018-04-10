@@ -2,7 +2,7 @@ import React from 'react';
 import { Scene, Router, ActionConst, Stack, Modal, Tabs } from 'react-native-router-flux';
 
 // Start screen
-import Welcome from '../screens/Welcome';
+import Welcome from '../screens/Network/Welcome';
 
 // Authentication Scenes
 import Register from '../screens/Auth/Register';
@@ -14,8 +14,8 @@ import ForgotPassword from '../screens/Auth/ForgotPassword';
 import Home from '../screens/Home/Home';
 import PostPreview from '../screens/Home/PostPreview';
 import AddNewPost from '../screens/Home/AddNewPost';
-import MainMenu from '../screens/Home/MainMenu';
-import EditProfile from '../screens/Home/EditProfile';
+import MainMenu from '../screens/Settings/MainMenu';
+import EditProfile from '../screens/Settings/EditProfile';
 import Options from '../screens/Home/Options';
 
 // Import Store, actions

@@ -10,6 +10,8 @@ import {THEMES} from '../../config/constants';
 import {init} from '../../modules/app';
 const {colors} = THEMES.gitterDefault;
 
+import {config} from '../index';
+
 class NoInternetScreen extends Component {
   constructor(props) {
     super(props);

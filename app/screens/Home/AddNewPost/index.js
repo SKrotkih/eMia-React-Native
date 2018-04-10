@@ -6,6 +6,7 @@ import NativeBase from 'native-base';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
+import { config } from '../index';
 import styles from './styles';
 import { windowWidth, windowHeight } from '../../../theme/styles';
 

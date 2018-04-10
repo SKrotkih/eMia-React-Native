@@ -1,11 +1,8 @@
 import Expo from "expo";
 import React, {Component} from 'react';
-import { ImageBackground, StatusBar } from 'react-native';
-import { YellowBox } from 'react-native';
-
 import { Provider } from 'react-redux';
-
 import { StyleProvider } from "native-base";
+import { ImageBackground, StatusBar, YellowBox } from 'react-native';
 
 import getTheme from './app/theme/components';
 import variables from './app/theme/variables/commonColor';
@@ -31,9 +28,6 @@ export default class App extends Component {
   
   constructor () {
     super();
-
-    console.log('LAUNCH!!!');
-
     this.state = {
       isReady: false,
       isLoggedIn: false      
