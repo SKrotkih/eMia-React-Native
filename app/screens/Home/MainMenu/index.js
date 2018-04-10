@@ -88,8 +88,8 @@ export class MainMenu extends Component {
     }
     var _this = this;
     return (
-      <Container style={{margin: 15, marginBottom: 15, backgroundColor: '#ffffff'}}>
-        <Content>
+      <Container style={{margin: 15, marginBottom: 15, backgroundColor: '#00000000'}}>
+        <Content style={{backgroundColor: '#00000000'}}>
           <List
             dataArray={menuItems}
             renderRow={menuItem =>
@@ -135,18 +135,24 @@ function renderProfileMenuItem(_this) {
   } else {
     var avatarUrl = user.avatarUrl;
     return (
-      <ListItem avatar>
-        <Left>
-          <Thumbnail circular size={55} source={{uri: avatarUrl}} />          
-        </Left>
-        <Body>
-          <Text>
-            {user.username}
-          </Text>
-        </Body>
+      <ListItem height={63}>
+        <TouchableOpacity style={{flexDirection:'row'}} activeOpacity={0.5} onPress={() => {
+          editProfile(user)
+        }}>
+          <Body style={{flexDirection: 'row'}}>
+            <Thumbnail circular size={55} source={{uri: avatarUrl}} />          
+            <Text style={{alignSelf: 'center', marginLeft: 16, fontWeight: 'bold'}}>
+              {user.username}
+            </Text>
+          </Body>
+        </TouchableOpacity>
       </ListItem>
     )
   }
+}
+
+function editProfile (user) {
+  Actions.EditProfile({user});
 }
 
 // Log Out
@@ -159,32 +165,27 @@ function renderLogOutMenuItem(_this) {
     )
   } else {
     return (
-      <ListItem avatar>
-        <Body>
-          <TouchableOpacity
-            onPress={this.onSignOut}>
-            <View style={{ }}>
-              <Text>
-                Log Out
-              </Text>
-            </View>
-          </TouchableOpacity>
-        </Body>
+      <ListItem height={63}>
+        <TouchableOpacity style={{flexDirection:'row'}} activeOpacity={0.5} onPress={() => {
+          onSignOut()
+        }}>
+          <Body style={{flexDirection: 'row'}}>
+            <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>
+              Log Out
+            </Text>
+          </Body>
+        </TouchableOpacity>        
       </ListItem>
     )
   }
 }
 
 function onSignOut () {
-  api.signOut(this.onSuccess.bind(this), this.onError.bind(this));
-}
-
-function onSuccess () {
-  Actions.reset('Auth');
-}
-
-function onError (error) {
-  Alert.alert('Oops!', error.message);
+  signOut(() => { 
+    Actions.reset('Auth');
+  }, () => { 
+    Alert.alert('Oops!', error.message);
+  });
 }
 
 // - Log Out

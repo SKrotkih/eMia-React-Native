@@ -57,16 +57,13 @@ export function resetPassword (data, successCB, errorCB) {
 }
 
 export function signOut (successCB, errorCB) {
-  return (dispatch) => {
-    api.signOut(function (success, data, error) {
-      if (success) {
-        dispatch({type: t.LOGGED_OUT});
-        successCB();
-      } else if (error) {
-        errorCB(error);
-      }
-    });
-  };
+  api.signOut(function (success, data, error) {
+    if (success) {
+      successCB();
+    } else if (error) {
+      errorCB(error);
+    }
+  });
 }
 
 export function getCurrentUser (callback) {

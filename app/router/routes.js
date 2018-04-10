@@ -18,6 +18,7 @@ import Home from '../screens/Home/Home';
 import PostPreview from '../screens/Home/PostPreview';
 import AddNewPost from '../screens/Home/AddNewPost';
 import MainMenu from '../screens/Home/MainMenu';
+import EditProfile from '../screens/Home/EditProfile';
 import Options from '../screens/Home/Options';
 
 // Import Store, actions
@@ -66,6 +67,7 @@ export default class extends React.Component {
             <Scene key="PostPreview" component={PostPreview} title="" back={true}/>
             <Scene key="AddNewPost" component={AddNewPost} title="" back={true}/>
             <Scene key="MainMenu" component={MainMenu} title="" back={true}/>
+            <Scene key="EditProfile" component={EditProfile} title="" back={true}/>
             <Scene key="Options" component={Options} title="" back={true}/>
           </Stack>
         </Scene>
