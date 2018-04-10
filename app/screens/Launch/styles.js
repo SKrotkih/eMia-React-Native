@@ -3,16 +3,10 @@ import backgroundImage from '../../theme/BackgroundImage';
 
 const styles = StyleSheet.create({
 
-  container: {
+  background: {
     ...backgroundImage,
     justifyContent: 'space-around',
     alignItems: 'center'
-  },
-
-  logo: {
-    fontSize: 40,
-    color: 'white',
-    backgroundColor: 'transparent'
   }
 })
 

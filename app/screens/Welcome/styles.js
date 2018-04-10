@@ -46,6 +46,11 @@ const styles = StyleSheet.create({
     }
   },
 
+  buttonContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  
   containerView: {
     width: windowWidth - 40
   },
@@ -69,6 +74,31 @@ const styles = StyleSheet.create({
     width: windowWidth
   },
 
+  button: {
+    backgroundColor: color.brand,
+    height: normalize(55)
+  },
+
+  bottomText: {
+    fontSize: fontSize.regular,
+    fontFamily: fontFamily.medium,
+    marginRight: 5,
+    color: '#414141'
+  },
+
+  bottom: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: padding * 2
+  },
+
+  signInText: {
+    fontSize: fontSize.regular,
+    color: color.brand,
+    fontFamily: fontFamily.medium
+  },
+
   divider: {
     backgroundColor: '#D0D5DA',
     position: 'absolute',
@@ -84,43 +114,6 @@ const styles = StyleSheet.create({
     color: '#414141',
     paddingHorizontal: padding
   },
-
-  bottom: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: padding * 2
-  },
-
-  subText: {
-    color: '#414141',
-    fontSize: fontSize.large,
-    lineHeight: fontSize.large + 10,
-    marginVertical: padding * 2
-  },
-
-  buttonContainer: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-
-  button: {
-    backgroundColor: color.brand,
-    height: normalize(55)
-  },
-
-  bottomText: {
-    fontSize: fontSize.regular,
-    fontFamily: fontFamily.medium,
-    marginRight: 5,
-    color: '#414141'
-  },
-
-  signInText: {
-    fontSize: fontSize.regular,
-    color: color.brand,
-    fontFamily: fontFamily.medium
-  }
 });
 
 export default styles;

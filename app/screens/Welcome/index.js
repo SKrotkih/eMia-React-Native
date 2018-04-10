@@ -1,18 +1,31 @@
 import React from 'react';
-import {Text, View, TouchableOpacity, Image} from 'react-native';
-import {Button, SocialIcon, Divider} from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
+import {
+  Text, 
+  View, 
+  TouchableOpacity, 
+  Image
+} from 'react-native';
+
+import {
+  Button, 
+  SocialIcon, 
+  Divider
+} from 'react-native-elements';
+
 import {actions as auth} from '../Auth/index';
+
 import styles from './styles';
 
 class Welcome extends React.Component {
   constructor () {
     super();
-    this.state = {};
-  }
+    this.state = {
 
+    };
+  }
   render () {
     return (
       <View style={styles.container}>
