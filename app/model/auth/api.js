@@ -1,4 +1,4 @@
-import { auth, database, storage, provider } from '../firebase';
+import { auth, database, storage, provider } from '@model/firebase';
 
 // Register the user using email and password
 export function register (data, callback) {
@@ -10,7 +10,7 @@ export function register (data, callback) {
 
 // Create new user object in realtime database
 export function createUser (user, callback) {
-  database.ref('main').child('users').child(user.uid).update({ ...user })
+  database.ref('main').child('users').child(user.id).update({ ...user })
     .then(() => callback(true, null, null))
     .catch((error) => callback(false, null, {message: error}));
 }

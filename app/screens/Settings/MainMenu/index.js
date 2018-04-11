@@ -3,12 +3,12 @@ import ReactNative from 'react-native';
 
 import {Actions} from 'react-native-router-flux';
 
-import Loader from '../../../components/Loader';
+import Loader from '@components/Loader';
 
-import {getCurrentUser, signOut} from '../../../model/auth/actions';
+import {getCurrentUser, signOut} from '@model/auth/actions';
 
 import styles from './styles';
-import { windowWidth, windowHeight } from '../../../theme/styles';
+import { windowWidth, windowHeight } from '@theme/styles';
 import { config } from '../index';
 
 import { 

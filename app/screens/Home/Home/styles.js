@@ -1,5 +1,5 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native';
-import { color, fontSize, fontFamily, windowWidth, normalize } from '../../../theme/styles';
+import { color, fontSize, fontFamily, windowWidth, normalize } from '@theme/styles';
 
 const resizeMode = 'contain';
 

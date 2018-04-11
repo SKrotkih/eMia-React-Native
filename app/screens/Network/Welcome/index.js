@@ -30,7 +30,7 @@ class Welcome extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.topContainer}>
-          <Image style={styles.image} source={require('../../../assets/images/logo.png')} />
+          <Image style={styles.image} source={require('@assets/images/logo.png')} />
           <Text style={styles.title}>{config.APP_NAME}</Text>
         </View>
 

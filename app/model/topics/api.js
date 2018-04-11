@@ -1,4 +1,4 @@
-import { database, storage } from '../firebase';
+import { database, storage } from '@model/firebase';
 
 // import RNFetchBlob from 'react-native-fetch-blob';
 // var ImagePicker = require('react-native-image-picker');

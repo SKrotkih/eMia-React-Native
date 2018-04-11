@@ -4,9 +4,9 @@ import {Text, Image} from 'react-native';
 import {connect} from 'react-redux';
 import {rootNavigator} from '../../index';
 import styles from './styles';
-import Button from '../../components/Button';
+import Button from '@components/Button';
 
-import {THEMES} from '../../config/constants';
+import {THEMES} from '@config/constants';
 import {init} from '../../modules/app';
 const {colors} = THEMES.gitterDefault;
 

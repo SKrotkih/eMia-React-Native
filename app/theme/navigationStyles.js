@@ -1,4 +1,4 @@
-import {THEMES} from '../../constants';
+import {THEMES} from '@config/constants';
 const {colors} = THEMES.gitterDefault;
 
 const navigationStyles = {

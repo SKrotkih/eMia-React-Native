@@ -2,26 +2,26 @@ import React from 'react';
 import { Scene, Router, ActionConst, Stack, Modal, Tabs } from 'react-native-router-flux';
 
 // Start screen
-import Welcome from '../screens/Network/Welcome';
+import Welcome from '@screens/Network/Welcome';
 
 // Authentication Scenes
-import Register from '../screens/Auth/Register';
-import CompleteProfile from '../screens/Auth/CompleteProfile';
-import Login from '../screens/Auth/Login';
-import ForgotPassword from '../screens/Auth/ForgotPassword';
+import Register from '@screens/Auth/Register';
+import CompleteProfile from '@screens/Auth/CompleteProfile';
+import Login from '@screens/Auth/Login';
+import ForgotPassword from '@screens/Auth/ForgotPassword';
 
 // Main Scenes
-import Home from '../screens/Home/Home';
-import PostPreview from '../screens/Home/PostPreview';
-import AddNewPost from '../screens/Home/AddNewPost';
-import MainMenu from '../screens/Settings/MainMenu';
-import EditProfile from '../screens/Settings/EditProfile';
-import Options from '../screens/Home/Options';
+import Home from '@screens/Home/Home';
+import PostPreview from '@screens/Home/PostPreview';
+import AddNewPost from '@screens/Home/AddNewPost';
+import MainMenu from '@screens/Settings/MainMenu';
+import EditProfile from '@screens/Settings/EditProfile';
+import Options from '@screens/Home/Options';
 
 // Import Store, actions
-import store from '../redux/store';
+import store from '@redux/store';
 
-import { color, navTitleStyle, navBarStyle } from '../theme/styles';
+import { color, navTitleStyle, navBarStyle } from '@theme/styles';
 
 export default class extends React.Component {
   constructor () {

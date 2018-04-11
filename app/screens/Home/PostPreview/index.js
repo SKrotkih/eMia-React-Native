@@ -8,7 +8,7 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
 import styles from './styles';
-import Time from '../../../components/Time';
+import Time from '@components/Time';
 import { config } from '../index';
 
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';

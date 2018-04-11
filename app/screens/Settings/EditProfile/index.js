@@ -7,7 +7,7 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 
 import styles from './styles';
-import Time from '../../../components/Time';
+import Time from '@components/Time';
 
 import { 
   Container, 

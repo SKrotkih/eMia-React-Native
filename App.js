@@ -4,11 +4,11 @@ import { Provider } from 'react-redux';
 import { StyleProvider } from "native-base";
 import { ImageBackground, StatusBar, YellowBox } from 'react-native';
 
-import getTheme from './app/theme/components';
-import variables from './app/theme/variables/commonColor';
+import getTheme from '@theme/components';
+import variables from '@theme/variables/commonColor';
 
-import Router from './app/router/routes';
-import store from './app/redux/store';
+import Router from '@router/routes';
+import store from '@redux/store';
 
 import { checkLoginStatus } from './app/model/auth/actions';
 
@@ -40,17 +40,13 @@ export default class App extends Component {
     await Expo.Font.loadAsync({
       "Roboto": require('native-base/Fonts/Roboto.ttf'),
       "Roboto_medium": require("native-base/Fonts/Roboto_medium.ttf"),
-      "RobotoExtraBold": require('./app/assets/fonts/Roboto-Black.ttf'),
-      "RobotoBold": require('./app/assets/fonts/Roboto-Bold.ttf'),
-      "RobotoMedium": require('./app/assets/fonts/Roboto-Medium.ttf'),
-      "RobotoRegular": require('./app/assets/fonts/Roboto-Regular.ttf'),
-      "RobotoLight": require('./app/assets/fonts/Roboto-Light.ttf'),
+      "RobotoExtraBold": require('@assets/fonts/Roboto-Black.ttf'),
+      "RobotoBold": require('@assets/fonts/Roboto-Bold.ttf'),
+      "RobotoMedium": require('@assets/fonts/Roboto-Medium.ttf'),
+      "RobotoRegular": require('@assets/fonts/Roboto-Regular.ttf'),
+      "RobotoLight": require('@assets/fonts/Roboto-Light.ttf'),
       "Ionicons": require("native-base/Fonts/Ionicons.ttf")
     });
-
-    // await Expo.Font.loadAsync({
-    //   awesome: 'https://github.com/FortAwesome/Font-Awesome/raw/master/fonts/fontawesome-webfont.ttf'
-    // });
 
     store.dispatch(checkLoginStatus((isLoggedIn) => {
       this.setState({isReady: true, isLoggedIn});
@@ -60,7 +56,7 @@ export default class App extends Component {
   render() {
     if (!this.state.isReady) {
       return (
-        <ImageBackground style={styles.background} source={require('./app/assets/images/splash.png')}>
+        <ImageBackground style={styles.background} source={require('@assets/images/splash.png')}>
           <StatusBar translucent barStyle="dark-content" />
         </ImageBackground> )
     } else {

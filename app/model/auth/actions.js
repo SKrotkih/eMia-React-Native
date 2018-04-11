@@ -1,6 +1,6 @@
 import * as t from './actionTypes';
 import * as api from './api';
-import { auth } from '../firebase';
+import { auth } from '@model/firebase';
 
 import { AsyncStorage } from 'react-native';
 

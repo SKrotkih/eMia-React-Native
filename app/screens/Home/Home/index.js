@@ -26,10 +26,10 @@ import {connect} from 'react-redux';
 import { YellowBox, StatusBar } from 'react-native';
 import _ from 'lodash';
 
-import { color } from '../../../theme/styles';
+import { color } from '@theme/styles';
 
 import {styles, gridItemStyles} from './styles';
-import Loader from '../../../components/Loader';
+import Loader from '@components/Loader';
 
 import { actions as home } from '../index';
 import { config } from '../index';

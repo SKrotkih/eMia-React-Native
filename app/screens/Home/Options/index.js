@@ -8,7 +8,7 @@ import {connect} from 'react-redux';
 
 import { config } from '../index';
 import styles from './styles';
-import { windowWidth, windowHeight } from '../../../theme/styles';
+import { windowWidth, windowHeight } from '@theme/styles';
 
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
 
