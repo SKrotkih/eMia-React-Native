@@ -1,5 +1,7 @@
 import { database, storage } from '@model/firebase';
 
+import * as usersActions from '@model/auth/actions';
+
 // import RNFetchBlob from 'react-native-fetch-blob';
 // var ImagePicker = require('react-native-image-picker');
 
@@ -43,7 +45,8 @@ function parsePosts(snapshot, items) {
       items.push({
         value: child.val(),
         url: '',
-        avatarUrl: '',        
+        avatarUrl: '',
+        author: null,
         key: child.key
       });
     });
@@ -53,6 +56,10 @@ function parsePosts(snapshot, items) {
 function putUrlsPhoto(items, completion) {
   var counter = items.length;
   if (counter > 0) {
+
+    console.log('=======================================');
+
+
     items.forEach((item) => {
       var photoName = item.value.id+'.jpg';      
       getDownloadURL(photoName, (function(url) {
@@ -60,11 +67,22 @@ function putUrlsPhoto(items, completion) {
         var avatarName = item.value.uid+'.jpg';      
         getDownloadURL(avatarName, (function(url) {
           item.avatarUrl = url;
-          counter -= 1;
-          if (counter === 0) {
-            const data = { items };
-            completion(data, null);
-          } 
+          usersActions.getUser(item.value.uid, (function(user) {
+            item.author = user;
+
+            console.log(item);
+
+            counter -= 1;
+            if (counter === 0) {
+              const data = { items };
+              
+
+              console.log('=======================================');
+
+              
+              completion(data, null);
+            } 
+          }));
         }));  
       }));
     });

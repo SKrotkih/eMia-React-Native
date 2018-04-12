@@ -67,7 +67,7 @@ export class PostPreview extends Component {
     var url = item.url;
     var avatarUrl = item.avatarUrl;
     var publishedAt = new Date(1000*item.value.created);
-    var userName = 'User';
+    var userName =  item.author === null ? '' : item.author.username;
 
     // 
     // containerStyle={{ width: windowWidth - 30, height: windowWidth - 30 }}

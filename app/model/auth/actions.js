@@ -72,6 +72,17 @@ export function getCurrentUser (callback) {
   });
 }
 
+export function getUser (uid, callback) {
+  api.getUser({uid: uid}, function (success, data, error) {
+    if (success && data.exists) {
+      var user = data.user;
+      callback(user);
+    } else {
+      callback(null);
+    }
+  });
+}
+
 export function checkLoginStatus (callback) {
   return (dispatch) => {
     auth.onAuthStateChanged((user) => {
