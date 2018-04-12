@@ -11,6 +11,9 @@ import styles from './styles';
 import Time from '@components/Time';
 import { config } from '../index';
 
+import ImageViewer from '@theme/components/ImageViewer';
+import { windowWidth, windowHeight } from '@theme/styles';
+
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
 
 const {
@@ -66,6 +69,9 @@ export class PostPreview extends Component {
     var publishedAt = new Date(1000*item.value.created);
     var userName = 'User';
 
+    // 
+    // containerStyle={{ width: windowWidth - 30, height: windowWidth - 30 }}
+
     return (
       <Container style={styles.container}>
         <Header>
@@ -73,7 +79,7 @@ export class PostPreview extends Component {
             {title}
           </Text>
         </Header>
-        <Content>
+        <Content style={styles.content}>
           <View style={styles.thumbnail}>
             <Thumbnail circular size={55} source={{uri: avatarUrl}} />
             <Text style={{marginHorizontal: 8, fontWeight: 'bold', alignSelf: 'center'}}>
@@ -83,7 +89,14 @@ export class PostPreview extends Component {
           <Text  style={styles.description}>
             {body}
           </Text>
-          <Image style={styles.photo} source={{uri: url}} />
+          <View style={styles.backgroundPhoto}>
+            <ImageViewer
+              disabled={false}
+              source={{uri: url}}
+              downloadable
+              doubleTapEnabled={true}
+            />
+          </View>
           <Text style={{ marginHorizontal: 8, marginVertical: 8, fontWeight: 'bold' }}>
             <Time date={publishedAt} />
           </Text>

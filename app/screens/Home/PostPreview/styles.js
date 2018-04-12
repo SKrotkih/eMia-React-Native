@@ -5,13 +5,14 @@ const resizeMode = 'contain';
 
 const styles = StyleSheet.create({
   container: {
+    margin: 0, 
+    marginBottom: 0, 
+    backgroundColor: '#fff'
+  },
+  content: {
     margin: 15, 
     marginBottom: 15, 
-    backgroundColor: '#ffffff'
-  },
-
-  content: {
-    height: windowHeight
+    backgroundColor: '#fff'
   },
   thumbnail: {
     marginLeft: 4,
@@ -24,7 +25,10 @@ const styles = StyleSheet.create({
     alignSelf: 'center',     
     resizeMode: 'contain'    
   },
-
+  backgroundPhoto: {
+    width: windowWidth - 30, 
+    height: windowWidth - 30 
+  },
   title: {
     fontSize: 16,
     marginBottom: 4,

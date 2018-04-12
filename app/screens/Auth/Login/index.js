@@ -40,7 +40,6 @@ class Login extends React.Component {
     this.state = {
       error: error
     };
-
     this.onSubmit = this.onSubmit.bind(this);
     this.onSuccess = this.onSuccess.bind(this);
     this.onError = this.onError.bind(this);
