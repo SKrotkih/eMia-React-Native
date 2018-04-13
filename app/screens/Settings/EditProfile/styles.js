@@ -1,8 +1,6 @@
 import { StyleSheet } from 'react-native';
 import { windowWidth, windowHeight } from '@theme/styles';
 
-const resizeMode = 'contain';
-
 const styles = StyleSheet.create({
 
   container: {
@@ -16,10 +14,6 @@ const styles = StyleSheet.create({
     marginBottom: 15 
   },
 
-  inputNameFrame: {
-    flexDirection: 'row'
-  },
-  
   backgroundPhoto: {
     marginTop: 50, 
     width: windowWidth - 30, 

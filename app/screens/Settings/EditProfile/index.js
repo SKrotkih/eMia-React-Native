@@ -9,6 +9,7 @@ import {connect} from 'react-redux';
 import styles from './styles';
 import Time from '@components/Time';
 import ImageViewer from '@theme/components/ImageViewer';
+import { Alert } from '@theme/components/alerts/';
 
 import { 
   Container, 
@@ -36,7 +37,6 @@ const {
   Image,
   StyleSheet,
   View,
-  Alert,
   TouchableOpacity
 } = ReactNative;
 
@@ -97,7 +97,10 @@ export class EditProfile extends Component {
   }
 
   doneButtonPressed() {
-    console.log('=======');
+    Alert.show('Sorry, this function doesn\'t work jet...', {
+      type: 'info',
+      duration: 3000
+    });
   }
 
 }
