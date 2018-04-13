@@ -10,7 +10,7 @@ import styles from './styles';
 
 import AuthTextInput from '../AuthTextInput';
 
-class Form extends React.Component {
+class AuthForm extends React.Component {
   constructor (props) {
     super(props);
 
@@ -112,15 +112,15 @@ class Form extends React.Component {
   }
 }
 
-Form.propTypes = {
+AuthForm.propTypes = {
   showLabel: PropTypes.bool,
   buttonTitle: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   error: PropTypes.object
 }
 
-Form.defaultProps = {
+AuthForm.defaultProps = {
   onForgotPassword: null
 }
 
-export default Form;
+export default AuthForm;

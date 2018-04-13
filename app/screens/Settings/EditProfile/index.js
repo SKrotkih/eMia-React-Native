@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 
 import styles from './styles';
 import Time from '@components/Time';
+import ImageViewer from '@theme/components/ImageViewer';
 
 import { 
   Container, 
@@ -52,34 +53,35 @@ export class EditProfile extends Component {
   }
 
   componentWillMount () {
-    const { user } = this.props;
-    var title = user.username;
-    this.setTitle(title);
+    this.setTitle('My Profile');
   }
 
   render () {
     const { user } = this.props;
     var avatarUrl = user.avatarUrl;
     var name = user.username;
-    var body = user.email;
+
+    var textName = 'Name:';
 
     return (
       <Container style={styles.container}>
-        <Header>
-          <Text style={styles.title}>
-            {name}
-          </Text>
-        </Header>
-        <Content>
-          <View style={styles.thumbnail}>
-            <Thumbnail circular size={55} source={{uri: avatarUrl}} />
-            <Text style={{marginHorizontal: 8, fontWeight: 'bold', alignSelf: 'center'}}>
-            {name}
-            </Text>            
+        <Content style={styles.content}>
+          <View style={styles.inputNameFrame}>
+            <Text style={{fontWeight: 'bold'}}>
+              {textName}
+            </Text>
+            <Text style={{marginHorizontal: 8, fontWeight: 'bold'}}>
+              {name}
+            </Text>
           </View>          
-          <Text  style={styles.description}>
-            {body}
-          </Text>
+          <View style={styles.backgroundPhoto}>
+            <ImageViewer
+              disabled={false}
+              source={{uri: avatarUrl}}
+              downloadable
+              doubleTapEnabled={true}
+            />
+          </View>
         </Content>
       </Container>
     )

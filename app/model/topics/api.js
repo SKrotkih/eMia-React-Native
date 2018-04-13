@@ -56,10 +56,6 @@ function parsePosts(snapshot, items) {
 function putUrlsPhoto(items, completion) {
   var counter = items.length;
   if (counter > 0) {
-
-    console.log('=======================================');
-
-
     items.forEach((item) => {
       var photoName = item.value.id+'.jpg';      
       getDownloadURL(photoName, (function(url) {
@@ -69,17 +65,9 @@ function putUrlsPhoto(items, completion) {
           item.avatarUrl = url;
           usersActions.getUser(item.value.uid, (function(user) {
             item.author = user;
-
-            console.log(item);
-
             counter -= 1;
             if (counter === 0) {
               const data = { items };
-              
-
-              console.log('=======================================');
-
-              
               completion(data, null);
             } 
           }));

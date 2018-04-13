@@ -4,39 +4,28 @@ import { windowWidth, windowHeight } from '@theme/styles';
 const resizeMode = 'contain';
 
 const styles = StyleSheet.create({
+
   container: {
-    margin: 15, 
-    marginBottom: 15, 
-    backgroundColor: '#ffffff'
+    margin: 0, 
+    marginBottom: 0, 
+    backgroundColor: '#fff'
   },
 
   content: {
-    height: windowHeight
+    margin: 15, 
+    marginBottom: 15 
   },
-  thumbnail: {
-    marginLeft: 4,
-    marginTop: 4,
+
+  inputNameFrame: {
     flexDirection: 'row'
   },
-  photo: {
+  
+  backgroundPhoto: {
+    marginTop: 50, 
     width: windowWidth - 30, 
-    height: windowWidth - 30,
-    alignSelf: 'center',     
-    resizeMode: 'contain'    
-  },
+    height: windowWidth - 30 
+  }
 
-  title: {
-    fontSize: 16,
-    marginBottom: 4,
-    fontWeight: 'bold',    
-    textAlign: 'center'
-  },
-
-  description: {
-    fontSize: 14,
-    textAlign: 'center',
-    marginVertical: 8    
-  },
 });
 
 export default styles;

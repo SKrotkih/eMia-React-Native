@@ -3,7 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import { connect } from 'react-redux';
 
 import { actions as auth } from '@screens/Auth/index';
-import Form from '@components/Form';
+import AuthForm from '@components/AuthForm';
 
 const { createUser } = auth;
 
@@ -67,7 +67,7 @@ class CompleteProfile extends React.Component {
 
   render () {
     return (
-      <Form fields={fields}
+      <AuthForm fields={fields}
         showLabel={false}
         onSubmit={this.onSubmit}
         buttonTitle={'CONTINUE'}
