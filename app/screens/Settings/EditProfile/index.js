@@ -23,7 +23,11 @@ import {
   Body, 
   Icon, 
   Text, 
-  Thumbnail 
+  Thumbnail,
+  Form,
+  Item,
+  Label,
+  Input
 } from 'native-base';
 
 const {
@@ -45,15 +49,22 @@ export class EditProfile extends Component {
     super(props);
     this.state = {
     };
+    this.doneButtonPressed = this.doneButtonPressed.bind(this);    
   }
 
-  setTitle(titleText) {
+  setUpNavigationBar() {
+    var title = 'My Profile';
     const {setParams} = this.props.navigation;
-    setParams({ title: titleText });
+    setParams({ 
+      title: title,
+      right: 
+      <Icon style={{marginRight: 8, color: "#fff"}} name={'ios-done-all'}
+      onPress={ () => { this.doneButtonPressed() }} />
+    });
   }
 
   componentWillMount () {
-    this.setTitle('My Profile');
+    this.setUpNavigationBar();    
   }
 
   render () {
@@ -61,19 +72,17 @@ export class EditProfile extends Component {
     var avatarUrl = user.avatarUrl;
     var name = user.username;
 
-    var textName = 'Name:';
+    var nameLabelText = 'Name:';
 
     return (
       <Container style={styles.container}>
         <Content style={styles.content}>
-          <View style={styles.inputNameFrame}>
-            <Text style={{fontWeight: 'bold'}}>
-              {textName}
-            </Text>
-            <Text style={{marginHorizontal: 8, fontWeight: 'bold'}}>
-              {name}
-            </Text>
-          </View>          
+          <Form>
+            <Item fixedLabel>
+              <Label>{nameLabelText}</Label>
+              <Input placeholder={name} />
+            </Item>
+          </Form>
           <View style={styles.backgroundPhoto}>
             <ImageViewer
               disabled={false}
@@ -86,6 +95,11 @@ export class EditProfile extends Component {
       </Container>
     )
   }
+
+  doneButtonPressed() {
+    console.log('=======');
+  }
+
 }
 
 export default connect(null, null)(EditProfile)
