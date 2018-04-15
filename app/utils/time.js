@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import moment from 'moment';
 import {Text} from 'native-base';
+
 export default class Time extends PureComponent{
 
     constructor(props){

@@ -11,6 +11,7 @@ import styles from './styles';
 import { windowWidth, windowHeight } from '@theme/styles';
 
 import ImageViewer from '@theme/components/ImageViewer';
+var ImagePickerManager = require('react-native-image-picker');
 import { Alert } from '@theme/components/alerts/';
 
 import { 
@@ -38,6 +39,7 @@ const {
   AppRegistry,
   Image,
   StyleSheet,
+  PixelRatio,  
   View,
   TouchableOpacity
 } = ReactNative;
@@ -50,7 +52,7 @@ export class AddNewPost extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      postPhotoUrl: '',
+      photoUrl: '',
       postTitle: '',
       postBody: ''
     };
@@ -93,6 +95,10 @@ export class AddNewPost extends Component {
               <Input placeholder={body} />
             </Item>
           </Form>
+          <Button block info style={styles.button}
+              onPress={() => this.takePhotoButtonPressed()} >
+            <Text>Photo</Text>
+          </Button>
           <View style={styles.backgroundPhoto}>
             {this.renderPhoto()}
           </View>
@@ -102,17 +108,15 @@ export class AddNewPost extends Component {
   }
 
   renderPhoto() {
-    if (this.state.postPhotoUrl === '') {
+    if (this.state.photoUrl === '') {
       return (
-        <Button block info style={styles.button}>
-          <Text>Photo</Text>
-        </Button>
+        null
       )
     } else {
       return (
-        <ImageViewer
+          <ImageViewer
           disabled={false}
-          source={{uri: this.state.postPhotoUrl}}
+          source={{uri: this.state.photoUrl}}
           downloadable
           doubleTapEnabled={true}
         />
@@ -127,6 +131,40 @@ export class AddNewPost extends Component {
     });
   }
 
+  takePhotoButtonPressed() {
+    const imagePickerOptions = {
+      quality: 1.0,
+      maxWidth: 500,
+      maxHeight: 500,
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+        
+    ImagePickerManager.showImagePicker(imagePickerOptions, (response) => {
+    
+      console.log('Response = ', response);
+
+      if (response.didCancel) {
+        console.log('User cancelled photo picker');
+      }
+      else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+      }
+      else {
+        let source = { uri: response.uri };
+
+        // You can also display the image using data:
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+
+        this.setState({
+          photoUrl: source
+        });
+      }
+    });
+  }
 }
 
 export default connect(null, null)(AddNewPost)

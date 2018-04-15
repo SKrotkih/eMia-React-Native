@@ -74,7 +74,7 @@ export class PostPreview extends Component {
 
     return (
       <Container style={styles.container}>
-        <Header>
+        <Header style={{ backgroundColor: 'white' }}>
           <Text style={styles.title}>
             {title}
           </Text>

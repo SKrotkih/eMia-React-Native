@@ -86,7 +86,7 @@ export class Home extends Component {
       loaded: false,
       data: null,
       seg: 1,
-      active: false      
+      active: false
     };
     this.onCompletion = this.onCompletion.bind(this);
     this.onFailed = this.onFailed.bind(this);
@@ -135,40 +135,10 @@ export class Home extends Component {
     });
   }
 
-  // Segmented Control 
-  render_Segment () {
-    if (!this.state.loaded) {
-      return this.renderLoadingView();
-    }
-    return (
-      <Container>
-        <StatusBar backgroundColor={color.brand} barStyle="light-content" />
-        <Header hasSegment>
-          <Body>
-            <Segment>
-              <Button
-                active={this.state.seg === 1 ? true : false}
-                first
-                onPress={() => this.setState({ seg: 1 })}
-              >
-                <Text>Recent</Text>
-              </Button>
-              <Button
-                last
-                active={this.state.seg === 2 ? true : false}
-                onPress={() => this.setState({ seg: 2 })}
-              >
-                <Text>My Posts</Text>
-              </Button>
-            </Segment>
-          </Body>
-        </Header>
-        <Content padder contentContainerStyle={styles.container}>
-          {this.state.seg === 1 && this.renderTab1()}
-          {this.state.seg === 2 && this.renderTab2()}
-        </Content>
-      </Container>
-    );
+  collapseMenuOnButton () {
+    this.setState({
+      active: false
+    });
   }
 
   render() {
@@ -180,39 +150,50 @@ export class Home extends Component {
     // 
     return (
       <Container>
-        <Tabs renderTabBar={() => <ScrollableTab />}>
-          <Tab heading="Recent">
+        <Tabs tabBarUnderlineStyle={{borderBottomWidth:2}}
+          renderTabBar={() => <ScrollableTab />}
+          onChangeTab= {this.onChangeTab()}>
+          <Tab heading="Recent" tabStyle={{backgroundColor: 'white'}} textStyle={{color: color.brand}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
             {this.renderTab1()}
           </Tab>
-          <Tab heading="My Posts">
+          <Tab heading="My Posts" tabStyle={{backgroundColor: 'white'}} textStyle={{color: color.brand}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
             {this.renderTab2()}
           </Tab>
-          <Tab heading="Tab3">
+          <Tab heading="Tab3" tabStyle={{backgroundColor: 'white'}} textStyle={{color: color.brand}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
             {this.renderTab2()}
           </Tab>
-          <Tab heading="Tab4">
+          <Tab heading="Tab4" tabStyle={{backgroundColor: 'white'}} textStyle={{color: color.brand}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
             {this.renderTab2()}
           </Tab>
-          <Tab heading="Tab5">
+          <Tab heading="Tab5" tabStyle={{backgroundColor: 'white'}} textStyle={{color: color.brand}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
             {this.renderTab2()}
           </Tab>
         </Tabs>
-        <Fab
-          active={this.state.active}
-          direction="up"
-          containerStyle={{}}
-          style={{ backgroundColor: color.brand }}
-          position="bottomRight"
-          onPress={() => this.setState({ active: !this.state.active })}
-        >
-          <IconNB name="ios-menu" />
-          <Button style={{ backgroundColor: color.brand }}
-            onPress={() => createNewPostButtonPressed()}  >
-            <IconNB name="ios-create" />
-          </Button>
-        </Fab>
+        {this.renderActionsButton()}
       </Container>
     );
+  }
+
+  renderActionsButton() {
+    let activeState = this.state.active
+    return (
+      <Fab
+        active={activeState}
+        direction="up"
+        containerStyle={{}}
+        style={{ backgroundColor: color.brand }}
+        position="bottomRight"
+        onPress={() => this.setState({ active: !activeState })} >
+        <IconNB name="ios-menu" />
+        <Button style={{ backgroundColor: color.brand }}
+          onPress={() => this.createNewPostButtonPressed()}  >
+          <IconNB name="ios-create" />
+        </Button>
+      </Fab>
+    )
+  }
+
+  onChangeTab() {
   }
 
   renderTab1 () {
@@ -291,15 +272,53 @@ export class Home extends Component {
       </View>
     ) 
   }
+
+  // Segmented Control. Example of using. Left for a short time. 
+  render_Segment () {
+    if (!this.state.loaded) {
+      return this.renderLoadingView();
+    }
+    return (
+      <Container>
+        <StatusBar backgroundColor={color.brand} barStyle="light-content" />
+        <Header hasSegment>
+          <Body>
+            <Segment>
+              <Button
+                active={this.state.seg === 1 ? true : false}
+                first
+                onPress={() => this.setState({ seg: 1 })}
+              >
+                <Text>Recent</Text>
+              </Button>
+              <Button
+                last
+                active={this.state.seg === 2 ? true : false}
+                onPress={() => this.setState({ seg: 2 })}
+              >
+                <Text>My Posts</Text>
+              </Button>
+            </Segment>
+          </Body>
+        </Header>
+        <Content padder contentContainerStyle={styles.container}>
+          {this.state.seg === 1 && this.renderTab1()}
+          {this.state.seg === 2 && this.renderTab2()}
+        </Content>
+      </Container>
+    );
+  }
+
+  createNewPostButtonPressed() {
+    this.collapseMenuOnButton ()  
+    Actions.AddNewPost();
+  }
+
 }
 
-// Handlers on the button pressing.
+// Pressing the buttons handlers
 function selectPostItem(item) {
   Actions.PostPreview({ item });
-}
-
-function createNewPostButtonPressed() {
-  Actions.AddNewPost();
 }
 
 function menuButtonPressed() {
