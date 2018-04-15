@@ -18,7 +18,13 @@ const styles = StyleSheet.create({
     marginTop: 50, 
     width: windowWidth - 30, 
     height: windowWidth - 30 
-  }
+  },
+  
+  button: {
+    marginTop: 20,
+    marginLeft: 15,
+    marginRight: 15
+  },
 
 });
 

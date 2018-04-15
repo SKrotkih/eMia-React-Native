@@ -22,8 +22,8 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.88628381490707397" green="0.14508253335952759" blue="0.33034217357635498" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <color key="tintColor" red="0.88628381490707397" green="0.14508253335952759" blue="0.33034217357635498" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.011249245139999999" green="0.4650694132" blue="0.80812865499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" red="0.011249245139999999" green="0.4650694132" blue="0.80812865499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="oAg-GD-dzP" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Cfj-ah-jce"/>
                 <constraint firstItem="oAg-GD-dzP" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="Xba-44-lSN"/>

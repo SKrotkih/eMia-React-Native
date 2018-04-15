@@ -20,6 +20,8 @@ target 'eMia' do
     pod 'AwesomeCache'
     
     pod 'MZFayeClient', :git => 'https://github.com/m1entus/MZFayeClient.git', :commit => '6a88a1'
+    #pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+    
 end
 
 # The workaround starts here !!!!!
@@ -34,4 +36,3 @@ post_install do |installer|
         File.write(script, content)
     end
 end
-

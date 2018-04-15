@@ -293,7 +293,6 @@ export default class ImageViewer extends Component {
             ));
         } else {
 
-            // TODO:
             // const ret = RNFetchBlob.config({
             //     fileCache: true,
             //     path: `${RNFetchBlob.fs.dirs.DocumentDir}/${uuid.v4()}.jpg`
