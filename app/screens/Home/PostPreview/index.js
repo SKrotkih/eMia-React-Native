@@ -69,9 +69,6 @@ export class PostPreview extends Component {
     var publishedAt = new Date(1000*item.value.created);
     var userName = item.author === null ? '' : item.author.username;
 
-    // 
-    // containerStyle={{ width: windowWidth - 30, height: windowWidth - 30 }}
-
     return (
       <Container style={styles.container}>
         <Header style={{ backgroundColor: 'white' }}>

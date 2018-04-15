@@ -53,6 +53,8 @@ npm start
 
 Run the iOS app.
 
+Note. On this Video you can see how it works: https://youtu.be/tgvxxnFq-Sk .
+
 Last edited on 04-07-2018
 
 Sergey Krotkih
