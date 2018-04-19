@@ -4,6 +4,8 @@
   "private": true,
   "description": "eMia is a mobile app.",
   "author": "Sergey Krotkih <sergey.krotkih@gmail.com>",
+  "homepage": "https://github.com/SKrotkih/eMia#readme",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SKrotkih/eMia.git"
@@ -11,8 +13,6 @@
   "bugs": {
     "url": "https://github.com/SKrotkih/eMia/issues"
   },
-  "homepage": "https://github.com/SKrotkih/eMia#readme",
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "react-native-scripts start",
     "test": "jest",
@@ -20,7 +20,10 @@
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
     "lint": "node node_modules/eslint/bin/eslint -c .eslintrc ./",
     "release": "cd android && ./gradlew assembleRelease",
-    "android-release": "node node_modules/react-native/local-cli/cli.js run-android --variant=release"
+    "android-release": "node node_modules/react-native/local-cli/cli.js run-android --variant=release",
+    "build": "babel src/ -d lib/",
+    "prepublish": "npm run build",
+    "flow": "flow"
   },
   "jest": {
     "preset": "react-native"
@@ -77,9 +80,11 @@
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-react": "~3.13.1",
     "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.70.0",
     "jest": "19.0.2",
     "jest-expo": "25.0.0",
     "react-native-scripts": "1.11.1",
-    "react-test-renderer": "16.2.0"
+    "react-test-renderer": "16.2.0",
+    "flow-bin": "^0.41.0"
   }
 }
