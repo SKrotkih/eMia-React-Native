@@ -10,7 +10,7 @@ import variables from '@theme/variables/commonColor';
 import Router from '@router/routes';
 import store from '@redux/store';
 
-import { checkLoginStatus } from './app/model/auth/actions';
+import { checkLoginStatus } from './src/model/auth/actions';
 
 import styles from './styles';
 

@@ -63,21 +63,23 @@
     "remote-redux-devtools": "^0.1.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "~4.1.6",
     "babel-jest": "19.0.0",
+    "babel-preset-flow": "^6.23.0",
     "babel-preset-react-native": "1.9.1",
-    "jest": "19.0.2",
-    "react-test-renderer": "16.2.0",
     "eslint": "~1.10.3",
     "eslint-config-airbnb": "~2.1.1",
-    "eslint-plugin-react": "~3.13.1",
-    "babel-eslint": "~4.1.6",
     "eslint-config-google": "^0.9.1",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
+    "eslint-plugin-react": "~3.13.1",
     "eslint-plugin-standard": "^3.0.1",
+    "jest": "19.0.2",
     "jest-expo": "25.0.0",
-    "react-native-scripts": "1.11.1"
+    "react-native-scripts": "1.11.1",
+    "react-test-renderer": "16.2.0"
   }
 }

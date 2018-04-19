@@ -1,5 +1,5 @@
 import { AppRegistry } from 'react-native';
-import { app } from './App';
+import { app } from './src';
 
 AppRegistry.registerComponent('eMia', () => app);
 
