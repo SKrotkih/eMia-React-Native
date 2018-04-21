@@ -1,8 +1,14 @@
-import Expo from "expo";
+//import Expo from "expo";
+// app.json:
+//,
+//"expo": {
+//   "sdkVersion": "25.0.0"
+//}
+
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
 import { StyleProvider } from "native-base";
-import { ImageBackground, StatusBar, YellowBox } from 'react-native';
+import { ImageBackground, StatusBar, YellowBox, StyleSheet } from 'react-native';
 
 import getTheme from '@theme/components';
 import variables from '@theme/variables/commonColor';
@@ -12,7 +18,7 @@ import store from '@redux/store';
 
 import { checkLoginStatus } from './src/model/auth/actions';
 
-import styles from './styles';
+import backgroundImage from '@theme/BackgroundImage';
 
 function setUpIgnoreYellowMessage () {
   YellowBox.ignoreWarnings(['Setting a timer']);
@@ -25,28 +31,28 @@ function setUpIgnoreYellowMessage () {
 }
 
 export default class App extends Component {
-  
+
   constructor () {
     super();
     this.state = {
       isReady: false,
-      isLoggedIn: false      
+      isLoggedIn: false
     };
   }
 
   async componentWillMount() {
     setUpIgnoreYellowMessage();
 
-    await Expo.Font.loadAsync({
-      "Roboto": require('native-base/Fonts/Roboto.ttf'),
-      "Roboto_medium": require("native-base/Fonts/Roboto_medium.ttf"),
-      "RobotoExtraBold": require('@assets/fonts/Roboto-Black.ttf'),
-      "RobotoBold": require('@assets/fonts/Roboto-Bold.ttf'),
-      "RobotoMedium": require('@assets/fonts/Roboto-Medium.ttf'),
-      "RobotoRegular": require('@assets/fonts/Roboto-Regular.ttf'),
-      "RobotoLight": require('@assets/fonts/Roboto-Light.ttf'),
-      "Ionicons": require("native-base/Fonts/Ionicons.ttf")
-    });
+    // await Expo.Font.loadAsync({
+    //   "Roboto": require('native-base/Fonts/Roboto.ttf'),
+    //   "Roboto_medium": require("native-base/Fonts/Roboto_medium.ttf"),
+    //   "RobotoExtraBold": require('@assets/fonts/Roboto-Black.ttf'),
+    //   "RobotoBold": require('@assets/fonts/Roboto-Bold.ttf'),
+    //   "RobotoMedium": require('@assets/fonts/Roboto-Medium.ttf'),
+    //   "RobotoRegular": require('@assets/fonts/Roboto-Regular.ttf'),
+    //   "RobotoLight": require('@assets/fonts/Roboto-Light.ttf'),
+    //   "Ionicons": require("native-base/Fonts/Ionicons.ttf")
+    // });
 
     store.dispatch(checkLoginStatus((isLoggedIn) => {
       this.setState({isReady: true, isLoggedIn});
@@ -54,19 +60,19 @@ export default class App extends Component {
   }
 
   render() {
-    if (!this.state.isReady) {
-      return (
-        <ImageBackground style={styles.background} source={require('@assets/images/splash.png')}>
-          <StatusBar translucent barStyle="dark-content" />
-        </ImageBackground> )
-    } else {
-      return (
-        <Provider store={store}>
-          <StyleProvider style={getTheme(variables)}>
-            <Router isLoggedIn={this.state.isLoggedIn} />
-          </StyleProvider>
-        </Provider> )
-    }
+     if (!this.state.isReady) {
+       return (
+         <ImageBackground style={styles.background} source={require('@assets/images/splash.png')}>
+           <StatusBar translucent barStyle="dark-content" />
+         </ImageBackground> )
+     } else {
+       return (
+         <Provider store={store}>
+           <StyleProvider style={getTheme(variables)}>
+             <Router isLoggedIn={this.state.isLoggedIn} />
+           </StyleProvider>
+         </Provider> )
+     }
   }
 }
 
@@ -74,3 +80,9 @@ App.navigatorStyle = {
   navBarHidden: true,
   statusBarBlur: true
 }
+
+const styles = StyleSheet.create({
+  background: { ...backgroundImage,
+    justifyContent: 'space-around',
+    alignItems: 'center'
+  }})

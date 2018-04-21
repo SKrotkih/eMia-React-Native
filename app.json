@@ -1,7 +1,4 @@
 {
   "name": "eMia",
-  "displayName": "eMia",
-  "expo": {
-    "sdkVersion": "25.0.0"
-  }
+   "displayName": "eMia"
 }

@@ -432,7 +432,6 @@
 		7F39C193208AE4130043F05F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
 		7F39C194208AE4140043F05F /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = package.json; path = ../../package.json; sourceTree = "<group>"; };
 		7F39C195208AE4140043F05F /* index.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = index.android.js; path = ../../index.android.js; sourceTree = "<group>"; };
-		7F39C196208AE4330043F05F /* node_modules */ = {isa = PBXFileReference; lastKnownFileType = folder; name = node_modules; path = ../../node_modules; sourceTree = "<group>"; };
 		7F4EAEDF207484B9004090B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F72644C2082FE0500A3367E /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		7F9223D3207414440032ADA1 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -836,10 +835,10 @@
 			isa = PBXGroup;
 			children = (
 				7F9223D3207414440032ADA1 /* AppDelegate.h */,
+				7F9223DA207414440032ADA1 /* AppDelegate.m */,
 				7F9223D5207414440032ADA1 /* LaunchScreen.xib */,
 				7F9223D7207414440032ADA1 /* main.m */,
 				7F4EAEDF207484B9004090B8 /* Assets.xcassets */,
-				7F9223DA207414440032ADA1 /* AppDelegate.m */,
 				7F9223DB207414440032ADA1 /* Info.plist */,
 				7F9223E22074148F0032ADA1 /* eMia-Bridging-Header.h */,
 			);
@@ -1284,7 +1283,6 @@
 		7FAE66B0208AE2DD007BF600 /* root */ = {
 			isa = PBXGroup;
 			children = (
-				7F39C196208AE4330043F05F /* node_modules */,
 				7FAE66B1208AE317007BF600 /* README.md */,
 				7F39C190208AE4130043F05F /* App.js */,
 				7F39C192208AE4130043F05F /* app.json */,
@@ -2270,7 +2268,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 				);
 				INFOPLIST_FILE = eMia/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2313,7 +2311,7 @@
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 				);
 				INFOPLIST_FILE = eMia/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2507,7 +2505,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -2546,7 +2544,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
