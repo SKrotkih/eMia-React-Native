@@ -23,7 +23,6 @@ DerivedData
 node_modules/
 package-lock.json
 .expo
-.flowconfig
 
 # CocoaPods
 Pods/
