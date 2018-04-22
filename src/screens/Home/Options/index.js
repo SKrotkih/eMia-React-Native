@@ -1,6 +1,7 @@
 
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ReactNative from 'react-native';
+
 import NativeBase from 'native-base';
 
 import {Actions} from 'react-native-router-flux';
@@ -11,6 +12,7 @@ import styles from './styles';
 import { windowWidth, windowHeight } from '@theme/styles';
 
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
+import { requireNativeComponent } from 'react-native';
 
 const {
   Dimensions,  
@@ -38,23 +40,24 @@ export class Options extends Component {
   }
 
   componentWillMount () {
-    this.setTitle("Options");
+    this.setTitle("Filter");
   }
 
   render () {
     return (
-      <Container style={{margin: 15, marginBottom: 15, backgroundColor: '#ffffff'}}>
-        <Header>
-          <Text style={styles.postTitle}>
-          </Text>
-        </Header>
+      <Container style={{margin: 0, marginBottom: 0, backgroundColor: '#fff'}}>
         <Content contentContainerStyle={{height: windowHeight}}>
-          <Text>
-          </Text>
-        </Content>
+            <FilterBridgeView style={{height: windowHeight}} {...this.props} />
+         </Content>
       </Container>
     )
   }
 }
+
+Options.propTypes = {
+   
+}
+
+const FilterBridgeView = requireNativeComponent('FilterBridgeView', Options)
 
 export default connect(null, null)(Options)

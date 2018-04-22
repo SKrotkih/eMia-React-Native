@@ -71,6 +71,17 @@
 		7F9223DC207414440032ADA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F9223D5207414440032ADA1 /* LaunchScreen.xib */; };
 		7F9223DD207414440032ADA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9223D7207414440032ADA1 /* main.m */; };
 		7F9223E0207414440032ADA1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9223DA207414440032ADA1 /* AppDelegate.m */; };
+		7FE2716C208CEEF000F2D0EC /* FilterBridgeViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2716B208CEEF000F2D0EC /* FilterBridgeViewManager.m */; };
+		7FE27198208CF04E00F2D0EC /* FilterBridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE27197208CF04E00F2D0EC /* FilterBridgeView.swift */; };
+		7FE271B7208D075F00F2D0EC /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 7FE271AE208D075D00F2D0EC /* README.md */; };
+		7FE271B8208D075F00F2D0EC /* index.js in Resources */ = {isa = PBXBuildFile; fileRef = 7FE271AF208D075D00F2D0EC /* index.js */; };
+		7FE271B9208D075F00F2D0EC /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = 7FE271B0208D075E00F2D0EC /* index.ios.js */; };
+		7FE271BA208D075F00F2D0EC /* App.js in Resources */ = {isa = PBXBuildFile; fileRef = 7FE271B1208D075E00F2D0EC /* App.js */; };
+		7FE271BB208D075F00F2D0EC /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 7FE271B2208D075E00F2D0EC /* LICENSE.txt */; };
+		7FE271BC208D075F00F2D0EC /* app.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FE271B3208D075E00F2D0EC /* app.json */; };
+		7FE271BD208D075F00F2D0EC /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 7FE271B4208D075E00F2D0EC /* LICENSE */; };
+		7FE271BE208D075F00F2D0EC /* package.json in Resources */ = {isa = PBXBuildFile; fileRef = 7FE271B5208D075E00F2D0EC /* package.json */; };
+		7FE271BF208D075F00F2D0EC /* index.android.js in Resources */ = {isa = PBXBuildFile; fileRef = 7FE271B6208D075E00F2D0EC /* index.android.js */; };
 		81C30CEF06244AB1B2F7A5C6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5ABA8322D4BF89EE3BA4E /* Entypo.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		9B31FC5B9CA44558BE6BE353 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 79B897289761480294040E3F /* Zocial.ttf */; };
@@ -442,14 +453,6 @@
 		79B897289761480294040E3F /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		7F3385E3208BAC5F00041D3A /* NativeModulesBridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeModulesBridge.m; sourceTree = "<group>"; };
 		7F3385E6208BBFA500041D3A /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
-		7F39C164208AE4120043F05F /* index.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = index.js; path = ../../index.js; sourceTree = "<group>"; };
-		7F39C18F208AE4130043F05F /* index.ios.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = index.ios.js; path = ../../index.ios.js; sourceTree = "<group>"; };
-		7F39C190208AE4130043F05F /* App.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = App.js; path = ../../App.js; sourceTree = "<group>"; };
-		7F39C191208AE4130043F05F /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE.txt; path = ../../LICENSE.txt; sourceTree = "<group>"; };
-		7F39C192208AE4130043F05F /* app.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = app.json; path = ../../app.json; sourceTree = "<group>"; };
-		7F39C193208AE4130043F05F /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
-		7F39C194208AE4140043F05F /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = package.json; path = ../../package.json; sourceTree = "<group>"; };
-		7F39C195208AE4140043F05F /* index.android.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = index.android.js; path = ../../index.android.js; sourceTree = "<group>"; };
 		7F4EAEDF207484B9004090B8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F72644C2082FE0500A3367E /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNImagePicker.xcodeproj; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; };
 		7F91778D208CAC4F0054B364 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = NativeModules/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -616,7 +619,18 @@
 		7FAE6682208AE276007BF600 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		7FAE6684208AE276007BF600 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		7FAE6685208AE276007BF600 /* routes.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = routes.js; sourceTree = "<group>"; };
-		7FAE66B1208AE317007BF600 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		7FE2716A208CEEF000F2D0EC /* FilterBridgeViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FilterBridgeViewManager.h; sourceTree = "<group>"; };
+		7FE2716B208CEEF000F2D0EC /* FilterBridgeViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FilterBridgeViewManager.m; sourceTree = "<group>"; };
+		7FE27197208CF04E00F2D0EC /* FilterBridgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBridgeView.swift; sourceTree = "<group>"; };
+		7FE271AE208D075D00F2D0EC /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		7FE271AF208D075D00F2D0EC /* index.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.js; path = ../index.js; sourceTree = "<group>"; };
+		7FE271B0208D075E00F2D0EC /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.ios.js; path = ../index.ios.js; sourceTree = "<group>"; };
+		7FE271B1208D075E00F2D0EC /* App.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = App.js; path = ../App.js; sourceTree = "<group>"; };
+		7FE271B2208D075E00F2D0EC /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE.txt; path = ../LICENSE.txt; sourceTree = "<group>"; };
+		7FE271B3208D075E00F2D0EC /* app.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = app.json; path = ../app.json; sourceTree = "<group>"; };
+		7FE271B4208D075E00F2D0EC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		7FE271B5208D075E00F2D0EC /* package.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = package.json; path = ../package.json; sourceTree = "<group>"; };
+		7FE271B6208D075E00F2D0EC /* index.android.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.android.js; path = ../index.android.js; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8459C41DC05AE1B78D0ED231 /* Pods_eMia.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_eMia.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BA6F015997B8EC10E29E478 /* Pods-GitterMobile.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitterMobile.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitterMobile/Pods-GitterMobile.debug.xcconfig"; sourceTree = "<group>"; };
@@ -934,6 +948,9 @@
 				7F917798208CB1300054B364 /* FilterInteractor.swift */,
 				7F917799208CB1300054B364 /* FiltersViewController.swift */,
 				7F91779B208CB1300054B364 /* FilterDependencies.swift */,
+				7FE2716A208CEEF000F2D0EC /* FilterBridgeViewManager.h */,
+				7FE2716B208CEEF000F2D0EC /* FilterBridgeViewManager.m */,
+				7FE27197208CF04E00F2D0EC /* FilterBridgeView.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1457,20 +1474,20 @@
 			path = router;
 			sourceTree = "<group>";
 		};
-		7FAE66B0208AE2DD007BF600 /* root */ = {
+		7FE271AD208D018600F2D0EC /* root */ = {
 			isa = PBXGroup;
 			children = (
-				7FAE66B1208AE317007BF600 /* README.md */,
-				7F39C190208AE4130043F05F /* App.js */,
-				7F39C192208AE4130043F05F /* app.json */,
-				7F39C195208AE4140043F05F /* index.android.js */,
-				7F39C18F208AE4130043F05F /* index.ios.js */,
-				7F39C164208AE4120043F05F /* index.js */,
-				7F39C193208AE4130043F05F /* LICENSE */,
-				7F39C191208AE4130043F05F /* LICENSE.txt */,
-				7F39C194208AE4140043F05F /* package.json */,
+				7FE271B1208D075E00F2D0EC /* App.js */,
+				7FE271B3208D075E00F2D0EC /* app.json */,
+				7FE271B6208D075E00F2D0EC /* index.android.js */,
+				7FE271B0208D075E00F2D0EC /* index.ios.js */,
+				7FE271AF208D075D00F2D0EC /* index.js */,
+				7FE271B4208D075E00F2D0EC /* LICENSE */,
+				7FE271B2208D075E00F2D0EC /* LICENSE.txt */,
+				7FE271B5208D075E00F2D0EC /* package.json */,
+				7FE271AE208D075D00F2D0EC /* README.md */,
 			);
-			path = root;
+			name = root;
 			sourceTree = "<group>";
 		};
 		7FF704742073D27700606EA4 /* Recovered References */ = {
@@ -1521,7 +1538,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				7FAE66B0208AE2DD007BF600 /* root */,
+				7FE271AD208D018600F2D0EC /* root */,
 				7FAE65DD208AE276007BF600 /* src */,
 				7F3385E1208BABAC00041D3A /* NativeModules */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -2113,20 +2130,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FE271BE208D075F00F2D0EC /* package.json in Resources */,
 				7F4EAEFF207484B9004090B8 /* Assets.xcassets in Resources */,
 				7F9223DC207414440032ADA1 /* LaunchScreen.xib in Resources */,
 				7F9177A5208CB1300054B364 /* Filter.storyboard in Resources */,
+				7FE271BF208D075F00F2D0EC /* index.android.js in Resources */,
 				81C30CEF06244AB1B2F7A5C6 /* Entypo.ttf in Resources */,
 				9DA18C96C8B944AAABC7F1F5 /* EvilIcons.ttf in Resources */,
 				E312711FFCA3421EA424435E /* FontAwesome.ttf in Resources */,
 				2CF11286B15A46DFB1239EFD /* Foundation.ttf in Resources */,
+				7FE271B9208D075F00F2D0EC /* index.ios.js in Resources */,
+				7FE271BA208D075F00F2D0EC /* App.js in Resources */,
+				7FE271BD208D075F00F2D0EC /* LICENSE in Resources */,
 				310F14159DF9471A9826D83D /* Ionicons.ttf in Resources */,
 				5A6FD8737267414190DDEBDF /* MaterialIcons.ttf in Resources */,
 				0124C2398A844925961D4F79 /* Octicons.ttf in Resources */,
 				7D4C5384FEC3447195387AD1 /* Roboto_medium.ttf in Resources */,
 				7F91778E208CAC4F0054B364 /* Info.plist in Resources */,
 				69CC64DF97DE46B4B58E9A6C /* Roboto.ttf in Resources */,
+				7FE271B7208D075F00F2D0EC /* README.md in Resources */,
+				7FE271BB208D075F00F2D0EC /* LICENSE.txt in Resources */,
+				7FE271BC208D075F00F2D0EC /* app.json in Resources */,
 				7A3E66B8DA97422AB406BFF5 /* rubicon-icon-font.ttf in Resources */,
+				7FE271B8208D075F00F2D0EC /* index.js in Resources */,
 				E7B75765F49A4597A24353A5 /* SimpleLineIcons.ttf in Resources */,
 				9B31FC5B9CA44558BE6BE353 /* Zocial.ttf in Resources */,
 				D3F1DB316C63405887FBF5E4 /* Feather.ttf in Resources */,
@@ -2279,11 +2305,13 @@
 				7F9177BF208CB48F0054B364 /* EnumIteration.swift in Sources */,
 				7F9177BD208CB48F0054B364 /* String.swift in Sources */,
 				7F9177A1208CB1300054B364 /* FilterPresenter.swift in Sources */,
+				7FE2716C208CEEF000F2D0EC /* FilterBridgeViewManager.m in Sources */,
 				7F9177BC208CB48F0054B364 /* Image.swift in Sources */,
 				7F91779E208CB1300054B364 /* Gender.swift in Sources */,
 				7F9177A3208CB1300054B364 /* FilterInteractor.swift in Sources */,
 				7F9177BA208CB48F0054B364 /* Date.swift in Sources */,
 				7F9177BB208CB48F0054B364 /* View.swift in Sources */,
+				7FE27198208CF04E00F2D0EC /* FilterBridgeView.swift in Sources */,
 				7F9223E0207414440032ADA1 /* AppDelegate.m in Sources */,
 				7F9223DD207414440032ADA1 /* main.m in Sources */,
 				7F9177A7208CB1300054B364 /* FilterPresntationController.swift in Sources */,
