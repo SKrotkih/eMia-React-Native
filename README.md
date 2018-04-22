@@ -33,28 +33,27 @@ Create a new project. Then follow documentations. As a result you need to downlo
 ## Installation
 
 Clone or unzip the repository.
-Then, in the root direcory:
+
+In console go to the root eMia directory
+
+execute command:
 
 npm install
 
-Follow the next steps for building iOS app.
+Follow the next steps to build and run the iOS app.
 
-In the ios directory:
+In console go to the ios directory.
+
+execute command: 
 
 pod install
 
-Open eMia.xcworkspace
+Open eMia.xcworkspace to open project in Xcode.
 
-Build the project
-
-Go to the project's root directory. Start server in console:
-
-npm start
-
-Run the iOS app.
+Press on Cmd+R or click on the run button to run the app and the project should run.
 
 Note. On this Video you can see how it works: https://youtu.be/tgvxxnFq-Sk .
 
-Last edited on 04-07-2018
+Last edited on 04-21-2018
 
 Sergey Krotkih
