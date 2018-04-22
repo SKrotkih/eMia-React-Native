@@ -15,6 +15,8 @@ The App will sends you push-notification if another user likes your post.
 
 eMia uses Firebase database, storage, authentication and cloud messages.
 
+This version loads native (iOS) FilterViewController for option menu button on the main screen.  
+
 ## Requirements
 
 ## Preparing for using
@@ -34,21 +36,17 @@ Create a new project. Then follow documentations. As a result you need to downlo
 
 Clone or unzip the repository.
 
-In console go to the root eMia directory
-
-execute command:
+In root directory  execute command:
 
 npm install
 
-Follow the next steps to build and run the iOS app.
+Build and run iOS app.
 
-In console go to the ios directory.
-
-execute command: 
+In ios directory execute command: 
 
 pod install
 
-Open eMia.xcworkspace to open project in Xcode.
+Open eMia.xcworkspace in Xcode.
 
 Press on Cmd+R or click on the run button to run the app and the project should run.
 
