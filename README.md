@@ -19,6 +19,8 @@ This version loads native (iOS) FilterViewController for option menu button on t
 
 ## Requirements
 
+Xcode 9, Android Studio 3.1
+
 ## Preparing for using
 
 If you wish to try eMia, please following next steps.
@@ -40,7 +42,7 @@ In root directory  execute command:
 
 npm install
 
-Build and run iOS app.
+### Build and run iOS app.
 
 In ios directory execute command: 
 
@@ -50,8 +52,15 @@ Open eMia.xcworkspace in Xcode.
 
 Press on Cmd+R or click on the run button to run the app and the project should run.
 
-Note. On this Video you can see how it works: https://youtu.be/tgvxxnFq-Sk .
+### Build and run Android app.
 
-Last edited on 04-21-2018
+Open android project in android folder in Android Studio
+
+Run 'app'
+
+### Note. 
+On this Video you can see how it works: https://youtu.be/tgvxxnFq-Sk .
+
+Last edited on 04-23-2018
 
 Sergey Krotkih
