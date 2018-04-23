@@ -54,12 +54,18 @@ Press on Cmd+R or click on the run button to run the app and the project should 
 
 ### Build and run Android app.
 
-Open android project in android folder in Android Studio
+In console go to eMia directory
 
-Run 'app'
+run command
+
+react-native start --port 8081
+
+Start Android Studio.  Open android project. Run 'app'
 
 ## Demo video
-On this Video you can see how it works: https://youtu.be/tgvxxnFq-Sk .
+
+https://youtu.be/tgvxxnFq-Sk
+
 
 Last edited on 04-23-2018
 
