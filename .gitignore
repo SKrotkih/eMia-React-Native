@@ -23,6 +23,7 @@ DerivedData
 node_modules/
 package-lock.json
 .expo
+.iml
 
 # CocoaPods
 Pods/

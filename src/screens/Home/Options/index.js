@@ -12,7 +12,7 @@ import styles from './styles';
 import { windowWidth, windowHeight } from '@theme/styles';
 
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
-import { requireNativeComponent } from 'react-native';
+import { requireNativeComponent, Platform } from 'react-native';
 
 const {
   Dimensions,  
@@ -47,10 +47,24 @@ export class Options extends Component {
     return (
       <Container style={{margin: 0, marginBottom: 0, backgroundColor: '#fff'}}>
         <Content contentContainerStyle={{height: windowHeight}}>
-            <FilterBridgeView style={{height: windowHeight}} {...this.props} />
+          {this.renderContent()}
          </Content>
       </Container>
     )
+  }
+
+  renderContent() {
+    if (Platform.OS === "ios") {
+      return (
+        <FilterBridgeView style={{height: windowHeight}} {...this.props} />
+      )
+    } else {
+      return (
+        <Text style={{alignSelf: 'center'}}>
+          This screen isn't implemented yet
+        </Text>
+      )
+    }
   }
 }
 
