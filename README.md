@@ -15,7 +15,7 @@ The App will sends you push-notification if another user likes your post.
 
 eMia uses Firebase database, storage, authentication and cloud messages.
 
-Notes. This version loads native (iOS) FilterViewController for option menu button on the main screen.  
+Notes. This version loads native (iOS, Swift 4) FilterViewController for option menu button on the main screen.  
 
 ## Requirements
 
@@ -54,9 +54,9 @@ Press on Cmd+R or click on the run button to run the app and the project should 
 
 ### Build and run Android app.
 
-In console go to eMia directory
+In console go to the eMia directory
 
-run command
+run command:
 
 react-native start --port 8081
 
