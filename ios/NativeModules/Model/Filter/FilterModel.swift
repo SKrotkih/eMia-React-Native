@@ -10,16 +10,28 @@ import UIKit
 
 struct FilterModel: Equatable {
    
-   var myFavoriteFilter: FilterFavorite = .all
-   var genderFilter: Gender = .boy
-   var minAge: CGFloat = 18
-   var maxAge: CGFloat = 60
+   private var manager = FilterManager()
+   
+   var myFavoriteFilter: FilterFavorite
+   var genderFilter: Gender
+   var minAge: CGFloat
+   var maxAge: CGFloat
    var municipality: String?
 
    init() {
+      myFavoriteFilter = manager.myFavoriteFilter
+      genderFilter = manager.genderFilter
+      minAge = manager.minAge
+      maxAge = manager.maxAge
+      municipality = manager.municipality
    }
    
    func syncronize() {
+      manager.myFavoriteFilter = myFavoriteFilter
+      manager.genderFilter = genderFilter
+      manager.minAge = minAge
+      manager.maxAge = maxAge
+      manager.municipality = municipality
    }
 }
 

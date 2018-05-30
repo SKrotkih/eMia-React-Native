@@ -11,15 +11,10 @@ import UIKit
 class FilterDependencies: NSObject {
    
    static func configure(view: FiltersViewController) {
-      let presenter = FilterPresenter()
       let interactor = FilterInteractor()
-      
-      view.eventHandler = presenter
-      view.presenter = presenter
-      
+      let presenter = FilterPresenter()
       presenter.interactor = interactor
-      presenter.view = view
-      
+      view.presenter = presenter
       interactor.presenter = presenter
    }
 }

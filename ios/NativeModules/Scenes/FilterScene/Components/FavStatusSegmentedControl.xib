@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="2q2-29-ROx" customClass="FavStatusSegmentedControl" customModule="eMia" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OeV-k6-9Vb">
+                    <rect key="frame" x="0.0" y="0.0" width="187.5" height="43"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nid-Xd-a0N">
+                            <rect key="frame" x="8" y="11" width="172" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="Ftn-Df-v0B"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="nid-Xd-a0N" secondAttribute="trailing" constant="7.5" id="P7x-bE-Csh"/>
+                        <constraint firstItem="nid-Xd-a0N" firstAttribute="centerY" secondItem="OeV-k6-9Vb" secondAttribute="centerY" id="Z3U-vj-2bR"/>
+                        <constraint firstItem="nid-Xd-a0N" firstAttribute="leading" secondItem="OeV-k6-9Vb" secondAttribute="leading" constant="8" id="wdx-HD-dt7"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="Q6T-su-9dZ" appends="YES" id="OOu-iR-Nne"/>
+                    </connections>
+                </view>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MY9-CV-PCK">
+                    <rect key="frame" x="186.5" y="0.0" width="1" height="43"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="1" id="7q2-SE-xNY"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kul-3G-esu">
+                    <rect key="frame" x="187.5" y="0.0" width="187.5" height="43"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Favorite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gwx-Xx-RrL">
+                            <rect key="frame" x="8" y="11" width="172" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="FJY-qk-u6M"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="17"/>
+                            <color key="textColor" red="0.29803922770000002" green="0.29803922770000002" blue="0.29803922770000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Gwx-Xx-RrL" firstAttribute="centerY" secondItem="kul-3G-esu" secondAttribute="centerY" id="C7a-e0-mNt"/>
+                        <constraint firstAttribute="trailing" secondItem="Gwx-Xx-RrL" secondAttribute="trailing" constant="7.5" id="lRV-3V-PTD"/>
+                        <constraint firstItem="Gwx-Xx-RrL" firstAttribute="leading" secondItem="kul-3G-esu" secondAttribute="leading" constant="8" id="o6w-43-QjD"/>
+                    </constraints>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="tXx-RU-EVZ" appends="YES" id="E5b-QR-7DF"/>
+                    </connections>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="kul-3G-esu" firstAttribute="leading" secondItem="OeV-k6-9Vb" secondAttribute="trailing" id="2k2-Vf-k7O"/>
+                <constraint firstAttribute="bottom" secondItem="MY9-CV-PCK" secondAttribute="bottom" id="EHB-A1-scN"/>
+                <constraint firstItem="OeV-k6-9Vb" firstAttribute="width" secondItem="2q2-29-ROx" secondAttribute="width" multiplier="0.5" id="EQS-Os-D5f"/>
+                <constraint firstItem="OeV-k6-9Vb" firstAttribute="leading" secondItem="2q2-29-ROx" secondAttribute="leading" id="LKJ-oC-nsM"/>
+                <constraint firstAttribute="trailing" secondItem="kul-3G-esu" secondAttribute="trailing" id="Pgz-HU-s7g"/>
+                <constraint firstItem="kul-3G-esu" firstAttribute="centerY" secondItem="2q2-29-ROx" secondAttribute="centerY" id="aL0-qZ-Tdi"/>
+                <constraint firstItem="kul-3G-esu" firstAttribute="height" secondItem="2q2-29-ROx" secondAttribute="height" id="gxU-z7-EKs"/>
+                <constraint firstItem="MY9-CV-PCK" firstAttribute="top" secondItem="2q2-29-ROx" secondAttribute="top" id="jPr-yL-F2t"/>
+                <constraint firstItem="MY9-CV-PCK" firstAttribute="leading" secondItem="OeV-k6-9Vb" secondAttribute="trailing" constant="-1" id="nwn-VP-4fH"/>
+                <constraint firstItem="OeV-k6-9Vb" firstAttribute="centerY" secondItem="2q2-29-ROx" secondAttribute="centerY" id="sMs-yn-8YZ"/>
+                <constraint firstItem="OeV-k6-9Vb" firstAttribute="height" secondItem="2q2-29-ROx" secondAttribute="height" id="uwq-Su-wHY"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="allLabel" destination="nid-Xd-a0N" id="J37-D2-nhX"/>
+                <outlet property="myFavoriteLabel" destination="Gwx-Xx-RrL" id="hvk-9z-mZX"/>
+                <outlet property="selectedAllView" destination="OeV-k6-9Vb" id="y0C-E5-f8f"/>
+                <outlet property="selectedMyFavoriteView" destination="kul-3G-esu" id="Uz2-aY-Kh4"/>
+                <outlet property="tapAllRecognizer" destination="Q6T-su-9dZ" id="IFI-Wl-m3T"/>
+                <outlet property="tapMyFavoriteRecognizer" destination="tXx-RU-EVZ" id="BWL-Sh-Gj6"/>
+            </connections>
+            <point key="canvasLocation" x="20" y="-107"/>
+        </view>
+        <tapGestureRecognizer id="Q6T-su-9dZ"/>
+        <tapGestureRecognizer id="tXx-RU-EVZ"/>
+    </objects>
+</document>

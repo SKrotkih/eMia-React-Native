@@ -8,6 +8,11 @@ target 'eMia' do
     pod 'Firebase/Auth'
     pod 'Firebase/RemoteConfig'
     pod 'Firebase/Messaging'
+    
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'RxDataSources'
+    
     pod 'IQKeyboardManagerSwift'
     pod 'SwiftyJSON'
     pod 'NextGrowingTextView'
@@ -15,8 +20,8 @@ target 'eMia' do
     
     pod 'SwiftyNotifications', '~>0.2'
     pod 'ReachabilitySwift', '~> 3'
-    pod 'DTCollectionViewManager', '~> 6.0'
-    
+#    pod 'DTCollectionViewManager', '~> 6.0'
+
     pod 'AwesomeCache'
     
     pod 'MZFayeClient', :git => 'https://github.com/m1entus/MZFayeClient.git', :commit => '6a88a1'

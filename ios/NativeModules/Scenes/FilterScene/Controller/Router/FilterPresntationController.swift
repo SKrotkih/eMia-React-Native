@@ -95,8 +95,6 @@ class FilterPresntationController: UIPresentationController {
 		}
 	}
 	
-	
-	
 	override func containerViewWillLayoutSubviews() {
 		dimmingView.frame = (containerView?.bounds)!
 		presentedView!.frame = frameOfPresentedViewInContainerView
@@ -126,7 +124,6 @@ class FilterPresntationController: UIPresentationController {
 			progress = CGFloat(downwardMovementPercent)
 		}
 		
-		
 		switch recognizer.state {
 		case .began:
 			interactor.hasStarted = true
@@ -147,6 +144,4 @@ class FilterPresntationController: UIPresentationController {
 			break
 		}
 	}
-	
 }
-

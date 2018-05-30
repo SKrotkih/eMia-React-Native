@@ -37,8 +37,4 @@ extension FilterPresentationSegue: UIViewControllerTransitioningDelegate {
 	func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
 		return presentation.interactor.hasStarted ? presentation.interactor : nil
 	}
-	
 }
-
-
-
