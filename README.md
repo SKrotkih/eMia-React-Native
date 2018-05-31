@@ -1,25 +1,32 @@
 # eMia
 
 This is the entire source code of the cross-platform (iOS and Android) app. 
-It's been developing with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
+It's developing with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
+
+This is a demo movie on iOS device: 
+
+![reactnative_ios](https://user-images.githubusercontent.com/2775621/40759771-2bb84a6e-649c-11e8-86b2-be6e8ed46ad1.gif)
+
+
 
 ## Introduction
 
-There are two native apps. They are: [eMia-iOS](https://github.com/SKrotkih/eMia-iOS) and [eMia-Android](https://github.com/SKrotkih/eMia-Android). Here you can see the React Native code example which summarizes them.
-The project is in process.
+There are two native apps. 
+They are: [eMia-iOS](https://github.com/SKrotkih/eMia-iOS) 
+and [eMia-Android](https://github.com/SKrotkih/eMia-Android).
 
-eMia is an application like a forum. 
-You can be registered as an user database on the Firebase. 
-You can edit your profile, post new topic with a title, description and a photo.
+eMia is a simple social network. 
+You can be registered there, then edit your profile, post new topic with a title, description and a photo.
 The App will sends you push-notification if another user likes your post.
 
 eMia uses Firebase database, storage, authentication and cloud messages.
 
-Notes. This version loads native (iOS, Swift 4) FilterViewController for option menu button on the main screen.  
+Notes. This version loads native (iOS, Swift 4) view controller on Filter scene which is launched on options menu button.  
 
 ## Requirements
 
-Xcode 9, Android Studio 3.1
+- Xcode 9
+- Android Studio 3.1
 
 ## Preparing for using
 
@@ -44,17 +51,17 @@ npm install
 
 ### Build and run iOS app.
 
-In ios directory execute command: 
+In ios directory put command in console: 
 
 pod install
 
-Open eMia.xcworkspace in Xcode.
+Then open the eMia.xcworkspace in Xcode.
 
 Press on Cmd+R or click on the run button to run the app and the project should run.
 
 ### Build and run Android app.
 
-In console go to the eMia directory
+Go to the eMia directory. Put command in console:
 
 run command:
 
@@ -65,7 +72,6 @@ Start Android Studio.  Open android project. Run 'app'
 ## Demo video
 
 https://youtu.be/tgvxxnFq-Sk
-
 
 Last edited on 04-23-2018
 
