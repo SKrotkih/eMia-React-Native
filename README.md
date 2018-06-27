@@ -25,7 +25,7 @@ Notes. This version loads native (iOS, Swift 4) view controller on Filter scene 
 
 ## Requirements
 
-- Xcode 9
+- Xcode 9, Swift 4
 - Android Studio 3.1
 
 ## Preparing for using
