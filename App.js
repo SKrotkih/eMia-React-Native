@@ -1,9 +1,11 @@
-//import Expo from "expo";
+// clean next comment lines to use expo
+// import Expo from "expo";
 // app.json:
-//,
-//"expo": {
+// ,
+// clean the next comments to use expo
+// "expo": {
 //   "sdkVersion": "25.0.0"
-//}
+// }
 
 import React, {Component} from 'react';
 import { Provider } from 'react-redux';
@@ -33,16 +35,17 @@ function setUpIgnoreYellowMessage () {
 export default class App extends Component {
 
   constructor () {
-    super();
+    super()
     this.state = {
       isReady: false,
       isLoggedIn: false
     };
   }
 
-  async componentWillMount() {
-    setUpIgnoreYellowMessage();
+  async componentWillMount () {
+    setUpIgnoreYellowMessage()
 
+    // clean next comment lines to use expo
     // await Expo.Font.loadAsync({
     //   "Roboto": require('native-base/Fonts/Roboto.ttf'),
     //   "Roboto_medium": require("native-base/Fonts/Roboto_medium.ttf"),
@@ -59,20 +62,20 @@ export default class App extends Component {
     }));
   }
 
-  render() {
-     if (!this.state.isReady) {
-       return (
-         <ImageBackground style={styles.background} source={require('@assets/images/splash.png')}>
-           <StatusBar translucent barStyle="dark-content" />
-         </ImageBackground> )
-     } else {
-       return (
-         <Provider store={store}>
-           <StyleProvider style={getTheme(variables)}>
-             <Router isLoggedIn={this.state.isLoggedIn} />
-           </StyleProvider>
-         </Provider> )
-     }
+  render () {
+    if (!this.state.isReady) {
+      return (
+        <ImageBackground style={styles.background} source={require('@assets/images/splash.png')}>
+          <StatusBar translucent barStyle="dark-content" />
+        </ImageBackground> )
+    } else {
+      return (
+        <Provider store={store}>
+          <StyleProvider style={getTheme(variables)}>
+            <Router isLoggedIn={this.state.isLoggedIn} />
+          </StyleProvider>
+        </Provider>)
+    }
   }
 }
 

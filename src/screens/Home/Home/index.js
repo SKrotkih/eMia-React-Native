@@ -15,7 +15,6 @@
 // https://www.npmjs.com/package/react-native-grid-component?activeTab=readme
 // npm install react-native-grid-component --save
 
-
 import React from 'react';
 import ReactNative from 'react-native';
 import Grid from 'react-native-grid-component';
@@ -31,8 +30,7 @@ import { color } from '@theme/styles';
 import {styles, gridItemStyles} from './styles';
 import Loader from '@components/Loader';
 
-import { actions as home } from '../index';
-import { config } from '../index';
+import { actions as home, config } from '../index';
 import { actions as auth } from '../../Auth/index';
 
 import { 
@@ -92,17 +90,13 @@ export class Home extends Component {
     this.onFailed = this.onFailed.bind(this);
   }
 
-  setUpNavigationBar() {
+  setUpNavigationBar () {
     var title = config.APP_NAME;
     const {setParams} = this.props.navigation;
     setParams({ 
       title: title,
-      left: 
-      <Icon style={{marginLeft: 8, color: "#fff"}} name={'ios-menu'}
-      onPress={ () => { menuButtonPressed() }} />,
-      right: 
-      <Icon style={{marginRight: 8, color: "#fff"}} name={'ios-options'}
-      onPress={ () => { optionsButtonPressed() }} />
+      left: <Icon style={{marginLeft: 8, color: '#fff'}} name={'ios-menu'} onPress={ () => { menuButtonPressed() }} />,
+      right: <Icon style={{marginRight: 8, color: '#fff'}} name={'ios-options'} onPress={ () => { optionsButtonPressed() }} />
     });
   }
 
@@ -141,19 +135,19 @@ export class Home extends Component {
     });
   }
 
-  render() {
+  render () {
     if (!this.state.loaded) {
       return this.renderLoadingView();
     }
     // Icons
     //  https://oblador.github.io/react-native-vector-icons/
-    // 
+    //
     return (
       <Container>
-        <Tabs tabBarUnderlineStyle={{borderBottomWidth:2}}
+        <Tabs tabBarUnderlineStyle={{borderBottomWidth: 2}}
           renderTabBar={() => <ScrollableTab />}
           onChangeTab= {this.onChangeTab()}>
-          <Tab heading="Recent" tabStyle={{backgroundColor: 'white'}} textStyle={{color: color.brand}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+          <Tab heading="Recently" tabStyle={{backgroundColor: 'white'}} textStyle={{color: color.brand}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
             {this.renderTab1()}
           </Tab>
           <Tab heading="My Posts" tabStyle={{backgroundColor: 'white'}} textStyle={{color: color.brand}} activeTabStyle={{backgroundColor: 'white'}} activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
@@ -174,7 +168,7 @@ export class Home extends Component {
     );
   }
 
-  renderActionsButton() {
+  renderActionsButton () {
     let activeState = this.state.active
     return (
       <Fab
@@ -193,7 +187,7 @@ export class Home extends Component {
     )
   }
 
-  onChangeTab() {
+  onChangeTab () {
   }
 
   renderTab1 () {
@@ -232,7 +226,7 @@ export class Home extends Component {
 
   renderPlaceholder (sectionID, rowID) {
     // TODO: create properly key
-    var key = ''+sectionID+'-9'
+    var key = '' + sectionID + '-9'
     return (
       <View style={gridItemStyles.container} key={key}>
         <Text>
@@ -241,9 +235,9 @@ export class Home extends Component {
     )
   }
 
-  renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
-    // TODO: The same. Need key
-    var key = ''+sectionID+'-'+rowID
+  renderSeparator (sectionID, rowID, adjacentRowHighlighted) {
+    // TODO: The same. Need a key
+    var key = '' + sectionID + '-' + rowID
     return (
       <View style={styles.separator} key={key} />
     )
@@ -256,18 +250,17 @@ export class Home extends Component {
     var url = item.url;
     return (
       <View style={gridItemStyles.container} key={key}>
-        <TouchableOpacity key={key} style={{flexDirection:'row'}} activeOpacity={0.5} onPress={() => {
-          selectPostItem(item)        
-        }}>
-        <Body>
-          <Image style={gridItemStyles.image} source={{ cache:'force-cache', uri: url }} />
-          <Text style={gridItemStyles.title} numberOfLines={1}>
-            {title}
-          </Text>
-          <Text style={gridItemStyles.description} numberOfLines={3}>
-            {body}
-          </Text>
-        </Body>
+        <TouchableOpacity key={key} style={{flexDirection: 'row'}} activeOpacity={0.5} onPress={() => {
+          selectPostItem(item)}}>
+          <Body>
+            <Image style={gridItemStyles.image} source={{ cache:'force-cache', uri: url }} />
+            <Text style={gridItemStyles.title} numberOfLines={1}>
+              {title}
+            </Text>
+            <Text style={gridItemStyles.description} numberOfLines={3}>
+              {body}
+            </Text>
+          </Body>
         </TouchableOpacity>
       </View>
     ) 
@@ -285,7 +278,7 @@ export class Home extends Component {
           <Body>
             <Segment>
               <Button
-                active={this.state.seg === 1 ? true : false}
+                active={this.state.seg === 1}
                 first
                 onPress={() => this.setState({ seg: 1 })}
               >
@@ -293,7 +286,7 @@ export class Home extends Component {
               </Button>
               <Button
                 last
-                active={this.state.seg === 2 ? true : false}
+                active={this.state.seg === 2}
                 onPress={() => this.setState({ seg: 2 })}
               >
                 <Text>My Posts</Text>
@@ -309,23 +302,23 @@ export class Home extends Component {
     );
   }
 
-  createNewPostButtonPressed() {
-    this.collapseMenuOnButton ()  
+  createNewPostButtonPressed () {
+    this.collapseMenuOnButton()
     Actions.AddNewPost();
   }
 
 }
 
 // Pressing the buttons handlers
-function selectPostItem(item) {
+function selectPostItem (item) {
   Actions.PostPreview({ item });
 }
 
-function menuButtonPressed() {
+function menuButtonPressed () {
   Actions.MainMenu();
 }
 
-function optionsButtonPressed() {
+function optionsButtonPressed () {
   Actions.Options();
 }
 

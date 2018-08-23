@@ -58,10 +58,10 @@ export class EditProfile extends Component {
       userName: ''
     };
     this.doneButtonPressed = this.doneButtonPressed.bind(this);
-    //this.getImage = this.getImage.bind(this);    
+    //this.getImage = this.getImage.bind(this);
   }
 
-  setUpNavigationBar() {
+  setUpNavigationBar () {
     var title = 'My Profile';
     const {setParams} = this.props.navigation;
     setParams({ 
@@ -113,14 +113,14 @@ export class EditProfile extends Component {
     )
   }
 
-  doneButtonPressed() {
+  doneButtonPressed () {
     Alert.show('Sorry, this function doesn\'t work jet...', {
       type: 'info',
       duration: 3000
     });
   }
 
-  takePhotoButtonPressed() {
+  takePhotoButtonPressed () {
     const imagePickerOptions = {
       quality: 1.0,
       maxWidth: 500,

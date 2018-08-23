@@ -2,14 +2,17 @@ import { AsyncStorage } from 'react-native';
 
 import * as t from './actionTypes';
 
-let initialState = { isLoggedIn: false, user: null };
+let initialState = {
+  isLoggedIn: false,
+  user: null
+};
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case t.LOGGED_IN:
       const user = action.data;
 
-      // Save token and data to Asyncstorage
+      // Save token and data to the AsyncStorage
       AsyncStorage.multiSet([
         ['user', JSON.stringify(user)]
       ]);

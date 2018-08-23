@@ -22,9 +22,7 @@ import styles from './styles';
 class Welcome extends React.Component {
   constructor () {
     super();
-    this.state = {
-
-    };
+    this.state = {};
   }
   render () {
     return (
@@ -47,12 +45,11 @@ class Welcome extends React.Component {
           </View>
           <View style={styles.bottom}>
             <Text style={styles.bottomText}>
-                            Already have an account?
+              Already have an account?
             </Text>
-
             <TouchableOpacity onPress={Actions.Login}>
               <Text style={styles.signInText}>
-                                Sign in
+                Sign in
               </Text>
             </TouchableOpacity>
           </View>

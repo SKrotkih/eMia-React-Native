@@ -1,20 +1,17 @@
 
 import React from 'react';
 import ReactNative from 'react-native';
-import NativeBase from 'native-base';
-
-import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
-
-import { config } from '../index';
 import styles from './styles';
-import { windowWidth, windowHeight } from '@theme/styles';
-
 import ImageViewer from '@theme/components/ImageViewer';
-var ImagePickerManager = require('react-native-image-picker');
 import { Alert } from '@theme/components/alerts/';
 
-import { 
+import NativeBase from 'native-base';
+import {Actions} from 'react-native-router-flux';
+import { config } from '../index';
+import { windowWidth, windowHeight } from '@theme/styles';
+
+import {
   Container, 
   Header, 
   Title, 
@@ -48,6 +45,8 @@ const {
   Component
 } = React;
 
+var ImagePickerManager = require('react-native-image-picker');
+
 export class AddNewPost extends Component {
   constructor (props) {
     super(props);
@@ -59,14 +58,12 @@ export class AddNewPost extends Component {
     this.doneButtonPressed = this.doneButtonPressed.bind(this);
   }
 
-  setUpNavigationBar() {
+  setUpNavigationBar () {
     var title = 'New Post';
     const {setParams} = this.props.navigation;
-    setParams({ 
+    setParams({
       title: title,
-      right: 
-      <Icon style={{marginRight: 8, color: "#fff"}} name={'ios-done-all'}
-      onPress={ () => { this.doneButtonPressed() }} />
+      right: <Icon style={{marginRight: 8, color: '#fff'}} name={'ios-done-all'} onPress={ () => { this.doneButtonPressed() }} />
     });
   }
 
@@ -96,7 +93,7 @@ export class AddNewPost extends Component {
             </Item>
           </Form>
           <Button block info style={styles.button}
-              onPress={() => this.takePhotoButtonPressed()} >
+            onPress={() => this.takePhotoButtonPressed()} >
             <Text>Photo</Text>
           </Button>
           <View style={styles.backgroundPhoto}>
@@ -107,14 +104,14 @@ export class AddNewPost extends Component {
     )
   }
 
-  renderPhoto() {
+  renderPhoto () {
     if (this.state.photoUrl === '') {
       return (
         null
       )
     } else {
       return (
-          <ImageViewer
+        <ImageViewer
           disabled={false}
           source={{uri: this.state.photoUrl}}
           downloadable
@@ -124,14 +121,14 @@ export class AddNewPost extends Component {
     }
   }
 
-  doneButtonPressed() {
+  doneButtonPressed () {
     Alert.show('Sorry, this function doesn\'t work jet...', {
       type: 'info',
       duration: 3000
     });
   }
 
-  takePhotoButtonPressed() {
+  takePhotoButtonPressed () {
     const imagePickerOptions = {
       quality: 1.0,
       maxWidth: 500,
@@ -147,13 +144,11 @@ export class AddNewPost extends Component {
 
       if (response.didCancel) {
         console.log('User cancelled photo picker');
-      }
-      else if (response.error) {
+      } else if (response.error) {
         console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
-      }
-      else {
+      } else {
         let source = { uri: response.uri };
 
         // You can also display the image using data:

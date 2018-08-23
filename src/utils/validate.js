@@ -6,22 +6,15 @@ export function isEmpty (str) {
 export function validateEmail (email) {
   var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-  if (filter.test(email)) return true;
-
-  return false;
+  return (filter.test(email))
 }
 
 export function validatePassword (password) {
-  if (password.length > 6) return true;
-
-  return false;
+  return (password.length > 6)
 }
 
 export function confirmPassword (cPassword, password) {
-  if (cPassword === password) {
-    return true;
-  }
-  return false;
+  return (cPassword === password)
 }
 
 export function validate (form) {

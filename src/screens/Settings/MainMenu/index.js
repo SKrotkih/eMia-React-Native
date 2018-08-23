@@ -61,7 +61,7 @@ export class MainMenu extends Component {
     };
   }
 
-  setTitle(titleText) {
+  setTitle (titleText) {
     const {setParams} = this.props.navigation;
     setParams({ title: titleText });
   }
@@ -127,7 +127,7 @@ function renderMenuItem(menuItem, _this) {
 
 // Profile
 
-function renderProfileMenuItem(_this) {
+function renderProfileMenuItem (_this) {
   var user = _this.state.user;
   if (user === null) {
     return (
@@ -158,7 +158,7 @@ function editProfile (user) {
 
 // Log Out
 
-function renderLogOutMenuItem(_this) {
+function renderLogOutMenuItem (_this) {
   var user = _this.state.user;
   if (user === null) {
     return (

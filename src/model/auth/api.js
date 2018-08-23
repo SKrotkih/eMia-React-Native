@@ -43,27 +43,28 @@ export function getCurrentUser (callback) {
   auth.onAuthStateChanged((user) => {
     if (user === null) {
       callback(null)
-    } else {}
-      getUser({uid: user.uid}, function (success, data, error) {
-        if (success && data.exists) {
-          var currentUser = data.user;
-          var avatarName = currentUser.id+'.jpg';
-          getDownloadURL(avatarName, (function(url) {
-            currentUser.avatarUrl = url;
-            callback(currentUser)
-          }))
-        } else {
-          callback(null)
-        }
-      })
+    } else {
+    }
+    getUser({uid: user.uid}, function (success, data, error) {
+      if (success && data.exists) {
+        var currentUser = data.user;
+        var avatarName = currentUser.id+'.jpg';
+        getDownloadURL(avatarName, (function (url) {
+          currentUser.avatarUrl = url;
+          callback(currentUser)
+        }))
+      } else {
+        callback(null)
+      }
     })
+  })
 }
 
 function getDownloadURL(photoName, callback) {
   const imageRef = storage.ref(photoName);
-  imageRef.getDownloadURL().then(function(url) {
+  imageRef.getDownloadURL().then(function (url) {
     callback(url);
-  }, function(error) {
+  }, function (error) {
     console.log(error);
     callback(null);    
   });

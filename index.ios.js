@@ -1,6 +1,6 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
+import { AppRegistry } from 'react-native'
+import App from './App'
 
-AppRegistry.registerComponent('eMia', () => App);
+AppRegistry.registerComponent('eMia', () => App)
 
-global.CURRENT_VERSION = 'v0.1.3';
+global.CURRENT_VERSION = 'v0.1.3'

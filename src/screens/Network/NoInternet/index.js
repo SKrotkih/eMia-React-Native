@@ -13,19 +13,19 @@ const {colors} = THEMES.gitterDefault;
 import {config} from '../index';
 
 class NoInternetScreen extends Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.handleRetry = this.handleRetry.bind(this);
   }
 
-  handleRetry() {
+  handleRetry () {
     const {dispatch} = this.props;
     rootNavigator.startAppWithScreen({screen: 'gm.Launch'});
     dispatch(init());
   }
 
-  render() {
+  render () {
     return (
       <Image style={styles.container}
         source={require('../../images/gitter-background.jpg')}>

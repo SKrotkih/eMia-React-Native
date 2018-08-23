@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   photo: {
-    width: windowWidth - 30, 
+    width: windowWidth - 30,
     height: windowWidth - 30,
-    alignSelf: 'center',     
-    resizeMode: 'contain'    
+    alignSelf: 'center',
+    resizeMode: 'contain'
   },
 
   title: {
