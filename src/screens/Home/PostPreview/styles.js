@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
-import { windowWidth, windowHeight } from '@theme/styles';
+import { StyleSheet } from 'react-native'
+import { windowWidth, windowHeight } from '@theme/styles'
 
-const resizeMode = 'contain';
+const resizeMode = 'contain'
 
 const styles = StyleSheet.create({
   container: {
@@ -41,6 +41,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginVertical: 8
   },
-});
+})
 
-export default styles;
+export default styles

@@ -1,15 +1,15 @@
 
-import React from 'react';
-import ReactNative from 'react-native';
-import {connect} from 'react-redux';
-import styles from './styles';
-import ImageViewer from '@theme/components/ImageViewer';
-import { Alert } from '@theme/components/alerts/';
+import React from 'react'
+import ReactNative from 'react-native'
+import {connect} from 'react-redux'
+import styles from './styles'
+import ImageViewer from '@theme/components/ImageViewer'
+import { Alert } from '@theme/components/alerts/'
 
-import NativeBase from 'native-base';
-import {Actions} from 'react-native-router-flux';
-import { config } from '../index';
-import { windowWidth, windowHeight } from '@theme/styles';
+import NativeBase from 'native-base'
+import {Actions} from 'react-native-router-flux'
+import { config } from '../index'
+import { windowWidth, windowHeight } from '@theme/styles'
 
 import {
   Container, 
@@ -29,7 +29,7 @@ import {
   Item,
   Label,
   Input
-} from 'native-base';
+} from 'native-base'
 
 const {
   Dimensions,  
@@ -39,45 +39,45 @@ const {
   PixelRatio,  
   View,
   TouchableOpacity
-} = ReactNative;
+} = ReactNative
 
 const {
   Component
-} = React;
+} = React
 
-var ImagePickerManager = require('react-native-image-picker');
+var ImagePickerManager = require('react-native-image-picker')
 
 export class AddNewPost extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       photoUrl: '',
       postTitle: '',
       postBody: ''
-    };
-    this.doneButtonPressed = this.doneButtonPressed.bind(this);
+    }
+    this.doneButtonPressed = this.doneButtonPressed.bind(this)
   }
 
   setUpNavigationBar () {
-    var title = 'New Post';
-    const {setParams} = this.props.navigation;
+    var title = 'New Post'
+    const {setParams} = this.props.navigation
     setParams({
       title: title,
       right: <Icon style={{marginRight: 8, color: '#fff'}} name={'ios-done-all'} onPress={ () => { this.doneButtonPressed() }} />
-    });
+    })
   }
 
   componentWillMount () {
-    this.setUpNavigationBar();    
+    this.setUpNavigationBar()    
   }
 
   render () {
 
-    var titleLabelText = 'Title:';
-    var bodyLabelText = 'Body:';
+    var titleLabelText = 'Title:'
+    var bodyLabelText = 'Body:'
 
-    var title = this.state.postTitle === '' ? 'Title' : this.state.postTitle;
-    var body = this.state.postBody === '' ? 'Body' : this.state.postBody;    
+    var title = this.state.postTitle === '' ? 'Title' : this.state.postTitle
+    var body = this.state.postBody === '' ? 'Body' : this.state.postBody    
 
     return (
       <Container style={styles.container}>
@@ -125,7 +125,7 @@ export class AddNewPost extends Component {
     Alert.show('Sorry, this function doesn\'t work jet...', {
       type: 'info',
       duration: 3000
-    });
+    })
   }
 
   takePhotoButtonPressed () {
@@ -136,29 +136,29 @@ export class AddNewPost extends Component {
       storageOptions: {
         skipBackup: true
       }
-    };
+    }
         
     ImagePickerManager.showImagePicker(imagePickerOptions, (response) => {
     
-      console.log('Response = ', response);
+      console.log('Response = ', response)
 
       if (response.didCancel) {
-        console.log('User cancelled photo picker');
+        console.log('User cancelled photo picker')
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
+        console.log('ImagePicker Error: ', response.error)
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
+        console.log('User tapped custom button: ', response.customButton)
       } else {
-        let source = { uri: response.uri };
+        let source = { uri: response.uri }
 
         // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data };
+        // let source = { uri: 'data:image/jpeg;base64,' + response.data }
 
         this.setState({
           photoUrl: source
-        });
+        })
       }
-    });
+    })
   }
 }
 

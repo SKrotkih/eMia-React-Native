@@ -1,11 +1,11 @@
-import React from 'react';
-import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
+import React from 'react'
+import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux'
 
-import { actions as auth } from '@screens/Auth/index';
-import AuthForm from '@components/AuthForm';
+import { actions as auth } from '@screens/Auth/index'
+import AuthForm from '@components/AuthForm'
 
-const { createUser } = auth;
+const { createUser } = auth
 
 const fields = [
   {
@@ -17,52 +17,52 @@ const fields = [
     value: '',
     type: 'text'
   }
-];
+]
 
 const error = {
   general: '',
   username: ''
-};
+}
 
 class CompleteProfile extends React.Component {
   constructor () {
-    super();
+    super()
     this.state = {
       error: error
-    };
+    }
 
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onSuccess = this.onSuccess.bind(this);
-    this.onError = this.onError.bind(this);
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onSuccess = this.onSuccess.bind(this)
+    this.onError = this.onError.bind(this)
   }
 
   onSubmit (data) {
-    this.setState({error: error}); // clear out error messages
+    this.setState({error: error}) // clear out error messages
 
     // attach user id
-    const { user } = this.props;
-    data['uid'] = user.uid;
+    const { user } = this.props
+    data['uid'] = user.uid
 
-    this.props.createUser(data, this.onSuccess, this.onError);
+    this.props.createUser(data, this.onSuccess, this.onError)
   }
 
   onSuccess () {
-    Actions.Main();
+    Actions.Main()
   }
 
   onError (error) {
-    let errObj = this.state.error;
+    let errObj = this.state.error
 
     if (error.hasOwnProperty('message')) {
-      errObj['general'] = error.message;
+      errObj['general'] = error.message
     } else {
-      let keys = Object.keys(error);
+      let keys = Object.keys(error)
       keys.map((key, index) => {
-        errObj[key] = error[key];
-      });
+        errObj[key] = error[key]
+      })
     }
 
-    this.setState({error: errObj});
+    this.setState({error: errObj})
   }
 
   render () {

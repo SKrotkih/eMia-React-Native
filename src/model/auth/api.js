@@ -1,18 +1,18 @@
-import { auth, database, storage, provider } from '@model/firebase';
+import { auth, database, storage, provider } from '@model/firebase'
 
 // Register the user using email and password
 export function register (data, callback) {
-  const { email, password } = data;
+  const { email, password } = data
   auth.createUserWithEmailAndPassword(email, password)
     .then((user) => callback(true, user, null))
-    .catch((error) => callback(false, null, error));
+    .catch((error) => callback(false, null, error))
 }
 
 // Create new user object in realtime database
 export function createUser (user, callback) {
   database.ref('main').child('users').child(user.id).update({ ...user })
     .then(() => callback(true, null, null))
-    .catch((error) => callback(false, null, {message: error}));
+    .catch((error) => callback(false, null, {message: error}))
 }
 
 // Sign user in with their email and password
@@ -47,10 +47,10 @@ export function getCurrentUser (callback) {
     }
     getUser({uid: user.uid}, function (success, data, error) {
       if (success && data.exists) {
-        var currentUser = data.user;
-        var avatarName = currentUser.id+'.jpg';
-        getDownloadURL(avatarName, (function (url) {
-          currentUser.avatarUrl = url;
+        var currentUser = data.user
+        var avatarName = currentUser.id+'.jpg'
+        getImageUrl(avatarName, (function (url) {
+          currentUser.avatarUrl = url
           callback(currentUser)
         }))
       } else {
@@ -60,14 +60,14 @@ export function getCurrentUser (callback) {
   })
 }
 
-function getDownloadURL(photoName, callback) {
-  const imageRef = storage.ref(photoName);
-  imageRef.getDownloadURL().then(function (url) {
-    callback(url);
+function getImageUrl (photoName, callback) {
+  const imageRef = storage.ref(photoName)
+  imageRef.getImageUrl().then(function (url) {
+    callback(url)
   }, function (error) {
-    console.log(error);
-    callback(null);    
-  });
+    console.log(error)
+    callback(null)    
+  })
 }
 
 // Send Password Reset Email

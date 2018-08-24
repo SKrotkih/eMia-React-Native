@@ -1,15 +1,15 @@
 
-import React, { PropTypes } from 'react';
-import ReactNative from 'react-native';
-import { requireNativeComponent, Platform } from 'react-native';
-import {connect} from 'react-redux';
-import { windowWidth, windowHeight } from '@theme/styles';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base';
+import React, { PropTypes } from 'react'
+import ReactNative from 'react-native'
+import { requireNativeComponent, Platform } from 'react-native'
+import {connect} from 'react-redux'
+import { windowWidth, windowHeight } from '@theme/styles'
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base'
 
-import NativeBase from 'native-base';
-import {Actions} from 'react-native-router-flux';
-import { config } from '../index';
-import styles from './styles';
+import NativeBase from 'native-base'
+import {Actions} from 'react-native-router-flux'
+import { config } from '../index'
+import styles from './styles'
 
 const {
   Dimensions,  
@@ -19,26 +19,26 @@ const {
   View,
   Alert,
   TouchableOpacity
-} = ReactNative;
+} = ReactNative
 
 const {
   Component
-} = React;
+} = React
 
 export class Options extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
-    };
+    }
   }
 
   setTitle (titleText) {
-    const {setParams} = this.props.navigation;
-    setParams({ title: titleText });
+    const {setParams} = this.props.navigation
+    setParams({ title: titleText })
   }
 
   componentWillMount () {
-    this.setTitle('Filter');
+    this.setTitle('Filter')
   }
 
   render () {

@@ -1,7 +1,7 @@
-import { StyleSheet } from 'react-native';
-import { windowWidth, windowHeight } from '@theme/styles';
+import { StyleSheet } from 'react-native'
+import { windowWidth, windowHeight } from '@theme/styles'
 
-const resizeMode = 'contain';
+const resizeMode = 'contain'
 
 const styles = StyleSheet.create({
   container: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 16,
     marginBottom: 4,
-    fontWeight: 'bold',    
+    fontWeight: 'bold',
     textAlign: 'center'
   },
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     textAlign: 'center',
     marginVertical: 8
-  },
-});
+  }
+})
 
-export default styles;
+export default styles

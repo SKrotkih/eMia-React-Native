@@ -15,23 +15,23 @@
 // https://www.npmjs.com/package/react-native-grid-component?activeTab=readme
 // npm install react-native-grid-component --save
 
-import React from 'react';
-import ReactNative from 'react-native';
-import Grid from 'react-native-grid-component';
-import NativeBase from 'native-base';
+import React from 'react'
+import ReactNative from 'react-native'
+import Grid from 'react-native-grid-component'
+import NativeBase from 'native-base'
 
-import {Actions} from 'react-native-router-flux';
-import {connect} from 'react-redux';
-import { YellowBox, StatusBar } from 'react-native';
-import _ from 'lodash';
+import {Actions} from 'react-native-router-flux'
+import {connect} from 'react-redux'
+import { YellowBox, StatusBar } from 'react-native'
+import _ from 'lodash'
 
-import { color } from '@theme/styles';
+import { color } from '@theme/styles'
 
-import {styles, gridItemStyles} from './styles';
-import Loader from '@components/Loader';
+import {styles, gridItemStyles} from './styles'
+import Loader from '@components/Loader'
 
-import { actions as home, config } from '../index';
-import { actions as auth } from '../../Auth/index';
+import { actions as home, config } from '../index'
+import { actions as auth } from '../../Auth/index'
 
 import { 
   Container, 
@@ -53,7 +53,7 @@ import {
   ScrollableTab,
   Fab,
   IconNB
-} from 'native-base';
+} from 'native-base'
 
 const {
   AppRegistry,
@@ -64,80 +64,80 @@ const {
   TouchableHighlight,
   TouchableOpacity,
   ActivityIndicator  
-} = ReactNative;
+} = ReactNative
 const {
   Component
-} = React;
+} = React
 const {
   fetchUsers,
   fetchPosts
-} = home;
+} = home
 const {
   login
-} = auth;
+} = auth
 
 export class Home extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       dataSource: null,
       loaded: false,
       data: null,
       seg: 1,
       active: false
-    };
-    this.onCompletion = this.onCompletion.bind(this);
-    this.onFailed = this.onFailed.bind(this);
+    }
+    this.onCompletion = this.onCompletion.bind(this)
+    this.onFailed = this.onFailed.bind(this)
   }
 
   setUpNavigationBar () {
-    var title = config.APP_NAME;
-    const {setParams} = this.props.navigation;
+    var title = config.APP_NAME
+    const {setParams} = this.props.navigation
     setParams({ 
       title: title,
       left: <Icon style={{marginLeft: 8, color: '#fff'}} name={'ios-menu'} onPress={ () => { menuButtonPressed() }} />,
       right: <Icon style={{marginRight: 8, color: '#fff'}} name={'ios-options'} onPress={ () => { optionsButtonPressed() }} />
-    });
+    })
   }
 
   componentWillMount () {
-    this.setUpNavigationBar();
+    this.setUpNavigationBar()
   }
 
   componentDidMount () {
-    this.fetchData();
+    this.fetchData()
   }
 
   fetchData () {
-    this.props.fetchPosts(this.onCompletion, this.onFailed);
+    this.props.fetchPosts(this.onCompletion, this.onFailed)
   }
 
   onCompletion (items) {
     this.setState({
       dataSource: items,
       loaded: true
-    });
+    })
   }
 
   onFailed (error) {
     if (error != null) {
-      Alert.alert('Oops!', error.message);
+      Alert.alert('Oops!', error.message)
     }
     this.setState({
       dataSource: [],
       loaded: true
-    });
+    })
   }
 
   collapseMenuOnButton () {
     this.setState({
       active: false
-    });
+    })
   }
 
   render () {
     if (!this.state.loaded) {
-      return this.renderLoadingView();
+      return this.renderLoadingView()
     }
     // Icons
     //  https://oblador.github.io/react-native-vector-icons/
@@ -165,7 +165,7 @@ export class Home extends Component {
         </Tabs>
         {this.renderActionsButton()}
       </Container>
-    );
+    )
   }
 
   renderActionsButton () {
@@ -221,7 +221,7 @@ export class Home extends Component {
       <View style={styles.loading}>
         <Loader loading={true} />
       </View>
-    );
+    )
   }
 
   renderPlaceholder (sectionID, rowID) {
@@ -244,10 +244,10 @@ export class Home extends Component {
   }            
 
   renderItem (item, sectionID, rowID) {
-    var title = item.value.title;
-    var body = item.value.body;
-    var key = item.key;
-    var url = item.url;
+    var title = item.value.title
+    var body = item.value.body
+    var key = item.key
+    var url = item.url
     return (
       <View style={gridItemStyles.container} key={key}>
         <TouchableOpacity key={key} style={{flexDirection: 'row'}} activeOpacity={0.5} onPress={() => {
@@ -269,7 +269,7 @@ export class Home extends Component {
   // Segmented Control. Example of using. Left for a short time. 
   render_Segment () {
     if (!this.state.loaded) {
-      return this.renderLoadingView();
+      return this.renderLoadingView()
     }
     return (
       <Container>
@@ -299,27 +299,27 @@ export class Home extends Component {
           {this.state.seg === 2 && this.renderTab2()}
         </Content>
       </Container>
-    );
+    )
   }
 
   createNewPostButtonPressed () {
     this.collapseMenuOnButton()
-    Actions.AddNewPost();
+    Actions.AddNewPost()
   }
 
 }
 
 // Pressing the buttons handlers
 function selectPostItem (item) {
-  Actions.PostPreview({ item });
+  Actions.PostPreview({ item })
 }
 
 function menuButtonPressed () {
-  Actions.MainMenu();
+  Actions.MainMenu()
 }
 
 function optionsButtonPressed () {
-  Actions.Options();
+  Actions.Options()
 }
 
 export default connect(null, { login, fetchPosts })(Home)

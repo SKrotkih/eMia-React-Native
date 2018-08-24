@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 
-import { Actions } from 'react-native-router-flux';
-import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux'
+import { connect } from 'react-redux'
 
-import { actions as auth } from '@screens/Auth/index';
-import AuthForm from '@components/AuthForm';
+import { actions as auth } from '@screens/Auth/index'
+import AuthForm from '@components/AuthForm'
 
-const { register } = auth;
+const { register } = auth
 
 const fields = [
   {
@@ -36,49 +36,49 @@ const fields = [
     value: '',
     type: 'confirm_password'
   }
-];
+]
 
 const error = {
   general: '',
   email: '',
   password: '',
   confirm_password: ''
-};
+}
 
 class Register extends React.Component {
   constructor () {
-    super();
+    super()
     this.state = {
       error: error
-    };
+    }
 
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onSuccess = this.onSuccess.bind(this);
-    this.onError = this.onError.bind(this);
+    this.onSubmit = this.onSubmit.bind(this)
+    this.onSuccess = this.onSuccess.bind(this)
+    this.onError = this.onError.bind(this)
   }
 
   onSubmit (data) {
     this.setState({error: error}) // clear out error messages
 
-    this.props.register(data, this.onSuccess, this.onError);
+    this.props.register(data, this.onSuccess, this.onError)
   }
 
   onSuccess (user) {
-    Actions.CompleteProfile({ user });
+    Actions.CompleteProfile({ user })
   }
 
   onError (error) {
-    let errObj = this.state.error;
+    let errObj = this.state.error
 
     if (error.hasOwnProperty('message')) {
-      errObj['general'] = error.message;
+      errObj['general'] = error.message
     } else {
-      let keys = Object.keys(error);
+      let keys = Object.keys(error)
       keys.map((key, index) => {
-        errObj[key] = error[key];
+        errObj[key] = error[key]
       })
     }
-    this.setState({error: errObj});
+    this.setState({error: errObj})
   }
 
   render () {
