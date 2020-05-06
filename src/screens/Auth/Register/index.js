@@ -16,7 +16,7 @@ const fields = [
     autoFocus: false,
     secureTextEntry: false,
     value: '',
-    type: 'email'
+    type: 'email-address'
   },
   {
     key: 'password',
@@ -25,7 +25,7 @@ const fields = [
     autoFocus: false,
     secureTextEntry: true,
     value: '',
-    type: 'password'
+    type: 'visible-password'
   },
   {
     key: 'confirm_password',
@@ -34,7 +34,7 @@ const fields = [
     autoFocus: false,
     secureTextEntry: true,
     value: '',
-    type: 'confirm_password'
+    type: 'visible-password'
   }
 ]
 

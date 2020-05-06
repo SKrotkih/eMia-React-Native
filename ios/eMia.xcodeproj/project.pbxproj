@@ -61,7 +61,6 @@
 		7F537E6020BEE0D10079854F /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F537E5D20BEE0D10079854F /* PostModel.swift */; };
 		7F537E6320BEE1B10079854F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F537E6220BEE1B10079854F /* Constants.swift */; };
 		7F72647B2082FE1200A3367E /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F7264782082FE0500A3367E /* libRNImagePicker.a */; };
-		7F91778E208CAC4F0054B364 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F91778D208CAC4F0054B364 /* Info.plist */; };
 		7F9177A1208CB1300054B364 /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F917796208CB1300054B364 /* FilterPresenter.swift */; };
 		7F9177A3208CB1300054B364 /* FilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F917798208CB1300054B364 /* FilterInteractor.swift */; };
 		7F9177A4208CB1300054B364 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F917799208CB1300054B364 /* FiltersViewController.swift */; };
@@ -1791,6 +1790,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -2209,7 +2209,6 @@
 				5A6FD8737267414190DDEBDF /* MaterialIcons.ttf in Resources */,
 				0124C2398A844925961D4F79 /* Octicons.ttf in Resources */,
 				7D4C5384FEC3447195387AD1 /* Roboto_medium.ttf in Resources */,
-				7F91778E208CAC4F0054B364 /* Info.plist in Resources */,
 				69CC64DF97DE46B4B58E9A6C /* Roboto.ttf in Resources */,
 				7F537E0720BEDB8A0079854F /* ShowMeSegmentedControl.xib in Resources */,
 				7A3E66B8DA97422AB406BFF5 /* rubicon-icon-font.ttf in Resources */,
@@ -2273,7 +2272,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-eMia/Pods-eMia-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-eMia/Pods-eMia-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AwesomeCache/AwesomeCache.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -2316,7 +2315,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eMia/Pods-eMia-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eMia/Pods-eMia-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7B08CE5FD9FAC6240078E7C4 /* [CP] Check Pods Manifest.lock */ = {
@@ -2545,7 +2544,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.boblberg;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.boblberg;
 				PRODUCT_NAME = eMia;
 				SWIFT_OBJC_BRIDGING_HEADER = "NativeModules/Supporting files/eMia-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -2588,7 +2587,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.boblberg;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.boblberg;
 				PRODUCT_NAME = eMia;
 				SWIFT_OBJC_BRIDGING_HEADER = "NativeModules/Supporting files/eMia-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
