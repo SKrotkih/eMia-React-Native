@@ -28,3 +28,7 @@ package-lock.json
 # CocoaPods
 Pods/
 Podfile.lock
+
+GoogleService-Info.js
+GoogleService-Info.plist
+

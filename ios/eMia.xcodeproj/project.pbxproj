@@ -83,6 +83,8 @@
 		7F9223DC207414440032ADA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F9223D5207414440032ADA1 /* LaunchScreen.xib */; };
 		7F9223DD207414440032ADA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9223D7207414440032ADA1 /* main.m */; };
 		7F9223E0207414440032ADA1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9223DA207414440032ADA1 /* AppDelegate.m */; };
+		7F98059A2462D95C00ABD338 /* GoogleService-Info.js in Resources */ = {isa = PBXBuildFile; fileRef = 7F9805992462D95C00ABD338 /* GoogleService-Info.js */; };
+		7F9805C62462DDF100ABD338 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F9805C52462DDF100ABD338 /* GoogleService-Info.plist */; };
 		7FE2716C208CEEF000F2D0EC /* FilterBridgeViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2716B208CEEF000F2D0EC /* FilterBridgeViewManager.m */; };
 		7FE27198208CF04E00F2D0EC /* FilterBridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE27197208CF04E00F2D0EC /* FilterBridgeView.swift */; };
 		81C30CEF06244AB1B2F7A5C6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5ABA8322D4BF89EE3BA4E /* Entypo.ttf */; };
@@ -505,6 +507,8 @@
 		7F9223D7207414440032ADA1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7F9223DA207414440032ADA1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7F9223E22074148F0032ADA1 /* eMia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "eMia-Bridging-Header.h"; sourceTree = "<group>"; };
+		7F9805992462D95C00ABD338 /* GoogleService-Info.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "GoogleService-Info.js"; sourceTree = "<group>"; };
+		7F9805C52462DDF100ABD338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7FAE65DF208AE276007BF600 /* constants.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = constants.js; sourceTree = "<group>"; };
 		7FAE65E0208AE276007BF600 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		7FAE65E2208AE276007BF600 /* time.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = time.js; sourceTree = "<group>"; };
@@ -1128,6 +1132,8 @@
 			isa = PBXGroup;
 			children = (
 				7FAE65DF208AE276007BF600 /* constants.js */,
+				7F9805992462D95C00ABD338 /* GoogleService-Info.js */,
+				7F9805C52462DDF100ABD338 /* GoogleService-Info.plist */,
 				7FAE65E0208AE276007BF600 /* package.json */,
 			);
 			path = config;
@@ -2202,6 +2208,7 @@
 				7F9177A5208CB1300054B364 /* Filter.storyboard in Resources */,
 				81C30CEF06244AB1B2F7A5C6 /* Entypo.ttf in Resources */,
 				9DA18C96C8B944AAABC7F1F5 /* EvilIcons.ttf in Resources */,
+				7F98059A2462D95C00ABD338 /* GoogleService-Info.js in Resources */,
 				E312711FFCA3421EA424435E /* FontAwesome.ttf in Resources */,
 				2CF11286B15A46DFB1239EFD /* Foundation.ttf in Resources */,
 				310F14159DF9471A9826D83D /* Ionicons.ttf in Resources */,
@@ -2215,6 +2222,7 @@
 				E7B75765F49A4597A24353A5 /* SimpleLineIcons.ttf in Resources */,
 				9B31FC5B9CA44558BE6BE353 /* Zocial.ttf in Resources */,
 				D3F1DB316C63405887FBF5E4 /* Feather.ttf in Resources */,
+				7F9805C62462DDF100ABD338 /* GoogleService-Info.plist in Resources */,
 				E3E516B9A3474AA7A4D1C04C /* MaterialCommunityIcons.ttf in Resources */,
 				7F537E0520BEDB8A0079854F /* MunicipalityControllerView.xib in Resources */,
 				7F537E0A20BEDB8A0079854F /* AgeSliderView.xib in Resources */,

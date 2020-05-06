@@ -36,6 +36,7 @@ For iOS
 Sign in your Google account, then open Firebase console https://console.firebase.google.com
 Create a new project. Please follow documentations https://firebase.google.com/docs/ios/setup#add_firebase_to_your_app.
 As a result you have to download GoogleService-Info.plist file and replace current one.
+Or read comments in the \src\config\constants.js
 
 For Android
 Sign in your Google account, then open Firebase console https://console.firebase.google.com
