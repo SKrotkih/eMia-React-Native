@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16096" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1" customClass="PopUpReachabilityView" customModule="Knowme_IQ" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="387" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Internet Connection\nPlease check the Internet Connection" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M8U-Ri-GF2">
+                    <rect key="frame" x="56" y="3" width="275" height="51"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="275" id="Bna-Gc-X0G"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9cB-FC-lt4">
+                    <rect key="frame" x="327" y="23" width="50" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="ImS-ra-e7u"/>
+                        <constraint firstAttribute="height" constant="27" id="qO5-8m-G4h"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <state key="normal" title="Settings">
+                        <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="9cB-FC-lt4" secondAttribute="bottom" constant="10" id="DLm-qY-asa"/>
+                <constraint firstItem="M8U-Ri-GF2" firstAttribute="top" secondItem="1" secondAttribute="top" constant="3" id="Kfc-fZ-DkP"/>
+                <constraint firstItem="M8U-Ri-GF2" firstAttribute="centerX" secondItem="1" secondAttribute="centerX" id="Z0U-2y-fXv"/>
+                <constraint firstAttribute="trailing" secondItem="9cB-FC-lt4" secondAttribute="trailing" constant="10" id="lJH-9Q-8NJ"/>
+                <constraint firstAttribute="bottom" secondItem="M8U-Ri-GF2" secondAttribute="bottom" constant="6" id="uci-Re-gLK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="settingsButton" destination="9cB-FC-lt4" id="CEh-tl-ncu"/>
+                <outlet property="textLabel" destination="M8U-Ri-GF2" id="Its-9o-obd"/>
+            </connections>
+            <point key="canvasLocation" x="15.9375" y="-218.66197183098592"/>
+        </view>
+    </objects>
+</document>

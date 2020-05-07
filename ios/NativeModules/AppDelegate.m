@@ -35,4 +35,9 @@
    return YES;
 }
 
+- (UINavigationController*) mainNavController  {
+   UINavigationController* rootController = (UINavigationController*)[[self window] rootViewController];
+   return rootController;
+}
+
 @end

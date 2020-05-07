@@ -108,10 +108,11 @@ extension PostItem {
     
     // Save new data to Firebase Database
     private func save(completion: @escaping (Bool) -> Void) {
-        let key = firebaseRef.child(PostItemFields.posts).childByAutoId().key
-        self.key = key
-        self.id = key
-        update(completion: completion)
+      if let key = firebaseRef.child(PostItemFields.posts).childByAutoId().key {
+         self.key = key
+         self.id = key
+         update(completion: completion)
+      }
     }
     
     func remove() {

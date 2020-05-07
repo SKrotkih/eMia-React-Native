@@ -1,5 +1,5 @@
 import * as firebase from 'firebase'
-import * as constants from '@config/constants'
+import * as constants from '@config/GoogleService-Info'
 
 // Initialize Firebase
 const config = {
@@ -10,6 +10,8 @@ const config = {
   storageBucket: constants.FIREBASE_STORAGE_BUCKET,
   messagingSenderId: constants.FIREBASE_MESSAGING_SENDER_ID
 }
+
+console.log('API KEY = ', config.apiKey)
 
 firebase.initializeApp(config)
 
