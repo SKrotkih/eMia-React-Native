@@ -15,7 +15,7 @@ const fields = [
     autoFocus: false,
     secureTextEntry: false,
     value: '',
-    type: 'text'
+    type: 'default'
   }
 ]
 
