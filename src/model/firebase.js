@@ -11,8 +11,6 @@ const config = {
   messagingSenderId: constants.FIREBASE_MESSAGING_SENDER_ID
 }
 
-console.log('API KEY = ', config.apiKey)
-
 firebase.initializeApp(config)
 
 export const database = firebase.database()
