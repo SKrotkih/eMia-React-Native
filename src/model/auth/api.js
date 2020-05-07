@@ -10,7 +10,7 @@ export function register (data, callback) {
 
 // Create new user object in realtime database
 export function createUser (user, callback) {
-  database.ref('main').child('users').child(user.id).update({ ...user })
+  database.ref('main').child('users').child(user.uid).update({ ...user })
     .then(() => callback(true, null, null))
     .catch((error) => callback(false, null, {message: error}))
 }
@@ -48,7 +48,7 @@ export function getCurrentUser (callback) {
     getUser({uid: user.uid}, function (success, data, error) {
       if (success && data.exists) {
         var currentUser = data.user
-        var avatarName = currentUser.id+'.jpg'
+        var avatarName = currentUser.uid+'.jpg'
         getImageUrl(avatarName, (function (url) {
           currentUser.avatarUrl = url
           callback(currentUser)
