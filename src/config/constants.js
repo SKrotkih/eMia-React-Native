@@ -1,16 +1,20 @@
-import {Platform} from 'react-native';
-const iOS = Platform.OS === 'ios';
+import {Platform} from 'react-native'
+const iOS = Platform.OS === 'ios'
 
-export const FIREBASE_API_KEY = 'AIzaSyDo8FbKO8rNmM2gsZ3mEUy9PXDMeSMoCWM';
-export const FIREBASE_AUTH_DOMAIN = '';
-export const FIREBASE_DATABASE_URL = 'https://boblberg-b8a0f.firebaseio.com';
-export const FIREBASE_PROJECT_ID = 'boblberg-b8a0f';
-export const FIREBASE_STORAGE_BUCKET = 'boblberg-b8a0f.appspot.com';
-export const FIREBASE_MESSAGING_SENDER_ID = '504296480517';
+// You should register your own app on the Firebase console, create
+// file GoogleService-Info.js and put constants from your Firebase app like this (just copy/past next some lines and replace values with yours):
+/*
+export const FIREBASE_API_KEY = ''
+export const FIREBASE_AUTH_DOMAIN = ''
+export const FIREBASE_DATABASE_URL = ''
+export const FIREBASE_PROJECT_ID = ''
+export const FIREBASE_STORAGE_BUCKET = ''
+export const FIREBASE_MESSAGING_SENDER_ID = ''
+*/
+ 
+export const FACEBOOK_APP_ID = ''
 
-export const FACEBOOK_APP_ID = '';
-
-export const APP_NAME = 'eMia';
+export const APP_NAME = 'eMia'
 
 export const THEMES = {
   gitterDefault: {
@@ -51,7 +55,7 @@ export const THEMES = {
       androidGray: '#f0eef0'
     }
   }
-};
+}
 
 export const OLD_ANDROID_VERSIONS = ['4.4.4', '4.4.3', '4.4.2', '4.4.1', '4.4', '4.3.1', '4.3', '4.2.2', '4.2.1', '4.2', '4.1.2']
 
@@ -68,4 +72,4 @@ export const icons = {
   'checkmark': {icon: 'check', color: 'white', size: 24},
   'browser': {icon: 'open-in-browser', color: 'white', size: 24},
   'closeIcon': {icon: 'close', color: 'white', size: 24}
-};
+}

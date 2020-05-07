@@ -1,15 +1,12 @@
-import React from 'react';
-import ReactNative from 'react-native';
+import React from 'react'
+import ReactNative from 'react-native'
+import {Actions} from 'react-native-router-flux'
+import Loader from '@components/Loader'
+import {getCurrentUser, signOut} from '@model/auth/actions'
+import styles from './styles'
 
-import {Actions} from 'react-native-router-flux';
-
-import Loader from '@components/Loader';
-
-import {getCurrentUser, signOut} from '@model/auth/actions';
-
-import styles from './styles';
-import { windowWidth, windowHeight } from '@theme/styles';
-import { config } from '../index';
+import { windowWidth, windowHeight } from '@theme/styles'
+import { config } from '../index'
 
 import { 
   Container, 
@@ -26,7 +23,7 @@ import {
   Text, 
   Thumbnail, 
   List,
-  ListItem } from 'native-base';
+  ListItem } from 'native-base'
 
 const {
   Dimensions,  
@@ -36,10 +33,10 @@ const {
   View,
   Alert,
   TouchableOpacity
-} = ReactNative;
+} = ReactNative
 const {
   Component
-} = React;
+} = React
 
 const menuItems = [
   {
@@ -50,28 +47,28 @@ const menuItems = [
     id: "logout",
     text: "Log Out",
   }
-];
+]
 
 export class MainMenu extends Component {
   constructor (props) {
-    super(props);
+    super(props)
     this.state = {
       loaded: false,
       user: null
-    };
+    }
   }
 
-  setTitle(titleText) {
-    const {setParams} = this.props.navigation;
-    setParams({ title: titleText });
+  setTitle (titleText) {
+    const {setParams} = this.props.navigation
+    setParams({ title: titleText })
   }
 
   componentWillMount () {
-    this.setTitle("Settings");
+    this.setTitle("Settings")
   }
 
   componentDidMount () {
-    this.fetchCurrentUserData();
+    this.fetchCurrentUserData()
   }
 
   fetchCurrentUserData () {
@@ -79,15 +76,15 @@ export class MainMenu extends Component {
       this.setState({
         user: user,
         loaded: true
-      });
-    });
+      })
+    })
   }
 
   render () {
     if (!this.state.loaded) {
-      return renderLoadingView();
+      return renderLoadingView()
     }
-    var _this = this;
+    var _this = this
     return (
       <Container style={{margin: 15, marginBottom: 15, backgroundColor: '#00000000'}}>
         <Content style={{backgroundColor: '#00000000'}}>
@@ -108,7 +105,7 @@ function renderLoadingView () {
     <View style={styles.loading}>
       <Loader loading={true} />
     </View>
-  );
+  )
 }
 
 function renderMenuItem(menuItem, _this) {
@@ -121,20 +118,20 @@ function renderMenuItem(menuItem, _this) {
       renderProfileMenuItem(_this)
     )
   } else {
-    return null;
+    return null
   }
 }
 
 // Profile
 
-function renderProfileMenuItem(_this) {
-  var user = _this.state.user;
+function renderProfileMenuItem (_this) {
+  var user = _this.state.user
   if (user === null) {
     return (
       null
     )
   } else {
-    var avatarUrl = user.avatarUrl;
+    var avatarUrl = user.avatarUrl
     return (
       <ListItem height={63}>
         <TouchableOpacity style={{flexDirection:'row'}} activeOpacity={0.5} onPress={() => {
@@ -153,13 +150,13 @@ function renderProfileMenuItem(_this) {
 }
 
 function editProfile (user) {
-  Actions.EditProfile({user});
+  Actions.EditProfile({user})
 }
 
 // Log Out
 
-function renderLogOutMenuItem(_this) {
-  var user = _this.state.user;
+function renderLogOutMenuItem (_this) {
+  var user = _this.state.user
   if (user === null) {
     return (
       null
@@ -182,11 +179,11 @@ function renderLogOutMenuItem(_this) {
 }
 
 function onSignOut () {
-  signOut(() => { 
-    Actions.reset('Auth');
-  }, () => { 
-    Alert.alert('Oops!', error.message);
-  });
+  signOut(() => {
+    Actions.reset('Auth')
+  }, () => {
+    Alert.alert('Oops!', error.message)
+  })
 }
 
 // - Log Out

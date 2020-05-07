@@ -1,30 +1,28 @@
-import React from 'react';
-import {Actions} from 'react-native-router-flux';
-import {connect} from 'react-redux';
-import { config } from '../index';
+import React from 'react'
+import {Actions} from 'react-native-router-flux'
+import {connect} from 'react-redux'
+import { config } from '../index'
 
 import {
   Text, 
   View, 
   TouchableOpacity, 
   Image
-} from 'react-native';
+} from 'react-native'
 
 import {
   Button, 
   SocialIcon, 
   Divider
-} from 'react-native-elements';
+} from 'react-native-elements'
 
-import {actions as auth} from '../../Auth/index';
-import styles from './styles';
+import {actions as auth} from '../../Auth/index'
+import styles from './styles'
 
 class Welcome extends React.Component {
   constructor () {
-    super();
-    this.state = {
-
-    };
+    super()
+    this.state = {}
   }
   render () {
     return (
@@ -47,12 +45,11 @@ class Welcome extends React.Component {
           </View>
           <View style={styles.bottom}>
             <Text style={styles.bottomText}>
-                            Already have an account?
+              Already have an account?
             </Text>
-
             <TouchableOpacity onPress={Actions.Login}>
               <Text style={styles.signInText}>
-                                Sign in
+                Sign in
               </Text>
             </TouchableOpacity>
           </View>

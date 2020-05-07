@@ -1,4 +1,4 @@
-platform :ios, '10.0'
+platform :ios, '11.0'
 use_frameworks!
 
 target 'eMia' do
@@ -16,13 +16,6 @@ target 'eMia' do
     pod 'IQKeyboardManagerSwift'
     pod 'SwiftyJSON'
     pod 'NextGrowingTextView'
-    pod 'NVActivityIndicatorView'
-    
-    pod 'SwiftyNotifications', '~>0.2'
-    pod 'ReachabilitySwift', '~> 3'
-#    pod 'DTCollectionViewManager', '~> 6.0'
-
-    pod 'AwesomeCache'
     
     pod 'MZFayeClient', :git => 'https://github.com/m1entus/MZFayeClient.git', :commit => '6a88a1'
     #pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'

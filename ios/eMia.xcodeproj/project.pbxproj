@@ -61,7 +61,6 @@
 		7F537E6020BEE0D10079854F /* PostModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F537E5D20BEE0D10079854F /* PostModel.swift */; };
 		7F537E6320BEE1B10079854F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F537E6220BEE1B10079854F /* Constants.swift */; };
 		7F72647B2082FE1200A3367E /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F7264782082FE0500A3367E /* libRNImagePicker.a */; };
-		7F91778E208CAC4F0054B364 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F91778D208CAC4F0054B364 /* Info.plist */; };
 		7F9177A1208CB1300054B364 /* FilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F917796208CB1300054B364 /* FilterPresenter.swift */; };
 		7F9177A3208CB1300054B364 /* FilterInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F917798208CB1300054B364 /* FilterInteractor.swift */; };
 		7F9177A4208CB1300054B364 /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F917799208CB1300054B364 /* FiltersViewController.swift */; };
@@ -84,6 +83,12 @@
 		7F9223DC207414440032ADA1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F9223D5207414440032ADA1 /* LaunchScreen.xib */; };
 		7F9223DD207414440032ADA1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9223D7207414440032ADA1 /* main.m */; };
 		7F9223E0207414440032ADA1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7F9223DA207414440032ADA1 /* AppDelegate.m */; };
+		7F98059A2462D95C00ABD338 /* GoogleService-Info.js in Resources */ = {isa = PBXBuildFile; fileRef = 7F9805992462D95C00ABD338 /* GoogleService-Info.js */; };
+		7F9805C62462DDF100ABD338 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7F9805C52462DDF100ABD338 /* GoogleService-Info.plist */; };
+		7FA734A32463C01200C322BD /* PopUpReachabilityView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FA734A02463C01200C322BD /* PopUpReachabilityView.xib */; };
+		7FA734A42463C01200C322BD /* PopUpReachabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA734A12463C01200C322BD /* PopUpReachabilityView.swift */; };
+		7FA734A52463C01200C322BD /* NetworkReachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA734A22463C01200C322BD /* NetworkReachability.swift */; };
+		7FA7356B2463C90500C322BD /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA7356A2463C90500C322BD /* Utils.swift */; };
 		7FE2716C208CEEF000F2D0EC /* FilterBridgeViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FE2716B208CEEF000F2D0EC /* FilterBridgeViewManager.m */; };
 		7FE27198208CF04E00F2D0EC /* FilterBridgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FE27197208CF04E00F2D0EC /* FilterBridgeView.swift */; };
 		81C30CEF06244AB1B2F7A5C6 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FF5ABA8322D4BF89EE3BA4E /* Entypo.ttf */; };
@@ -506,6 +511,12 @@
 		7F9223D7207414440032ADA1 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7F9223DA207414440032ADA1 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		7F9223E22074148F0032ADA1 /* eMia-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "eMia-Bridging-Header.h"; sourceTree = "<group>"; };
+		7F9805992462D95C00ABD338 /* GoogleService-Info.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = "GoogleService-Info.js"; sourceTree = "<group>"; };
+		7F9805C52462DDF100ABD338 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7FA734A02463C01200C322BD /* PopUpReachabilityView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpReachabilityView.xib; sourceTree = "<group>"; };
+		7FA734A12463C01200C322BD /* PopUpReachabilityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpReachabilityView.swift; sourceTree = "<group>"; };
+		7FA734A22463C01200C322BD /* NetworkReachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkReachability.swift; sourceTree = "<group>"; };
+		7FA7356A2463C90500C322BD /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		7FAE65DF208AE276007BF600 /* constants.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = constants.js; sourceTree = "<group>"; };
 		7FAE65E0208AE276007BF600 /* package.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = package.json; sourceTree = "<group>"; };
 		7FAE65E2208AE276007BF600 /* time.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = time.js; sourceTree = "<group>"; };
@@ -891,6 +902,7 @@
 		7F3385E1208BABAC00041D3A /* NativeModules */ = {
 			isa = PBXGroup;
 			children = (
+				7FA7349F2463C01200C322BD /* Reachability */,
 				7F9177CA208CB5F40054B364 /* Model */,
 				7F9177B2208CB48E0054B364 /* Extensions */,
 				7F9177A9208CB3490054B364 /* Helpers */,
@@ -1030,6 +1042,7 @@
 				7F9177C1208CB50F0054B364 /* Localization */,
 				7F9177AC208CB38E0054B364 /* MunicipalityPicker */,
 				7F9177AA208CB3490054B364 /* SegueHandler.swift */,
+				7FA7356A2463C90500C322BD /* Utils.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1108,6 +1121,16 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		7FA7349F2463C01200C322BD /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+				7FA734A02463C01200C322BD /* PopUpReachabilityView.xib */,
+				7FA734A12463C01200C322BD /* PopUpReachabilityView.swift */,
+				7FA734A22463C01200C322BD /* NetworkReachability.swift */,
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		7FAE65DD208AE276007BF600 /* src */ = {
 			isa = PBXGroup;
 			children = (
@@ -1129,6 +1152,8 @@
 			isa = PBXGroup;
 			children = (
 				7FAE65DF208AE276007BF600 /* constants.js */,
+				7F9805992462D95C00ABD338 /* GoogleService-Info.js */,
+				7F9805C52462DDF100ABD338 /* GoogleService-Info.plist */,
 				7FAE65E0208AE276007BF600 /* package.json */,
 			);
 			path = config;
@@ -1791,6 +1816,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -2202,6 +2228,7 @@
 				7F9177A5208CB1300054B364 /* Filter.storyboard in Resources */,
 				81C30CEF06244AB1B2F7A5C6 /* Entypo.ttf in Resources */,
 				9DA18C96C8B944AAABC7F1F5 /* EvilIcons.ttf in Resources */,
+				7F98059A2462D95C00ABD338 /* GoogleService-Info.js in Resources */,
 				E312711FFCA3421EA424435E /* FontAwesome.ttf in Resources */,
 				2CF11286B15A46DFB1239EFD /* Foundation.ttf in Resources */,
 				310F14159DF9471A9826D83D /* Ionicons.ttf in Resources */,
@@ -2209,13 +2236,14 @@
 				5A6FD8737267414190DDEBDF /* MaterialIcons.ttf in Resources */,
 				0124C2398A844925961D4F79 /* Octicons.ttf in Resources */,
 				7D4C5384FEC3447195387AD1 /* Roboto_medium.ttf in Resources */,
-				7F91778E208CAC4F0054B364 /* Info.plist in Resources */,
 				69CC64DF97DE46B4B58E9A6C /* Roboto.ttf in Resources */,
 				7F537E0720BEDB8A0079854F /* ShowMeSegmentedControl.xib in Resources */,
 				7A3E66B8DA97422AB406BFF5 /* rubicon-icon-font.ttf in Resources */,
 				E7B75765F49A4597A24353A5 /* SimpleLineIcons.ttf in Resources */,
 				9B31FC5B9CA44558BE6BE353 /* Zocial.ttf in Resources */,
+				7FA734A32463C01200C322BD /* PopUpReachabilityView.xib in Resources */,
 				D3F1DB316C63405887FBF5E4 /* Feather.ttf in Resources */,
+				7F9805C62462DDF100ABD338 /* GoogleService-Info.plist in Resources */,
 				E3E516B9A3474AA7A4D1C04C /* MaterialCommunityIcons.ttf in Resources */,
 				7F537E0520BEDB8A0079854F /* MunicipalityControllerView.xib in Resources */,
 				7F537E0A20BEDB8A0079854F /* AgeSliderView.xib in Resources */,
@@ -2273,50 +2301,46 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-eMia/Pods-eMia-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/AwesomeCache/AwesomeCache.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-eMia/Pods-eMia-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/MZFayeClient/MZFayeClient.framework",
-				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
 				"${BUILT_PRODUCTS_DIR}/NextGrowingTextView/NextGrowingTextView.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
+				"${BUILT_PRODUCTS_DIR}/PromisesObjC/FBLPromises.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
+				"${BUILT_PRODUCTS_DIR}/RxRelay/RxRelay.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SocketRocket/SocketRocket.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
-				"${BUILT_PRODUCTS_DIR}/SwiftyNotifications/SwiftyNotifications.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AwesomeCache.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MZFayeClient.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NextGrowingTextView.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBLPromises.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxRelay.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketRocket.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyNotifications.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-eMia/Pods-eMia-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-eMia/Pods-eMia-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7B08CE5FD9FAC6240078E7C4 /* [CP] Check Pods Manifest.lock */ = {
@@ -2367,6 +2391,7 @@
 				7F9177BA208CB48F0054B364 /* Date.swift in Sources */,
 				7F537E1A20BEDBCE0079854F /* Gender.swift in Sources */,
 				7F9177BB208CB48F0054B364 /* View.swift in Sources */,
+				7FA7356B2463C90500C322BD /* Utils.swift in Sources */,
 				7FE27198208CF04E00F2D0EC /* FilterBridgeView.swift in Sources */,
 				7F9223E0207414440032ADA1 /* AppDelegate.m in Sources */,
 				7F9223DD207414440032ADA1 /* main.m in Sources */,
@@ -2375,6 +2400,7 @@
 				7F537E0920BEDB8A0079854F /* AgeSliderView.swift in Sources */,
 				7F537E1C20BEDBCE0079854F /* FilterModel.swift in Sources */,
 				7F9177B1208CB3F20054B364 /* GlobalColors.swift in Sources */,
+				7FA734A42463C01200C322BD /* PopUpReachabilityView.swift in Sources */,
 				7F9177C5208CB50F0054B364 /* LocalizedString.swift in Sources */,
 				7F9177D2208CB7C30054B364 /* UserModel.swift in Sources */,
 				7F9177C0208CB48F0054B364 /* Color.swift in Sources */,
@@ -2390,6 +2416,7 @@
 				7F537E1D20BEDBCE0079854F /* FilterFavorite.swift in Sources */,
 				7F9177A4208CB1300054B364 /* FiltersViewController.swift in Sources */,
 				7F9177A6208CB1300054B364 /* FilterDependencies.swift in Sources */,
+				7FA734A52463C01200C322BD /* NetworkReachability.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2545,11 +2572,11 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.boblberg;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.boblberg;
 				PRODUCT_NAME = eMia;
 				SWIFT_OBJC_BRIDGING_HEADER = "NativeModules/Supporting files/eMia-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -2588,10 +2615,10 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.skappledev.boblberg;
+				PRODUCT_BUNDLE_IDENTIFIER = com.skdevappleid.boblberg;
 				PRODUCT_NAME = eMia;
 				SWIFT_OBJC_BRIDGING_HEADER = "NativeModules/Supporting files/eMia-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

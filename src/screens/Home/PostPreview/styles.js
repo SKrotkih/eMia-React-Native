@@ -1,17 +1,17 @@
-import { StyleSheet } from 'react-native';
-import { windowWidth, windowHeight } from '@theme/styles';
+import { StyleSheet } from 'react-native'
+import { windowWidth, windowHeight } from '@theme/styles'
 
-const resizeMode = 'contain';
+const resizeMode = 'contain'
 
 const styles = StyleSheet.create({
   container: {
-    margin: 0, 
-    marginBottom: 0, 
+    margin: 0,
+    marginBottom: 0,
     backgroundColor: '#fff'
   },
   content: {
-    margin: 15, 
-    marginBottom: 15, 
+    margin: 15,
+    marginBottom: 15,
     backgroundColor: '#fff'
   },
   thumbnail: {
@@ -20,27 +20,27 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   photo: {
-    width: windowWidth - 30, 
+    width: windowWidth - 30,
     height: windowWidth - 30,
-    alignSelf: 'center',     
-    resizeMode: 'contain'    
+    alignSelf: 'center',
+    resizeMode: 'contain'
   },
   backgroundPhoto: {
-    width: windowWidth - 30, 
-    height: windowWidth - 30 
+    width: windowWidth - 30,
+    height: windowWidth - 30
   },
   title: {
     fontSize: 16,
     marginBottom: 4,
-    fontWeight: 'bold',    
+    fontWeight: 'bold',
     textAlign: 'center'
   },
 
   description: {
     fontSize: 14,
     textAlign: 'center',
-    marginVertical: 8    
+    marginVertical: 8
   },
-});
+})
 
-export default styles;
+export default styles

@@ -1,9 +1,9 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native';
-import { color, fontSize, fontFamily, windowWidth, normalize } from '@theme/styles';
+import { StyleSheet, Platform, Dimensions } from 'react-native'
+import { color, fontSize, fontFamily, windowWidth, normalize } from '@theme/styles'
 
-const resizeMode = 'contain';
+const resizeMode = 'contain'
 
-const deviceHeight = Dimensions.get("window").height;
+const deviceHeight = Dimensions.get("window").height
 
 const styles = StyleSheet.create({
   container: {
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     backgroundColor: '#eee'
   },
-});
+})
 
 const gridItemStyles = StyleSheet.create({
   container: {
@@ -47,6 +47,6 @@ const gridItemStyles = StyleSheet.create({
     marginBottom: 2,
     textAlign: 'center'
   }
-});
+})
 
-export {styles, gridItemStyles};
+export {styles, gridItemStyles}

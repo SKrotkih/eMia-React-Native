@@ -99,7 +99,7 @@ extension FiltersViewController  {
         switch view {
         case self.view:
             view.backgroundColor = UIColor.white.withAlphaComponent(0.75)
-            let blurEffect = UIBlurEffect(style: UIBlurEffectStyle.extraLight)
+            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.extraLight)
             let blurEffectView = UIVisualEffectView(effect: blurEffect)
             blurEffectView.frame = view.bounds
             blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

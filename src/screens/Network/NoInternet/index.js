@@ -1,31 +1,31 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import {Text, Image} from 'react-native';
-import {connect} from 'react-redux';
-import {rootNavigator} from '../../index';
-import styles from './styles';
-import Button from '@components/Button';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import {Text, Image} from 'react-native'
+import {connect} from 'react-redux'
+import {rootNavigator} from '../../index'
+import styles from './styles'
+import Button from '@components/Button'
 
-import {THEMES} from '@config/constants';
-import {init} from '../../modules/app';
-const {colors} = THEMES.gitterDefault;
+import {THEMES} from '@config/constants'
+import {init} from '../../modules/app'
+const {colors} = THEMES.gitterDefault
 
-import {config} from '../index';
+import {config} from '../index'
 
 class NoInternetScreen extends Component {
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
 
-    this.handleRetry = this.handleRetry.bind(this);
+    this.handleRetry = this.handleRetry.bind(this)
   }
 
-  handleRetry() {
-    const {dispatch} = this.props;
-    rootNavigator.startAppWithScreen({screen: 'gm.Launch'});
-    dispatch(init());
+  handleRetry () {
+    const {dispatch} = this.props
+    rootNavigator.startAppWithScreen({screen: 'gm.Launch'})
+    dispatch(init())
   }
 
-  render() {
+  render () {
     return (
       <Image style={styles.container}
         source={require('../../images/gitter-background.jpg')}>

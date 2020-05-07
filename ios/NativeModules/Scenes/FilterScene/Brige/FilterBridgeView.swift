@@ -45,10 +45,10 @@ class FilterBridgeView: UIView {
       let storyboard = UIStoryboard(name: "Filter", bundle: nil)
       let vc = storyboard.instantiateViewController(withIdentifier: "FiltersViewController")
       
-      parentVC.addChildViewController(vc)
+      parentVC.addChild(vc)
       addSubview(vc.view)
       vc.view.frame = bounds
-      vc.didMove(toParentViewController: parentVC)
+      vc.didMove(toParent: parentVC)
       self.viewController = vc
    }
 }
