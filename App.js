@@ -23,6 +23,9 @@ import { checkLoginStatus } from './src/model/auth/actions';
 import backgroundImage from '@theme/BackgroundImage';
 
 function setUpIgnoreYellowMessage () {
+
+  console.disableYellowBox = true;
+
   YellowBox.ignoreWarnings(['Setting a timer']);
   const _console = _.clone(console);
   console.warn = message => {

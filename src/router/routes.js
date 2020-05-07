@@ -49,11 +49,11 @@ export default class extends React.Component {
 
           <Stack key="Main" initial={isLoggedIn}>
             <Scene key="Home" component={Home} title="eMia" initial={true} type={ActionConst.REPLACE}/>
-            <Scene key="PostPreview" component={PostPreview} title="" back={true}/>
-            <Scene key="AddNewPost" component={AddNewPost} title="" back={true}/>
-            <Scene key="MainMenu" component={MainMenu} title="" back={true}/>
-            <Scene key="EditProfile" component={EditProfile} title="" back={true}/>
-            <Scene key="Options" component={Options} title="" back={true}/>
+            <Scene key="PostPreview" component={PostPreview} title="" back/>
+            <Scene key="AddNewPost" component={AddNewPost} title="" back/>
+            <Scene key="MainMenu" component={MainMenu} title="" back/>
+            <Scene key="EditProfile" component={EditProfile} title="" back/>
+            <Scene key="Options" component={Options} title="" back/>
           </Stack>
         </Scene>
       </Router>
