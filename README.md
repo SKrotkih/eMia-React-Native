@@ -1,4 +1,4 @@
-# eMia
+# eMia - React Native 
 
 This is the entire source code of the cross-platform (iOS and Android) app. 
 Developed with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
