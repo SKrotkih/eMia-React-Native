@@ -1,18 +1,17 @@
 # eMia - React Native 
 
-This is the entire source code of the cross-platform (iOS and Android) app. 
-Developed with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
+Here is an entire source code application developed with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
 
-This is a demo movie on iOS device: 
+Demo movie on an iOS device: 
 
 ![reactnative_ios](https://user-images.githubusercontent.com/2775621/40759771-2bb84a6e-649c-11e8-86b2-be6e8ed46ad1.gif)
 
 
 ## Introduction
 
-Еhere are also two native apps. 
-They are: [eMia-iOS](https://github.com/SKrotkih/eMia-iOS) 
-and [eMia-Android](https://github.com/SKrotkih/eMia-Android).
+There are also two native example apps: 
+[eMia-iOS](https://github.com/SKrotkih/eMia-iOS) 
+[eMia-Android](https://github.com/SKrotkih/eMia-Android).
 
 eMia is a simple social network. 
 You can be registered there, then edit your profile, post new topic with a title, description and a photo.
@@ -20,7 +19,7 @@ The App will sends you push-notification if another user likes your post.
 
 eMia uses Firebase database, storage, authentication and cloud messages.
 
-Notes. This React Native version contains also some native things. There is a view controller on Filter scene (iOS, Swift 5) which is launched by options menu button.  
+Notes. This React Native version contains also some native things. For example there is Filter View Controller (iOS, Swift 5) which is launched by options menu button (React Native  component).  
 
 ## Requirements
 
@@ -30,7 +29,7 @@ Notes. This React Native version contains also some native things. There is a vi
 
 ## Preparing for using
 
-If you wish to try eMia, please following next steps.
+If you wish to try eMia by yourself, please following next steps.
 
 For iOS
 Sign in your Google account, then open Firebase console https://console.firebase.google.com
