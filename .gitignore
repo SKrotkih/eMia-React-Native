@@ -24,6 +24,8 @@ node_modules/
 package-lock.json
 .expo
 .iml
+.vscode
+
 
 # CocoaPods
 Pods/
@@ -31,4 +33,5 @@ Podfile.lock
 
 GoogleService-Info.js
 GoogleService-Info.plist
+
 
