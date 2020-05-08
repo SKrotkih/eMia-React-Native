@@ -55,11 +55,31 @@ In ios directory put command in console:
 
 pod install
 
-Then open the eMia.xcworkspace in Xcode.
+return to the root folder. Run
+
+react-native run-ios
+this command used to make sure all right with future  build
+
+go to ios folder again
+
+Open the eMia.xcworkspace in Xcode.
 
 Press on Cmd+R or click on the run button to run the app and the project should run.
+Here you can debug native code
 
-Or open the project in Visual Studio Code. Here you can use debug for Java Script. 
+Open the project in Visual Studio Code. 
+In VSC you can debug Java Script code. 
+
+Open Google Chrome
+React Native JS code runs as a web worker inside Google Chrome.
+Press ⌘⌥I to open Developer Tools. Enable Pause On Caught Exceptions for a better debugging experience.
+You may also install the standalone version of React Developer Tools to inspect the React component hierarchy, their props, and state.
+
+In VSC run Main Menu -> Run -> Start Debugging (F5)
+
+The App shoud start
+
+<img src="https://user-images.githubusercontent.com/2775621/81370480-f208a580-90fd-11ea-8482-5718e9b518c5.png" alt="eMia is launched" style="width: 690px;" />
 
 ### Build and run Android app.
 
