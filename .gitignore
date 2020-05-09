@@ -25,7 +25,8 @@ package-lock.json
 .expo
 .iml
 .vscode
-
+yarn.lock
+yarn-error.log
 
 # CocoaPods
 Pods/
