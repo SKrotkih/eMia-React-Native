@@ -21,7 +21,7 @@ DerivedData
 .idea/
 #React Native
 node_modules/
-package-lock.json
+#package-lock.json
 .expo
 .iml
 .vscode
