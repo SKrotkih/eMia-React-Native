@@ -14,8 +14,8 @@ There are also two native example apps:
 [eMia-Android](https://github.com/SKrotkih/eMia-Android).
 
 eMia is a simple social network. 
-You can be registered there, then edit your profile, post new topic with a title, description and a photo.
-The App will sends you push-notification if another user likes your post.
+You can be registered there, then edit your profile, post a new topic with a title, description and a photo.
+You will get  push-notification if another user likes your post.
 
 eMia uses Firebase database, storage, authentication and cloud messages.
 
@@ -29,16 +29,16 @@ Notes. This React Native version contains also some native things. For example t
 
 ## Preparing for using
 
-If you wish to try eMia by yourself, please following next steps.
+If you wont to try eMia by yourself, please following the next steps.
 
 For iOS
-Sign in your Google account, then open Firebase console https://console.firebase.google.com
+Sign in your Google account, open Firebase console https://console.firebase.google.com
 Create a new project. Please follow documentations https://firebase.google.com/docs/ios/setup#add_firebase_to_your_app.
-As a result you have to use GoogleService-Info.plist and for  filling constants (read comments there \src\config\constants.js).
+As a result you need with using GoogleService-Info.plist fill constants (read comments in \src\config\constants.js).
 
 For Android
-Sign in your Google account, then open Firebase console https://console.firebase.google.com
-Create a new project. Then follow documentations. As a result you need to download google-services.json.
+Sign in your Google account, open Firebase console https://console.firebase.google.com
+Create a new project. Follow documentations. As a result you need to download google-services.json.
 
 ## Installation
 
@@ -56,15 +56,16 @@ pod install
 
 return to the root folder. Run
 
+run
 react-native run-ios
-this command used to make sure all right with future  build
+to make sure all right wil be with future  build
 
 go to ios folder again
 
 Open the eMia.xcworkspace in Xcode.
 
 Press on Cmd+R or click on the run button to run the app and the project should run.
-Here you can debug native code
+Now you can debug native code
 
 Open the project in Visual Studio Code. 
 In VSC you can debug Java Script code. 
@@ -83,8 +84,6 @@ The App shoud start
 ### Build and run Android app.
 
 Go to the eMia directory. Put command in console:
-
-run command:
 
 react-native start --port 8081
 
