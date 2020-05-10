@@ -44,7 +44,7 @@ Create a new project. Follow documentations. As a result you need to download go
 
 Clone or unzip the repository.
 
-In root directory  execute command:
+Install React Native (if needed).  In root directory  execute command:
 
 npm install
 
