@@ -47,17 +47,20 @@ Install React Native (current version is 0.62.2).  In root directory  execute c
 
 npm install
 
+Note. Make sure directory node_modules is not exist or remove it before.
+
 ### Build and run iOS app.
 
 In ios directory put command in console: 
 
 pod install
 
-return to the root folder. Run
+return to the root folder. 
+Run
 
-run
 react-native run-ios
-to make sure all right wil be with future  build
+
+to make sure all right with future  build
 
 go to ios folder again
 
