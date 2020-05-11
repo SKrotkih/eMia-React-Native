@@ -23,7 +23,6 @@ Notes. This React Native version contains also some native things. For example t
 
 ## Requirements
 
-- React Native 0.62
 - Xcode 11, Swift 5
 - Android Studio 3.1
 
@@ -44,7 +43,7 @@ Create a new project. Follow documentations. As a result you need to download go
 
 Clone or unzip the repository.
 
-Install React Native (if needed).  In root directory  execute command:
+Install React Native (current version is 0.62.2).  In root directory  execute command:
 
 npm install
 
