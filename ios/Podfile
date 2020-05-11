@@ -1,36 +1,72 @@
 platform :ios, '11.0'
-use_frameworks!
+
+require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'eMia' do
-    pod 'Firebase/Core'
-    pod 'Firebase/Database'
-    pod 'Firebase/Storage'
-    pod 'Firebase/Auth'
-    pod 'Firebase/RemoteConfig'
-    pod 'Firebase/Messaging'
-    
-    pod 'RxSwift'
-    pod 'RxCocoa'
-    pod 'RxDataSources'
-    
-    pod 'IQKeyboardManagerSwift'
-    pod 'SwiftyJSON'
-    pod 'NextGrowingTextView'
-    
-    pod 'MZFayeClient', :git => 'https://github.com/m1entus/MZFayeClient.git', :commit => '6a88a1'
-    #pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
-    
+  
+  use_frameworks!
+  
+  pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
+  pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
+  pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
+  pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
+  pod 'React', :path => '../node_modules/react-native/'
+  pod 'React-Core', :path => '../node_modules/react-native/'
+  pod 'React-CoreModules', :path => '../node_modules/react-native/React/CoreModules'
+  pod 'React-Core/DevSupport', :path => '../node_modules/react-native/'
+  pod 'React-RCTActionSheet', :path => '../node_modules/react-native/Libraries/ActionSheetIOS'
+  pod 'React-RCTAnimation', :path => '../node_modules/react-native/Libraries/NativeAnimation'
+  pod 'React-RCTBlob', :path => '../node_modules/react-native/Libraries/Blob'
+  pod 'React-RCTImage', :path => '../node_modules/react-native/Libraries/Image'
+  pod 'React-RCTLinking', :path => '../node_modules/react-native/Libraries/LinkingIOS'
+  pod 'React-RCTNetwork', :path => '../node_modules/react-native/Libraries/Network'
+  pod 'React-RCTSettings', :path => '../node_modules/react-native/Libraries/Settings'
+  pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
+  pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
+  pod 'React-Core/RCTWebSocket', :path => '../node_modules/react-native/'
+  pod 'react-native-image-picker', :path => '../node_modules/react-native-image-picker'
+  
+  pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
+  pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
+  pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
+  pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
+  pod 'ReactCommon/callinvoker', :path => "../node_modules/react-native/ReactCommon"
+  pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
+  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga', :modular_headers => true
+  
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  
+  # Add new pods below this line
+  
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
+  pod 'Firebase/Storage'
+  pod 'Firebase/Auth'
+  pod 'Firebase/RemoteConfig'
+  pod 'Firebase/Messaging'
+  
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'RxDataSources'
+  
+  pod 'IQKeyboardManagerSwift'
+  pod 'SwiftyJSON'
+  pod 'NextGrowingTextView'
+  
 end
 
 # The workaround starts here !!!!!
 
 post_install do |installer|
-    Dir.glob(installer.sandbox.target_support_files_root + "Pods-*/*.sh").each do |script|
-        flag_name = File.basename(script, ".sh") + "-Installation-Flag"
-        folder = "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
-        file = File.join(folder, flag_name)
-        content = File.read(script)
-        content.gsub!(/set -e/, "set -e\nKG_FILE=\"#{file}\"\nif [ -f \"$KG_FILE\" ]; then exit 0; fi\nmkdir -p \"#{folder}\"\ntouch \"$KG_FILE\"")
-        File.write(script, content)
-    end
+  Dir.glob(installer.sandbox.target_support_files_root + "Pods-*/*.sh").each do |script|
+    flag_name = File.basename(script, ".sh") + "-Installation-Flag"
+    folder = "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
+    file = File.join(folder, flag_name)
+    content = File.read(script)
+    content.gsub!(/set -e/, "set -e\nKG_FILE=\"#{file}\"\nif [ -f \"$KG_FILE\" ]; then exit 0; fi\nmkdir -p \"#{folder}\"\ntouch \"$KG_FILE\"")
+    File.write(script, content)
+  end
 end
+
