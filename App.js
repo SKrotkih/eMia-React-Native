@@ -70,7 +70,7 @@ export default class App extends Component {
       return (
         <ImageBackground style={styles.background} source={require('@assets/images/splash.png')}>
           <StatusBar translucent barStyle="dark-content" />
-        </ImageBackground> )
+        </ImageBackground>)
     } else {
       return (
         <Provider store={store}>
@@ -88,7 +88,7 @@ App.navigatorStyle = {
 }
 
 const styles = StyleSheet.create({
-  background: { ...backgroundImage,
+  background: { backgroundImage,
     justifyContent: 'space-around',
     alignItems: 'center'
   }})
