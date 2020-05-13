@@ -26,6 +26,8 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.3.0",
     "axios": "^0.18.1",
     "expo": "^37.0.9",
     "firebase": "^7.14.3",
@@ -54,6 +56,7 @@
     "react-native-redux-listener": "^0.3.0",
     "react-native-root-siblings": "^3.0.0",
     "react-native-router-flux": "^4.0.0-beta.28",
+    "react-native-safe-area-context": "^1.0.0",
     "react-native-screens": "^2.7.0",
     "react-native-scripts": "^2.0.1",
     "react-native-scrollable-tab-view": "^0.6.7",

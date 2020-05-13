@@ -39,6 +39,8 @@ target 'eMia' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   
   # Add new pods below this line
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   
   pod 'Firebase/Core'
   pod 'Firebase/Database'
