@@ -74,6 +74,9 @@
 		FEBCA55B21D95DAF03B37B28 /* Pods_eMia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8459C41DC05AE1B78D0ED231 /* Pods_eMia.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* eMiaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = eMiaTests.m; sourceTree = "<group>"; };
@@ -307,6 +310,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEBCA55B21D95DAF03B37B28 /* Pods_eMia.framework in Frameworks */,
+				C3B7AAC064CC4068A81E02AD /* RNMaskedViewTests.xctest in Frameworks */,
+				EE76F954C5BE4499B76189ED /* Demo.app in Frameworks */,
+				1DC0081B74D6495B84E243BB /* DemoTests.xctest in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1055,6 +1061,11 @@
 				1CC53DA7B18A4E2384B720E7 /* libRNShare.a */,
 				9CC3E913B1B6421792E0A8BB /* libRCTActionSheet.a */,
 				CFE7B82F420B44A7BCE544C8 /* libRNFetchBlob.a */,
+				57B6D5A017A94221ABB13DB0 /* libRNMaskedView.a */,
+				38B6CD6623704F18B86096EC /* RNMaskedViewTests.xctest */,
+				944C4FCF7E7E4EB0BEA2470B /* libReactNativeNavigation.a */,
+				57C035D7CA024972B0F43593 /* Demo.app */,
+				CF1340EB96594332A635A2BA /* DemoTests.xctest */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1149,12 +1160,17 @@
 			mainGroup = 83CBB9F61A601CBA00E9B192;
 			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* eMia */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		13B07F8E1A680F5B00A75B9A /* Resources */ = {
@@ -1442,10 +1458,8 @@
 					"\"${PODS_ROOT}/Headers/Public/React-Core\"",
 					"\"${PODS_ROOT}/Headers/Public/MZFayeClient\"",
 					"\"${PODS_ROOT}/Headers/Public/SocketRocket\"",
-					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
-					"$(SRCROOT)/../node_modules/react-native-transformable-image/Demo/ios/Demo",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/NativeModules/Info.plist";
@@ -1488,10 +1502,8 @@
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/MZFayeClient\"",
 					"\"${PODS_ROOT}/Headers/Public/SocketRocket\"",
-					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
 					"$(SRCROOT)/../node_modules/react-native-device-info/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-share/ios",
-					"$(SRCROOT)/../node_modules/react-native-transformable-image/Demo/ios/Demo",
 					"$(SRCROOT)/../node_modules/react-native-fetch-blob/ios/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/NativeModules/Info.plist";
