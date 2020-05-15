@@ -4,13 +4,8 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 target 'eMia' do
   
-  use_frameworks!
-# use_native_modules!
+  # use_native_modules!
   
-  pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
-  pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
-  pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
-  pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
   pod 'React', :path => '../node_modules/react-native/'
   pod 'React-Core', :path => '../node_modules/react-native/'
   pod 'React-CoreModules', :path => '../node_modules/react-native/React/CoreModules'
@@ -25,21 +20,27 @@ target 'eMia' do
   pod 'React-RCTText', :path => '../node_modules/react-native/Libraries/Text'
   pod 'React-RCTVibration', :path => '../node_modules/react-native/Libraries/Vibration'
   pod 'React-Core/RCTWebSocket', :path => '../node_modules/react-native/'
-  
   pod 'React-cxxreact', :path => '../node_modules/react-native/ReactCommon/cxxreact'
   pod 'React-jsi', :path => '../node_modules/react-native/ReactCommon/jsi'
   pod 'React-jsiexecutor', :path => '../node_modules/react-native/ReactCommon/jsiexecutor'
   pod 'React-jsinspector', :path => '../node_modules/react-native/ReactCommon/jsinspector'
+
   pod 'ReactCommon/callinvoker', :path => "../node_modules/react-native/ReactCommon"
   pod 'ReactCommon/turbomodule/core', :path => "../node_modules/react-native/ReactCommon"
-  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga', :modular_headers => true
   
+  pod 'Yoga', :path => '../node_modules/react-native/ReactCommon/yoga', :modular_headers => true
+  pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
+  pod 'FBReactNativeSpec', :path => "../node_modules/react-native/Libraries/FBReactNativeSpec"
+  pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
+  pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
+
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
   
   # Add new pods below this line
 
+  use_frameworks!
   
   pod 'Firebase/Core'
   pod 'Firebase/Database'
