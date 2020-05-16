@@ -45,31 +45,38 @@ Clone or unzip the repository.
 
 Install React Native (current version is 0.62.2).  In root directory  execute command:
 
-npm install
-
-Note. Make sure directory node_modules is not exist or remove it before.
+yarn install
 
 ### Build and run iOS app.
 
-In ios directory put command in console: 
+In ios directory run command in console: 
+
+cd ios
 
 pod install
 
-return to the root folder. 
-Run
+cd ..
 
 react-native run-ios
 
-to make sure all right with future  build
+or
 
-go to ios folder again
+start React Native Packager
+
+react-native start --reset-cache
+
+cd ios
 
 Open the eMia.xcworkspace in Xcode.
 
 Press on Cmd+R or click on the run button to run the app and the project should run.
 Now you can debug native code
 
+or
+
 Open the project in Visual Studio Code. 
+Add extension React Native Tools
+Add "Debug iOS" and "Debug Android" into the launch.json
 In VSC you can debug Java Script code. 
 
 Open Google Chrome
