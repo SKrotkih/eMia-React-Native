@@ -3,6 +3,8 @@ package com.emia;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import org.reactnative.maskedview.RNCMaskedViewPackage;
 import com.reactnativenavigation.NavigationReactPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -32,6 +34,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNGestureHandlerPackage(),
+            new RNCMaskedViewPackage(),
             new NavigationReactPackage(),
             new RNGestureHandlerPackage(),
             new VectorIconsPackage(),
