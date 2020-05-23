@@ -31,6 +31,7 @@ yarn-error.log
 # CocoaPods
 Pods/
 Podfile.lock
+Podfile.zip
 
 GoogleService-Info.js
 GoogleService-Info.plist
