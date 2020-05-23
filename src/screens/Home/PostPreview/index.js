@@ -1,103 +1,78 @@
-
-import React from 'react'
-import ReactNative from 'react-native'
-import styles from './styles'
-import Time from '@components/Time'
-import {connect} from 'react-redux'
-import ImageViewer from '@theme/components/ImageViewer'
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base'
-
-import Grid from 'react-native-grid-component'
-import NativeBase from 'native-base'
-import {Actions} from 'react-native-router-flux'
-import { config } from '../index'
-import { windowWidth, windowHeight } from '@theme/styles'
+import React from 'react';
+import ReactNative from 'react-native';
+import styles from './styles';
+import Time from '@components/Time';
+import {connect} from 'react-redux';
+import ImageViewer from '@theme/components/ImageViewer';
+import {Container, Header, Content, Text, Thumbnail} from 'native-base';
 
 const {
-  Dimensions,  
+  View,
+  Dimensions,
   AppRegistry,
   Image,
   StyleSheet,
-  View,
   Alert,
-  TouchableOpacity
-} = ReactNative
-const {
-  Component
-} = React
+  TouchableOpacity,
+} = ReactNative;
 
-const previewContentHeight = Dimensions.get('window').height
-const screenWidth = Dimensions.get('window').width
+const {Component} = React;
 
 export class PostPreview extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
+  constructor(props) {
+    super(props);
+    const {item} = this.props;
+    this.state = this.createState(item);
+
+    this.title = item.value.title;
+    this.body = item.value.body;
+    this.url = item.url;
+    this.avatarUrl = item.avatarUrl;
+    this.publishedAt = new Date(1000 * item.value.created);
+    this.userName = item.author == null ? '' : item.author.username;
   }
 
-  setTitle (titleText) {
-    const {setParams} = this.props.navigation
-    setParams({ title: titleText })
+  createState(item) {
+    const state = {};
+    return state;
   }
 
-  // static navigationOptions = ({ navigation }) => {
-  //   title: `${navigation.state.params.title}`,
-  //   headerTitleStyle: {
-  //     textAlign: 'center', 
-  //     alignSelf:'center'},
-  //     headerStyle: {
-  //       backgroundColor:'white',
-  //     },
-  // }
-
-  componentWillMount () {
-    var title = this.props.item.value.title
-    this.setTitle(title)
+  setTitle(titleText) {
+    const {setParams} = this.props.navigation;
+    setParams({title: titleText});
   }
 
-  render () {
+  componentWillMount() {
+    this.setTitle(this.title);
+  }
 
-    const { item } = this.props
-    var title = item.value.title
-    var body = item.value.body
-    var url = item.url
-    var avatarUrl = item.avatarUrl
-    var publishedAt = new Date(1000 * item.value.created)
-    var userName = item.author === null ? '' : item.author.username
-
+  render() {
     return (
       <Container style={styles.container}>
-        <Header style={{ backgroundColor: 'white' }}>
-          <Text style={styles.title}>
-            {title}
-          </Text>
+        <Header style={styles.headerBackground}>
+          <Text style={styles.title}>{this.title}</Text>
         </Header>
         <Content style={styles.content}>
           <View style={styles.thumbnail}>
-            <Thumbnail circular size={55} source={{uri: avatarUrl}} />
-            <Text style={{marginHorizontal: 8, fontWeight: 'bold', alignSelf: 'center'}}>
-              {userName}
-            </Text>
+            <Thumbnail circular size={55} source={{uri: this.avatarUrl}} />
+            <Text style={styles.userName}>{this.userName}</Text>
           </View>
-          <Text style={styles.description}>
-            {body}
-          </Text>
+          <Text style={styles.description}>{this.body}</Text>
           <View style={styles.backgroundPhoto}>
             <ImageViewer
               disabled={false}
-              source={{uri: url}}
+              source={{uri: this.url}}
               downloadable
               doubleTapEnabled={true}
             />
           </View>
-          <Text style={{ marginHorizontal: 8, marginVertical: 8, fontWeight: 'bold' }}>
-            <Time date={publishedAt} />
+          <Text style={styles.publishedAt}>
+            <Time date={this.publishedAt} />
           </Text>
         </Content>
       </Container>
-    )
+    );
   }
 }
 
-export default connect(null, null)(PostPreview)
+export default connect(null, null)(PostPreview);

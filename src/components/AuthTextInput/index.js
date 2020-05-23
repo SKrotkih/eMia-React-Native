@@ -1,59 +1,57 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-
-import { View } from 'react-native';
-
-import { FormLabel, FormInput, FormValidationMessage } from 'react-native-elements';
-import { isEmpty } from '@utils/validate';
+import {View, TextInput, Text} from 'react-native';
+import {FormValidationMessage} from 'react-native-elements';
+import {isEmpty} from '@utils/validate';
 import styles from './styles';
 
 class AuthTextInput extends Component {
-  render () {
-    const { showLabel, placeholder, autoFocus, onChangeText, secureTextEntry, type } = this.props;
+  render() {
+    const {
+      showLabel,
+      placeholder,
+      autoFocus,
+      onChangeText,
+      secureTextEntry,
+      type,
+      label,
+      value,
+      error,
+    } = this.props;
     return (
       <View style={styles.container}>
-        {
-          (showLabel) &&
-                    <FormLabel>{this.props.label}</FormLabel>
-        }
-        <FormInput
-          autoCapitalize='none'
-          clearButtonMode='while-editing'
+        {showLabel && <Text>{label}</Text>}
+        <TextInput
+          autoCapitalize="none"
+          clearButtonMode="while-editing"
           underlineColorAndroid={'#fff'}
           placeholder={placeholder}
           autoFocus={autoFocus}
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}
-          inputStyle={styles.inputContainer}
+          style={styles.inputContainer}
           keyboardType={type}
-          value={this.props.value}/>
-        {
-          (!isEmpty(this.props.error)) &&
-                    <FormValidationMessage>
-                      {this.props.error}
-                    </FormValidationMessage>
-        }
+          defaultValue={value}
+        />
+        {!isEmpty(error) && <Text>{error}</Text>}
       </View>
-    )
+    );
   }
 }
 
 AuthTextInput.propTypes = {
-  label: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
+  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
   autoFocus: PropTypes.bool,
   onChangeText: PropTypes.func.isRequired,
   secureTextEntry: PropTypes.bool,
   value: PropTypes.string,
-  error: PropTypes.string
-}
+  error: PropTypes.string,
+};
 
 AuthTextInput.defaultProps = {
   autoFocus: false,
-  secureTextEntry: false
-}
+  secureTextEntry: false,
+};
 
-export default AuthTextInput
+export default AuthTextInput;

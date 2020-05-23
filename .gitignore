@@ -35,4 +35,5 @@ Podfile.lock
 GoogleService-Info.js
 GoogleService-Info.plist
 
+node_modules.zip
 

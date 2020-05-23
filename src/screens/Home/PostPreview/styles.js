@@ -1,46 +1,58 @@
-import { StyleSheet } from 'react-native'
-import { windowWidth, windowHeight } from '@theme/styles'
+import {StyleSheet} from 'react-native';
+import {windowWidth, windowHeight} from '@theme/styles';
 
-const resizeMode = 'contain'
+const resizeMode = 'contain';
 
 const styles = StyleSheet.create({
   container: {
     margin: 0,
     marginBottom: 0,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   content: {
     margin: 15,
     marginBottom: 15,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
   },
   thumbnail: {
     marginLeft: 4,
     marginTop: 4,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   photo: {
     width: windowWidth - 30,
     height: windowWidth - 30,
     alignSelf: 'center',
-    resizeMode: 'contain'
+    resizeMode: 'contain',
   },
   backgroundPhoto: {
     width: windowWidth - 30,
-    height: windowWidth - 30
+    height: windowWidth - 30,
   },
   title: {
     fontSize: 16,
     marginBottom: 4,
     fontWeight: 'bold',
-    textAlign: 'center'
+    textAlign: 'center',
   },
-
   description: {
     fontSize: 14,
     textAlign: 'center',
-    marginVertical: 8
+    marginVertical: 8,
   },
-})
+  userName: {
+    marginHorizontal: 8,
+    fontWeight: 'bold',
+    alignSelf: 'center',
+  },
+  publishedAt: {
+    marginHorizontal: 8,
+    marginVertical: 8,
+    fontWeight: 'bold',
+  },
+  headerBackground: {
+    backgroundColor: 'white',
+  },
+});
 
-export default styles
+export default styles;

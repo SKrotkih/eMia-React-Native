@@ -6,7 +6,7 @@
 //  Copyright © 2018 Coded I/S. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class FilterPresenter: FilterPresented {
    var interactor: FilterInteractor!

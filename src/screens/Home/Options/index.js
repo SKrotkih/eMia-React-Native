@@ -1,73 +1,83 @@
+import React, {PropTypes} from 'react';
+import ReactNative from 'react-native';
+import {requireNativeComponent, Platform} from 'react-native';
+import {connect} from 'react-redux';
+import {windowWidth, windowHeight} from '@theme/styles';
+import {
+  Container,
+  Header,
+  Title,
+  Content,
+  Footer,
+  FooterTab,
+  Button,
+  Left,
+  Right,
+  Body,
+  Icon,
+  Text,
+  Thumbnail
+} from 'native-base';
 
-import React, { PropTypes } from 'react'
-import ReactNative from 'react-native'
-import { requireNativeComponent, Platform } from 'react-native'
-import {connect} from 'react-redux'
-import { windowWidth, windowHeight } from '@theme/styles'
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Text, Thumbnail } from 'native-base'
-
-import NativeBase from 'native-base'
-import {Actions} from 'react-native-router-flux'
-import { config } from '../index'
-import styles from './styles'
+import NativeBase from 'native-base';
+import {Actions} from 'react-native-router-flux';
+import {config} from '../index';
+import styles from './styles';
 
 const {
-  Dimensions,  
+  Dimensions,
   AppRegistry,
   Image,
   StyleSheet,
   View,
   Alert,
   TouchableOpacity
-} = ReactNative
+} = ReactNative;
 
-const {
-  Component
-} = React
+const {Component} = React;
 
 export class Options extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
   }
 
-  setTitle (titleText) {
-    const {setParams} = this.props.navigation
-    setParams({ title: titleText })
+  setTitle(titleText) {
+    const {setParams} = this.props.navigation;
+    setParams({title: titleText});
   }
 
-  componentWillMount () {
-    this.setTitle('Filter')
+  componentWillMount() {
+    this.setTitle('Filter');
   }
 
-  render () {
+  render() {
     return (
       <Container style={{margin: 0, marginBottom: 0, backgroundColor: '#fff'}}>
         <Content contentContainerStyle={{height: windowHeight}}>
           {this.renderContent()}
         </Content>
       </Container>
-    )
+    );
   }
 
-  renderContent () {
+  renderContent() {
     if (Platform.OS === 'ios') {
       return (
-        <FilterBridgeView style={{height: windowHeight}} {...this.props} />
-      )
+        <FilterView style={{height: windowHeight}} {...this.props} />
+      );
     } else {
       return (
         <Text style={{alignSelf: 'center'}}>
           This screen isn't implemented yet
         </Text>
-      )
+      );
     }
   }
 }
 
-Options.propTypes = {}
+Options.propTypes = {};
 
-const FilterBridgeView = requireNativeComponent('FilterBridgeView', Options)
+const FilterView = requireNativeComponent('FilterBridgeView', Options);
 
-export default connect(null, null)(Options)
+export default connect(null, null)(Options);

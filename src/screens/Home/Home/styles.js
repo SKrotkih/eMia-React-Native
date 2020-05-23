@@ -1,26 +1,26 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native'
-import { color, fontSize, fontFamily, windowWidth, normalize } from '@theme/styles'
+import {StyleSheet, Platform, Dimensions} from 'react-native';
+import {color, fontSize, fontFamily, windowWidth, normalize} from '@theme/styles';
 
-const resizeMode = 'contain'
+const resizeMode = 'contain';
 
-const deviceHeight = Dimensions.get("window").height
+const deviceHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    height: Platform.OS === "ios" ? deviceHeight : deviceHeight - 20
+    height: Platform.OS === 'ios' ? deviceHeight : deviceHeight - 20,
   },
   loading: {
     flex: 1,
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   separator: {
     height: 1,
     marginBottom: 4,
-    backgroundColor: '#eee'
+    backgroundColor: '#eee',
   },
-})
+});
 
 const gridItemStyles = StyleSheet.create({
   container: {
@@ -28,25 +28,25 @@ const gridItemStyles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     height: 220,
-    margin: 1
+    margin: 1,
   },
-  image: { 
-    alignSelf: 'center',  // 'stretch'􏰸 'contain'􏰸 'cover'􏰸 'repeat' 'center'
+  image: {
+    alignSelf: 'center', // 'stretch'􏰸 'contain'􏰸 'cover'􏰸 'repeat' 'center'
     resizeMode: 'cover',
-    height: 160, 
-    width: (windowWidth - 8) / 2
+    height: 160,
+    width: (windowWidth - 8) / 2,
   },
   title: {
     fontSize: 12,
     marginBottom: 4,
-    fontWeight: 'bold',    
-    textAlign: 'center'
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   description: {
     fontSize: 10,
     marginBottom: 2,
-    textAlign: 'center'
-  }
-})
+    textAlign: 'center',
+  },
+});
 
-export {styles, gridItemStyles}
+export {styles, gridItemStyles};

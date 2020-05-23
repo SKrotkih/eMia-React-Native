@@ -1,16 +1,7 @@
-// clean next comment lines to use expo
-// import Expo from "expo";
-// app.json:
-// ,
-// clean the next comments to use expo
-// "expo": {
-//   "sdkVersion": "25.0.0"
-// }
-
 import React, {Component} from 'react';
-import { Provider } from 'react-redux';
-import { StyleProvider } from "native-base";
-import { ImageBackground, StatusBar, YellowBox, StyleSheet } from 'react-native';
+import {Provider} from 'react-redux';
+import {StyleProvider} from 'native-base';
+import {ImageBackground, StatusBar, YellowBox, StyleSheet} from 'react-native';
 
 import getTheme from '@theme/components';
 import variables from '@theme/variables/commonColor';
@@ -18,35 +9,34 @@ import variables from '@theme/variables/commonColor';
 import Router from '@router/routes';
 import store from '@redux/store';
 
-import { checkLoginStatus } from './src/model/auth/actions';
+import {checkLoginStatus} from './src/model/auth/actions';
 
 import backgroundImage from '@theme/BackgroundImage';
 
-function setUpIgnoreYellowMessage () {
-
+function setUpIgnoreYellowMessage() {
   console.disableYellowBox = true;
 
-  YellowBox.ignoreWarnings(['Setting a timer']);
-  const _console = _.clone(console);
-  console.warn = message => {
-    if (message.indexOf('Setting a timer') <= -1) {
-      _console.warn(message);
-    }
-  };
+  YellowBox.ignoreWarnings(['Setting a timer', 'Warning:']);
+
+  // const _console = _.clone(console);
+  // console.warn = message => {
+  //   if (message.indexOf('Setting a timer') <= -1) {
+  //     _console.warn(message);
+  //   }
+  // };
 }
 
 export default class App extends Component {
-
-  constructor () {
-    super()
+  constructor() {
+    super();
     this.state = {
       isReady: false,
-      isLoggedIn: false
+      isLoggedIn: false,
     };
   }
 
-  async componentWillMount () {
-    setUpIgnoreYellowMessage()
+  async componentWillMount() {
+    setUpIgnoreYellowMessage();
 
     // clean next comment lines to use expo
     // await Expo.Font.loadAsync({
@@ -60,35 +50,43 @@ export default class App extends Component {
     //   "Ionicons": require("native-base/Fonts/Ionicons.ttf")
     // });
 
-    store.dispatch(checkLoginStatus((isLoggedIn) => {
-      this.setState({isReady: true, isLoggedIn});
-    }));
+    store.dispatch(
+      checkLoginStatus((isLoggedIn) => {
+        this.setState({isReady: true, isLoggedIn});
+      }),
+    );
   }
 
-  render () {
+  render() {
     if (!this.state.isReady) {
       return (
-        <ImageBackground style={styles.background} source={require('@assets/images/splash.png')}>
+        <ImageBackground
+          style={styles.background}
+          source={require('@assets/images/splash.png')}>
           <StatusBar translucent barStyle="dark-content" />
-        </ImageBackground>)
+        </ImageBackground>
+      );
     } else {
       return (
         <Provider store={store}>
           <StyleProvider style={getTheme(variables)}>
             <Router isLoggedIn={this.state.isLoggedIn} />
           </StyleProvider>
-        </Provider>)
+        </Provider>
+      );
     }
   }
 }
 
 App.navigatorStyle = {
   navBarHidden: true,
-  statusBarBlur: true
-}
+  statusBarBlur: true,
+};
 
 const styles = StyleSheet.create({
-  background: { backgroundImage,
+  background: {
+    ...backgroundImage,
     justifyContent: 'space-around',
-    alignItems: 'center'
-  }})
+    alignItems: 'center',
+  },
+});

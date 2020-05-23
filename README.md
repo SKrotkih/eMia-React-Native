@@ -43,13 +43,13 @@ Create a new project. Follow documentations. As a result you need to download go
 
 Clone or unzip the repository.
 
-Install React Native (current version is 0.62.2).  In root directory  execute command:
+In root directory  execute command:
 
-yarn install
+yarn
 
-### Build and run iOS app.
-
-In ios directory run command in console: 
+Note. Fix issue with CocoaPods could not find compatible versions for pod "React/Core": 
+Start:
+grep -rl "s.dependency 'React/Core'" node_modules/ | xargs sed -i '' 's=React/Core=React-Core=g'
 
 cd ios
 
@@ -57,13 +57,11 @@ pod install
 
 cd ..
 
+## Run and Debug the App
+
 react-native run-ios
 
 or
-
-start React Native Packager
-
-react-native start --reset-cache
 
 cd ios
 
@@ -74,15 +72,10 @@ Now you can debug native code
 
 or
 
-Open the project in Visual Studio Code. 
-Add extension React Native Tools
-Add "Debug iOS" and "Debug Android" into the launch.json
+Open the project (root directory) in Visual Studio Code (VCS). 
+Add extension React Native Tools the the VSC
+Add "Debug iOS" and "Debug Android" (reactnative type ) into the launch.json
 In VSC you can debug Java Script code. 
-
-Open Google Chrome
-React Native JS code runs as a web worker inside Google Chrome.
-Press ⌘⌥I to open Developer Tools. Enable Pause On Caught Exceptions for a better debugging experience.
-You may also install the standalone version of React Developer Tools to inspect the React component hierarchy, their props, and state.
 
 In VSC run Main Menu -> Run -> Start Debugging (F5)
 
@@ -102,4 +95,6 @@ Start Android Studio.  Open android project. Run 'app'
 
 https://youtu.be/tgvxxnFq-Sk
 
-Edited on 07-05-2018
+First build was developed on 07-05-2018
+Last update 05-22-2020
+

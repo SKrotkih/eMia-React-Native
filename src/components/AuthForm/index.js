@@ -1,28 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import {Text, View} from 'react-native';
 import {Button} from 'react-native-elements';
-
 import {isEmpty, validate} from '@utils/validate';
-
 import styles from './styles';
-
 import AuthTextInput from '../AuthTextInput';
 
 class AuthForm extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
-
-    const { fields, error } = props;
-
+    const {fields, error} = props;
     this.state = this.createState(fields, error);
-
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  createState (fields, error) {
+  createState(fields, error) {
     const state = {};
     fields.forEach((field) => {
       let {key, type, value} = field;
@@ -32,18 +25,17 @@ class AuthForm extends React.Component {
     return state;
   }
 
-  onSubmit () {
+  onSubmit() {
     const data = this.state;
     const result = validate(data);
     if (!result.success) {
       this.setState({error: result.error});
-    }
-    else {
+    } else {
       this.props.onSubmit(this.extractData(data));
     }
   }
 
-  extractData (data) {
+  extractData(data) {
     const retData = {};
 
     Object.keys(data).forEach(function (key) {
@@ -56,42 +48,44 @@ class AuthForm extends React.Component {
     return retData;
   }
 
-  onChange (key, text) {
+  onChange(key, text) {
     const state = this.state;
     state[key].value = text;
     this.setState(state);
   }
 
-  render () {
-    const { fields, showLabel, buttonTitle, onForgotPassword } = this.props;
-
+  render() {
+    const {fields, showLabel, buttonTitle, onForgotPassword} = this.props;
     return (
       <View style={styles.container}>
         <View style={styles.wrapper}>
-          {
-            (!isEmpty(this.state.error['general'])) &&
-                        <Text style={styles.errorText}>{this.state.error['general']}</Text>
-          }
-
-          {
-            fields.map((data, idx) => {
-              let {key, label, placeholder, autoFocus, secureTextEntry, type} = data
-              return (
-                <AuthTextInput 
-                  key={key}
-                  label={label}
-                  showLabel={showLabel}
-                  placeholder={placeholder}
-                  autoFocus={autoFocus}
-                  type={type}
-                  onChangeText={(text) => this.onChange(key, text)}
-                  secureTextEntry={secureTextEntry}
-                  value={this.state[key]['value']}
-                  error={this.state.error[key]}/>
-              )
-            })
-          }
-
+          {!isEmpty(this.state.error.general) && (
+            <Text style={styles.errorText}>{this.state.error.general}</Text>
+          )}
+          {fields.map((data, idx) => {
+            let {
+              key,
+              label,
+              placeholder,
+              autoFocus,
+              secureTextEntry,
+              type,
+            } = data;
+            return (
+              <AuthTextInput
+                key={key}
+                label={label}
+                showLabel={showLabel}
+                placeholder={placeholder}
+                autoFocus={autoFocus}
+                type={type}
+                onChangeText={(text) => this.onChange(key, text)}
+                secureTextEntry={secureTextEntry}
+                value={this.state[key].value}
+                error={this.state.error[key]}
+              />
+            );
+          })}
           <Button
             raised
             title={buttonTitle}
@@ -99,16 +93,16 @@ class AuthForm extends React.Component {
             containerViewStyle={styles.containerView}
             buttonStyle={styles.button}
             textStyle={styles.buttonText}
-            onPress={this.onSubmit}/>
-          {
-            this.props.onForgotPassword !== null &&
-                        <Text style={styles.forgotText} onPress={onForgotPassword}>
-                            Forgot password?</Text>
-          }
-
+            onPress={this.onSubmit}
+          />
+          {this.props.onForgotPassword !== null && (
+            <Text style={styles.forgotText} onPress={onForgotPassword}>
+              Forgot password?
+            </Text>
+          )}
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -116,11 +110,11 @@ AuthForm.propTypes = {
   showLabel: PropTypes.bool,
   buttonTitle: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
-}
+  error: PropTypes.object,
+};
 
 AuthForm.defaultProps = {
-  onForgotPassword: null
-}
+  onForgotPassword: null,
+};
 
 export default AuthForm;

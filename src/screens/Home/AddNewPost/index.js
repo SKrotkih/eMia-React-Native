@@ -28,8 +28,8 @@ import {
   Form,
   Item,
   Label,
-  Input
-} from 'native-base'
+  Input,
+} from 'native-base';
 
 const {
   Dimensions,  

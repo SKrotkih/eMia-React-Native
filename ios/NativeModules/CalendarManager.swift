@@ -25,12 +25,12 @@ class CalendarManager: RCTEventEmitter {
     self.sendEvent(withName: "EventReminder", body: ret)
   }
   
-  @objc override func constantsToExport() -> [String : Any]! {
-    return [
-      "x": 1,
-      "y": 2,
-      "z": "Arbitrary string"
-    ]
-  }
+//  @objc override func constantsToExport() -> [String : Any]! {
+//    return [
+//      "x": 1,
+//      "y": 2,
+//      "z": "Arbitrary string"
+//    ]
+//  }
   
 }

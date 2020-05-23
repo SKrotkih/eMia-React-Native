@@ -1,14 +1,11 @@
 import * as t from './actionTypes';
 import * as api from './api';
-import { auth } from '@model/firebase';
-
-import { AsyncStorage } from 'react-native';
-
-export function register (data, successCB, errorCB) {
+import {auth} from '@model/firebase';
+export function register(data, successCB, errorCB) {
   return (dispatch) => {
-    api.register(data, function (success, data, error) {
+    api.register(data, function (success, _data, error) {
       if (success) {
-        successCB(data);
+        successCB(_data);
       } else if (error) {
         errorCB(error);
       }
@@ -16,7 +13,7 @@ export function register (data, successCB, errorCB) {
   };
 }
 
-export function createUser (user, successCB, errorCB) {
+export function createUser(user, successCB, errorCB) {
   return (dispatch) => {
     api.createUser(user, function (success, data, error) {
       if (success) {
@@ -29,7 +26,7 @@ export function createUser (user, successCB, errorCB) {
   };
 }
 
-export function login (data, successCB, errorCB) {
+export function login(data, successCB, errorCB) {
   return (dispatch) => {
     api.login(data, function (success, data, error) {
       if (success) {
@@ -44,9 +41,9 @@ export function login (data, successCB, errorCB) {
   };
 }
 
-export function resetPassword (data, successCB, errorCB) {
+export function resetPassword(data, successCB, errorCB) {
   return (dispatch) => {
-    api.resetPassword(data, function (success, data, error) {
+    api.resetPassword(data, function (success, _data, error) {
       if (success) {
         successCB();
       } else if (error) {
@@ -56,7 +53,7 @@ export function resetPassword (data, successCB, errorCB) {
   };
 }
 
-export function signOut (successCB, errorCB) {
+export function signOut(successCB, errorCB) {
   api.signOut(function (success, data, error) {
     if (success) {
       successCB();
@@ -66,43 +63,34 @@ export function signOut (successCB, errorCB) {
   });
 }
 
-export function getCurrentUser (callback) {
+export function getCurrentUser(callback) {
   api.getCurrentUser(function (user) {
     callback(user);
   });
 }
 
-export function getUser (uid, callback) {
-  api.getUser({uid: uid}, function (success, data, error) {
+export function getUser(uid, callback) {
+  api.getUser(uid, function (success, data, error) {
     if (success && data.exists) {
-      var user = data.user;
+      const user = data.user.user;
       callback(user);
     } else {
+      console.log('API. GET USER failed request');
       callback(null);
     }
   });
 }
 
-export function checkLoginStatus (callback) {
+export function checkLoginStatus(callback) {
   return (dispatch) => {
     auth.onAuthStateChanged((user) => {
-      let isLoggedIn = (user !== null);
+      let isLoggedIn = user !== null;
       if (isLoggedIn) {
-        const newLocal1 = (err, user) => {
-          if (user === null || err !== null) {
-            isLoggedIn = false; // set the loggedIn value to false
-          } else {
-            dispatch({ type: t.LOGGED_IN, data: JSON.parse(user) });
-          }
-          callback(isLoggedIn);
-        };
-        const newLocal = newLocal1;
-        // get the user object from the Async storage
-        AsyncStorage.getItem('user', newLocal);
+        dispatch({type: t.LOGGED_IN, data: user});
       } else {
         dispatch({type: t.LOGGED_OUT});
-        callback(isLoggedIn);
       }
+      callback(isLoggedIn);
     });
   };
 }
