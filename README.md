@@ -1,4 +1,4 @@
-# eMia - React Native 
+# eMia - React Native
 
 Here is an entire source code application developed with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
 
@@ -6,11 +6,10 @@ Demo movie on an iOS device:
 
 ![reactnative_ios](https://user-images.githubusercontent.com/2775621/40759771-2bb84a6e-649c-11e8-86b2-be6e8ed46ad1.gif)
 
-
 ## Introduction
 
-There are also two native example apps: 
-[eMia-iOS](https://github.com/SKrotkih/eMia-iOS) 
+There are also two native example apps:
+[eMia-iOS](https://github.com/SKrotkih/eMia-iOS)
 [eMia-Android](https://github.com/SKrotkih/eMia-Android).
 
 eMia is a simple social network. 
@@ -47,17 +46,17 @@ In root directory  execute command:
 
 yarn
 
-Note. Fix issue with CocoaPods could not find compatible versions for pod "React/Core": 
-Start:
-grep -rl "s.dependency 'React/Core'" node_modules/ | xargs sed -i '' 's=React/Core=React-Core=g'
-
 cd ios
 
 pod install
 
+Note. Fix issue with CocoaPods could not find compatible versions for pod "React/Core":
 cd ..
+grep -rl "s.dependency 'React/Core'" node_modules/ | xargs sed -i '' 's=React/Core=React-Core=g'
 
 ## Run and Debug the App
+
+In Root directory:
 
 react-native run-ios
 
@@ -75,7 +74,7 @@ or
 Open the project (root directory) in Visual Studio Code (VCS). 
 Add extension React Native Tools the the VSC
 Add "Debug iOS" and "Debug Android" (reactnative type ) into the launch.json
-In VSC you can debug Java Script code. 
+In VSC you can debug Java Script code.
 
 In VSC run Main Menu -> Run -> Start Debugging (F5)
 
@@ -83,7 +82,7 @@ The App shoud start
 
 <img src="https://user-images.githubusercontent.com/2775621/81370480-f208a580-90fd-11ea-8482-5718e9b518c5.png" alt="eMia is launched" style="width: 690px;" />
 
-### Build and run Android app.
+### Build and run Android app
 
 Go to the eMia directory. Put command in console:
 
@@ -95,6 +94,6 @@ Start Android Studio.  Open android project. Run 'app'
 
 https://youtu.be/tgvxxnFq-Sk
 
-First build was developed on 07-05-2018
-Last update 05-22-2020
+First build was developed: 07-05-2018
 
+Last updated: 05-22-2020
