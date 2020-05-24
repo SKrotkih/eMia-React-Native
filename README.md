@@ -71,14 +71,14 @@ Now you can debug native code
 
 or
 
-Open the project (root directory) in Visual Studio Code (VCS). 
+Open the project (root directory) in Visual Studio Code (VCS).
 Add extension React Native Tools the the VSC
 Add "Debug iOS" and "Debug Android" (reactnative type ) into the launch.json
 In VSC you can debug Java Script code.
 
 In VSC run Main Menu -> Run -> Start Debugging (F5)
 
-The App shoud start
+The App should start
 
 <img src="https://user-images.githubusercontent.com/2775621/81370480-f208a580-90fd-11ea-8482-5718e9b518c5.png" alt="eMia is launched" style="width: 690px;" />
 
@@ -96,4 +96,4 @@ https://youtu.be/tgvxxnFq-Sk
 
 First build was developed: 07-05-2018
 
-Last updated: 05-22-2020
+Last updated: 05-22-2020  ("react-native": "0.62.2")

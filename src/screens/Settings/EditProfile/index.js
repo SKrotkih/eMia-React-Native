@@ -10,6 +10,7 @@ import {Actions} from 'react-native-router-flux';
 import Time from '@components/Time';
 
 import ImagePicker from 'react-native-image-picker';
+import {windowWidth} from '@theme/styles';
 
 // import RNFetchBlob from 'react-native-fetch-blob'
 var ImagePickerManager = require('react-native-image-picker');
@@ -49,18 +50,23 @@ const {Component} = React;
 export class EditProfile extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      photoUrl: '',
-      userName: '',
-    };
+
+    console.log(windowWidth);
+
+    const {user} = this.props;
+    this.state = this.createState(user);
+    this.userName = user.username;
     this.doneButtonPressed = this.doneButtonPressed.bind(this);
   }
 
+  createState(user) {
+    const state = {
+      photoUrl: user.avatarUrl,
+    };
+    return state;
+  }
   componentWillMount() {
-    const {user} = this.props;
     this.setUpNavigationBar();
-    this.setState({photoUrl: user.avatarUrl});
-    this.setState({userName: user.username});
   }
 
   setUpNavigationBar() {
@@ -68,13 +74,19 @@ export class EditProfile extends Component {
     const {setParams} = this.props.navigation;
     setParams({
       title: title,
-      right: <Icon style={{marginRight: 8, color: "#fff"}} name={'ios-done-all'} onPress={ () => { this.doneButtonPressed() }}/>,
+      right: (
+        <Icon
+          style={{marginRight: 8, color: '#fff'}}
+          name={'ios-done-all'}
+          onPress={() => {
+            this.doneButtonPressed();
+          }}
+        />
+      ),
     });
   }
 
   render() {
-    var name = this.state.userName;
-    var photoUrl = this.state.photoUrl;
     var nameLabelText = 'Name:';
     return (
       <Container style={styles.container}>
@@ -82,7 +94,7 @@ export class EditProfile extends Component {
           <Form>
             <Item fixedLabel>
               <Label>{nameLabelText}</Label>
-              <Input placeholder={name} />
+              <Input placeholder={this.userName} />
             </Item>
           </Form>
           <Button
@@ -92,15 +104,16 @@ export class EditProfile extends Component {
             onPress={() => this.takePhotoButtonPressed()}>
             <Text>Photo</Text>
           </Button>
-          {photoUrl !== null && (
-            <View style={styles.backgroundPhoto}>
-              {/* <Image
-                style={{width: 100, height: 100}}
-                source={{uri: photoUrl, scale: 1}}
-              /> */}
+          {this.state.photoUrl !== null && (
+            <View
+              style={{
+                marginTop: 50,
+                width: windowWidth - 30,
+                height: windowWidth - 30,
+              }}>
               <ImageViewer
                 disabled={false}
-                source={{uri: photoUrl}}
+                source={{uri: this.state.photoUrl}}
                 downloadable={true}
                 doubleTapEnabled={true}
               />
@@ -112,7 +125,7 @@ export class EditProfile extends Component {
   }
 
   doneButtonPressed() {
-    Alert.show('Sorry, this function doesn\'t work jet...', {
+    Alert.show("Sorry, this function doesn't work jet...", {
       type: 'info',
       duration: 3000,
     });

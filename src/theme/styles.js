@@ -1,9 +1,4 @@
-import { 
-  Dimensions, 
-  Platform, 
-  StatusBar 
-} from 'react-native';
-
+import {Dimensions, Platform, StatusBar} from 'react-native';
 import { moderateScale as normalize } from 'react-native-size-matters';
 
 const color = {
@@ -15,21 +10,13 @@ const color = {
   light_grey: '#eaeaea',
   grey: '#ccc',
   red: 'red',
-  underlayColor: '#ddd'
+  underlayColor: '#ddd',
 };
 
 const fontSize = {
   small: normalize(12),
   regular: normalize(14),
-  large: normalize(21)
-};
-
-const customfontFamily = {
-  extrabold: 'RobotoBlack',
-  bold: 'RobotoBold',
-  medium: 'RobotoMedium',
-  regular: 'RobotoRegular',
-  light: 'RobotoLight'
+  large: normalize(21),
 };
 
 const fontFamily = {
@@ -39,12 +26,12 @@ const fontFamily = {
       Bold: '700',
       SemiBold: '600',
       Light: '300',
-      Normal: '400'
+      Normal: '400',
     },
     styles: {
-      Italic: 'italic'
-    }
-  }
+      Italic: 'italic',
+    },
+  },
 };
 
 const padding = 8;
@@ -61,7 +48,7 @@ const navTitleStyle = { fontSize: fontSize.large, fontFamily: fontFamily.extrabo
 const navBarStyle = { backgroundColor: color.brand, marginTop: statusBarHeight };
 
 export {
-  padding,  
+  padding,
   color,
   fontSize,
   fontFamily,
@@ -71,5 +58,5 @@ export {
   tabIconStyle,
   navTitleStyle,
   normalize,
-  navBarStyle
+  navBarStyle,
 };

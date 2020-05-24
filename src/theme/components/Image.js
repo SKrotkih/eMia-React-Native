@@ -145,6 +145,27 @@ export default class ImageViewer extends Component {
   }
 
   componentWillMount() {
+    this.mounted = true;
+
+    if (this.props.threshold) {
+      this._thresholdTimer = setTimeout(() => {
+        this.setState({thresholdReached: true});
+        this._thresholdTimer = null;
+      }, this.props.threshold);
+    }
+
+    const {source} = this.props;
+    if (
+      typeof source === 'object' &&
+      typeof source.uri === 'string' &&
+      this.mounted
+    ) {
+      Image.prefetch(source.uri);
+      this._imageSize = {width: 200.0, height: 300.0};
+      Image.getSize(source.uri, (width, height) => {
+        this._imageSize = {width, height};
+      });
+    }
     this.state.layout.x.addListener((animated) =>
       this.handleLayoutChange(animated, LAYOUT_ENUM.X),
     );
@@ -158,30 +179,6 @@ export default class ImageViewer extends Component {
       onPanResponderRelease: this.handleRelease,
       onPanResponderTerminate: this.handleRelease,
     });
-  }
-
-  componentDidMount() {
-    const {source} = this.props;
-
-    this.mounted = true;
-
-    if (this.props.threshold) {
-      this._thresholdTimer = setTimeout(() => {
-        this.setState({thresholdReached: true});
-        this._thresholdTimer = null;
-      }, this.props.threshold);
-    }
-    if (
-      typeof source === 'object' &&
-      typeof source.uri === 'string' &&
-      this.mounted
-    ) {
-      // TODO: -
-      Image.prefetch(source.uri);
-      Image.getSize(source.uri, (width, height) => {
-        this._imageSize = {width, height};
-      });
-    }
   }
 
   componentWillReceiveProps(props) {
@@ -521,9 +518,6 @@ export default class ImageViewer extends Component {
         <Animated.View style={[styles.imageContainer, containerStyle]}>
           <TouchableWithoutFeedback onPress={this.toggleModal}>
             <AnimatedImage
-              // Todo: Fix me
-              // eslint-disable-next-line react/no-string-refs
-              ref="originalImage"
               source={source}
               onLoadStart={this.handleLoadStart}
               onProgress={this.handleProgress}

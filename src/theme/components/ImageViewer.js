@@ -143,21 +143,23 @@ export default class ImageViewer extends Component {
         this._thresholdTimer = null;
       }, this.props.threshold);
     }
-
+    this._imageSize = {width: 200.0, height: 300.0};
     if (
       typeof source === 'object' &&
       typeof source.uri === 'string' &&
       this.mounted
     ) {
       Image.prefetch(source.uri);
-      this._imageSize = {width: 200.0, height: 300.0};
       Image.getSize(source.uri, (width, height) => {
         this._imageSize = {width, height};
       });
     }
-    this.state.layout.x.addListener(animated => this.handleLayoutChange(animated, LAYOUT_ENUM.X));
-    this.state.layout.y.addListener(animated => this.handleLayoutChange(animated, LAYOUT_ENUM.Y));
-
+    this.state.layout.x.addListener((animated) =>
+      this.handleLayoutChange(animated, LAYOUT_ENUM.X),
+    );
+    this.state.layout.y.addListener((animated) =>
+      this.handleLayoutChange(animated, LAYOUT_ENUM.Y),
+    );
     this.panResponder = PanResponder.create({
       onStartShouldSetPanResponder: this.handleSetPanResponder,
       onMoveShouldSetPanResponder: () => true,
