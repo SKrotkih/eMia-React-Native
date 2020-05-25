@@ -3,17 +3,15 @@ import ReactNative from 'react-native';
 import {connect} from 'react-redux';
 import styles from './styles';
 import ImageViewer from '@theme/components/ImageViewer';
-import {Alert} from '@theme/components/alerts/';
-
-import NativeBase from 'native-base';
-import {Actions} from 'react-native-router-flux';
-import Time from '@components/Time';
-
 import ImagePicker from 'react-native-image-picker';
+import {uploadImage} from '@model/topics/api';
+
 import {windowWidth} from '@theme/styles';
 
-// import RNFetchBlob from 'react-native-fetch-blob'
-var ImagePickerManager = require('react-native-image-picker');
+import NativeBase from 'native-base';
+import {Alert} from '@theme/components/alerts/';
+import {Actions} from 'react-native-router-flux';
+import Time from '@components/Time';
 
 import {
   Container,
@@ -55,12 +53,13 @@ export class EditProfile extends Component {
 
     const {user} = this.props;
     this.state = this.createState(user);
-    this.userName = user.username;
+
     this.doneButtonPressed = this.doneButtonPressed.bind(this);
   }
 
   createState(user) {
     const state = {
+      userName: user.username,
       photoUrl: user.avatarUrl,
     };
     return state;
@@ -94,7 +93,7 @@ export class EditProfile extends Component {
           <Form>
             <Item fixedLabel>
               <Label>{nameLabelText}</Label>
-              <Input placeholder={this.userName} />
+              <Input placeholder={this.state.userName} />
             </Item>
           </Form>
           <Button
@@ -124,13 +123,6 @@ export class EditProfile extends Component {
     );
   }
 
-  doneButtonPressed() {
-    Alert.show("Sorry, this function doesn't work jet...", {
-      type: 'info',
-      duration: 3000,
-    });
-  }
-
   takePhotoButtonPressed() {
     const options = {
       quality: 1.0,
@@ -140,7 +132,7 @@ export class EditProfile extends Component {
         skipBackup: true,
       },
     };
-    ImagePicker.launchImageLibrary(options, (response) => {
+    ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
       if (response.didCancel) {
         console.log('User cancelled image picker');
@@ -151,39 +143,38 @@ export class EditProfile extends Component {
       }
     });
   }
+
+  doneButtonPressed() {
+    const uri = this.state.photoUrl;
+    const name = this.state.userName;
+    if (name === null || name.length === 0) {
+      Alert.show('Please, enter your name', {
+        type: 'info',
+        duration: 3000,
+      });
+    } else if (uri === null || uri.length === 0) {
+      this.updateProfile(name, null);
+    } else {
+      uploadImage(uri)
+        .then((resolve) => {
+          this.updateProfile(name, resolve);
+        })
+        .then((reject) => {
+          if (reject === undefined) {
+            return;
+          } else {
+            Alert.show(`Error while uploading photo: ${reject}`, {
+              type: 'info',
+              duration: 3000,
+            });
+          }
+        });
+    }
+  }
+
+  updateProfile(name, url) {
+    console.log(`${name}; ${url}`);
+  }
 }
-
-  // uploadImage(uri, mime = 'application/octet-stream') {
-
-  //   // Prepare Blob support
-  //   const Blob = RNFetchBlob.polyfill.Blob
-  //   const fs = RNFetchBlob.fs
-  //   window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest
-  //   window.Blob = Blob
-
-  //   return new Promise((resolve, reject) => {
-  //     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri
-  //     let uploadBlob = null
-  //     const imageRef = FirebaseClient.storage().ref('images').child('image_001')
-  //     fs.readFile(uploadUri, 'base64')
-  //       .then((data) => {
-  //         return Blob.build(data, { type: `${mime}BASE64` })
-  //       })
-  //       .then((blob) => {
-  //         uploadBlob = blob
-  //         return imageRef.put(blob, { contentType: mime })
-  //       })
-  //       .then(() => {
-  //         uploadBlob.close()
-  //         return imageRef.getDownloadURL()
-  //       })
-  //       .then((url) => {
-  //         resolve(url)
-  //       })
-  //       .catch((error) => {
-  //         reject(error)
-  //     })
-  //   })
-  // }
 
 export default connect(null, null)(EditProfile);

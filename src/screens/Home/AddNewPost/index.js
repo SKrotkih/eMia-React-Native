@@ -1,29 +1,29 @@
+import React from 'react';
+import ReactNative from 'react-native';
+import {connect} from 'react-redux';
+import styles from './styles';
+import ImageViewer from '@theme/components/ImageViewer';
+import {Alert} from '@theme/components/alerts/';
+import {uploadImage} from '@model/topics/api';
 
-import React from 'react'
-import ReactNative from 'react-native'
-import {connect} from 'react-redux'
-import styles from './styles'
-import ImageViewer from '@theme/components/ImageViewer'
-import { Alert } from '@theme/components/alerts/'
-
-import NativeBase from 'native-base'
-import {Actions} from 'react-native-router-flux'
-import { config } from '../index'
-import { windowWidth, windowHeight } from '@theme/styles'
+import NativeBase from 'native-base';
+import {Actions} from 'react-native-router-flux';
+import {config} from '../index';
+import {windowWidth, windowHeight} from '@theme/styles';
 
 import {
-  Container, 
-  Header, 
-  Title, 
-  Content, 
-  Footer, 
-  FooterTab, 
-  Button, 
-  Left, 
-  Right, 
-  Body, 
-  Icon, 
-  Text, 
+  Container,
+  Header,
+  Title,
+  Content,
+  Footer,
+  FooterTab,
+  Button,
+  Left,
+  Right,
+  Body,
+  Icon,
+  Text,
   Thumbnail,
   Form,
   Item,
@@ -32,52 +32,59 @@ import {
 } from 'native-base';
 
 const {
-  Dimensions,  
+  Dimensions,
   AppRegistry,
   Image,
   StyleSheet,
-  PixelRatio,  
+  PixelRatio,
   View,
-  TouchableOpacity
-} = ReactNative
+  TouchableOpacity,
+} = ReactNative;
 
-const {
-  Component
-} = React
+const {Component} = React;
 
-var ImagePickerManager = require('react-native-image-picker')
+import ImagePicker from 'react-native-image-picker';
+
+var ImagePickerManager = require('react-native-image-picker');
 
 export class AddNewPost extends Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       photoUrl: '',
       postTitle: '',
-      postBody: ''
-    }
-    this.doneButtonPressed = this.doneButtonPressed.bind(this)
+      postBody: '',
+    };
+    this.doneButtonPressed = this.doneButtonPressed.bind(this);
   }
 
-  setUpNavigationBar () {
-    var title = 'New Post'
-    const {setParams} = this.props.navigation
+  setUpNavigationBar() {
+    var title = 'New Post';
+    const {setParams} = this.props.navigation;
     setParams({
       title: title,
-      right: <Icon style={{marginRight: 8, color: '#fff'}} name={'ios-done-all'} onPress={ () => { this.doneButtonPressed() }} />
-    })
+      right: (
+        <Icon
+          style={{marginRight: 8, color: '#fff'}}
+          name={'ios-done-all'}
+          onPress={() => {
+            this.doneButtonPressed();
+          }}
+        />
+      ),
+    });
   }
 
-  componentWillMount () {
-    this.setUpNavigationBar()    
+  componentWillMount() {
+    this.setUpNavigationBar();
   }
 
-  render () {
+  render() {
+    var titleLabelText = 'Title:';
+    var bodyLabelText = 'Body:';
 
-    var titleLabelText = 'Title:'
-    var bodyLabelText = 'Body:'
-
-    var title = this.state.postTitle === '' ? 'Title' : this.state.postTitle
-    var body = this.state.postBody === '' ? 'Body' : this.state.postBody    
+    var title = this.state.postTitle === '' ? 'Title' : this.state.postTitle;
+    var body = this.state.postBody === '' ? 'Body' : this.state.postBody;
 
     return (
       <Container style={styles.container}>
@@ -93,22 +100,18 @@ export class AddNewPost extends Component {
             </Item>
           </Form>
           <Button block info style={styles.button}
-            onPress={() => this.takePhotoButtonPressed()} >
+            onPress={() => this.takePhotoButtonPressed()}>
             <Text>Photo</Text>
           </Button>
-          <View style={styles.backgroundPhoto}>
-            {this.renderPhoto()}
-          </View>
+          <View style={styles.backgroundPhoto}>{this.renderPhoto()}</View>
         </Content>
       </Container>
-    )
+    );
   }
 
-  renderPhoto () {
+  renderPhoto() {
     if (this.state.photoUrl === '') {
-      return (
-        null
-      )
+      return null;
     } else {
       return (
         <ImageViewer
@@ -117,49 +120,68 @@ export class AddNewPost extends Component {
           downloadable
           doubleTapEnabled={true}
         />
-      )
+      );
     }
   }
 
-  doneButtonPressed () {
-    Alert.show('Sorry, this function doesn\'t work jet...', {
-      type: 'info',
-      duration: 3000
-    })
+  doneButtonPressed() {
+    const uri = this.state.photoUrl;
+    const title = this.state.postTitle;
+    const body = this.state.postBody;
+    if (title === null || title.length === 0) {
+      Alert.show('Please, enter post title', {
+        type: 'info',
+        duration: 3000,
+      });
+    } else if (uri === null || uri.length === 0) {
+      this.createNewPost(title, null);
+    } else {
+      uploadImage(uri)
+        .then((resolve) => {
+          this.createNewPost(title, resolve);
+        })
+        .then((reject) => {
+          if (reject === undefined) {
+            return;
+          } else {
+            Alert.show(`Error while uploading photo: ${reject}`, {
+              type: 'info',
+              duration: 3000,
+            });
+          }
+        });
+    }
   }
 
-  takePhotoButtonPressed () {
-    const imagePickerOptions = {
+  createNewPost(name, url) {
+    console.log(`${name};\n${url}`);
+  }
+
+  takePhotoButtonPressed() {
+    const options = {
       quality: 1.0,
       maxWidth: 500,
       maxHeight: 500,
       storageOptions: {
-        skipBackup: true
-      }
-    }
-        
-    ImagePickerManager.showImagePicker(imagePickerOptions, (response) => {
-    
-      console.log('Response = ', response)
+        skipBackup: true,
+      },
+    };
+    ImagePicker.showImagePicker(options, (response) => {
+      console.log('Response = ', response);
 
       if (response.didCancel) {
-        console.log('User cancelled photo picker')
+        console.log('User cancelled photo picker');
       } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error)
+        console.log('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton)
+        console.log('User tapped custom button: ', response.customButton);
       } else {
-        let source = { uri: response.uri }
-
-        // You can also display the image using data:
-        // let source = { uri: 'data:image/jpeg;base64,' + response.data }
-
         this.setState({
-          photoUrl: source
-        })
+          photoUrl: response.uri,
+        });
       }
-    })
+    });
   }
 }
 
-export default connect(null, null)(AddNewPost)
+export default connect(null, null)(AddNewPost);

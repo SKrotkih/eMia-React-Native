@@ -1,8 +1,5 @@
-import * as api from './api'
-const {
-  fetchAllUsers,
-  fetchAllPosts
-} = api
+import * as api from './api';
+const {fetchAllUsers, fetchAllPosts} = api;
 
 export function fetchUsers (completion, failed) {
   return (dispatch) => {

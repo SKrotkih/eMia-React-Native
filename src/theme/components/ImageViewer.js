@@ -490,7 +490,7 @@ export default class ImageViewer extends Component {
 
     const interpolatedColor = backgroundOpacity.interpolate({
       inputRange: [BACKGROUND_VALUES.MIN, BACKGROUND_VALUES.MAX],
-      outputRange: ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 1)']
+      outputRange: ['rgba(0, 0, 0, 0)', 'rgba(0, 0, 0, 1)'],
     });
 
     const width = this._imageSize.width * (windowWidth / this._imageSize.width);
@@ -528,7 +528,11 @@ export default class ImageViewer extends Component {
           }
           transparent>
           <Animated.View
-            style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: interpolatedColor}}>
+            style={[
+              styles.upperOverlayHeader,
+              {backgroundColor: interpolatedColor},
+              {opacity: interpolatedOpacity},
+            ]}>
             <Animated.View style={[styles.overlayHeader, {opacity: interpolatedOpacity}]}>
               <View style={{flex: 1, alignItems: 'flex-start'}}>
                 <TouchableOpacity
@@ -549,7 +553,10 @@ export default class ImageViewer extends Component {
                     activeOpacity={0.7}
                     style={{top: 2, right: 10}}
                     hitSlop={{
-                      top: 7, right: 7, bottom: 7, left: 7
+                      top: 7,
+                      right: 7,
+                      bottom: 7,
+                      left: 7,
                     }}>
                   <Icon style={{color: "#fff", backgroundColor: 'transparent'}} name={'ios-download'} />
                   </TouchableOpacity>
@@ -575,6 +582,10 @@ export default class ImageViewer extends Component {
       </View>
     );
   }
+
+  callToggleModal() {
+    this.toggleModal();
+  }
 }
 
 const styles = StyleSheet.create({
@@ -598,6 +609,12 @@ const styles = StyleSheet.create({
     width: windowWidth,
     maxHeight: windowHeight - 60,
     marginTop: 50,
+  },
+  upperOverlayHeader: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   overlayHeader: {
     flex: 1,
