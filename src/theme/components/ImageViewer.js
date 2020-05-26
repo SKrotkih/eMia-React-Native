@@ -20,7 +20,7 @@ import PropTypes from 'prop-types';
 import RNFetchBlob from 'react-native-fetch-blob';
 import * as Progress from 'react-native-progress';
 // components
-import {Alert} from './alerts/';
+import {Alert} from './alerts/Alert';
 
 // import {windowWidth, windowHeight} from '@theme/styles';
 

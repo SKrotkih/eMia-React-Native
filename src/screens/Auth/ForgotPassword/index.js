@@ -7,7 +7,7 @@ import {Alert} from '@theme/components/alerts/';
 import {actions as auth} from '@screens/Auth/index';
 import AuthForm from '@components/AuthForm';
 
-const {resetPassword} = auth;
+const {forgetPassword} = auth;
 
 const fields = [
   {
@@ -44,7 +44,10 @@ class ForgotPassword extends React.Component {
   }
 
   onSuccess() {
-    Alert.alert('Password Reminder Sent');
+    Alert.show('Password Reminder Sent', {
+      type: 'info',
+      duration: 3000,
+    });
     Actions.pop();
   }
 
@@ -75,4 +78,4 @@ class ForgotPassword extends React.Component {
   }
 }
 
-export default connect(null, {resetPassword})(ForgotPassword);
+export default connect(null, {forgetPassword})(ForgotPassword);
