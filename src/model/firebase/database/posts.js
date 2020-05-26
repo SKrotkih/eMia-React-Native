@@ -16,6 +16,43 @@ export function fetchAllPosts(callback) {
     .catch((error) => callback(null, error));
 }
 
+export function uploadData(post, completion) {
+  database
+    .ref('main')
+    .child('posts')
+    .push({
+      title: post.title,
+    })
+    .then((url) => {
+      let id = url.key;
+      console.log(`Data set uploaded on key: ${id}`);
+      database
+        .ref('main')
+        .child('posts')
+        .child(id)
+        .set({
+          author: 'k2',
+          body: post.body,
+          created: Date.now() / 1000.0,
+          id: id,
+          photosize: '500.0;500.0',
+          starCount: 0,
+          title: post.title,
+          uid: '' /* current user id */,
+        })
+        .then(() => {
+          console.log('Data set.');
+          completion(id);
+        })
+        .catch((error) => {
+          console.log(`Error: ${error}`);
+        });
+    })
+    .catch((error) => {
+      console.log(`Error: ${error}`);
+    });
+}
+
 function parsePosts(snapshot, items) {
   console.log('API. parsePosts');
   if (snapshot.val() !== null) {

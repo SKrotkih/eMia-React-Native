@@ -155,7 +155,8 @@ export class EditProfile extends Component {
     } else if (uri === null || uri.length === 0) {
       this.updateProfile(name, null);
     } else {
-      uploadImage(uri)
+      let uid = 'uid';
+      uploadImage(uri, uid)
         .then((resolve) => {
           this.updateProfile(name, resolve);
         })

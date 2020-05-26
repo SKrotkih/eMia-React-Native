@@ -1,18 +1,20 @@
 import {Platform} from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob';
 import FirebaseClient from 'firebase';
+import {storage} from '@model/firebase/config';
 
-export function uploadImage(uri) {
+export function uploadImage(uri, id) {
   // Prepare Blob support
   const Blob = RNFetchBlob.polyfill.Blob;
   const fs = RNFetchBlob.fs;
   window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
   window.Blob = Blob;
   return new Promise((resolve, reject) => {
-    const mime = 'application/octet-stream';
+    const mime = 'image/jpeg';
     const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
     let uploadBlob = null;
-    const imageRef = FirebaseClient.storage().ref('images').child('image_001');
+    //const imageRef = storage.child(id);
+    const imageRef = FirebaseClient.storage().ref('').child(id);
     fs.readFile(uploadUri, 'base64')
       .then((data) => {
         return Blob.build(data, {type: `${mime}BASE64`});
