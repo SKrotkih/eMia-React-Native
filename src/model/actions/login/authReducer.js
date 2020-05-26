@@ -1,14 +1,14 @@
 import {removeStorageItem, setStorageObjectItem} from '@utils/storage';
-import * as t from './actionTypes';
+import {LOGGED_IN, LOGGED_OUT} from '@model/actions/login/actionTypes';
 
 let initialState = {
   isLoggedIn: false,
-  user: null
+  user: null,
 };
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
-    case t.LOGGED_IN:
+    case LOGGED_IN:
       const user = action.data;
 
       // Save token and data to the AsyncStorage
@@ -18,7 +18,7 @@ const authReducer = (state = initialState, action) => {
 
       return state;
 
-    case t.LOGGED_OUT:
+    case LOGGED_OUT:
       removeStorageItem('user');
 
       state = Object.assign({}, state, {isLoggedIn: false, user: null});

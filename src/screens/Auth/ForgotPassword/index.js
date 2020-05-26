@@ -1,11 +1,13 @@
-import React from 'react'
-import { Actions } from 'react-native-router-flux'
-import { connect } from 'react-redux'
+// ForgotPassword
+//
+import React from 'react';
+import {Actions} from 'react-native-router-flux';
+import {connect} from 'react-redux';
+import {Alert} from '@theme/components/alerts/';
+import {actions as auth} from '@screens/Auth/index';
+import AuthForm from '@components/AuthForm';
 
-import { actions as auth } from '@screens/Auth/index'
-import AuthForm from '@components/AuthForm'
-
-const { resetPassword } = auth
+const {resetPassword} = auth;
 
 const fields = [
   {
@@ -15,61 +17,62 @@ const fields = [
     autoFocus: false,
     secureTextEntry: false,
     value: '',
-    type: 'email-address'
-  }
-]
+    type: 'email-address',
+  },
+];
 
 const error = {
   general: '',
-  email: ''
-}
+  email: '',
+};
 
 class ForgotPassword extends React.Component {
-  constructor () {
-    super()
+  constructor() {
+    super();
     this.state = {
-      error: error
-    }
+      error: error,
+    };
 
-    this.onSubmit = this.onSubmit.bind(this)
-    this.onSuccess = this.onSuccess.bind(this)
-    this.onError = this.onError.bind(this)
+    this.onSubmit = this.onSubmit.bind(this);
+    this.onSuccess = this.onSuccess.bind(this);
+    this.onError = this.onError.bind(this);
   }
 
-  onSubmit (data) {
-    this.setState({error: error}) // clear out error messages
-
-    this.props.resetPassword(data, this.onSuccess, this.onError)
+  onSubmit(data) {
+    this.setState({error: error}); // clear out error messages
+    this.props.resetPassword(data, this.onSuccess, this.onError);
   }
 
-  onSuccess () {
-    alert('Password Reminder Sent')
-    Actions.pop()
+  onSuccess() {
+    Alert.alert('Password Reminder Sent');
+    Actions.pop();
   }
 
-  onError (error) {
-    let errObj = this.state.error
+  onError(error) {
+    let errObj = this.state.error;
 
     if (error.hasOwnProperty('message')) {
-      errObj['general'] = error.message
+      errObj.general = error.message;
     } else {
-      let keys = Object.keys(error)
+      let keys = Object.keys(error);
       keys.map((key, index) => {
-        errObj[key] = error[key]
-      })
+        errObj[key] = error[key];
+      });
     }
 
-    this.setState({error: errObj})
+    this.setState({error: errObj});
   }
 
-  render () {
+  render() {
     return (
-      <AuthForm fields={fields}
+      <AuthForm
+        fields={fields}
         onSubmit={this.onSubmit}
         buttonTitle={'SUBMIT'}
-        error={this.state.error}/>
-    )
+        error={this.state.error}
+      />
+    );
   }
 }
 
-export default connect(null, { resetPassword })(ForgotPassword)
+export default connect(null, {resetPassword})(ForgotPassword);

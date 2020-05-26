@@ -1,51 +1,50 @@
+// AddNewPost
+
 import React from 'react';
 import ReactNative from 'react-native';
 import {connect} from 'react-redux';
-import styles from './styles';
 import ImageViewer from '@theme/components/ImageViewer';
 import {Alert} from '@theme/components/alerts/';
-import {uploadImage} from '@model/topics/api';
+import {uploadImage} from '@model/firebase/utils/uploadImage';
+import styles from './styles';
 
 import NativeBase from 'native-base';
 import {Actions} from 'react-native-router-flux';
 import {config} from '../index';
-import {windowWidth, windowHeight} from '@theme/styles';
 
 import {
   Container,
-  Header,
-  Title,
   Content,
-  Footer,
-  FooterTab,
   Button,
-  Left,
-  Right,
-  Body,
   Icon,
   Text,
-  Thumbnail,
   Form,
   Item,
   Label,
   Input,
+  Header,
+  Title,
+  Thumbnail,
+  Left,
+  Right,
+  Body,
+  Footer,
+  FooterTab,
 } from 'native-base';
 
 const {
+  View,
   Dimensions,
   AppRegistry,
   Image,
   StyleSheet,
   PixelRatio,
-  View,
   TouchableOpacity,
 } = ReactNative;
 
 const {Component} = React;
 
 import ImagePicker from 'react-native-image-picker';
-
-var ImagePickerManager = require('react-native-image-picker');
 
 export class AddNewPost extends Component {
   constructor(props) {
@@ -124,35 +123,6 @@ export class AddNewPost extends Component {
     }
   }
 
-  doneButtonPressed() {
-    const uri = this.state.photoUrl;
-    const title = this.state.postTitle;
-    const body = this.state.postBody;
-    if (title === null || title.length === 0) {
-      Alert.show('Please, enter post title', {
-        type: 'info',
-        duration: 3000,
-      });
-    } else if (uri === null || uri.length === 0) {
-      this.createNewPost(title, null);
-    } else {
-      uploadImage(uri)
-        .then((resolve) => {
-          this.createNewPost(title, resolve);
-        })
-        .then((reject) => {
-          if (reject === undefined) {
-            return;
-          } else {
-            Alert.show(`Error while uploading photo: ${reject}`, {
-              type: 'info',
-              duration: 3000,
-            });
-          }
-        });
-    }
-  }
-
   createNewPost(name, url) {
     console.log(`${name};\n${url}`);
   }
@@ -181,6 +151,35 @@ export class AddNewPost extends Component {
         });
       }
     });
+  }
+
+  doneButtonPressed() {
+    const uri = this.state.photoUrl;
+    const title = this.state.postTitle;
+    const body = this.state.postBody;
+    if (title === null || title.length === 0) {
+      Alert.show('Please, enter post title', {
+        type: 'info',
+        duration: 3000,
+      });
+    } else if (uri === null || uri.length === 0) {
+      this.createNewPost(title, null);
+    } else {
+      uploadImage(uri)
+        .then((resolve) => {
+          this.createNewPost(title, resolve);
+        })
+        .then((reject) => {
+          if (reject === undefined) {
+            return;
+          } else {
+            Alert.show(`Error while uploading photo: ${reject}`, {
+              type: 'info',
+              duration: 3000,
+            });
+          }
+        });
+    }
   }
 }
 

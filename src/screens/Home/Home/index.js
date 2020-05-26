@@ -1,3 +1,5 @@
+// Home.js
+//
 // How to add Firebase Auth with react native !!!
 // https://github.com/g6ling/React-Native-Tips/tree/master/How_to_add_Firebase_Auth_with_react_native
 

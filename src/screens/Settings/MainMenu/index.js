@@ -2,11 +2,9 @@ import React from 'react';
 import ReactNative from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Loader from '@components/Loader';
-import {getCurrentUser, signOut} from '@model/auth/actions';
+import {signOut} from '@model/actions/login/actions';
+import {downloadCurrentUserData} from '@model/actions/users/actions';
 import styles from './styles';
-
-import {windowWidth, windowHeight} from '@theme/styles';
-import {config} from '../index';
 
 import {
   Container,
@@ -72,7 +70,7 @@ export class MainMenu extends Component {
   }
 
   fetchCurrentUserData() {
-    getCurrentUser((user) => {
+    downloadCurrentUserData((user) => {
       this.setState({
         user: user,
         loaded: true,

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import styles from './styles';
 import ImageViewer from '@theme/components/ImageViewer';
 import ImagePicker from 'react-native-image-picker';
-import {uploadImage} from '@model/topics/api';
+import {uploadImage} from '@model/firebase/utils/uploadImage';
 
 import {windowWidth} from '@theme/styles';
 

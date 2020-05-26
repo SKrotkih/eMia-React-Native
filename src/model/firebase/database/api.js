@@ -1,8 +1,44 @@
-import {database, storage} from '@model/firebase';
-import * as usersActions from '@model/auth/actions';
-import {Platform} from 'react-native';
-import RNFetchBlob from 'react-native-fetch-blob';
-import FirebaseClient from 'firebase';
+import {database} from '@model/firebase/config';
+import {getDownloadURL} from '@model/firebase/storage/api';
+
+// Create new user object in realtime database
+export function createUser(user, callback) {
+  database
+    .ref('main')
+    .child('users')
+    .child(user.user.uid)
+    .update({...user})
+    .then(() => {
+      callback(true, null, null);
+    })
+    .catch((error) => {
+      callback(false, null, {message: error});
+    });
+}
+
+// Get user object from the realtime database
+export function getUser(uid, callback) {
+  console.log('API. getUser uid=', uid);
+  database
+    .ref('main')
+    .child('users')
+    .child(uid)
+    .once('value')
+    .then(function (snapshot) {
+      let exists = snapshot.val() != null;
+      if (exists) {
+        const user = snapshot.val();
+        const data = {exists, user};
+        callback(true, data, null);
+      } else {
+        callback(false, null, null);
+      }
+    })
+    .catch((error) => {
+      console.log('API. GET USER error: ', error.message);
+      callback(false, null, error);
+    });
+}
 
 export function fetchAllUsers(callback) {
   console.log('API. fetchAllUsers');
@@ -40,38 +76,6 @@ export function fetchAllPosts(callback) {
     .catch((error) => callback(null, error));
 }
 
-export function uploadImage(uri) {
-  // Prepare Blob support
-  const Blob = RNFetchBlob.polyfill.Blob;
-  const fs = RNFetchBlob.fs;
-  window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;
-  window.Blob = Blob;
-  return new Promise((resolve, reject) => {
-    const mime = 'application/octet-stream';
-    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-    let uploadBlob = null;
-    const imageRef = FirebaseClient.storage().ref('images').child('image_001');
-    fs.readFile(uploadUri, 'base64')
-      .then((data) => {
-        return Blob.build(data, {type: `${mime}BASE64`});
-      })
-      .then((blob) => {
-        uploadBlob = blob;
-        return imageRef.put(blob, {contentType: mime});
-      })
-      .then(() => {
-        uploadBlob.close();
-        return imageRef.getDownloadURL();
-      })
-      .then((url) => {
-        resolve(url);
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-}
-
 function parsePosts(snapshot, items) {
   console.log('API. parsePosts');
   if (snapshot.val() !== null) {
@@ -98,7 +102,7 @@ function putUrlsPhoto(items, completion) {
         var avatarName = item.value.uid + '.jpg';
         getDownloadURL(avatarName, function (_url) {
           item.avatarUrl = _url;
-          usersActions.getUser(item.value.uid, function (user) {
+          getUser(item.value.uid, function (user) {
             item.author = user;
             counter -= 1;
             if (counter === 0) {
@@ -113,16 +117,4 @@ function putUrlsPhoto(items, completion) {
     const data = {items};
     completion(data, null);
   }
-}
-
-function getDownloadURL(photoName, callback) {
-  const imageRef = storage.ref(photoName);
-  imageRef.getDownloadURL().then(
-    (url) => {
-      callback(url);
-    },
-    function (error) {
-      console.log(error);
-    },
-  );
 }

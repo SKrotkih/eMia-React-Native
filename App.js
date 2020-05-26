@@ -9,7 +9,7 @@ import variables from '@theme/variables/commonColor';
 import Router from '@router/routes';
 import store from '@redux/store';
 
-import {checkLoginStatus} from './src/model/auth/actions';
+import {checkLoginStatus} from '@model/firebase/auth/api';
 
 import backgroundImage from '@theme/BackgroundImage';
 
