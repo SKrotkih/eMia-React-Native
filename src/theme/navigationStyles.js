@@ -7,7 +7,7 @@ const navigationStyles = {
   navBarTextColor: 'white',
   topBarElevationShadowEnabled: true,
   statusBarColor: colors.darkRed,
-  statusBarTextColorScheme: 'dark'
+  statusBarTextColorScheme: 'dark',
 };
 
 export default navigationStyles;

@@ -1,10 +1,10 @@
 import {auth} from '@model/firebase/config';
-import {getUser} from '@model/firebase/database/api';
+import {getUser} from '@model/firebase/database/users';
 import {getImageUrl} from '@model/firebase/storage/api';
 import {LOGGED_IN, LOGGED_OUT} from '@model/actions/login/actionTypes';
 
 // Sign user in with their email and password
-export function login(data, callback) {
+export function signIn(data, callback) {
   const {email, password} = data;
   console.log('API. LOGIN email: ', email, 'password: ', password);
   auth

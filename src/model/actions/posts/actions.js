@@ -1,4 +1,4 @@
-import {fetchAllPosts} from '@model/firebase/database/api';
+import {fetchAllPosts} from '@model/firebase/database/posts';
 
 export function fetchPosts(completion, failed) {
   return (dispatch) => {

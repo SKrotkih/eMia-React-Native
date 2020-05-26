@@ -1,12 +1,12 @@
-import { StyleSheet } from 'react-native';
-import { padding, color, fontSize, fontFamily, windowWidth, normalize } from '@theme/styles';
+import {StyleSheet} from 'react-native';
+import {padding, color, fontSize, fontFamily, windowWidth, normalize} from '@theme/styles';
 
 const resizeMode = 'contain';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.white
+    backgroundColor: color.white,
   },
 
   topContainer: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     paddingBottom: padding * 2,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: color.brand
+    backgroundColor: color.brand,
   },
 
   image: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     width: 100,
     backgroundColor: color.grey,
     marginBottom: padding,
-    resizeMode
+    resizeMode,
   },
 
   title: {
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     lineHeight: fontSize.large + 4,
     fontFamily: fontFamily.bold,
     color: color.white,
-    letterSpacing: 1
+    letterSpacing: 1,
   },
 
   bottomContainer: {
@@ -42,48 +42,48 @@ const styles = StyleSheet.create({
     shadowRadius: 2,
     shadowOffset: {
       height: 1,
-      width: 0
-    }
+      width: 0,
+    },
   },
 
   buttonContainer: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
-  
+
   containerView: {
-    width: windowWidth - 40
+    width: windowWidth - 40,
   },
 
   socialButton: {
     height: normalize(55),
     borderRadius: 4,
     marginTop: 0,
-    marginBottom: 0
+    marginBottom: 0,
   },
 
   buttonText: {
     fontSize: fontSize.regular + 2,
-    fontFamily: fontFamily.medium
+    fontFamily: fontFamily.medium,
   },
 
   orContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     height: 40,
-    width: windowWidth
+    width: windowWidth,
   },
 
   button: {
     backgroundColor: color.brand,
-    height: normalize(55)
+    height: normalize(55),
   },
 
   bottomText: {
     fontSize: fontSize.regular,
     fontFamily: fontFamily.medium,
     marginRight: 5,
-    color: '#414141'
+    color: '#414141',
   },
 
   bottom: {
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 19,
     left: 20,
-    right: 20
+    right: 20,
   },
 
   orText: {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.regular,
     fontFamily: fontFamily.medium,
     color: '#414141',
-    paddingHorizontal: padding
+    paddingHorizontal: padding,
   },
 });
 

@@ -1,6 +1,6 @@
 import authApi from '@model/firebase/auth/api';
 import {getCurrentUser} from '@model/firebase/auth/api';
-import api from '@model/firebase/database/api';
+import api from '@model/firebase/database/users';
 import {LOGGED_IN} from '@model/actions/login/actionTypes';
 
 export function register(data, successCB, errorCB) {

@@ -132,7 +132,11 @@ export class AddNewPost extends Component {
 
   doneButtonPressed() {
     const post = new Post(this.state.title, this.state.body, this.state.url);
-    post.upload();
+    post.upload((result) => {
+      if (result) {
+        this.props.navigation.goBack();
+      }
+    });
   }
 }
 

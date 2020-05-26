@@ -2,14 +2,15 @@ import {StyleSheet} from 'react-native';
 import backgroundImage from '@theme/BackgroundImage';
 
 const styles = StyleSheet.create({
-  container: {...backgroundImage,
+  container: {
+    ...backgroundImage,
     justifyContent: 'space-around',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   logo: {
     fontSize: 40,
     textAlign: 'center',
-    color: 'white'
+    color: 'white',
   },
   buttonStyle: {
     margin: 10,
@@ -18,12 +19,12 @@ const styles = StyleSheet.create({
     borderRadius: 2,
     justifyContent: 'center',
     alignItems: 'center',
-    elevation: 2
+    elevation: 2,
   },
   buttonText: {
     color: 'white',
-    fontWeight: 'bold'
-  }
-})
+    fontWeight: 'bold',
+  },
+});
 
-export default styles
+export default styles;

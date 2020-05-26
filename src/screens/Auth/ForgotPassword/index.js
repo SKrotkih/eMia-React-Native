@@ -40,7 +40,7 @@ class ForgotPassword extends React.Component {
 
   onSubmit(data) {
     this.setState({error: error}); // clear out error messages
-    this.props.resetPassword(data, this.onSuccess, this.onError);
+    this.props.forgetPassword(data, this.onSuccess, this.onError);
   }
 
   onSuccess() {

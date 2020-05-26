@@ -1,9 +1,9 @@
-import api from '@model/firebase/auth/api';
+import {signIn, signOut, resetPassword} from '@model/firebase/auth/api';
 import {LOGGED_IN} from '@model/actions/login/actionTypes';
 
 export function login(data, successCB, errorCB) {
   return (dispatch) => {
-    api.login(data, function (success, data, error) {
+    signIn(data, function (success, data, error) {
       if (success) {
         if (data.exists) {
           dispatch({type: LOGGED_IN, data: data.user});
@@ -16,9 +16,19 @@ export function login(data, successCB, errorCB) {
   };
 }
 
-export function resetPassword(data, successCB, errorCB) {
+export function logOut(successCB, errorCB) {
+  signOut(function (success, data, error) {
+    if (success) {
+      successCB();
+    } else if (error) {
+      errorCB(error);
+    }
+  });
+}
+
+export function forgetPassword(data, successCB, errorCB) {
   return (dispatch) => {
-    api.resetPassword(data, function (success, _data, error) {
+    resetPassword(data, function (success, _data, error) {
       if (success) {
         successCB();
       } else if (error) {
@@ -26,14 +36,4 @@ export function resetPassword(data, successCB, errorCB) {
       }
     });
   };
-}
-
-export function signOut(successCB, errorCB) {
-  api.signOut(function (success, data, error) {
-    if (success) {
-      successCB();
-    } else if (error) {
-      errorCB(error);
-    }
-  });
 }

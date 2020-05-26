@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 
 import {
   Dimensions,
@@ -28,21 +28,21 @@ export default class ModalComponent extends PureComponent {
     this._handleShare = this._handleShare.bind(this);
   }
 
-  _handleClose () {
+  _handleClose() {
     return this.props.onClose();
   }
 
-  _handleShare () {
+  _handleShare() {
     const { url, title } = this.props.articleData, message = `${title}\n\nRead more @\n${url}\n\nshared via RN News App`;
     return Share.share(
       {title, message, url: message},
-      {dialogTitle: `Share ${title}`}
+      {dialogTitle: `Share ${title}`},
     );
   }
 
-  render () {
-    const { showModal, articleData } = this.props;
-    const { url } = articleData;
+  render() {
+    const {showModal, articleData} = this.props;
+    const {url} = articleData;
     if (url !== undefined) {
       return (
         <Modal onRequestClose={this._handleClose} visible={showModal} transparent animationType="slide">
@@ -67,9 +67,9 @@ export default class ModalComponent extends PureComponent {
             </Content>
           </Container>
         </Modal>
-      )
+      );
     } else {
-      return null
+      return null;
     }
   }
 }

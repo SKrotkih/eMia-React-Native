@@ -5,9 +5,10 @@ import {connect} from 'react-redux';
 import {windowWidth, windowHeight} from '@theme/styles';
 import {
   Container,
+  Content,
+  Thumbnail,
   Header,
   Title,
-  Content,
   Footer,
   FooterTab,
   Button,
@@ -16,7 +17,6 @@ import {
   Body,
   Icon,
   Text,
-  Thumbnail
 } from 'native-base';
 
 import NativeBase from 'native-base';
@@ -64,6 +64,7 @@ export class Options extends Component {
   renderContent() {
     if (Platform.OS === 'ios') {
       return (
+        // Native screen!
         <FilterView style={{height: windowHeight}} {...this.props} />
       );
     } else {

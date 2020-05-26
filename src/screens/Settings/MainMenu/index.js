@@ -2,7 +2,7 @@ import React from 'react';
 import ReactNative from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Loader from '@components/Loader';
-import {signOut} from '@model/actions/login/actions';
+import {logOut} from '@model/actions/login/actions';
 import {downloadCurrentUserData} from '@model/actions/users/actions';
 import styles from './styles';
 
@@ -96,12 +96,12 @@ export class MainMenu extends Component {
   }
 }
 
-function renderLoadingView () {
+function renderLoadingView() {
   return (
     <View style={styles.loading}>
       <Loader loading={true} />
     </View>
-  )
+  );
 }
 
 function renderMenuItem(menuItem, _this) {
@@ -175,7 +175,7 @@ function renderLogOutMenuItem(_this) {
 }
 
 function onSignOut() {
-  signOut(
+  logOut(
     () => {
       Actions.reset('Auth');
     },
