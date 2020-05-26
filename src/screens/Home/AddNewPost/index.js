@@ -2,59 +2,30 @@
 
 import React from 'react';
 import ReactNative from 'react-native';
+import {TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import ImageViewer from '@theme/components/ImageViewer';
-import {Alert} from '@theme/components/alerts/';
-import {uploadImage} from '@model/firebase/utils/uploadImage';
 import styles from './styles';
-
-import NativeBase from 'native-base';
-import {Actions} from 'react-native-router-flux';
-import {config} from '../index';
-
-import {
-  Container,
-  Content,
-  Button,
-  Icon,
-  Text,
-  Form,
-  Item,
-  Label,
-  Input,
-  Header,
-  Title,
-  Thumbnail,
-  Left,
-  Right,
-  Body,
-  Footer,
-  FooterTab,
-} from 'native-base';
-
-const {
-  View,
-  Dimensions,
-  AppRegistry,
-  Image,
-  StyleSheet,
-  PixelRatio,
-  TouchableOpacity,
-} = ReactNative;
-
-const {Component} = React;
-
+import {Post} from '@model/entities/post';
+import {Button, Icon, Text, Label} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
+
+const {View} = ReactNative;
+const {Component} = React;
 
 export class AddNewPost extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      photoUrl: '',
-      postTitle: '',
-      postBody: '',
-    };
+    this.state = this.createState();
     this.doneButtonPressed = this.doneButtonPressed.bind(this);
+  }
+
+  createState() {
+    const state = {};
+    state.title = '';
+    state.body = '';
+    state.url = '';
+    return state;
   }
 
   setUpNavigationBar() {
@@ -82,49 +53,55 @@ export class AddNewPost extends Component {
     var titleLabelText = 'Title:';
     var bodyLabelText = 'Body:';
 
-    var title = this.state.postTitle === '' ? 'Title' : this.state.postTitle;
-    var body = this.state.postBody === '' ? 'Body' : this.state.postBody;
+    var title = this.state.postTitle === '' ? 'Title' : this.state.title;
+    var body = this.state.postBody === '' ? 'Body' : this.state.body;
 
     return (
-      <Container style={styles.container}>
-        <Content style={styles.content}>
-          <Form>
-            <Item fixedLabel>
-              <Label>{titleLabelText}</Label>
-              <Input placeholder={title} />
-            </Item>
-            <Item fixedLabel>
-              <Label>{bodyLabelText}</Label>
-              <Input placeholder={body} />
-            </Item>
-          </Form>
-          <Button block info style={styles.button}
-            onPress={() => this.takePhotoButtonPressed()}>
-            <Text>Photo</Text>
-          </Button>
-          <View style={styles.backgroundPhoto}>{this.renderPhoto()}</View>
-        </Content>
-      </Container>
+      <View style={styles.container}>
+        <Label style={styles.label}>{titleLabelText}</Label>
+        <TextInput
+          style={styles.input}
+          autoCapitalize="none"
+          clearButtonMode="while-editing"
+          underlineColorAndroid="transparent"
+          placeholder="Type title"
+          autoFocus={true}
+          onChangeText={(text) => this.state.title = text}
+          defaultValue={title}
+        />
+        <Label style={styles.label}>{bodyLabelText}</Label>
+        <TextInput
+          style={styles.input}
+          autoCapitalize="none"
+          clearButtonMode="while-editing"
+          underlineColorAndroid="transparent"
+          placeholder="Type body"
+          autoFocus={false}
+          onChangeText={(text) => this.state.body = text}
+          defaultValue={body}
+        />
+        <Button block info style={styles.button}
+          onPress={() => this.takePhotoButtonPressed()}>
+          <Text>Photo</Text>
+        </Button>
+        <View style={styles.backgroundPhoto}>{this.renderPhoto()}</View>
+      </View>
     );
   }
 
   renderPhoto() {
-    if (this.state.photoUrl === '') {
+    if (this.state.url === '') {
       return null;
     } else {
       return (
         <ImageViewer
           disabled={false}
-          source={{uri: this.state.photoUrl}}
+          source={{uri: this.state.url}}
           downloadable
           doubleTapEnabled={true}
         />
       );
     }
-  }
-
-  createNewPost(name, url) {
-    console.log(`${name};\n${url}`);
   }
 
   takePhotoButtonPressed() {
@@ -147,39 +124,15 @@ export class AddNewPost extends Component {
         console.log('User tapped custom button: ', response.customButton);
       } else {
         this.setState({
-          photoUrl: response.uri,
+          url: response.uri,
         });
       }
     });
   }
 
   doneButtonPressed() {
-    const uri = this.state.photoUrl;
-    const title = this.state.postTitle;
-    const body = this.state.postBody;
-    if (title === null || title.length === 0) {
-      Alert.show('Please, enter post title', {
-        type: 'info',
-        duration: 3000,
-      });
-    } else if (uri === null || uri.length === 0) {
-      this.createNewPost(title, null);
-    } else {
-      uploadImage(uri)
-        .then((resolve) => {
-          this.createNewPost(title, resolve);
-        })
-        .then((reject) => {
-          if (reject === undefined) {
-            return;
-          } else {
-            Alert.show(`Error while uploading photo: ${reject}`, {
-              type: 'info',
-              duration: 3000,
-            });
-          }
-        });
-    }
+    const post = new Post(this.state.title, this.state.body, this.state.url);
+    post.upload();
   }
 }
 

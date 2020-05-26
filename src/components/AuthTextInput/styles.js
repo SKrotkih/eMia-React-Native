@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.regular + 2,
     fontFamily: fontFamily.bold,
     borderBottomColor: '#A5A7A9',
-  }
+  },
 });
 
 export default styles;
