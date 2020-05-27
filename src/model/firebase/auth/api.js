@@ -61,6 +61,18 @@ export function register(data, callback) {
     });
 }
 
+export function getUserIdAsync() {
+  return new Promise((resolve, reject) => {
+    auth.onAuthStateChanged((user) => {
+      if (user === null) {
+        reject('The User has not signed in yet');
+      } else {
+        resolve(user.uid);
+      }
+    });
+  });
+}
+
 export function checkLoginStatus(callback) {
   return (dispatch) => {
     auth.onAuthStateChanged((user) => {

@@ -16,7 +16,7 @@ export function fetchAllPosts(callback) {
     .catch((error) => callback(null, error));
 }
 
-export function uploadData(post, completion) {
+export function uploadData(post, uid, completion) {
   database
     .ref('main')
     .child('posts')
@@ -38,10 +38,9 @@ export function uploadData(post, completion) {
           photosize: '500.0;500.0',
           starCount: 0,
           title: post.title,
-          uid: '' /* current user id */,
+          uid: uid,
         })
         .then(() => {
-          console.log('Data set.');
           completion(id);
         })
         .catch((error) => {
