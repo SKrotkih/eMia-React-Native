@@ -47,6 +47,16 @@ export class PostPreview extends Component {
   }
 
   render() {
+    const avatarUrl = this.avatarUrl;
+    if (avatarUrl === null) {
+      var avatarUri = {uri: 'Icon-Profile'};
+    } else {
+      var avatarUri = {uri: this.avatarUrl};
+    }
+    var photoUrl = this.url;
+    if (photoUrl === null) {
+      photoUrl = 'Icon-Profile';
+    }
     return (
       <Container style={styles.container}>
         <Header style={styles.headerBackground}>
@@ -54,14 +64,14 @@ export class PostPreview extends Component {
         </Header>
         <Content style={styles.content}>
           <View style={styles.thumbnail}>
-            <Thumbnail circular size={55} source={{uri: this.avatarUrl}} />
+            <Thumbnail circular size={55} source={avatarUri} />
             <Text style={styles.userName}>{this.userName}</Text>
           </View>
           <Text style={styles.description}>{this.body}</Text>
           <View style={styles.backgroundPhoto}>
             <ImageViewer
               disabled={false}
-              source={{uri: this.url}}
+              source={{uri: photoUrl}}
               downloadable
               doubleTapEnabled={true}
             />
