@@ -6,16 +6,7 @@ import {connect} from 'react-redux';
 import ImageViewer from '@theme/components/ImageViewer';
 import {Container, Header, Content, Text, Thumbnail} from 'native-base';
 
-const {
-  View,
-  Dimensions,
-  AppRegistry,
-  Image,
-  StyleSheet,
-  Alert,
-  TouchableOpacity,
-} = ReactNative;
-
+const {View} = ReactNative;
 const {Component} = React;
 
 export class PostPreview extends Component {

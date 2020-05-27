@@ -64,6 +64,7 @@ export class Home extends Component {
       data: null,
       seg: 1,
       active: false,
+      refreshing: false,
     };
     this.onCompletion = this.onCompletion.bind(this);
     this.onFailed = this.onFailed.bind(this);
@@ -111,6 +112,7 @@ export class Home extends Component {
     this.setState({
       dataSource: items,
       loaded: true,
+      refreshing: false,
     });
   }
 
@@ -219,8 +221,21 @@ export class Home extends Component {
         renderSeparator={this.renderSeparator.bind(this)}
         renderPlaceholder={this.renderPlaceholder}
         data={this.state.dataSource}
-        itemsPerRow={2}
+        numColumns={2}
         itemHasChanged={(d1, d2) => d1 !== d2}
+        keyExtractor={(item, index) => index.toString()}
+        refreshing={this.state.refreshing}
+        onRefresh={() => {
+          this.fetchData();
+          this.setState({
+            refreshing: true,
+          });
+        }}
+        onEndReached={() => {
+          // this.setState(({ data }) => ({
+          //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
+          // }));
+        }}
       />
     );
   }
