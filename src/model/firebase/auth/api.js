@@ -61,13 +61,13 @@ export function register(data, callback) {
     });
 }
 
-export function getUserIdAsync() {
+export function getUserAsync() {
   return new Promise((resolve, reject) => {
     auth.onAuthStateChanged((user) => {
       if (user === null) {
         reject('The User has not signed in yet');
       } else {
-        resolve(user.uid);
+        resolve(user);
       }
     });
   });
@@ -75,40 +75,41 @@ export function getUserIdAsync() {
 
 export function checkLoginStatus(callback) {
   return (dispatch) => {
-    auth.onAuthStateChanged((user) => {
-      let isLoggedIn = user !== null;
-      if (isLoggedIn) {
+    getUserAsync()
+      .then((user) => {
         dispatch({type: LOGGED_IN, data: user});
-      } else {
+        callback(true);
+      })
+      .catch((error) => {
         dispatch({type: LOGGED_OUT});
-      }
-      callback(isLoggedIn);
-    });
+        callback(false);
+      });
   };
 }
 
 // Get current registered user from the Authentication Firebase database
-export function getCurrentUser(callback) {
-  console.log('API. getCurrentUser');
-  auth.onAuthStateChanged((user) => {
-    if (user === null) {
-      callback(null);
-    } else {
-      let uid = user.uid;
-      console.log('API. getCurrentUser: ', uid);
-      getUser(uid, function (success, data, error) {
-        if (success && data.exists) {
-          let currentUser = data.user;
-          console.log('API. GET IMAGE: ', uid);
-          let avatarName = uid + '.jpg';
-          getDownloadURL(avatarName, function (url) {
-            currentUser.avatarUrl = url;
-            callback(currentUser);
-          });
-        } else {
-          callback(null);
-        }
+export function getCurrentUserAsync() {
+  console.log('API. getCurrentUserAsync');
+  return new Promise((resolve, reject) => {
+    getUserAsync()
+      .then((user) => {
+        let uid = user.uid;
+        getUser(uid, function (success, data, error) {
+          if (success && data.exists) {
+            let currentUser = data.user;
+            console.log('API. GET IMAGE: ', uid);
+            let avatarName = uid + '.jpg';
+            getDownloadURL(avatarName, (url) => {
+              currentUser.avatarUrl = url;
+              resolve(currentUser);
+            });
+          } else {
+            reject('Could not get User response');
+          }
+        });
+      })
+      .catch((error) => {
+        reject(`Could not get Auth User response. Error: ${error}`);
       });
-    }
   });
 }

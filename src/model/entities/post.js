@@ -2,7 +2,7 @@
 import {Alert} from '@theme/components/alerts/';
 import {uploadImage} from '@model/firebase/utils/uploadImage';
 import {uploadData} from '@model/firebase/database/posts';
-import {getUserIdAsync} from '@model/firebase/auth/api';
+import {getCurrentUserAsync} from '@model/firebase/auth/api';
 
 export class Post {
   constructor(title, body, pictureUri) {
@@ -10,6 +10,8 @@ export class Post {
     this.body = body;
     this.url = '';
     this.pictureUri = pictureUri;
+    this.uid = '';
+    this.author = '';
   }
 
   upload(completed) {
@@ -25,9 +27,11 @@ export class Post {
 
   createNewPost(completed) {
     var _this = this;
-    getUserIdAsync()
-      .then((uid) => {
-        uploadData(_this, uid, (id) => {
+    getCurrentUserAsync()
+      .then((user) => {
+        _this.uid = user.uid;
+        _this.author = user.username;
+        uploadData(_this, (id) => {
           let pictureUri = _this.pictureUri;
           if (pictureUri === null || pictureUri.length === 0) {
             completed(true);

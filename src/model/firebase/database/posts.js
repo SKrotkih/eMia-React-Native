@@ -18,7 +18,7 @@ export function fetchAllPosts(callback) {
     });
 }
 
-export function uploadData(post, uid, completion) {
+export function uploadData(post, completion) {
   database
     .ref('main')
     .child('posts')
@@ -33,14 +33,14 @@ export function uploadData(post, uid, completion) {
         .child('posts')
         .child(id)
         .set({
-          author: 'k2',
-          body: post.body,
-          created: Date.now() / 1000.0,
           id: id,
+          author: post.author,
+          body: post.body,
+          title: post.title,
+          uid: post.uid,
+          created: Date.now() / 1000.0,
           photosize: '500.0;500.0',
           starCount: 0,
-          title: post.title,
-          uid: uid,
         })
         .then(() => {
           completion(id);

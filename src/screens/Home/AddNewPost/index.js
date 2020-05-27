@@ -82,7 +82,7 @@ export class AddNewPost extends Component {
         />
         <Button block info style={styles.button}
           onPress={() => this.takePhotoButtonPressed()}>
-          <Text>Photo</Text>
+          <Text>Attach a Photo</Text>
         </Button>
         <View style={styles.backgroundPhoto}>{this.renderPhoto()}</View>
       </View>
