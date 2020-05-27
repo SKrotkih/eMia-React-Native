@@ -3,7 +3,6 @@ import RNFetchBlob from 'react-native-fetch-blob';
 import FirebaseClient from 'firebase';
 
 export function uploadImage(uri, id) {
-  // Prepare Blob support
   const Blob = RNFetchBlob.polyfill.Blob;
   const fs = RNFetchBlob.fs;
   window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;

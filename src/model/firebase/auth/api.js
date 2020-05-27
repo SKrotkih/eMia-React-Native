@@ -1,6 +1,6 @@
 import {auth} from '@model/firebase/config';
 import {getUser} from '@model/firebase/database/users';
-import {getImageUrl} from '@model/firebase/storage/api';
+import {getDownloadURL} from '@model/firebase/storage/api';
 import {LOGGED_IN, LOGGED_OUT} from '@model/actions/login/actionTypes';
 
 // Sign user in with their email and password
@@ -101,7 +101,7 @@ export function getCurrentUser(callback) {
           let currentUser = data.user;
           console.log('API. GET IMAGE: ', uid);
           let avatarName = uid + '.jpg';
-          getImageUrl(avatarName, function (url) {
+          getDownloadURL(avatarName, function (url) {
             currentUser.avatarUrl = url;
             callback(currentUser);
           });

@@ -8,12 +8,14 @@ export function fetchAllPosts(callback) {
     .ref('main')
     .child('posts')
     .once('value')
-    .then(function (snapshot) {
+    .then((snapshot) => {
       var items = [];
       parsePosts(snapshot, items);
       putUrlsPhoto(items, callback);
     })
-    .catch((error) => callback(null, error));
+    .catch((error) => {
+      callback(null, error);
+    });
 }
 
 export function uploadData(post, uid, completion) {
@@ -69,28 +71,28 @@ function parsePosts(snapshot, items) {
 
 function putUrlsPhoto(items, completion) {
   console.log('API. putUrlsPhoto');
-  var counter = items.length;
-  if (counter > 0) {
-    items.forEach((item) => {
-      var photoName = item.value.id + '.jpg';
-      getDownloadURL(photoName, function (url) {
-        item.url = url;
-        var avatarName = item.value.uid + '.jpg';
-        getDownloadURL(avatarName, function (_url) {
-          item.avatarUrl = _url;
-          getUser(item.value.uid, function (user) {
-            item.author = user;
-            counter -= 1;
-            if (counter === 0) {
-              const data = {items};
-              completion(data, null);
-            }
-          });
+  var bufferLength = items.length;
+  if (bufferLength === 0) {
+    const data = {items};
+    completion(data, null);
+    return;
+  }
+  items.forEach((item) => {
+    var photoName = item.value.id + '.jpg';
+    getDownloadURL(photoName, (photoUrl) => {
+      item.url = photoUrl;
+      var avatarName = item.value.uid + '.jpg';
+      getDownloadURL(avatarName, (avatarUrl) => {
+        item.avatarUrl = avatarUrl;
+        getUser(item.value.uid, (user) => {
+          item.author = user;
+          bufferLength -= 1;
+          if (bufferLength === 0) {
+            const data = {items};
+            completion(data, null);
+          }
         });
       });
     });
-  } else {
-    const data = {items};
-    completion(data, null);
-  }
+  });
 }
