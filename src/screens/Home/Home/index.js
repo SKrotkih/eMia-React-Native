@@ -270,6 +270,7 @@ export class Home extends Component {
 
   renderItem(item, sectionID, rowID) {
     var title = item.value.title;
+    var author = item.value.author;
     var body = item.value.body;
     var key = item.key;
     var url = item.url;

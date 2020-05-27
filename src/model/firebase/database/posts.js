@@ -62,7 +62,6 @@ function parsePosts(snapshot, items) {
         value: child.val(),
         url: '',
         avatarUrl: '',
-        author: null,
         key: child.key,
       });
     });

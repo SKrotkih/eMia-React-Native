@@ -20,7 +20,7 @@ export class PostPreview extends Component {
     this.url = item.url;
     this.avatarUrl = item.avatarUrl;
     this.publishedAt = new Date(1000 * item.value.created);
-    this.userName = item.author == null ? '' : item.author.username;
+    this.userName = item.value.author == null ? '' : item.value.author;
   }
 
   createState(item) {
