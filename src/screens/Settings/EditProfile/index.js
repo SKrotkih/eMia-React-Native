@@ -130,7 +130,7 @@ export class EditProfile extends Component {
     }
 
     doneButtonPressed() {
-        let profile = Profile(this.state.uid, this.state.userName, this.state.photoUrl)
+        let profile = new Profile(this.state.uid, this.state.userName, this.state.photoUrl)
         profile.upload((result) => {
             if (result) {
                 this.props.navigation.goBack();

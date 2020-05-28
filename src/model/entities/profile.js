@@ -10,7 +10,7 @@ export class Profile {
     }
 
     upload(completed) {
-        if (name === null || name.length === 0) {
+        if (this.name === null || this.name.length === 0) {
             Alert.show('Please, enter your name', {
                 type: 'info',
                 duration: 3000,
@@ -23,8 +23,10 @@ export class Profile {
 
     createProfile(completed) {
         var _this = this;
-        uploadData(_this, (id) => {
-            if (_this.avatarUrl === null || _this.avatarUrl.length === 0) {
+        uploadData(_this, (result) => {
+            if (result === false) {
+                completed(false);
+            } else if (_this.avatarUrl === null || _this.avatarUrl.length === 0) {
                 completed(true);
             } else {
                 uploadImage(_this.avatarUrl, _this.uid)
