@@ -25,7 +25,7 @@ const error = {
 };
 
 class CompleteProfile extends React.Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {
       error: error,

@@ -3,37 +3,29 @@
 import React from 'react';
 import ReactNative, {TextInput} from 'react-native';
 import {connect} from 'react-redux';
-import styles from './styles';
-import ImageViewer from '@theme/components/ImageViewer';
 import ImagePicker from 'react-native-image-picker';
-import {uploadImage} from '@model/firebase/utils/uploadImage';
-import {Profile} from '@model/entities/profile';
-
-import {windowWidth} from '@theme/styles';
-import {Alert} from '@theme/components/alerts/';
-
 import {
     Button,
     Icon,
     Text,
     Label,
 } from 'native-base';
+import styles from './styles';
+import ImageViewer from '@theme/components/ImageViewer';
+import {Profile} from '@model/entities/profile';
 
-const {
-    View,
-} = ReactNative;
+import {windowWidth} from '@theme/styles';
+import {Alert} from '@theme/components/alerts/';
 
+const {View} = ReactNative;
 const {Component} = React;
 
 export class EditProfile extends Component {
     constructor(props) {
         super(props);
-
-        console.log(windowWidth);
-
         const {user} = this.props;
+        this.uid = user.uid;
         this.state = this.createState(user);
-
         this.doneButtonPressed = this.doneButtonPressed.bind(this);
     }
 
@@ -41,7 +33,6 @@ export class EditProfile extends Component {
         const state = {
             userName: user.username,
             photoUrl: user.avatarUrl,
-            uid: user.uid,
         };
         return state;
     }
