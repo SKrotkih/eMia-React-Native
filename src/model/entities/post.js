@@ -37,22 +37,19 @@ export class Post {
             completed(true);
           } else {
             uploadImage(pictureUri, id)
-              .then((resolve) => {
-                _this.url = resolve;
+              .then((pictureUrl) => {
+                _this.url = pictureUrl;
                 console.log(`Image's url: ${_this.url}`);
                 completed(true);
               })
-              .then((reject) => {
-                if (reject === undefined) {
-                  completed(false);
-                  return;
-                } else {
-                  Alert.show(`Error while uploading photo: ${reject}`, {
+              .catch((error) => {
+                if (error !== null) {
+                  Alert.show(`Error while uploading photo: ${error}`, {
                     type: 'info',
                     duration: 3000,
                   });
-                  completed(false);
                 }
+                completed(false);
               });
           }
         });

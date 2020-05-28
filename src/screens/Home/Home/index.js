@@ -35,19 +35,19 @@ import {actions as home, config} from '../index';
 import {actions as auth} from '../../Auth/index';
 
 import {
-  Container,
-  Header,
-  Content,
-  Button,
-  Body,
-  Icon,
-  Text,
-  Segment,
-  Tabs,
-  Tab,
-  ScrollableTab,
-  Fab,
-  IconNB,
+    Container,
+    Header,
+    Content,
+    Button,
+    Body,
+    Icon,
+    Text,
+    Segment,
+    Tabs,
+    Tab,
+    ScrollableTab,
+    Fab,
+    IconNB,
 } from 'native-base';
 
 const {Image, View, Alert, TouchableOpacity} = ReactNative;
@@ -56,301 +56,302 @@ const {fetchPosts} = home;
 const {login} = auth;
 
 export class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dataSource: null,
-      loaded: false,
-      data: null,
-      seg: 1,
-      active: false,
-      refreshing: false,
-    };
-    this.onCompletion = this.onCompletion.bind(this);
-    this.onFailed = this.onFailed.bind(this);
-  }
-
-  setUpNavigationBar() {
-    var title = config.APP_NAME;
-    const {setParams} = this.props.navigation;
-    setParams({
-      title: title,
-      left: (
-        <Icon
-          style={{marginLeft: 8, color: '#fff'}}
-          name={'ios-menu'}
-          onPress={() => {
-            menuButtonPressed();
-          }}
-        />
-      ),
-      right: (
-        <Icon
-          style={{marginRight: 8, color: '#fff'}}
-          name={'ios-options'}
-          onPress={() => {
-            optionsButtonPressed();
-          }}
-        />
-      ),
-    });
-  }
-
-  componentWillMount() {
-    this.setUpNavigationBar();
-  }
-
-  componentDidMount() {
-    this.fetchData();
-  }
-
-  fetchData() {
-    this.props.fetchPosts(this.onCompletion, this.onFailed);
-  }
-
-  onCompletion(items) {
-    this.setState({
-      dataSource: items,
-      loaded: true,
-      refreshing: false,
-    });
-  }
-
-  onFailed(error) {
-    if (error != null) {
-      Alert.alert('Oops!', error.message);
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataSource: null,
+            loaded: false,
+            data: null,
+            seg: 1,
+            active: false,
+            refreshing: false,
+        };
+        this.onCompletion = this.onCompletion.bind(this);
+        this.onFailed = this.onFailed.bind(this);
     }
-    this.setState({
-      dataSource: [],
-      loaded: true,
-    });
-  }
 
-  collapseMenuOnButton() {
-    this.setState({
-      active: false,
-    });
-  }
-
-  render() {
-    if (!this.state.loaded) {
-      return this.renderLoadingView();
+    setUpNavigationBar() {
+        var title = config.APP_NAME;
+        const {setParams} = this.props.navigation;
+        setParams({
+            title: title,
+            left: (
+                <Icon
+                    style={{marginLeft: 8, color: '#fff'}}
+                    name={'ios-menu'}
+                    onPress={() => {
+                        menuButtonPressed();
+                    }}
+                />
+            ),
+            right: (
+                <Icon
+                    style={{marginRight: 8, color: '#fff'}}
+                    name={'ios-options'}
+                    onPress={() => {
+                        optionsButtonPressed();
+                    }}
+                />
+            ),
+        });
     }
-    // Icons
-    //  https://oblador.github.io/react-native-vector-icons/
-    //
-    return (
-      <Container>
-        <Tabs
-          tabBarUnderlineStyle={{borderBottomWidth: 2}}
-          renderTabBar={() => <ScrollableTab />}
-          onChangeTab={this.onChangeTab()}>
-          <Tab
-            heading="Recently"
-            tabStyle={{backgroundColor: 'white'}}
-            textStyle={{color: color.brand}}
-            activeTabStyle={{backgroundColor: 'white'}}
-            activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
-            {this.renderTab1()}
-          </Tab>
-          <Tab
-            heading="My Posts"
-            tabStyle={{backgroundColor: 'white'}}
-            textStyle={{color: color.brand}}
-            activeTabStyle={{backgroundColor: 'white'}}
-            activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
-            {this.renderTab2()}
-          </Tab>
-          <Tab
-            heading="Tab3"
-            tabStyle={{backgroundColor: 'white'}}
-            textStyle={{color: color.brand}}
-            activeTabStyle={{backgroundColor: 'white'}}
-            activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
-            {this.renderTab2()}
-          </Tab>
-          <Tab
-            heading="Tab4"
-            tabStyle={{backgroundColor: 'white'}}
-            textStyle={{color: color.brand}}
-            activeTabStyle={{backgroundColor: 'white'}}
-            activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
-            {this.renderTab2()}
-          </Tab>
-          <Tab
-            heading="Tab5"
-            tabStyle={{backgroundColor: 'white'}}
-            textStyle={{color: color.brand}}
-            activeTabStyle={{backgroundColor: 'white'}}
-            activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
-            {this.renderTab2()}
-          </Tab>
-        </Tabs>
-        {this.renderActionsButton()}
-      </Container>
-    );
-  }
 
-  renderActionsButton() {
-    let activeState = this.state.active;
-    return (
-      <Fab
-        active={activeState}
-        direction="up"
-        containerStyle={{}}
-        style={{backgroundColor: color.brand}}
-        position="bottomRight"
-        onPress={() => this.setState({active: !activeState})}>
-        <IconNB name="ios-menu" />
-        <Button
-          style={{backgroundColor: color.brand}}
-          onPress={() => this.createNewPostButtonPressed()}>
-          <IconNB name="ios-create" />
-        </Button>
-      </Fab>
-    );
-  }
+    componentWillMount() {
+        this.setUpNavigationBar();
+    }
 
-  onChangeTab() {}
+    componentDidMount() {
+        this.fetchData();
+    }
 
-  renderTab1() {
-    return (
-      <Grid
-        style={styles.list}
-        renderItem={this.renderItem}
-        renderSeparator={this.renderSeparator.bind(this)}
-        renderPlaceholder={this.renderPlaceholder}
-        data={this.state.dataSource}
-        numColumns={2}
-        itemHasChanged={(d1, d2) => d1 !== d2}
-        keyExtractor={(item, index) => index.toString()}
-        refreshing={this.state.refreshing}
-        onRefresh={() => {
-          this.fetchData();
-          this.setState({
-            refreshing: true,
-          });
-        }}
-        onEndReached={() => {
-          // this.setState(({ data }) => ({
-          //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
-          // }));
-        }}
-      />
-    );
-  }
+    fetchData() {
+        this.props.fetchPosts(this.onCompletion, this.onFailed);
+    }
 
-  renderTab2() {
-    return <Text>My Posts</Text>;
-  }
+    onCompletion(items) {
+        this.setState({
+            dataSource: items,
+            loaded: true,
+            refreshing: false,
+        });
+    }
 
-  renderLoadingView() {
-    return (
-      <View style={styles.loading}>
-        <Loader loading={true} />
-      </View>
-    );
-  }
+    onFailed(error) {
+        if (error != null) {
+            Alert.alert('Oops!', error.message);
+        }
+        this.setState({
+            dataSource: [],
+            loaded: true,
+        });
+    }
 
-  renderPlaceholder(sectionID, rowID) {
-    // TODO: create properly key
-    var key = '' + sectionID + '-9';
-    return (
-      <View style={gridItemStyles.container} key={key}>
-        <Text></Text>
-      </View>
-    );
-  }
+    collapseMenuOnButton() {
+        this.setState({
+            active: false,
+        });
+    }
 
-  renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
-    // TODO: The same. Need a key
-    var key = '' + sectionID + '-' + rowID;
-    return <View style={styles.separator} key={key} />;
-  }
+    render() {
+        if (!this.state.loaded) {
+            return this.renderLoadingView();
+        }
+        // Icons
+        //  https://oblador.github.io/react-native-vector-icons/
+        //
+        return (
+            <Container>
+                <Tabs
+                    tabBarUnderlineStyle={{borderBottomWidth: 2}}
+                    renderTabBar={() => <ScrollableTab/>}
+                    onChangeTab={this.onChangeTab()}>
+                    <Tab
+                        heading="Recently"
+                        tabStyle={{backgroundColor: 'white'}}
+                        textStyle={{color: color.brand}}
+                        activeTabStyle={{backgroundColor: 'white'}}
+                        activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+                        {this.renderTab1()}
+                    </Tab>
+                    <Tab
+                        heading="My Posts"
+                        tabStyle={{backgroundColor: 'white'}}
+                        textStyle={{color: color.brand}}
+                        activeTabStyle={{backgroundColor: 'white'}}
+                        activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+                        {this.renderTab2()}
+                    </Tab>
+                    <Tab
+                        heading="Tab3"
+                        tabStyle={{backgroundColor: 'white'}}
+                        textStyle={{color: color.brand}}
+                        activeTabStyle={{backgroundColor: 'white'}}
+                        activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+                        {this.renderTab2()}
+                    </Tab>
+                    <Tab
+                        heading="Tab4"
+                        tabStyle={{backgroundColor: 'white'}}
+                        textStyle={{color: color.brand}}
+                        activeTabStyle={{backgroundColor: 'white'}}
+                        activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+                        {this.renderTab2()}
+                    </Tab>
+                    <Tab
+                        heading="Tab5"
+                        tabStyle={{backgroundColor: 'white'}}
+                        textStyle={{color: color.brand}}
+                        activeTabStyle={{backgroundColor: 'white'}}
+                        activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+                        {this.renderTab2()}
+                    </Tab>
+                </Tabs>
+                {this.renderActionsButton()}
+            </Container>
+        );
+    }
 
-  renderItem(item, sectionID, rowID) {
-    var title = item.value.title;
-    var author = item.value.author;
-    var body = item.value.body;
-    var key = item.key;
-    var url = item.url;
-    return (
-      <View style={gridItemStyles.container} key={key}>
-        <TouchableOpacity
-          key={key}
-          style={{flexDirection: 'row'}}
-          activeOpacity={0.5}
-          onPress={() => {
-            selectPostItem(item);
-          }}>
-          <Body>
-            <Image
-              style={gridItemStyles.image}
-              source={{cache: 'force-cache', uri: url}}
+    renderActionsButton() {
+        let activeState = this.state.active;
+        return (
+            <Fab
+                active={activeState}
+                direction="up"
+                containerStyle={{}}
+                style={{backgroundColor: color.brand}}
+                position="bottomRight"
+                onPress={() => this.setState({active: !activeState})}>
+                <IconNB name="ios-menu"/>
+                <Button
+                    style={{backgroundColor: color.brand}}
+                    onPress={() => this.createNewPostButtonPressed()}>
+                    <IconNB name="ios-create"/>
+                </Button>
+            </Fab>
+        );
+    }
+
+    onChangeTab() {
+    }
+
+    renderTab1() {
+        return (
+            <Grid
+                style={styles.list}
+                renderItem={this.renderItem}
+                renderSeparator={this.renderSeparator.bind(this)}
+                renderPlaceholder={this.renderPlaceholder}
+                data={this.state.dataSource}
+                numColumns={2}
+                itemHasChanged={(d1, d2) => d1 !== d2}
+                keyExtractor={(item, index) => index.toString()}
+                refreshing={this.state.refreshing}
+                onRefresh={() => {
+                    this.fetchData();
+                    this.setState({
+                        refreshing: true,
+                    });
+                }}
+                onEndReached={() => {
+                    // this.setState(({ data }) => ({
+                    //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
+                    // }));
+                }}
             />
-            <Text style={gridItemStyles.title} numberOfLines={1}>
-              {title}
-            </Text>
-            <Text style={gridItemStyles.description} numberOfLines={3}>
-              {body}
-            </Text>
-          </Body>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-
-  // Segmented Control. Example of using. Left for a short time. 
-  render_Segment() {
-    if (!this.state.loaded) {
-      return this.renderLoadingView();
+        );
     }
-    return (
-      <Container>
-        <StatusBar backgroundColor={color.brand} barStyle="light-content" />
-        <Header hasSegment>
-          <Body>
-            <Segment>
-              <Button
-                active={this.state.seg === 1}
-                first
-                onPress={() => this.setState({seg: 1})}>
-                <Text>Recent</Text>
-              </Button>
-              <Button
-                last
-                active={this.state.seg === 2}
-                onPress={() => this.setState({seg: 2})}>
-                <Text>My Posts</Text>
-              </Button>
-            </Segment>
-          </Body>
-        </Header>
-        <Content padder contentContainerStyle={styles.container}>
-          {this.state.seg === 1 && this.renderTab1()}
-          {this.state.seg === 2 && this.renderTab2()}
-        </Content>
-      </Container>
-    );
-  }
 
-  createNewPostButtonPressed() {
-    this.collapseMenuOnButton();
-    Actions.AddNewPost();
-  }
+    renderTab2() {
+        return <Text>My Posts</Text>;
+    }
+
+    renderLoadingView() {
+        return (
+            <View style={styles.loading}>
+                <Loader loading={true}/>
+            </View>
+        );
+    }
+
+    renderPlaceholder(sectionID, rowID) {
+        // TODO: create properly key
+        var key = '' + sectionID + '-9';
+        return (
+            <View style={gridItemStyles.container} key={key}>
+                <Text></Text>
+            </View>
+        );
+    }
+
+    renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
+        // TODO: The same. Need a key
+        var key = '' + sectionID + '-' + rowID;
+        return <View style={styles.separator} key={key}/>;
+    }
+
+    renderItem(item, sectionID, rowID) {
+        var title = item.value.title;
+        var author = item.value.author;
+        var body = item.value.body;
+        var key = item.key;
+        var url = item.url;
+        return (
+            <View style={gridItemStyles.container} key={key}>
+                <TouchableOpacity
+                    key={key}
+                    style={{flexDirection: 'row'}}
+                    activeOpacity={0.5}
+                    onPress={() => {
+                        selectPostItem(item);
+                    }}>
+                    <Body>
+                        <Image
+                            style={gridItemStyles.image}
+                            source={{cache: 'force-cache', uri: url}}
+                        />
+                        <Text style={gridItemStyles.title} numberOfLines={1}>
+                            {title}
+                        </Text>
+                        <Text style={gridItemStyles.description} numberOfLines={3}>
+                            {body}
+                        </Text>
+                    </Body>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    // Segmented Control. Example of using. Left for a short time.
+    render_Segment() {
+        if (!this.state.loaded) {
+            return this.renderLoadingView();
+        }
+        return (
+            <Container>
+                <StatusBar backgroundColor={color.brand} barStyle="light-content"/>
+                <Header hasSegment>
+                    <Body>
+                        <Segment>
+                            <Button
+                                active={this.state.seg === 1}
+                                first
+                                onPress={() => this.setState({seg: 1})}>
+                                <Text>Recent</Text>
+                            </Button>
+                            <Button
+                                last
+                                active={this.state.seg === 2}
+                                onPress={() => this.setState({seg: 2})}>
+                                <Text>My Posts</Text>
+                            </Button>
+                        </Segment>
+                    </Body>
+                </Header>
+                <Content padder contentContainerStyle={styles.container}>
+                    {this.state.seg === 1 && this.renderTab1()}
+                    {this.state.seg === 2 && this.renderTab2()}
+                </Content>
+            </Container>
+        );
+    }
+
+    createNewPostButtonPressed() {
+        this.collapseMenuOnButton();
+        Actions.AddNewPost();
+    }
 }
 
 // Pressing the buttons handlers
 function selectPostItem(item) {
-  Actions.PostPreview({item});
+    Actions.PostPreview({item});
 }
 
 function menuButtonPressed() {
-  Actions.MainMenu();
+    Actions.MainMenu();
 }
 
 function optionsButtonPressed() {
-  Actions.Options();
+    Actions.Options();
 }
 
 export default connect(null, {login, fetchPosts})(Home);
