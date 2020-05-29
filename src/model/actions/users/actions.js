@@ -1,6 +1,7 @@
 import authApi from '@model/firebase/auth/api';
 import {getCurrentUserAsync} from '@model/firebase/auth/api';
 import api from '@model/firebase/database/users';
+import {updateUser} from '@model/firebase/database/users';
 import {LOGGED_IN} from '@model/actions/login/actionTypes';
 
 export function register(data, successCB, errorCB) {
@@ -26,28 +27,34 @@ export function downloadCurrentUserData(callback) {
     });
 }
 
-export function createUser(user, successCB, errorCB) {
+export function uploadCurrentUserData(user) {
+  return new Promise((resolve, reject) => {
+    updateUser(user)
+      .then(() => {
+        resolve();
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+export function updateUserProfileData(user, successCB, errorCB) {
   return (dispatch) => {
-    api.createUser(user, function (success, data, error) {
-      if (success) {
+    updateUser(user)
+      .then(() => {
         dispatch({type: LOGGED_IN, data: user});
         successCB();
-      } else if (error) {
+      })
+      .catch((error) => {
         errorCB(error);
-      }
-    });
+      });
   };
 }
 
 export function getUser(uid, callback) {
-  api.getUser(uid, function (success, data, error) {
-    if (success && data.exists) {
-      const user = data.user.user;
-      callback(user);
-    } else {
-      console.log('API. GET USER failed request');
-      callback(null);
-    }
+  api.getUser(uid, function (user) {
+    callback(user);
   });
 }
 

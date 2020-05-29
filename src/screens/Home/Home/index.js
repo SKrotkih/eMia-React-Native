@@ -270,11 +270,11 @@ export class Home extends Component {
     }
 
     renderItem(item, sectionID, rowID) {
-        var title = item.value.title;
-        var author = item.value.author;
-        var body = item.value.body;
-        var key = item.key;
-        var url = item.url;
+        var title = item.post.title;
+        var author = item.post.author;
+        var body = item.post.body;
+        var key = item.id;
+        var url = item.imageUrl;
         return (
             <View style={gridItemStyles.container} key={key}>
                 <TouchableOpacity

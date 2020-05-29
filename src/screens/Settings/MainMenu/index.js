@@ -73,6 +73,7 @@ export class MainMenu extends Component {
     downloadCurrentUserData((user) => {
       this.setState({
         user: user,
+        avatarUrl: '',
         loaded: true,
       });
     });
@@ -121,9 +122,12 @@ function renderProfileMenuItem(_this) {
   if (user === null) {
     return null;
   } else {
-    const avatarUrl = user.avatarUrl;
+    user.getDownloadURL().then((url) => {
+      _this.state.avatarUrl = url;
+    });
+    const avatarUrl = _this.state.avatarUrl;
     let avatarSource = {};
-    if (avatarUrl === null) {
+    if (avatarUrl === '') {
       avatarSource.uri = 'Icon-Profile';
     } else {
       avatarSource.uri = avatarUrl;

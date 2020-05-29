@@ -1,18 +1,21 @@
 import {database} from '@model/firebase/config';
+import {User} from '@model/entities/user';
 
 // Create new user object in realtime database
-export function createUser(user, callback) {
-  database
-    .ref('main')
-    .child('users')
-    .child(user.user.uid)
-    .update({...user})
-    .then(() => {
-      callback(true, null, null);
-    })
-    .catch((error) => {
-      callback(false, null, {message: error});
-    });
+export function updateUser(user) {
+  return new Promise((resolve, reject) => {
+    database
+      .ref('main')
+      .child('users')
+      .child(user.id)
+      .update({...user})
+      .then(() => {
+        resolve();
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }
 
 // Get user object from the realtime database
@@ -24,18 +27,26 @@ export function getUser(uid, callback) {
     .child(uid)
     .once('value')
     .then(function (snapshot) {
-      let exists = snapshot.val() != null;
-      if (exists) {
-        const user = snapshot.val();
-        const data = {exists, user};
-        callback(true, data, null);
+      if (snapshot.val() != null) {
+        let value = snapshot.val();
+        let user = new User(value.id, value.username);
+        user.address = value.address === undefined ? '' : value.address;
+        user.email = value.email === undefined ? '' : value.email;
+        user.gender = value.gender === undefined ? 1 : value.gender;
+        user.tokenAndroid = value.tokenAndroid === undefined ? '' : value.tokenAndroid;
+        user.tokenIOS = value.tokenIOS === undefined ? '' : value.tokenIOS;
+        user.yearbirth = value.yearbirth === undefined ? 0 : value.yearbirth;
+        if (user.id === undefined) {
+          user.id = value.uid;
+        }
+        callback(user);
       } else {
-        callback(false, null, null);
+        callback(null);
       }
     })
     .catch((error) => {
       console.log('API. GET USER error: ', error.message);
-      callback(false, null, error);
+      callback(null);
     });
 }
 

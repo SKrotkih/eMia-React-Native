@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import {actions as auth} from '@screens/Auth/index';
 import AuthForm from '@components/AuthForm';
 
-const {createUser} = auth;
+const {updateUserProfileData} = auth;
 
 const fields = [
   {
@@ -41,9 +41,9 @@ class CompleteProfile extends React.Component {
 
     // attach user id
     const {user} = this.props;
-    data.uid = user.uid;
+    data.id = user.uid;
 
-    this.props.createUser(data, this.onSuccess, this.onError);
+    this.props.updateUserProfileData(data, this.onSuccess, this.onError);
   }
 
   onSuccess() {
@@ -78,4 +78,4 @@ class CompleteProfile extends React.Component {
   }
 }
 
-export default connect(null, {createUser})(CompleteProfile);
+export default connect(null, {updateUserProfileData})(CompleteProfile);

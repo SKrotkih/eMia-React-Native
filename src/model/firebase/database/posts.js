@@ -1,6 +1,6 @@
 import {database} from '@model/firebase/config';
-import {getDownloadURL} from '@model/firebase/storage/api';
 import {getUser} from '@model/firebase/database/users';
+import {Post} from '@model/entities/post';
 
 export function fetchAllPosts(callback) {
   console.log('API. fetchAllPosts');
@@ -59,10 +59,10 @@ function parsePosts(snapshot, items) {
   if (snapshot.val() !== null) {
     snapshot.forEach((child) => {
       items.push({
-        value: child.val(),
-        url: '',
+        post: child.val(),
+        imageUrl: '',
         avatarUrl: '',
-        key: child.key,
+        author: null,
       });
     });
   }
@@ -77,21 +77,33 @@ function putUrlsPhoto(items, completion) {
     return;
   }
   items.forEach((item) => {
-    var photoName = item.value.id + '.jpg';
-    getDownloadURL(photoName, (photoUrl) => {
-      item.url = photoUrl;
-      var avatarName = item.value.uid + '.jpg';
-      getDownloadURL(avatarName, (avatarUrl) => {
-        item.avatarUrl = avatarUrl;
-        getUser(item.value.uid, (user) => {
-          item.author = user;
-          bufferLength -= 1;
-          if (bufferLength === 0) {
-            const data = {items};
-            completion(data, null);
-          }
-        });
+    let postId = item.post.id;
+    let userId = item.post.uid;
+    Post.getDownloadURL(postId)
+      .then((url) => {
+        item.imageUrl = url;
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        Post.getDownloadURL(userId)
+          .then((url) => {
+            item.avatarUrl = url;
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+          .finally(() => {
+            getUser(userId, (user) => {
+              item.author = user;
+              bufferLength -= 1;
+              if (bufferLength === 0) {
+                const data = {items};
+                completion(data, null);
+              }
+            });
+          });
       });
-    });
   });
 }

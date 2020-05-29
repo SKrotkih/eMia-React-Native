@@ -3,15 +3,32 @@ import {Alert} from '@theme/components/alerts/';
 import {uploadImage} from '@model/firebase/utils/uploadImage';
 import {uploadData} from '@model/firebase/database/posts';
 import {getCurrentUserAsync} from '@model/firebase/auth/api';
+import {storage} from '@model/firebase/config';
 
 export class Post {
   constructor(title, body, pictureUri) {
-    this.title = title;
+    this.author = '';
     this.body = body;
+    this.title = title;
     this.url = '';
     this.pictureUri = pictureUri;
     this.uid = '';
-    this.author = '';
+  }
+
+  static getDownloadURL(postId) {
+    console.log('Post. getDownloadURL');
+    return new Promise((resolve, reject) => {
+      const photoName = postId + '.jpg';
+      const imageRef = storage.ref(photoName);
+      imageRef
+          .getDownloadURL()
+          .then((url) => {
+            resolve(url);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+    })
   }
 
   upload(completed) {

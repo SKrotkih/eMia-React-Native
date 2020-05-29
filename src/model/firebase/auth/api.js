@@ -1,6 +1,5 @@
 import {auth} from '@model/firebase/config';
 import {getUser} from '@model/firebase/database/users';
-import {getDownloadURL} from '@model/firebase/storage/api';
 import {LOGGED_IN, LOGGED_OUT} from '@model/actions/login/actionTypes';
 
 // Sign user in with their email and password
@@ -94,17 +93,11 @@ export function getCurrentUserAsync() {
     getUserAsync()
       .then((user) => {
         let uid = user.uid;
-        getUser(uid, function (success, data, error) {
-          if (success && data.exists) {
-            let currentUser = data.user;
-            console.log('API. GET IMAGE: ', uid);
-            let avatarName = uid + '.jpg';
-            getDownloadURL(avatarName, (url) => {
-              currentUser.avatarUrl = url;
-              resolve(currentUser);
-            });
-          } else {
+        getUser(uid, function (currentUser) {
+          if (currentUser === null) {
             reject('Could not get User response');
+          } else {
+            resolve(currentUser);
           }
         });
       })

@@ -12,7 +12,7 @@ import {
 } from 'native-base';
 import styles from './styles';
 import ImageViewer from '@theme/components/ImageViewer';
-import {Profile} from '@model/entities/profile';
+import {User} from '@model/entities/user';
 
 import {windowWidth} from '@theme/styles';
 import {Alert} from '@theme/components/alerts/';
@@ -24,21 +24,27 @@ export class EditProfile extends Component {
     constructor(props) {
         super(props);
         const {user} = this.props;
-        this.uid = user.uid;
-        this.state = this.createState(user);
-        this.doneButtonPressed = this.doneButtonPressed.bind(this);
-    }
-
-    createState(user) {
-        const state = {
-            userName: user.username,
-            photoUrl: user.avatarUrl,
+        let defaultName = user.username === undefined ? '' : user.username;
+        this.state = {
+            user: user,
+            userName: defaultName,
+            photoUrl: '',
         };
-        return state;
+        this.doneButtonPressed = this.doneButtonPressed.bind(this);
     }
 
     componentWillMount() {
         this.setUpNavigationBar();
+        this.setUpImage();
+    }
+
+    setUpImage() {
+        this.state.user.getDownloadURL()
+            .then((url) => {
+                this.setState({
+                    photoUrl: url,
+                });
+            })
     }
 
     setUpNavigationBar() {
@@ -70,7 +76,10 @@ export class EditProfile extends Component {
                     underlineColorAndroid="transparent"
                     placeholder="Type your name"
                     autoFocus={false}
-                    onChangeText={(text) => this.state.userName = text}
+                    onChangeText={(text) => {
+                        this.state.userName = text;
+                        this.state.user.username = text;
+                    }}
                     defaultValue={this.state.userName}
                 />
                 <Button
@@ -121,8 +130,7 @@ export class EditProfile extends Component {
     }
 
     doneButtonPressed() {
-        let profile = new Profile(this.state.uid, this.state.userName, this.state.photoUrl)
-        profile.upload((result) => {
+        this.state.user.update(this.state.photoUrl, (result) => {
             if (result) {
                 this.props.navigation.goBack();
             }
