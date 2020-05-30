@@ -27,29 +27,19 @@ export class User {
         var _this = this;
         uploadCurrentUserData(_this)
             .then(() => {
-                _this.getDownloadURL()
-                    .then((url) => {
-                        if (url === photoUrl) {
-                            completed(true);
-                        } else {
-                            uploadImage(photoUrl, _this.id)
-                                .then((resolve) => {
-                                    completed(true);
-                                })
-                                .catch((error) => {
-                                    if (error !== null) {
-                                        Alert.show(`Error while uploading photo: ${error}`, {
-                                            type: 'info',
-                                            duration: 3000,
-                                        });
-                                    }
-                                    completed(false);
-                                });
-                        }
-                    })
-                    .catch((error) => {
-                        completed(true);
-                    })
+                uploadImage(photoUrl, _this.id)
+                .then((resolve) => {
+                    completed(true);
+                })
+                .catch((error) => {
+                    if (error !== null) {
+                        Alert.show(`Error while uploading photo: ${error}`, {
+                            type: 'info',
+                            duration: 3000,
+                        });
+                    }
+                    completed(false);
+                });
             })
             .catch((error) => {
                 if (error !== null) {

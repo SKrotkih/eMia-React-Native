@@ -5,6 +5,17 @@ export class ModelView {
         this.item = postItem;
     }
 
+    // Redundant, but...
+    createState() {
+        const state = {
+            post: this.item.post,
+            author: this.item.author,
+            avatarUrl: this.item.avatarUrl,
+            imageUrl: this.item.imageUrl,
+        };
+        return state;
+    }
+
     get title() {
         return this.item.post.title;
     }
@@ -37,16 +48,5 @@ export class ModelView {
 
     get userName() {
         return this.item.author.username == null ? '' : this.item.author.username;
-    }
-
-    // Redundant, but...
-    createState() {
-        const state = {
-            post: this.item.post,
-            author: this.item.author,
-            avatarUrl: this.item.avatarUrl,
-            imageUrl: this.item.imageUrl,
-        };
-        return state;
     }
 }

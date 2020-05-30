@@ -20,44 +20,46 @@ export function signIn(data) {
 }
 
 // Send Password Reset Email
-export function resetPassword(data, callback) {
-  const {email} = data;
-  auth
-    .sendPasswordResetEmail(email)
-    .then((user) => {
-      callback(true, null, null);
-    })
-    .catch((error) => {
-      callback(false, null, error);
+export function resetPassword(data) {
+    return new Promise((resolve, reject) => {
+        const {email} = data;
+        auth
+            .sendPasswordResetEmail(email)
+            .then((user) => {
+                resolve();
+            })
+            .catch((error) => {
+                reject(error)
+            });
     });
 }
 
-export function signOut(callback) {
-  auth
-    .signOut()
-    .then(() => {
-      if (callback) {
-        callback(true, null, null);
-      }
-    })
-    .catch((error) => {
-      if (callback) {
-        callback(false, null, error);
-      }
+export function signOut() {
+    return new Promise((resolve, reject) => {
+        auth
+            .signOut()
+            .then(() => {
+                resolve();
+            })
+            .catch((error) => {
+                reject(error)
+            });
     });
 }
 
 // Register the user using email and password
-export function registerNewUser(data, callback) {
-  const {email, password} = data;
-  auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((user) => {
-      callback(true, user, null);
+export function registerNewUser(data) {
+    return new Promise((resolve, reject) => {
+        const {email, password} = data;
+        auth
+            .createUserWithEmailAndPassword(email, password)
+            .then((user) => {
+                resolve(user);
+            })
+            .catch((error) => {
+                resolve(user);
+            });
     })
-    .catch((error) => {
-      callback(false, null, error);
-    });
 }
 
 export function getUserAsync() {

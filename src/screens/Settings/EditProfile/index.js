@@ -12,10 +12,10 @@ import {
 } from 'native-base';
 import styles from './styles';
 import ImageViewer from '@theme/components/ImageViewer';
-import {User} from '@model/entities/user';
 
 import {windowWidth} from '@theme/styles';
 import {Alert} from '@theme/components/alerts/';
+import {ModelView} from './ModelView';
 
 const {View} = ReactNative;
 const {Component} = React;
@@ -24,28 +24,22 @@ export class EditProfile extends Component {
     constructor(props) {
         super(props);
         const {user, completion} = this.props;
-        this.completion = completion;
-        let defaultName = user.username === undefined ? '' : user.username;
+        this.mv = new ModelView(user, this);
         this.state = {
-            user: user,
-            userName: defaultName,
-            photoUrl: '',
+            state: false,
         };
+        this.completion = completion;
         this.doneButtonPressed = this.doneButtonPressed.bind(this);
+    }
+
+    updateView() {
+        let currentState = !this.state.state;
+        this.setState({state: currentState});
     }
 
     componentWillMount() {
         this.setUpNavigationBar();
-        this.setUpImage();
-    }
-
-    setUpImage() {
-        this.state.user.getDownloadURL()
-            .then((url) => {
-                this.setState({
-                    photoUrl: url,
-                });
-            })
+        this.mv.renderView()
     }
 
     setUpNavigationBar() {
@@ -78,10 +72,9 @@ export class EditProfile extends Component {
                     placeholder="Type your name"
                     autoFocus={false}
                     onChangeText={(text) => {
-                        this.state.userName = text;
-                        this.state.user.username = text;
+                        this.mv.name = text;
                     }}
-                    defaultValue={this.state.userName}
+                    defaultValue={this.mv.name}
                 />
                 <Button
                     block
@@ -90,7 +83,7 @@ export class EditProfile extends Component {
                     onPress={() => this.takePhotoButtonPressed()}>
                     <Text>Update/Add Profile Photo</Text>
                 </Button>
-                {this.state.photoUrl !== null && (
+                {!this.mv.isImageEmpty && (
                     <View
                         style={{
                             marginTop: 50,
@@ -99,7 +92,7 @@ export class EditProfile extends Component {
                         }}>
                         <ImageViewer
                             disabled={false}
-                            source={{uri: this.state.photoUrl}}
+                            source={{uri: this.mv.imageUrl}}
                             downloadable={true}
                             doubleTapEnabled={true}
                         />
@@ -123,23 +116,20 @@ export class EditProfile extends Component {
             if (response.didCancel) {
                 console.log('User cancelled image picker');
             } else {
-                this.setState({
-                    photoUrl: response.uri,
-                });
+                this.mv.imageUrl = response.uri;
             }
         });
     }
 
     doneButtonPressed() {
-        this.state.user.update(this.state.photoUrl, (result) => {
-            if (result) {
+        this.mv.submitData()
+            .then(() => {
                 if (this.completion === undefined) {
                     this.props.navigation.goBack();
                 } else {
                     this.completion();
                 }
-            }
-        });
+            });
     }
 }
 

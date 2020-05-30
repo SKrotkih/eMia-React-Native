@@ -25,34 +25,34 @@ export function login(data, successCB, errorCB) {
 
 export function register(data, successCB, errorCB) {
     return (dispatch) => {
-        registerNewUser(data, function (success, _data, error) {
-        if (success) {
-          successCB(_data);
-        } else if (error) {
-          errorCB(error);
-        }
-      });
-    };
+        registerNewUser(data)
+        .then((user) => {
+            successCB(user);
+        })
+        .catch((error) => {
+            errorCB(error);
+        });
+    }
   }
 
 export function logOut(successCB, errorCB) {
-    signOut(function (success, data, error) {
-        if (success) {
+    signOut()
+        .then(() => {
             successCB();
-        } else if (error) {
+        })
+        .catch((error) => {
             errorCB(error);
-        }
-    });
+        });
 }
 
 export function forgetPassword(data, successCB, errorCB) {
     return (dispatch) => {
-        resetPassword(data, function (success, _data, error) {
-            if (success) {
-                successCB();
-            } else if (error) {
-                errorCB(error);
-            }
+        resetPassword(data)
+        .then(() => {
+            successCB();
+        })
+        .catch((error) => {
+            errorCB(error);
         });
-    };
+    }
 }
