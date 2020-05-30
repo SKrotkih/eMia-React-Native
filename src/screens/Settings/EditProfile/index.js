@@ -61,6 +61,10 @@ export class EditProfile extends Component {
 
     render() {
         let nameLabelText = 'Name:';
+        let addressLabelText = 'Address:';
+        let genderLabelText = 'Gender:';
+        let yearBirthLabelText = 'Year:';
+        let emailLabelText = 'Email:';
         return (
             <View style={styles.container}>
                 <Label style={styles.label}>{nameLabelText}</Label>
@@ -75,6 +79,58 @@ export class EditProfile extends Component {
                         this.mv.name = text;
                     }}
                     defaultValue={this.mv.name}
+                />
+                <Label style={styles.label}>{addressLabelText}</Label>
+                <TextInput
+                    style={styles.input}
+                    autoCapitalize="none"
+                    clearButtonMode="while-editing"
+                    underlineColorAndroid="transparent"
+                    placeholder="Type your address"
+                    autoFocus={false}
+                    onChangeText={(text) => {
+                        this.mv.address = text;
+                    }}
+                    defaultValue={this.mv.address}
+                />
+                <Label style={styles.label}>{genderLabelText}</Label>
+                <TextInput
+                    style={styles.input}
+                    autoCapitalize="none"
+                    clearButtonMode="while-editing"
+                    underlineColorAndroid="transparent"
+                    placeholder="Type your gender"
+                    autoFocus={false}
+                    onChangeText={(text) => {
+                        this.mv.gender = text;
+                    }}
+                    defaultValue={this.mv.gender}
+                />
+                <Label style={styles.label}>{yearBirthLabelText}</Label>
+                <TextInput
+                    style={styles.input}
+                    autoCapitalize="none"
+                    clearButtonMode="while-editing"
+                    underlineColorAndroid="transparent"
+                    placeholder="Type your year of birth"
+                    autoFocus={false}
+                    onChangeText={(text) => {
+                        this.mv.yearBirth = text;
+                    }}
+                    defaultValue={this.mv.yearBirth}
+                />
+                <Label style={styles.label}>{emailLabelText}</Label>
+                <TextInput
+                    style={styles.input}
+                    autoCapitalize="none"
+                    clearButtonMode="while-editing"
+                    underlineColorAndroid="transparent"
+                    placeholder="Type your email"
+                    autoFocus={false}
+                    onChangeText={(text) => {
+                        this.mv.email = text;
+                    }}
+                    defaultValue={this.mv.email}
                 />
                 <Button
                     block
