@@ -23,7 +23,7 @@ class Welcome extends React.Component {
             <Button
               raised
               borderRadius={4}
-              title={'SIGN UP WITH E-MAIL'}
+              title={'Sign Up with E-MAIL'}
               containerViewStyle={[styles.containerView]}
               buttonStyle={[styles.button]}
               textStyle={styles.buttonText}

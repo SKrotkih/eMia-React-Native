@@ -50,18 +50,18 @@ export default class extends React.Component {
               initial={true}
               hideNavBar
             />
-            <Scene key="Register" component={Register} title="Register" back />
+            <Scene key="Register" component={Register} title="Sign Up" back />
             <Scene
               key="EditProfile"
               component={EditProfile}
               title="My Profile"
               back
             />
-            <Scene key="Login" component={Login} title="Login" back />
+            <Scene key="Login" component={Login} title="Sign In" back />
             <Scene
               key="ForgotPassword"
               component={ForgotPassword}
-              title="Forgot Password"
+              title="Restore Password"
               back
             />
           </Stack>
@@ -70,7 +70,7 @@ export default class extends React.Component {
             <Scene
               key="Home"
               component={Home}
-              title="eMia"
+              title="eMia - React Native"
               initial={true}
               type={ActionConst.REPLACE}
             />

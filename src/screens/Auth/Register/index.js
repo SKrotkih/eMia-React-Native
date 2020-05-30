@@ -4,6 +4,7 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {actions as auth} from '@screens/Auth/index';
 import AuthForm from '@components/AuthForm';
+import {User} from "@model/entities/user";
 
 const {register} = auth;
 
@@ -61,8 +62,14 @@ class Register extends React.Component {
     this.props.register(data, this.onSuccess, this.onError);
   }
 
-  onSuccess(user) {
-    Actions.EditProfile({user});
+  onSuccess(data) {
+    let user = new User(data.user.uid, '');
+    Actions.EditProfile({
+      user: user,
+      completion: function() {
+        Actions.Main();
+      },
+    });
   }
 
   onError(_error) {
@@ -85,7 +92,7 @@ class Register extends React.Component {
         fields={fields}
         showLabel={false}
         onSubmit={this.onSubmit}
-        buttonTitle={'SIGN UP'}
+        buttonTitle={'   OK   '}
         error={this.state.error}
       />
     );
