@@ -53,11 +53,11 @@ class Login extends React.Component {
     this.props.login(data, this.onSuccess, this.onError);
   }
 
-  onSuccess({exists, user}) {
-    if (exists) {
-      Actions.Main();
+  onSuccess(uid, currentUser) {
+    if (currentUser === null) {
+      Actions.CompleteProfile({uid});
     } else {
-      Actions.CompleteProfile({user});
+      Actions.Main();
     }
   }
 

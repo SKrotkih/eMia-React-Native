@@ -3,20 +3,20 @@ import {getUser} from '@model/firebase/database/users';
 import {LOGGED_IN, LOGGED_OUT} from '@model/actions/login/actionTypes';
 
 // Sign user in with their email and password
-export function signIn(data, callback) {
-  const {email, password} = data;
-  console.log('API. LOGIN email: ', email, 'password: ', password);
-  auth
-    .signInWithEmailAndPassword(email, password)
-    .then((user) => {
-      const uid = user.user.uid;
-      console.log('API. LOGIN SUCCESS. User UID=', uid);
-      getUser(uid, callback);
-    })
-    .catch((error) => {
-      console.log('API. LOGIN ERROR: ', error.message);
-      callback(false, null, error);
-    });
+export function signIn(data) {
+  return new Promise((resolve, reject) => {
+    const {email, password} = data;
+    console.log('API. LOGIN email: ', email, 'password: ', password);
+    auth
+        .signInWithEmailAndPassword(email, password)
+        .then((value) => {
+          const uid = value.user.uid;
+          resolve(uid);
+        })
+        .catch((error) => {
+          reject(error)
+        });
+  });
 }
 
 // Send Password Reset Email
@@ -93,16 +93,28 @@ export function getCurrentUserAsync() {
     getUserAsync()
       .then((user) => {
         let uid = user.uid;
-        getUser(uid, function (currentUser) {
-          if (currentUser === null) {
-            reject('Could not get User response');
-          } else {
-            resolve(currentUser);
-          }
-        });
+        fetchUserData(uid)
+          .then((currentUser) => {
+             resolve(currentUser);
+          })
+          .catch((error) => {
+             reject(`Error while fetch user data: ${error}`);
+          });
       })
       .catch((error) => {
         reject(`Could not get Auth User response. Error: ${error}`);
       });
   });
+}
+
+export function fetchUserData(uid) {
+    return new Promise((resolve, reject) => {
+        getUser(uid, function (currentUser) {
+            if (currentUser === null) {
+                reject(`User with uid=${uid} is not presented in the data base`);
+            } else {
+                resolve(currentUser);
+            }
+        });
+    });
 }

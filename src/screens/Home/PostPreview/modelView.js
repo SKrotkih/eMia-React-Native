@@ -1,4 +1,4 @@
-// Post preview model view
+// Post preview Model View
 
 export class ModelView {
     constructor(postItem) {
@@ -39,6 +39,7 @@ export class ModelView {
         return this.item.author.username == null ? '' : this.item.author.username;
     }
 
+    // Redundant, but...
     createState() {
         const state = {
             post: this.item.post,
