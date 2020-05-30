@@ -48,7 +48,7 @@ export function signOut(callback) {
 }
 
 // Register the user using email and password
-export function register(data, callback) {
+export function registerNewUser(data, callback) {
   const {email, password} = data;
   auth
     .createUserWithEmailAndPassword(email, password)

@@ -3,7 +3,7 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {actions as auth} from '@screens/Auth/index';
 import AuthForm from '@components/AuthForm';
-import {User} from "../../../model/entities/user";
+import {User} from "@model/entities/user";
 
 const {login} = auth;
 

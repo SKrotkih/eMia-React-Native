@@ -55,7 +55,7 @@ export default class extends React.Component {
               key="EditProfile"
               component={EditProfile}
               title="My Profile"
-              back={false}
+              back
             />
             <Scene key="Login" component={Login} title="Login" back />
             <Scene

@@ -1,4 +1,4 @@
-import {signIn, signOut, resetPassword, fetchUserData} from '@model/firebase/auth/api';
+import {signIn, signOut, registerNewUser, resetPassword, fetchUserData} from '@model/firebase/auth/api';
 import {LOGGED_IN} from '@model/actions/login/actionTypes';
 
 export function login(data, successCB, errorCB) {
@@ -22,6 +22,18 @@ export function login(data, successCB, errorCB) {
             });
     }
 }
+
+export function register(data, successCB, errorCB) {
+    return (dispatch) => {
+        registerNewUser(data, function (success, _data, error) {
+        if (success) {
+          successCB(_data);
+        } else if (error) {
+          errorCB(error);
+        }
+      });
+    };
+  }
 
 export function logOut(successCB, errorCB) {
     signOut(function (success, data, error) {
