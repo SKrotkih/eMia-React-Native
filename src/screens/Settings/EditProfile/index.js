@@ -23,7 +23,8 @@ const {Component} = React;
 export class EditProfile extends Component {
     constructor(props) {
         super(props);
-        const {user} = this.props;
+        const {user, completion} = this.props;
+        this.completion = completion;
         let defaultName = user.username === undefined ? '' : user.username;
         this.state = {
             user: user,
@@ -132,7 +133,11 @@ export class EditProfile extends Component {
     doneButtonPressed() {
         this.state.user.update(this.state.photoUrl, (result) => {
             if (result) {
-                this.props.navigation.goBack();
+                if (this.completion === undefined) {
+                    this.props.navigation.goBack();
+                } else {
+                    this.completion();
+                }
             }
         });
     }

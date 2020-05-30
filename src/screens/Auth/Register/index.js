@@ -43,7 +43,7 @@ const error = {
   email: '',
   password: '',
   confirm_password: '',
-}
+};
 
 class Register extends React.Component {
   constructor() {
@@ -63,18 +63,18 @@ class Register extends React.Component {
   }
 
   onSuccess(user) {
-    Actions.CompleteProfile({user});
+    Actions.EditProfile({user});
   }
 
-  onError(error) {
+  onError(_error) {
     let errObj = this.state.error;
 
-    if (error.hasOwnProperty('message')) {
-      errObj['general'] = error.message;
+    if (_error.hasOwnProperty('message')) {
+      errObj.general = _error.message;
     } else {
-      let keys = Object.keys(error);
+      let keys = Object.keys(_error);
       keys.map((key, index) => {
-        errObj[key] = error[key];
+        errObj[key] = _error[key];
       });
     }
     this.setState({error: errObj});
@@ -82,11 +82,13 @@ class Register extends React.Component {
 
   render() {
     return (
-      <AuthForm fields={fields}
+      <AuthForm
+        fields={fields}
         showLabel={false}
         onSubmit={this.onSubmit}
         buttonTitle={'SIGN UP'}
-        error={this.state.error}/>
+        error={this.state.error}
+      />
     );
   }
 }

@@ -3,6 +3,7 @@ import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {actions as auth} from '@screens/Auth/index';
 import AuthForm from '@components/AuthForm';
+import {User} from "../../../model/entities/user";
 
 const {login} = auth;
 
@@ -55,7 +56,13 @@ class Login extends React.Component {
 
   onSuccess(uid, currentUser) {
     if (currentUser === null) {
-      Actions.CompleteProfile({uid});
+      let user = new User(uid, '');
+      Actions.EditProfile({
+        user: user,
+        completion: function() {
+          Actions.Main();
+        },
+      });
     } else {
       Actions.Main();
     }

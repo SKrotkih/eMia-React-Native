@@ -13,7 +13,6 @@ import Welcome from '@screens/Network/Welcome';
 
 // Authentication Scenes
 import Register from '@screens/Auth/Register';
-import CompleteProfile from '@screens/Auth/CompleteProfile';
 import Login from '@screens/Auth/Login';
 import ForgotPassword from '@screens/Auth/ForgotPassword';
 
@@ -24,9 +23,6 @@ import AddNewPost from '@screens/Home/AddNewPost';
 import MainMenu from '@screens/Settings/MainMenu';
 import EditProfile from '@screens/Settings/EditProfile';
 import Options from '@screens/Home/Options';
-
-// Import Store, actions
-import store from '@redux/store';
 
 import {color, navTitleStyle, navBarStyle} from '@theme/styles';
 
@@ -56,16 +52,17 @@ export default class extends React.Component {
             />
             <Scene key="Register" component={Register} title="Register" back />
             <Scene
-              key="CompleteProfile"
-              component={CompleteProfile}
-              title="Select Username"
+              key="EditProfile"
+              component={EditProfile}
+              title="My Profile"
               back={false}
             />
-            <Scene key="Login" component={Login} title="Login" />
+            <Scene key="Login" component={Login} title="Login" back />
             <Scene
               key="ForgotPassword"
               component={ForgotPassword}
               title="Forgot Password"
+              back
             />
           </Stack>
 

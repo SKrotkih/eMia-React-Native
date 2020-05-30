@@ -1,4 +1,4 @@
-import {Alert} from "../../screens/Settings/EditProfile";
+import {Alert} from '@theme/components/alerts/';
 import {uploadImage} from '@model/firebase/utils/uploadImage';
 import {uploadCurrentUserData} from '@model/actions/users/actions';
 import {storage} from '@model/firebase/config';
