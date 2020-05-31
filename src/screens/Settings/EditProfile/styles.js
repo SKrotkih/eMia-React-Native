@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   button: {
-    margin: 5,
+    margin: 30,
     marginLeft: 0,
     marginRight: 0,
   },
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   image: {
     overflow: "hidden",
     backgroundColor: color.grey,
-    margin: 15,
+    margin: 0,
     marginLeft: 0,
     marginRight: 0,
     height: windowWidth - 30,

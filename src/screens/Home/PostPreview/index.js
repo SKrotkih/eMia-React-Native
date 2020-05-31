@@ -31,24 +31,23 @@ export class PostPreview extends Component {
     return (
       <Container style={styles.container}>
         <Header style={styles.headerBackground}>
-          <Text style={styles.title}>{this.mv.title}</Text>
+          <Text style={styles.textHeader}>{this.mv.title}</Text>
         </Header>
         <Content style={styles.content}>
           <View style={styles.thumbnail}>
             <Thumbnail circular size={55} source={this.mv.avatarUrl} />
-            <Text style={styles.userName}>{this.mv.userName}</Text>
+            <Text style={styles.textUserName}>{this.mv.userName}</Text>
           </View>
-          <Text style={styles.description}>{this.mv.body}</Text>
-          <View style={styles.backgroundPhoto}>
-            <ImageViewer
+          <Text style={styles.textDescription}>{this.mv.body}</Text>
+          <ImageViewer
+              imageStyle={styles.image}
               disabled={false}
               source={this.mv.imageUrl}
               downloadable
               doubleTapEnabled={true}
-            />
-          </View>
-          <Text style={styles.publishedAt}>
-            <Time date={this.mv.publishedAt} />
+          />
+          <Text style={styles.timeBackground}>
+            <Time date={this.mv.publishedAt} style={styles.textPublishedAt} />
           </Text>
         </Content>
       </Container>

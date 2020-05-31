@@ -1,13 +1,23 @@
 import {StyleSheet} from 'react-native';
-import {windowWidth} from '@theme/styles';
-
-const resizeMode = 'contain';
+import {
+  windowWidth,
+  color,
+} from '@theme/styles';
 
 const styles = StyleSheet.create({
     container: {
         margin: 0,
         marginBottom: 0,
         backgroundColor: '#fff',
+    },
+    headerBackground: {
+        backgroundColor: 'white',
+    },
+    textHeader: {
+        fontSize: 16,
+        marginBottom: 4,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     content: {
         margin: 15,
@@ -19,39 +29,33 @@ const styles = StyleSheet.create({
         marginTop: 4,
         flexDirection: 'row',
     },
-    photo: {
+    textUserName: {
+        marginHorizontal: 15,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+    },
+    textDescription: {
+        fontSize: 12,
+        marginHorizontal: 8,
+        textAlign: 'center',
+        marginVertical: 8,
+    },
+    image: {
         width: windowWidth - 30,
         height: windowWidth - 30,
         alignSelf: 'center',
         resizeMode: 'contain',
+        backgroundColor: color.white
     },
-    backgroundPhoto: {
-        width: windowWidth - 30,
-        height: windowWidth - 30,
+    timeBackground: {
+        marginRight: 15,
+        marginTop: 15,
     },
-    title: {
-        fontSize: 16,
-        marginBottom: 4,
-        fontWeight: 'bold',
-        textAlign: 'center',
-    },
-    description: {
-        fontSize: 14,
-        textAlign: 'center',
-        marginVertical: 8,
-    },
-    userName: {
-        marginHorizontal: 8,
-        fontWeight: 'bold',
-        alignSelf: 'center',
-    },
-    publishedAt: {
-        marginHorizontal: 8,
-        marginVertical: 8,
-        fontWeight: 'bold',
-    },
-    headerBackground: {
-        backgroundColor: 'white',
+    textPublishedAt: {
+        fontSize: 12,
+        textAlign: 'right',
+        color: color.black,
+        marginTop: 15,
     },
 });
 
