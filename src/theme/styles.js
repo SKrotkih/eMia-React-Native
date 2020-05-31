@@ -5,7 +5,6 @@ const color = {
   brand: '#21AEED',
   black: '#3B3031',
   light_black: '#414141',
-  main: 'rgb(99,139,250)',
   white: '#ffffff',
   light_grey: '#eaeaea',
   grey: '#ccc',

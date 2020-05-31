@@ -1,7 +1,7 @@
 // EditProfile
 
 import React from 'react';
-import ReactNative, {TextInput} from 'react-native';
+import ReactNative, {TextInput, ScrollView} from 'react-native';
 import {connect} from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import {
@@ -67,93 +67,91 @@ export class EditProfile extends Component {
         let emailLabelText = 'Email:';
         return (
             <View style={styles.container}>
-                <Label style={styles.label}>{nameLabelText}</Label>
-                <TextInput
-                    style={styles.input}
-                    autoCapitalize="none"
-                    clearButtonMode="while-editing"
-                    underlineColorAndroid="transparent"
-                    placeholder="Type your name"
-                    autoFocus={false}
-                    onChangeText={(text) => {
-                        this.mv.name = text;
-                    }}
-                    defaultValue={this.mv.name}
-                />
-                <Label style={styles.label}>{addressLabelText}</Label>
-                <TextInput
-                    style={styles.input}
-                    autoCapitalize="none"
-                    clearButtonMode="while-editing"
-                    underlineColorAndroid="transparent"
-                    placeholder="Type your address"
-                    autoFocus={false}
-                    onChangeText={(text) => {
-                        this.mv.address = text;
-                    }}
-                    defaultValue={this.mv.address}
-                />
-                <Label style={styles.label}>{genderLabelText}</Label>
-                <TextInput
-                    style={styles.input}
-                    autoCapitalize="none"
-                    clearButtonMode="while-editing"
-                    underlineColorAndroid="transparent"
-                    placeholder="Type your gender"
-                    autoFocus={false}
-                    onChangeText={(text) => {
-                        this.mv.gender = text;
-                    }}
-                    defaultValue={this.mv.gender}
-                />
-                <Label style={styles.label}>{yearBirthLabelText}</Label>
-                <TextInput
-                    style={styles.input}
-                    autoCapitalize="none"
-                    clearButtonMode="while-editing"
-                    underlineColorAndroid="transparent"
-                    placeholder="Type your year of birth"
-                    autoFocus={false}
-                    onChangeText={(text) => {
-                        this.mv.yearBirth = text;
-                    }}
-                    defaultValue={this.mv.yearBirth}
-                />
-                <Label style={styles.label}>{emailLabelText}</Label>
-                <TextInput
-                    style={styles.input}
-                    autoCapitalize="none"
-                    clearButtonMode="while-editing"
-                    underlineColorAndroid="transparent"
-                    placeholder="Type your email"
-                    autoFocus={false}
-                    onChangeText={(text) => {
-                        this.mv.email = text;
-                    }}
-                    defaultValue={this.mv.email}
-                />
-                <Button
-                    block
-                    info
-                    style={styles.button}
-                    onPress={() => this.takePhotoButtonPressed()}>
-                    <Text>Update/Add Profile Photo</Text>
-                </Button>
-                {!this.mv.isImageEmpty && (
-                    <View
-                        style={{
-                            marginTop: 50,
-                            width: windowWidth - 30,
-                            height: windowWidth - 30,
-                        }}>
-                        <ImageViewer
-                            disabled={false}
-                            source={{uri: this.mv.imageUrl}}
-                            downloadable={true}
-                            doubleTapEnabled={true}
-                        />
-                    </View>
-                )}
+                <ScrollView style={[styles.content]}>
+                    <Label style={styles.label}>{nameLabelText}</Label>
+                    <TextInput
+                        style={styles.input}
+                        autoCapitalize="none"
+                        clearButtonMode="while-editing"
+                        underlineColorAndroid="transparent"
+                        placeholder="Type your name"
+                        autoFocus={false}
+                        onChangeText={(text) => {
+                            this.mv.name = text;
+                        }}
+                        defaultValue={this.mv.name}
+                    />
+                    <Label style={styles.label}>{addressLabelText}</Label>
+                    <TextInput
+                        style={styles.input}
+                        autoCapitalize="none"
+                        clearButtonMode="while-editing"
+                        underlineColorAndroid="transparent"
+                        placeholder="Type your address"
+                        autoFocus={false}
+                        onChangeText={(text) => {
+                            this.mv.address = text;
+                        }}
+                        defaultValue={this.mv.address}
+                    />
+                    <Label style={styles.label}>{genderLabelText}</Label>
+                    <TextInput
+                        style={styles.input}
+                        autoCapitalize="none"
+                        clearButtonMode="while-editing"
+                        underlineColorAndroid="transparent"
+                        placeholder="Type your gender"
+                        autoFocus={false}
+                        onChangeText={(text) => {
+                            this.mv.gender = text;
+                        }}
+                        defaultValue={this.mv.gender}
+                    />
+                    <Label style={styles.label}>{yearBirthLabelText}</Label>
+                    <TextInput
+                        style={styles.input}
+                        autoCapitalize="none"
+                        clearButtonMode="while-editing"
+                        underlineColorAndroid="transparent"
+                        placeholder="Type your year of birth"
+                        autoFocus={false}
+                        onChangeText={(text) => {
+                            this.mv.yearBirth = text;
+                        }}
+                        defaultValue={this.mv.yearBirth}
+                    />
+                    <Label style={styles.label}>{emailLabelText}</Label>
+                    <TextInput
+                        style={styles.input}
+                        autoCapitalize="none"
+                        clearButtonMode="while-editing"
+                        underlineColorAndroid="transparent"
+                        placeholder="Type your email"
+                        autoFocus={false}
+                        onChangeText={(text) => {
+                            this.mv.email = text;
+                        }}
+                        defaultValue={this.mv.email}
+                    />
+                    <Button
+                        block
+                        info
+                        style={styles.button}
+                        onPress={() => this.takePhotoButtonPressed()}>
+                        <Text style={styles.buttonText} >Update/Add Profile Photo</Text>
+                    </Button>
+                    {!this.mv.isImageEmpty && (
+                        <View style={styles.backgroundImage}>
+                            <ImageViewer
+                                imageStyle={styles.image}
+                                disabled={false}
+                                source={{uri: this.mv.imageUrl}}
+                                downloadable={true}
+                                doubleTapEnabled={true}
+                            />
+                        </View>
+                    )}
+                </ScrollView>
             </View>
         );
     }

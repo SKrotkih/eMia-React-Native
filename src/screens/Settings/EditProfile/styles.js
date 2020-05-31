@@ -1,38 +1,56 @@
 import {StyleSheet} from 'react-native';
-import {windowWidth} from '@theme/styles';
+import {windowWidth,
+  padding,
+  color,
+} from '@theme/styles';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 23,
+    flex: 1,
+    padding: 15,
     margin: 0,
-    marginBottom: 0,
-    backgroundColor: '#fff',
+    backgroundColor: color.white,
   },
   content: {
-    margin: 15,
-    marginBottom: 15,
-  },
-  backgroundPhoto: {
-    marginTop: 50,
-    width: windowWidth - 30,
-    height: windowWidth - 30,
-  },
-  button: {
-    marginTop: 20,
-    marginLeft: 15,
-    marginRight: 15,
   },
   label: {
+    fontWeight: 'normal',
+    fontSize: 12,
     marginLeft: 15,
     padding: 0,
     height: 20,
   },
   input: {
-    margin: 15,
+    fontSize: 12,
+    margin: 5,
+    marginLeft: 0,
+    marginRight: 0,
     paddingLeft: 15,
-    height: 40,
+    height: 35,
     borderRadius: 8,
-    borderColor: '#25b0eb',
+    borderColor: color.brand,
+    borderWidth: 1,
+  },
+  button: {
+    margin: 5,
+    marginLeft: 0,
+    marginRight: 0,
+  },
+  buttonText: {
+    fontSize: 12,
+  },
+  backgroundImage: {
+  },
+  image: {
+    overflow: "hidden",
+    backgroundColor: color.grey,
+    margin: 15,
+    marginLeft: 0,
+    marginRight: 0,
+    height: windowWidth - 30,
+    width: windowWidth - 30,
+    borderRadius: (windowWidth - 30.0) / 2.0,
+    borderColor: color.brand,
     borderWidth: 1,
   },
 });
