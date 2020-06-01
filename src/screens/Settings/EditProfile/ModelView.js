@@ -84,11 +84,10 @@ export class ModelView {
 
   setUpImage() {
     return new Promise((resolve, reject) => {
-      this._user.getDownloadURL()
-        .then((url) => {
-          this._imageUrl = url
-          this.updateView();
-        })
+      this._user.getDownloadURL().then((url) => {
+        this._imageUrl = url;
+        this.updateView();
+      });
     });
   }
 
@@ -98,6 +97,6 @@ export class ModelView {
       this._user.update(this._imageUrl, (result) => {
         resolve();
       });
-    })
+    });
   }
 }

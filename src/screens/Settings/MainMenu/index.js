@@ -85,7 +85,8 @@ export class MainMenu extends Component {
     }
     var _this = this;
     return (
-      <Container style={{margin: 15, marginBottom: 15, backgroundColor: '#00000000'}}>
+      <Container
+        style={{margin: 15, marginBottom: 15, backgroundColor: '#00000000'}}>
         <Content style={{backgroundColor: '#00000000'}}>
           <List
             dataArray={menuItems}
@@ -100,7 +101,7 @@ export class MainMenu extends Component {
 function renderLoadingView() {
   return (
     <View style={styles.loading}>
-      <Loader loading={true}/>
+      <Loader loading={true} />
     </View>
   );
 }
@@ -136,10 +137,10 @@ function renderProfileMenuItem(_this) {
       <ListItem height={63}>
         <TouchableOpacity
           style={{flexDirection: 'row'}} activeOpacity={0.5} onPress={() => {
-          editProfile(user);
-        }}>
+            editProfile(user);
+          }}>
           <Body style={{flexDirection: 'row'}}>
-            <Thumbnail circular size={55} source={avatarSource}/>
+            <Thumbnail circular size={55} source={avatarSource} />
             <Text
               style={{alignSelf: 'center', marginLeft: 16, fontWeight: 'bold'}}>
               {user.username}
@@ -165,8 +166,8 @@ function renderLogOutMenuItem(_this) {
     return (
       <ListItem height={63}>
         <TouchableOpacity style={{flexDirection: 'row'}} activeOpacity={0.5} onPress={() => {
-          onSignOut();
-        }}>
+            onSignOut();
+          }}>
           <Body style={{flexDirection: 'row'}}>
             <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>
               Log Out

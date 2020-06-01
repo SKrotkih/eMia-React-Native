@@ -14,7 +14,7 @@ export function signIn(data) {
         resolve(uid);
       })
       .catch((error) => {
-        reject(error)
+        reject(error);
       });
   });
 }
@@ -59,7 +59,7 @@ export function registerNewUser(data) {
       .catch((error) => {
         resolve(user);
       });
-  })
+  });
 }
 
 export function getUserAsync() {

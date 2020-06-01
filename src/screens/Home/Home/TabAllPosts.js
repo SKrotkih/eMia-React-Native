@@ -5,11 +5,7 @@ import Grid from 'react-native-grid-component';
 import {styles, gridItemStyles} from './styles';
 import {Actions} from 'react-native-router-flux';
 import Loader from '@components/Loader';
-
-import {
-  Body,
-  Text,
-} from 'native-base';
+import {Body, Text} from 'native-base';
 
 const {Image, View, TouchableOpacity} = ReactNative;
 
@@ -17,31 +13,34 @@ export default class TabAllPosts extends Component {
   constructor(props) {
     super(props);
     this.modalView = props.modalView;
+    this.filter = props.filter;
   }
 
   render() {
     if (!this.modalView.loaded) {
       return this.renderLoadingView();
     }
-    return (<Grid
-      style={styles.list}
-      renderItem={this.renderItem}
-      renderSeparator={this.renderSeparator.bind(this)}
-      renderPlaceholder={this.renderPlaceholder}
-      data={this.modalView.dataSource}
-      numColumns={2}
-      itemHasChanged={(d1, d2) => d1 !== d2}
-      keyExtractor={(item, index) => index.toString()}
-      refreshing={this.modalView.refreshing}
-      onRefresh={() => {
-        this.modalView.fetchData();
-      }}
-      onEndReached={() => {
-        // this.setState(({ data }) => ({
-        //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
-        // }));
-      }}
-    />)
+    return (
+      <Grid
+        style={styles.list}
+        renderItem={this.renderItem}
+        renderSeparator={this.renderSeparator.bind(this)}
+        renderPlaceholder={this.renderPlaceholder}
+        data={this.modalView.dataSource}
+        numColumns={2}
+        itemHasChanged={(d1, d2) => d1 !== d2}
+        keyExtractor={(item, index) => index.toString()}
+        refreshing={this.modalView.refreshing}
+        onRefresh={() => {
+          this.modalView.fetchData();
+        }}
+        onEndReached={() => {
+          // this.setState(({ data }) => ({
+          //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
+          // }));
+        }}
+      />
+    );
   }
 
   renderLoadingView() {
@@ -70,7 +69,6 @@ export default class TabAllPosts extends Component {
 
   renderItem(item, sectionID, rowID) {
     let title = item.post.title;
-    let author = item.post.author;
     let body = item.post.body;
     let key = item.id;
     let url = item.imageUrl;
@@ -101,7 +99,6 @@ export default class TabAllPosts extends Component {
   }
 }
 
-// Pressing the buttons handlers
 function selectPostItem(item) {
   Actions.PostPreview({item});
 }

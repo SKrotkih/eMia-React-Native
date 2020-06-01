@@ -24,6 +24,7 @@ import {color} from '@theme/styles';
 import {config} from '../index';
 import {actions as auth} from '../../Auth/index';
 import TabAllPosts from './TabAllPosts';
+import {TABS} from './styles';
 
 import {
   Container,
@@ -102,14 +103,14 @@ export class Home extends Component {
         <Tabs
           tabBarUnderlineStyle={{borderBottomWidth: 2}}
           renderTabBar={() => <ScrollableTab/>}
-          onChangeTab={this.onChangeTab()}>
+          onChangeTab={({i}) => this.onChangeTab(i)}>
           <Tab
             heading="All Posts"
             tabStyle={{backgroundColor: 'white'}}
             textStyle={{color: color.brand}}
             activeTabStyle={{backgroundColor: 'white'}}
             activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
-            <TabAllPosts modalView={this.mv}/>
+            <TabAllPosts modalView={this.mv} />
           </Tab>
           <Tab
             heading="My Posts"
@@ -117,17 +118,11 @@ export class Home extends Component {
             textStyle={{color: color.brand}}
             activeTabStyle={{backgroundColor: 'white'}}
             activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
-            {this.renderMyPostsTab()}
+            <TabAllPosts modalView={this.mv} />
           </Tab>
         </Tabs>
         {this.renderActionsButton()}
       </Container>
-    );
-  }
-
-  renderMyPostsTab() {
-    return (
-      <Text>Test</Text>
     );
   }
 
@@ -141,28 +136,31 @@ export class Home extends Component {
         style={{backgroundColor: color.brand}}
         position="bottomRight"
         onPress={() => this.setState({active: !activeState})}>
-        <IconNB name="ios-menu"/>
+        <IconNB name="ios-menu" />
         <Button
           style={{backgroundColor: color.brand}}
           onPress={() => this.createNewPostButtonPressed()}>
-          <IconNB name="ios-create"/>
+          <IconNB name="ios-create" />
         </Button>
       </Fab>
     );
   }
 
-  onChangeTab() {
+  onChangeTab(newTab) {
+    switch (newTab) {
+      case 0:
+        this.mv.filter = TABS.ALLPOSTS;
+        break;
+      case 1:
+        this.mv.filter = TABS.MYPOSTS;
+        break;
+    }
   }
 
   createNewPostButtonPressed() {
     this.collapseMenuOnButton();
     Actions.AddNewPost();
   }
-}
-
-// Pressing the buttons handlers
-function selectPostItem(item) {
-  Actions.PostPreview({item});
 }
 
 function menuButtonPressed() {

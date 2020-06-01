@@ -1,5 +1,5 @@
 import authApi from '@model/firebase/auth/api';
-import {getCurrentUserAsync} from '@model/firebase/auth/api';
+import {getCurrentUserAsync, getUserAsync} from '@model/firebase/auth/api';
 import api from '@model/firebase/database/users';
 import {updateUser} from '@model/firebase/database/users';
 import {LOGGED_IN} from '@model/actions/login/actionTypes';
@@ -14,6 +14,17 @@ export function register(data, successCB, errorCB) {
       }
     });
   };
+}
+
+export function getCurrentUserId(callback) {
+  getUserAsync()
+    .then((uid) => {
+      callback(uid);
+    })
+    .catch((error) => {
+      console.log(error);
+      callback(null);
+    });
 }
 
 export function downloadCurrentUserData(callback) {

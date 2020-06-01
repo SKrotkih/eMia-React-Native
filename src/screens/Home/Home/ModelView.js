@@ -1,6 +1,7 @@
 import React from 'react';
 import {Alert} from '@theme/components/alerts/';
 import * as actions from '@model/actions/posts/actions';
+import {TABS} from './styles';
 
 const {fetchPosts} = actions;
 
@@ -28,10 +29,22 @@ export class ModelView {
     return this._refreshing;
   }
 
-  fetchData() {
+  set filter(tabItem) {
+    switch (tabItem) {
+      case TABS.ALLPOSTS:
+        this.fetchData(0);
+        break;
+      case TABS.MYPOSTS:
+        this.fetchData(1);
+        break;
+    }
+  }
+
+  fetchData(i) {
     this._loaded = false;
     this._refreshing = true;
-    fetchPosts()
+    this.updateView();
+    fetchPosts(i)
       .then((items) => {
         this._dataSource = items;
         this._loaded = true;

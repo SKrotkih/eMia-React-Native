@@ -49,4 +49,9 @@ const gridItemStyles = StyleSheet.create({
   },
 });
 
-export {styles, gridItemStyles};
+const TABS = {
+  ALLPOSTS: 'allposts',
+  MYPOSTS: 'myposts',
+}
+
+export {styles, gridItemStyles, TABS};

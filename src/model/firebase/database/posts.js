@@ -1,5 +1,6 @@
 import {database} from '@model/firebase/config';
 import {getUser} from '@model/firebase/database/users';
+import {getUserAsync} from '@model/firebase/auth/api';
 import {Post} from '@model/entities/post';
 
 export function fetchAllPosts() {
@@ -11,17 +12,51 @@ export function fetchAllPosts() {
       .once('value')
       .then((snapshot) => {
         let items = [];
-        parsePosts(snapshot, items);
+        parsePosts(snapshot, items, function (post) {
+          return true;
+        });
         putUrlsPhoto(items, (data, error) => {
           if (error) {
             reject(error);
           } else {
             resolve(data.items);
           }
-        })
+        });
       })
       .catch((error) => {
         reject(error);
+      });
+  });
+}
+
+export function fetchMyPosts() {
+  console.log('API. fetchMyPosts');
+  return new Promise((resolve, reject) => {
+    getUserAsync()
+      .then((currentUser) => {
+        database
+          .ref('main')
+          .child('posts')
+          .once('value')
+          .then((snapshot) => {
+            let items = [];
+            parsePosts(snapshot, items, function (post) {
+              return post.uid === currentUser.uid;
+            });
+            putUrlsPhoto(items, (data, error) => {
+              if (error) {
+                reject(error);
+              } else {
+                resolve(data.items);
+              }
+            });
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      })
+      .catch((error) => {
+        console.log(error);
       });
   });
 }
@@ -62,16 +97,19 @@ export function uploadData(post, completion) {
     });
 }
 
-function parsePosts(snapshot, items) {
+function parsePosts(snapshot, items, testPost) {
   console.log('API. parsePosts');
   if (snapshot.val() !== null) {
     snapshot.forEach((child) => {
-      items.push({
-        post: child.val(),
-        imageUrl: '',
-        avatarUrl: '',
-        author: null,
-      });
+      let post = child.val();
+      if (testPost(post)) {
+        items.push({
+          post: child.val(),
+          imageUrl: '',
+          avatarUrl: '',
+          author: null,
+        });
+      }
     });
   }
 }
