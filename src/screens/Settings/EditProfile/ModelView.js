@@ -2,13 +2,15 @@ import {User} from '@model/entities/user';
 
 export class ModelView {
     constructor(user, view) {
-        this.user = user;
-        this.view = view;
+        this._user = user;
+        this._view = view;
         this._imageUrl = '';
+        this.setUpImage = this.setUpImage.bind(this);
+        this.submitData = this.submitData.bind(this);
     }
 
     updateView() {
-        this.view.updateView();
+        this._view.updateView();
     }
 
     renderView() {
@@ -17,42 +19,42 @@ export class ModelView {
 
     // Name
     get name() {
-        return this.user.username === undefined ? '' : this.user.username;
+        return this._user.username === undefined ? '' : this.user.username;
     }
     set name(newValue) {
-        this.user.username = newValue;
+        this._user.username = newValue;
         this.updateView();
     }
     // Address
     get address() {
-        return this.user.address;
+        return this._user.address;
     }
     set address(newValue) {
-        this.user.address = newValue;
+        this._user.address = newValue;
         this.updateView();
     }
     // Gender
     get gender() {
-        return this.user.gender;
+        return this._user.gender;
     }
     set gender(newValue) {
-        this.user.gender = newValue;
+        this._user.gender = newValue;
         this.updateView();
     }
     // Year of birth
     get yearBirth() {
-        return this.user.yearbirth;
+        return this._user.yearbirth;
     }
     set yearBirth(newValue) {
-        this.user.yearbirth = newValue;
+        this._user.yearbirth = newValue;
         this.updateView();
     }
     // Email
     get email() {
-        return this.user.email;
+        return this._user.email;
     }
     set email(newValue) {
-        this.user.email = newValue;
+        this._user.email = newValue;
         this.updateView();
     }
     // Image
@@ -68,20 +70,18 @@ export class ModelView {
         this.updateView();
     }
     setUpImage() {
-        let self = this;
         return new Promise((resolve, reject) => {
-            self.user.getDownloadURL()
+            this._user.getDownloadURL()
                 .then((url) => {
-                    self._imageUrl = url
-                    self.updateView();
+                    this._imageUrl = url
+                    this.updateView();
                 })
         });
     }
     // Send user data on server
     submitData() {
-        let self = this;
         return new Promise((resolve, reject) => {
-            self.user.update(this._imageUrl, (result) => {
+            this._user.update(this._imageUrl, (result) => {
                 resolve();
             });
         })

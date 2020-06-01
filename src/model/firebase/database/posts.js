@@ -2,20 +2,28 @@ import {database} from '@model/firebase/config';
 import {getUser} from '@model/firebase/database/users';
 import {Post} from '@model/entities/post';
 
-export function fetchAllPosts(callback) {
+export function fetchAllPosts() {
   console.log('API. fetchAllPosts');
-  database
-    .ref('main')
-    .child('posts')
-    .once('value')
-    .then((snapshot) => {
-      var items = [];
-      parsePosts(snapshot, items);
-      putUrlsPhoto(items, callback);
-    })
-    .catch((error) => {
-      callback(null, error);
-    });
+  return new Promise((resolve, reject) => {
+    database
+        .ref('main')
+        .child('posts')
+        .once('value')
+        .then((snapshot) => {
+          let items = [];
+          parsePosts(snapshot, items);
+          putUrlsPhoto(items, (data, error) => {
+            if (error) {
+              reject(error);
+            } else {
+              resolve(data.items);
+            }
+          })
+        })
+        .catch((error) => {
+          reject(error);
+        });
+  });
 }
 
 export function uploadData(post, completion) {
