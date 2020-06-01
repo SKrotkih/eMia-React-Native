@@ -100,7 +100,7 @@ export class MainMenu extends Component {
 function renderLoadingView() {
   return (
     <View style={styles.loading}>
-      <Loader loading={true} />
+      <Loader loading={true}/>
     </View>
   );
 }
@@ -135,11 +135,11 @@ function renderProfileMenuItem(_this) {
     return (
       <ListItem height={63}>
         <TouchableOpacity
-          style={{flexDirection:'row'}} activeOpacity={0.5} onPress={() => {
-            editProfile(user);
-          }}>
+          style={{flexDirection: 'row'}} activeOpacity={0.5} onPress={() => {
+          editProfile(user);
+        }}>
           <Body style={{flexDirection: 'row'}}>
-            <Thumbnail circular size={55} source={avatarSource} />
+            <Thumbnail circular size={55} source={avatarSource}/>
             <Text
               style={{alignSelf: 'center', marginLeft: 16, fontWeight: 'bold'}}>
               {user.username}
@@ -164,9 +164,9 @@ function renderLogOutMenuItem(_this) {
   } else {
     return (
       <ListItem height={63}>
-        <TouchableOpacity style={{flexDirection:'row'}} activeOpacity={0.5} onPress={() => {
-            onSignOut();
-          }}>
+        <TouchableOpacity style={{flexDirection: 'row'}} activeOpacity={0.5} onPress={() => {
+          onSignOut();
+        }}>
           <Body style={{flexDirection: 'row'}}>
             <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>
               Log Out

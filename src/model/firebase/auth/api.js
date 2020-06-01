@@ -8,58 +8,58 @@ export function signIn(data) {
     const {email, password} = data;
     console.log('API. LOGIN email: ', email, 'password: ', password);
     auth
-        .signInWithEmailAndPassword(email, password)
-        .then((value) => {
-          const uid = value.user.uid;
-          resolve(uid);
-        })
-        .catch((error) => {
-          reject(error)
-        });
+      .signInWithEmailAndPassword(email, password)
+      .then((value) => {
+        const uid = value.user.uid;
+        resolve(uid);
+      })
+      .catch((error) => {
+        reject(error)
+      });
   });
 }
 
 // Send Password Reset Email
 export function resetPassword(data) {
-    return new Promise((resolve, reject) => {
-        const {email} = data;
-        auth
-            .sendPasswordResetEmail(email)
-            .then((user) => {
-                resolve();
-            })
-            .catch((error) => {
-                reject(error)
-            });
-    });
+  return new Promise((resolve, reject) => {
+    const {email} = data;
+    auth
+      .sendPasswordResetEmail(email)
+      .then((user) => {
+        resolve();
+      })
+      .catch((error) => {
+        reject(error)
+      });
+  });
 }
 
 export function signOut() {
-    return new Promise((resolve, reject) => {
-        auth
-            .signOut()
-            .then(() => {
-                resolve();
-            })
-            .catch((error) => {
-                reject(error)
-            });
-    });
+  return new Promise((resolve, reject) => {
+    auth
+      .signOut()
+      .then(() => {
+        resolve();
+      })
+      .catch((error) => {
+        reject(error)
+      });
+  });
 }
 
 // Register the user using email and password
 export function registerNewUser(data) {
-    return new Promise((resolve, reject) => {
-        const {email, password} = data;
-        auth
-            .createUserWithEmailAndPassword(email, password)
-            .then((user) => {
-                resolve(user);
-            })
-            .catch((error) => {
-                resolve(user);
-            });
-    })
+  return new Promise((resolve, reject) => {
+    const {email, password} = data;
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        resolve(user);
+      })
+      .catch((error) => {
+        resolve(user);
+      });
+  })
 }
 
 export function getUserAsync() {
@@ -97,10 +97,10 @@ export function getCurrentUserAsync() {
         let uid = user.uid;
         fetchUserData(uid)
           .then((currentUser) => {
-             resolve(currentUser);
+            resolve(currentUser);
           })
           .catch((error) => {
-             reject(`Error while fetch user data: ${error}`);
+            reject(`Error while fetch user data: ${error}`);
           });
       })
       .catch((error) => {
@@ -110,13 +110,13 @@ export function getCurrentUserAsync() {
 }
 
 export function fetchUserData(uid) {
-    return new Promise((resolve, reject) => {
-        getUser(uid, function (currentUser) {
-            if (currentUser === null) {
-                reject(`User with uid=${uid} is not presented in the data base`);
-            } else {
-                resolve(currentUser);
-            }
-        });
+  return new Promise((resolve, reject) => {
+    getUser(uid, function (currentUser) {
+      if (currentUser === null) {
+        reject(`User with uid=${uid} is not presented in the data base`);
+      } else {
+        resolve(currentUser);
+      }
     });
+  });
 }

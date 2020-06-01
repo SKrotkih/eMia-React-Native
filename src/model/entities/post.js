@@ -21,13 +21,13 @@ export class Post {
       const photoName = postId + '.jpg';
       const imageRef = storage.ref(photoName);
       imageRef
-          .getDownloadURL()
-          .then((url) => {
-            resolve(url);
-          })
-          .catch((error) => {
-            reject(error);
-          });
+        .getDownloadURL()
+        .then((url) => {
+          resolve(url);
+        })
+        .catch((error) => {
+          reject(error);
+        });
     })
   }
 

@@ -8,6 +8,7 @@ import Button from '@components/Button';
 
 import {THEMES} from '@config/constants';
 import {init} from '../../modules/app';
+
 const {colors} = THEMES.gitterDefault;
 
 class NoInternetScreen extends Component {
@@ -26,7 +27,7 @@ class NoInternetScreen extends Component {
   render() {
     return (
       <Image style={styles.container}
-        source={require('../../images/gitter-background.jpg')}>
+             source={require('../../images/gitter-background.jpg')}>
         <Text style={styles.logo}>No internet connection.</Text>
         <Button
           style={[styles.buttonStyle, {backgroundColor: colors.darkRed}]}

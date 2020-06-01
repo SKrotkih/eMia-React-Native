@@ -6,23 +6,23 @@ export function fetchAllPosts() {
   console.log('API. fetchAllPosts');
   return new Promise((resolve, reject) => {
     database
-        .ref('main')
-        .child('posts')
-        .once('value')
-        .then((snapshot) => {
-          let items = [];
-          parsePosts(snapshot, items);
-          putUrlsPhoto(items, (data, error) => {
-            if (error) {
-              reject(error);
-            } else {
-              resolve(data.items);
-            }
-          })
+      .ref('main')
+      .child('posts')
+      .once('value')
+      .then((snapshot) => {
+        let items = [];
+        parsePosts(snapshot, items);
+        putUrlsPhoto(items, (data, error) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(data.items);
+          }
         })
-        .catch((error) => {
-          reject(error);
-        });
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 }
 

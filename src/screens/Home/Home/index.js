@@ -26,15 +26,15 @@ import {actions as auth} from '../../Auth/index';
 import TabAllPosts from './TabAllPosts';
 
 import {
-    Container,
-    Button,
-    Icon,
-    Text,
-    Tabs,
-    Tab,
-    ScrollableTab,
-    Fab,
-    IconNB,
+  Container,
+  Button,
+  Icon,
+  Text,
+  Tabs,
+  Tab,
+  ScrollableTab,
+  Fab,
+  IconNB,
 } from 'native-base';
 
 import {ModelView} from './ModelView';
@@ -43,134 +43,134 @@ const {Component} = React;
 const {login} = auth;
 
 export class Home extends Component {
-    constructor(props) {
-        super(props);
-        this.mv = new ModelView(this);
-        this.state = {
-            state: false,
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.mv = new ModelView(this);
+    this.state = {
+      state: false,
+    };
+  }
 
-    setUpNavigationBar() {
-        let title = config.APP_NAME;
-        const {setParams} = this.props.navigation;
-        setParams({
-            title: title,
-            left: (
-                <Icon
-                    style={{marginLeft: 8, color: '#fff'}}
-                    name={'ios-menu'}
-                    onPress={() => {
-                        menuButtonPressed();
-                    }}
-                />
-            ),
-            right: (
-                <Icon
-                    style={{marginRight: 8, color: '#fff'}}
-                    name={'ios-options'}
-                    onPress={() => {
-                        optionsButtonPressed();
-                    }}
-                />
-            ),
-        });
-    }
+  setUpNavigationBar() {
+    let title = config.APP_NAME;
+    const {setParams} = this.props.navigation;
+    setParams({
+      title: title,
+      left: (
+        <Icon
+          style={{marginLeft: 8, color: '#fff'}}
+          name={'ios-menu'}
+          onPress={() => {
+            menuButtonPressed();
+          }}
+        />
+      ),
+      right: (
+        <Icon
+          style={{marginRight: 8, color: '#fff'}}
+          name={'ios-options'}
+          onPress={() => {
+            optionsButtonPressed();
+          }}
+        />
+      ),
+    });
+  }
 
-    componentWillMount() {
-        this.setUpNavigationBar();
-    }
+  componentWillMount() {
+    this.setUpNavigationBar();
+  }
 
-    componentDidMount() {
-        this.mv.fetchData();
-    }
+  componentDidMount() {
+    this.mv.fetchData();
+  }
 
-    updateView() {
-        let currentState = !this.state.state;
-        this.setState({state: currentState});
-    }
+  updateView() {
+    let currentState = !this.state.state;
+    this.setState({state: currentState});
+  }
 
-    collapseMenuOnButton() {
-        this.setState({
-            active: false,
-        });
-    }
+  collapseMenuOnButton() {
+    this.setState({
+      active: false,
+    });
+  }
 
-    render() {
-        return (
-            <Container>
-                <Tabs
-                    tabBarUnderlineStyle={{borderBottomWidth: 2}}
-                    renderTabBar={() => <ScrollableTab/>}
-                    onChangeTab={this.onChangeTab()}>
-                    <Tab
-                        heading="All Posts"
-                        tabStyle={{backgroundColor: 'white'}}
-                        textStyle={{color: color.brand}}
-                        activeTabStyle={{backgroundColor: 'white'}}
-                        activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
-                        <TabAllPosts modalView={this.mv} />
-                    </Tab>
-                    <Tab
-                        heading="My Posts"
-                        tabStyle={{backgroundColor: 'white'}}
-                        textStyle={{color: color.brand}}
-                        activeTabStyle={{backgroundColor: 'white'}}
-                        activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
-                        {this.renderMyPostsTab()}
-                    </Tab>
-                </Tabs>
-                {this.renderActionsButton()}
-            </Container>
-        );
-    }
+  render() {
+    return (
+      <Container>
+        <Tabs
+          tabBarUnderlineStyle={{borderBottomWidth: 2}}
+          renderTabBar={() => <ScrollableTab/>}
+          onChangeTab={this.onChangeTab()}>
+          <Tab
+            heading="All Posts"
+            tabStyle={{backgroundColor: 'white'}}
+            textStyle={{color: color.brand}}
+            activeTabStyle={{backgroundColor: 'white'}}
+            activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+            <TabAllPosts modalView={this.mv}/>
+          </Tab>
+          <Tab
+            heading="My Posts"
+            tabStyle={{backgroundColor: 'white'}}
+            textStyle={{color: color.brand}}
+            activeTabStyle={{backgroundColor: 'white'}}
+            activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+            {this.renderMyPostsTab()}
+          </Tab>
+        </Tabs>
+        {this.renderActionsButton()}
+      </Container>
+    );
+  }
 
-    renderMyPostsTab() {
-        return (
-            <Text>Test</Text>
-        );
-    }
+  renderMyPostsTab() {
+    return (
+      <Text>Test</Text>
+    );
+  }
 
-    renderActionsButton() {
-        let activeState = this.state.active;
-        return (
-            <Fab
-                active={activeState}
-                direction="up"
-                containerStyle={{}}
-                style={{backgroundColor: color.brand}}
-                position="bottomRight"
-                onPress={() => this.setState({active: !activeState})}>
-                <IconNB name="ios-menu"/>
-                <Button
-                    style={{backgroundColor: color.brand}}
-                    onPress={() => this.createNewPostButtonPressed()}>
-                    <IconNB name="ios-create"/>
-                </Button>
-            </Fab>
-        );
-    }
+  renderActionsButton() {
+    let activeState = this.state.active;
+    return (
+      <Fab
+        active={activeState}
+        direction="up"
+        containerStyle={{}}
+        style={{backgroundColor: color.brand}}
+        position="bottomRight"
+        onPress={() => this.setState({active: !activeState})}>
+        <IconNB name="ios-menu"/>
+        <Button
+          style={{backgroundColor: color.brand}}
+          onPress={() => this.createNewPostButtonPressed()}>
+          <IconNB name="ios-create"/>
+        </Button>
+      </Fab>
+    );
+  }
 
-    onChangeTab() {
-    }
+  onChangeTab() {
+  }
 
-    createNewPostButtonPressed() {
-        this.collapseMenuOnButton();
-        Actions.AddNewPost();
-    }
+  createNewPostButtonPressed() {
+    this.collapseMenuOnButton();
+    Actions.AddNewPost();
+  }
 }
 
 // Pressing the buttons handlers
 function selectPostItem(item) {
-    Actions.PostPreview({item});
+  Actions.PostPreview({item});
 }
 
 function menuButtonPressed() {
-    Actions.MainMenu();
+  Actions.MainMenu();
 }
 
 function optionsButtonPressed() {
-    Actions.Options();
+  Actions.Options();
 }
 
 export default connect(null, {login})(Home);
