@@ -83,7 +83,7 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    this.mv.fetchData();
+    this.onChangeTab(0)
   }
 
   updateView() {

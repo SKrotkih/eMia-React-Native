@@ -11,6 +11,7 @@ export class ModelView {
     this._dataSource = null;
     this._loaded = false;
     this._refreshing = false;
+    this._currentFilter = TABS.ALLPOSTS;
   }
 
   updateView() {
@@ -29,7 +30,12 @@ export class ModelView {
     return this._refreshing;
   }
 
+  refreshData() {
+    this.filter = this._currentFilter;
+  }
+
   set filter(tabItem) {
+    this._currentFilter = tabItem;
     switch (tabItem) {
       case TABS.ALLPOSTS:
         this.fetchData(0);

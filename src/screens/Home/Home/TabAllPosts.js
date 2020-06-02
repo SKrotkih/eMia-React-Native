@@ -32,7 +32,7 @@ export default class TabAllPosts extends Component {
         keyExtractor={(item, index) => index.toString()}
         refreshing={this.modalView.refreshing}
         onRefresh={() => {
-          this.modalView.fetchData();
+          this.modalView.refreshData();
         }}
         onEndReached={() => {
           // this.setState(({ data }) => ({
