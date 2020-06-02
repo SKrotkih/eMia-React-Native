@@ -2,23 +2,19 @@
 
 Here is an entire source code application developed with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
 
-Demo movie on an iOS device: 
+How it looks on iOS device: 
 
 ![reactnative_ios](https://user-images.githubusercontent.com/2775621/40759771-2bb84a6e-649c-11e8-86b2-be6e8ed46ad1.gif)
 
 ## Introduction
 
-There are also two native example apps:
-[eMia-iOS](https://github.com/SKrotkih/eMia-iOS)
-[eMia-Android](https://github.com/SKrotkih/eMia-Android).
-
 eMia is a simple social network. 
-You can be registered there, then edit your profile, post a new topic with a title, description and a photo.
+You can sign in, sign up, sign out, restore password, edit profile, add a new post (title, body, photo),  filter posts.
 You will get  push-notification if another user likes your post.
 
 eMia uses Firebase database, storage, authentication and cloud messages.
 
-Notes. This React Native version contains also some native things. For example there is Filter View Controller (iOS, Swift 5) which is launched by options menu button (React Native  component).  
+Notes. This React Native version contains also some native things. For example there is Filter View Controller (iOS, Swift 5) which is launched with using options menu button.  
 
 ## Requirements
 
@@ -27,12 +23,12 @@ Notes. This React Native version contains also some native things. For example t
 
 ## Preparing for using
 
-If you wont to try eMia by yourself, please following the next steps.
+If you wont to try eMia by yourself, you should register app on Firebase. Please follow next instructions:
 
 For iOS
 Sign in your Google account, open Firebase console https://console.firebase.google.com
-Create a new project. Please follow documentations https://firebase.google.com/docs/ios/setup#add_firebase_to_your_app.
-As a result you need with using GoogleService-Info.plist fill constants (read comments in \src\config\constants.js).
+Create a new project. Follow documentations https://firebase.google.com/docs/ios/setup#add_firebase_to_your_app.
+Download GoogleService-Info.plist. Then with using GoogleService-Info.plist fill constants in \src\config\constants.js file (read comments there).
 
 For Android
 Sign in your Google account, open Firebase console https://console.firebase.google.com
@@ -44,13 +40,13 @@ Clone or unzip the repository.
 
 In root directory  execute command:
 
-yarn
+yarn   (or npm install)
 
 cd ios
 
 pod install
 
-Note. Fix issue with CocoaPods could not find compatible versions for pod "React/Core":
+Note. To fix issue with CocoaPods whet it could not find compatible versions for pod "React/Core":
 cd ..
 grep -rl "s.dependency 'React/Core'" node_modules/ | xargs sed -i '' 's=React/Core=React-Core=g'
 
@@ -89,6 +85,13 @@ Go to the eMia directory. Put command in console:
 react-native start --port 8081
 
 Start Android Studio.  Open android project. Run 'app'
+
+## Afterword
+
+There are also two native examples of the app:
+iOS - [eMia-iOS](https://github.com/SKrotkih/eMia-iOS)
+Android - [eMia-Android](https://github.com/SKrotkih/eMia-Android).
+
 
 ## Demo video
 
