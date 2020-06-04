@@ -38,3 +38,9 @@ GoogleService-Info.plist
 
 node_modules.zip
 
+android/.project
+android/.settings
+android/app/.classpath
+android/app/.settings
+android/app/.project
+android/java_pid*

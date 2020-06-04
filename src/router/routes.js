@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Scene,
-  Router,
-  ActionConst,
-  Stack,
-  Modal,
-  Tabs,
-} from 'react-native-router-flux';
+import {Scene, Router, ActionConst, Stack} from 'react-native-router-flux';
 
 // Start screen
 import Welcome from '@screens/Network/Welcome';

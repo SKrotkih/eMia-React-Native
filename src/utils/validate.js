@@ -1,23 +1,22 @@
-
-export function isEmpty (str) {
+export function isEmpty(str) {
   return (!str || str.length === 0);
 }
 
-export function validateEmail (email) {
+export function validateEmail(email) {
   var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-  return (filter.test(email))
+  return (filter.test(email));
 }
 
-export function validatePassword (password) {
-  return (password.length > 6)
+export function validatePassword(password) {
+  return (password.length > 6);
 }
 
-export function confirmPassword (cPassword, password) {
-  return (cPassword === password)
+export function confirmPassword(cPassword, password) {
+  return (cPassword === password);
 }
 
-export function validate (form) {
+export function validate(form) {
   let error = {};
   let success = true;
 
@@ -26,7 +25,7 @@ export function validate (form) {
 
   keys.slice(0, length).map(field => {
     if (field !== 'error') {
-      var { type, value } = form[field];
+      var {type, value} = form[field];
       if (isEmpty(value)) {
         error[field] = 'Your ' + field + ' is required';
         success = false;

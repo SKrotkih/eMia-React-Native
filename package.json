@@ -13,7 +13,10 @@
     "preset": "react-native"
   },
   "dependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/runtime": "^7.10.2",
     "@babel/preset-env": "^7.9.6",
+    "babel-jest": "^26.0.1",
     "@react-native-community/art": "^1.2.0",
     "@react-native-community/async-storage": "^1.10.3",
     "@react-native-community/eslint-config": "^1.1.0",

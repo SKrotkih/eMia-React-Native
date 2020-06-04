@@ -1,12 +1,6 @@
 import React, {PureComponent} from 'react';
 
-import {
-  Dimensions,
-  Modal,
-  WebView,
-  Share,
-  Image
-} from 'react-native';
+import {Dimensions, Modal, WebView, Share, Image} from 'react-native';
 
 import {
   Header,
@@ -16,13 +10,13 @@ import {
   Left,
   Right,
   Title,
-  Button
+  Button,
 } from 'native-base';
 
 const webViewHeight = Dimensions.get('window').height - 56;
 
 export default class ModalComponent extends PureComponent {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this._handleClose = this._handleClose.bind(this);
     this._handleShare = this._handleShare.bind(this);
@@ -33,7 +27,8 @@ export default class ModalComponent extends PureComponent {
   }
 
   _handleShare() {
-    const { url, title } = this.props.articleData, message = `${title}\n\nRead more @\n${url}\n\nshared via RN News App`;
+    const {url, title} = this.props.articleData,
+      message = `${title}\n\nRead more @\n${url}\n\nshared via RN News App`;
     return Share.share(
       {title, message, url: message},
       {dialogTitle: `Share ${title}`},
