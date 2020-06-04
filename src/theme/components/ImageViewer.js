@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import {Icon} from 'native-base';
 import PropTypes from 'prop-types';
-import RNFetchBlob from 'react-native-fetch-blob';
+import RNFetchBlob from 'rn-fetch-blob';
 import * as Progress from 'react-native-progress';
 // components
 import {Alert} from './alerts/Alert';
