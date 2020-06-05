@@ -44,3 +44,4 @@ android/app/.classpath
 android/app/.settings
 android/app/.project
 android/java_pid*
+android/.gradle
