@@ -6,9 +6,9 @@ import {TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import ImageViewer from '@theme/components/ImageViewer';
 import styles from './styles';
-import {Post} from '@model/entities/post';
 import {Button, Icon, Text, Label} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
+import {Post} from "../../../model/entities/post";
 
 const {View} = ReactNative;
 const {Component} = React;
@@ -127,7 +127,7 @@ export class AddNewPost extends Component {
 
   doneButtonPressed() {
     const post = new Post(this.state.title, this.state.body, this.state.url);
-    post.upload((result) => {
+    post.submitOnServer((result) => {
       if (result) {
         this.props.navigation.goBack();
       }

@@ -1,6 +1,6 @@
 import {Alert} from '@theme/components/alerts/';
 import {uploadImage} from '@model/firebase/utils/uploadImage';
-import {uploadCurrentUserData} from '@model/actions/users/actions';
+import {uploadCurrentUserData} from '@model/dbinteractor/users/dbinteractor';
 import {storage} from '@model/firebase/config';
 
 export class User {

@@ -2,7 +2,7 @@ import React from 'react';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {Text, View, TouchableOpacity, Image} from 'react-native';
-import {Button, SocialIcon, Divider} from 'react-native-elements';
+import {Button} from 'react-native-elements';
 import {config} from '../index';
 import styles from './styles';
 

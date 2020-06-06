@@ -36,6 +36,8 @@ Podfile.zip
 GoogleService-Info.js
 GoogleService-Info.plist
 
+tsbuild/
+
 node_modules.zip
 ios/pods.zip
 android/.project

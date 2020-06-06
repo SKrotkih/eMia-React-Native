@@ -1,11 +1,18 @@
 // Post
-import {Alert} from '@theme/components/alerts/';
-import {uploadImage} from '@model/firebase/utils/uploadImage';
-import {uploadData} from '@model/firebase/database/posts';
-import {getCurrentUserAsync} from '@model/firebase/auth/api';
-import {storage} from '@model/firebase/config';
+import {Alert} from '../../theme/components/alerts/';
+import {uploadImage} from '../../model/firebase/utils/uploadImage';
+import {uploadData} from '../../model/firebase/database/posts';
+import {getCurrentUserAsync} from '../../model/firebase/auth/api';
+import {storage} from '../../model/firebase/config';
 
 export class Post {
+  author: string;
+  body: string;
+  title: string;
+  url: string;
+  pictureUri: string;
+  uid: string;
+
   constructor(title, body, pictureUri) {
     this.author = '';
     this.body = body;
@@ -31,22 +38,22 @@ export class Post {
     })
   }
 
-  upload(completed) {
+  submitOnServer(completed) {
     if (this.title === null || this.title.length === 0) {
       Alert.show('Please, enter post title', {
         type: 'info',
         duration: 3000,
       });
     } else {
-      this.createNewPost(completed);
+      this.addPost(completed);
     }
   }
 
-  createNewPost(completed) {
-    var _this = this;
+  private addPost(completed) {
+    let _this = this;
     getCurrentUserAsync()
       .then((user) => {
-        _this.uid = user.uid;
+        _this.uid = user.id;
         _this.author = user.username;
         uploadData(_this, (id) => {
           let pictureUri = _this.pictureUri;

@@ -1,5 +1,5 @@
 import {signIn, signOut, registerNewUser, resetPassword, fetchUserData} from '@model/firebase/auth/api';
-import {LOGGED_IN} from '@model/actions/login/actionTypes';
+import {LOGGED_IN} from '@model/dbinteractor/login/actionTypes';
 
 export function login(data, successCB, errorCB) {
   return (dispatch) => {

@@ -1,6 +1,6 @@
 import {auth} from '@model/firebase/config';
 import {getUser} from '@model/firebase/database/users';
-import {LOGGED_IN, LOGGED_OUT} from '@model/actions/login/actionTypes';
+import {LOGGED_IN, LOGGED_OUT} from '@model/dbinteractor/login/actionTypes';
 
 // Sign user in with their email and password
 export function signIn(data) {

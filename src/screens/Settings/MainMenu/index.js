@@ -2,8 +2,8 @@ import React from 'react';
 import ReactNative from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Loader from '@components/Loader';
-import {logOut} from '@model/actions/login/actions';
-import {downloadCurrentUserData} from '@model/actions/users/actions';
+import {logOut} from '@model/dbinteractor/login/dbinteractor';
+import {downloadCurrentUserData} from '@model/dbinteractor/users/dbinteractor';
 import styles from './styles';
 
 import {

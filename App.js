@@ -13,19 +13,6 @@ import {checkLoginStatus} from '@model/firebase/auth/api';
 
 import backgroundImage from '@theme/BackgroundImage';
 
-function setUpIgnoreYellowMessage() {
-  console.disableYellowBox = true;
-
-  YellowBox.ignoreWarnings(['Setting a timer', 'Warning:']);
-
-  // const _console = _.clone(console);
-  // console.warn = message => {
-  //   if (message.indexOf('Setting a timer') <= -1) {
-  //     _console.warn(message);
-  //   }
-  // };
-}
-
 export default class App extends Component {
   constructor() {
     super();
@@ -76,6 +63,11 @@ export default class App extends Component {
       );
     }
   }
+}
+
+function setUpIgnoreYellowMessage() {
+  console.disableYellowBox = true;
+  YellowBox.ignoreWarnings(['Setting a timer', 'Warning:']);
 }
 
 App.navigatorStyle = {
