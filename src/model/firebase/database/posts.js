@@ -141,14 +141,22 @@ function putUrlsPhoto(items, completion) {
             console.log(error);
           })
           .finally(() => {
-            getUser(userId, (user) => {
-              item.author = user;
-              bufferLength -= 1;
-              if (bufferLength === 0) {
-                const data = {items};
-                completion(data, null);
-              }
-            });
+            getUser(userId)
+              .then((user) => {
+                item.author = user;
+                bufferLength -= 1;
+                if (bufferLength === 0) {
+                  const data = {items};
+                  completion(data, null);
+                }
+              })
+              .catch(() => {
+                bufferLength -= 1;
+                if (bufferLength === 0) {
+                  const data = {items};
+                  completion(data, null);
+                }
+              });
           });
       });
   });

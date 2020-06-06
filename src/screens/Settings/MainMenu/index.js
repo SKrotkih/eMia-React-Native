@@ -8,34 +8,16 @@ import styles from './styles';
 
 import {
   Container,
-  Header,
-  Title,
   Content,
-  Footer,
-  FooterTab,
-  Button,
-  Left,
-  Right,
   Body,
-  Icon,
   Text,
   Thumbnail,
   List,
   ListItem,
 } from 'native-base';
 
-const {
-  Dimensions,
-  AppRegistry,
-  Image,
-  StyleSheet,
-  View,
-  Alert,
-  TouchableOpacity,
-} = ReactNative;
-
+const {View, Alert, TouchableOpacity} = ReactNative;
 const {Component} = React;
-
 const menuItems = [
   {
     id: 'profile',

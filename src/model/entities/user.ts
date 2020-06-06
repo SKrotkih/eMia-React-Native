@@ -1,10 +1,19 @@
-import {Alert} from '@theme/components/alerts/';
-import {uploadImage} from '@model/firebase/utils/uploadImage';
-import {uploadCurrentUserData} from '@model/dbinteractor/users/dbinteractor';
-import {storage} from '@model/firebase/config';
+import {Alert} from '../../theme/components/alerts/';
+import {uploadImage} from '../../model/firebase/utils/uploadImage';
+import {uploadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
+import {storage} from '../../model/firebase/config';
 
 export class User {
-  constructor(uid, name) {
+  address: string;
+  email: string;
+  gender: number;
+  id: string;
+  tokenAndroid: string;
+  tokenIOS: string;
+  username: string;
+  yearbirth: number;
+
+  constructor(uid: string, name: string) {
     this.address = '';
     this.email = '';
     this.gender = 1;
@@ -15,7 +24,22 @@ export class User {
     this.yearbirth = 1970;
   }
 
-  update(photoUrl, completed) {
+  // Snapshot from Firebase Users table item
+  parse(snapshot: any) {
+    this.id = snapshot.id;
+    this.username = snapshot.username;
+    this.address = snapshot.address === undefined ? '' : snapshot.address;
+    this.email = snapshot.email === undefined ? '' : snapshot.email;
+    this.gender = snapshot.gender === undefined ? 1 : snapshot.gender;
+    this.tokenAndroid = snapshot.tokenAndroid === undefined ? '' : snapshot.tokenAndroid;
+    this.tokenIOS = snapshot.tokenIOS === undefined ? '' : snapshot.tokenIOS;
+    this.yearbirth = snapshot.yearbirth === undefined ? 0 : snapshot.yearbirth;
+    if (this.id === undefined) {
+      this.id = snapshot.uid;
+    }
+  }
+
+  update(photoUrl: string, completed) {
     if (this.username === null || this.username.length === 0) {
       Alert.show('Please, enter your name', {
         type: 'info',
@@ -24,7 +48,7 @@ export class User {
       completed(false);
       return;
     }
-    var _this = this;
+    let _this = this;
     uploadCurrentUserData(_this)
       .then(() => {
         uploadImage(photoUrl, _this.id)

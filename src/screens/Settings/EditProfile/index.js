@@ -96,9 +96,9 @@ export class EditProfile extends Component {
             placeholder="Type your gender"
             autoFocus={false}
             onChangeText={(text) => {
-              this.mv.gender = text;
+              this.mv.gender = +text;
             }}
-            defaultValue={this.mv.gender}
+            defaultValue={'' + this.mv.gender}
           />
           <Label style={styles.label}>{yearBirthLabelText}</Label>
           <TextInput

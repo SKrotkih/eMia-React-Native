@@ -1,7 +1,6 @@
 import authApi from '@model/firebase/auth/api';
 import {getCurrentUserAsync, getUserAsync} from '@model/firebase/auth/api';
-import api from '@model/firebase/database/users';
-import {updateUser} from '@model/firebase/database/users';
+import {updateUser, fetchAllUsers, getUser} from '../../firebase/database/users';
 import {LOGGED_IN} from '@model/dbinteractor/login/actionTypes';
 
 export function register(data, successCB, errorCB) {
@@ -63,20 +62,24 @@ export function updateUserProfileData(user, successCB, errorCB) {
   };
 }
 
-export function getUser(uid, callback) {
-  api.getUser(uid, function (user) {
-    callback(user);
-  });
+export function fetchUser(uid, callback) {
+  getUser(uid)
+    .then((user) => {
+      callback(user);
+    })
+    .catch(() => {
+      callback(null);
+    })
 }
 
 export function fetchUsers(completion, failed) {
   return (dispatch) => {
-    api.fetchAllUsers(function (data, error) {
-      if (data.items === null) {
+    fetchAllUsers()
+      .then((users) => {
+        completion(users);
+      })
+      .catch((error) => {
         failed(error);
-      } else {
-        completion(data.items);
-      }
-    });
-  };
+      })
+  }
 }

@@ -1,5 +1,5 @@
-import {database} from '@model/firebase/config';
-import {User} from '@model/entities/user';
+import {database} from '../../firebase/config';
+import {User} from '../../entities/user';
 
 // Create new user object in realtime database
 export function updateUser(user) {
@@ -13,61 +13,62 @@ export function updateUser(user) {
         resolve();
       })
       .catch((error) => {
+        console.log('API. updateUser error: ', error.message);
         reject(error);
       });
   });
 }
 
 // Get user object from the realtime database
-export function getUser(uid, callback) {
+export function getUser(uid) {
   console.log('API. getUser uid=', uid);
-  database
-    .ref('main')
-    .child('users')
-    .child(uid)
-    .once('value')
-    .then(function (snapshot) {
-      if (snapshot.val() != null) {
+  return new Promise((resolve, reject) => {
+    database
+      .ref('main')
+      .child('users')
+      .child(uid)
+      .once('value')
+      .then(function (snapshot) {
         let value = snapshot.val();
-        let user = new User(value.id, value.username);
-        user.address = value.address === undefined ? '' : value.address;
-        user.email = value.email === undefined ? '' : value.email;
-        user.gender = value.gender === undefined ? 1 : value.gender;
-        user.tokenAndroid = value.tokenAndroid === undefined ? '' : value.tokenAndroid;
-        user.tokenIOS = value.tokenIOS === undefined ? '' : value.tokenIOS;
-        user.yearbirth = value.yearbirth === undefined ? 0 : value.yearbirth;
-        if (user.id === undefined) {
-          user.id = value.uid;
+        if (value != null) {
+          let user = new User(value.id, value.username);
+          user.parse(value);
+          resolve(user);
+        } else {
+          resolve(null);
         }
-        callback(user);
-      } else {
-        callback(null);
-      }
-    })
-    .catch((error) => {
-      console.log('API. GET USER error: ', error.message);
-      callback(null);
-    });
+      })
+      .catch((error) => {
+        console.log('API. getUser error: ', error.message);
+        reject();
+      });
+  });
 }
 
-export function fetchAllUsers(callback) {
+export function fetchAllUsers() {
   console.log('API. fetchAllUsers');
-  database
-    .ref('main')
-    .child('users')
-    .once('value')
-    .then(function (snapshot) {
-      var items = [];
-      if (snapshot.val() !== null) {
-        snapshot.forEach((child) => {
-          items.push({
-            value: child.val(),
-            key: child.key,
+  return new Promise((resolve, reject) => {
+    database
+      .ref('main')
+      .child('users')
+      .once('value')
+      .then(function (snapshot) {
+        let users = [];
+        if (snapshot.val() !== null) {
+          snapshot.forEach((child) => {
+            let value = child.val();
+            let user = new User(value.id, value.username);
+            user.parse(value);
+            users.push({
+              value: user,
+              key: child.key,
+            });
           });
-        });
-      }
-      const data = {items};
-      callback(data, null);
-    })
-    .catch((error) => callback(null, error));
+        }
+        resolve(users);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 }

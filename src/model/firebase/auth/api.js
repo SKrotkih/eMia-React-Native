@@ -1,5 +1,5 @@
 import {auth} from '@model/firebase/config';
-import {getUser} from '@model/firebase/database/users';
+import {getUser} from '../../firebase/database/users';
 import {LOGGED_IN, LOGGED_OUT} from '@model/dbinteractor/login/actionTypes';
 
 // Sign user in with their email and password
@@ -111,12 +111,16 @@ export function getCurrentUserAsync() {
 
 export function fetchUserData(uid) {
   return new Promise((resolve, reject) => {
-    getUser(uid, function (currentUser) {
-      if (currentUser === null) {
-        reject(`User with uid=${uid} is not presented in the data base`);
-      } else {
-        resolve(currentUser);
-      }
-    });
+    getUser(uid)
+      .then((currentUser) => {
+        if (currentUser === null) {
+          reject(`User with uid=${uid} is not presented in the data base`);
+        } else {
+          resolve(currentUser);
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
 }
