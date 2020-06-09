@@ -5,9 +5,9 @@ import {Scene, Router, ActionConst, Stack} from 'react-native-router-flux';
 import Welcome from '../screens/Network/Welcome';
 
 // Authentication Scenes
-import Register from '@screens/Auth/Register';
-import Login from '@screens/Auth/Login';
-import ForgotPassword from '@screens/Auth/ForgotPassword';
+import Register from '../screens/Auth/Register';
+import Login from '../screens/Auth/Login';
+import ForgotPassword from '../screens/Auth/ForgotPassword';
 
 // Main Scenes
 import Home from '../screens/Home/Home';
