@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import ReactNative from 'react-native';
 import {requireNativeComponent, Platform} from 'react-native';
 import {connect} from 'react-redux';
-import {windowWidth, windowHeight} from '@theme/styles';
+import {windowHeight} from '../../../theme/styles';
 import {
   Container,
   Content,

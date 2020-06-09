@@ -1,7 +1,7 @@
-import {database} from '@model/firebase/config';
-import {getUser} from '@model/firebase/database/users';
-import {getUserAsync} from '@model/firebase/auth/api';
-import {Post} from '@model/entities/post';
+import {database} from '../config';
+import {getUser} from './users';
+import {getUserAsync} from '../auth/api';
+import {Post} from '../../entities/post';
 
 export function fetchAllPosts() {
   console.log('API. fetchAllPosts');

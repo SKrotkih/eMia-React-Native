@@ -1,5 +1,5 @@
-import {removeStorageItem, setStorageObjectItem} from '@utils/storage';
-import {LOGGED_IN, LOGGED_OUT} from '@model/dbinteractor/login/actionTypes';
+import {removeStorageItem, setStorageObjectItem} from '../../../utils/storage';
+import {LOGGED_IN, LOGGED_OUT} from '../../dbinteractor/login/actionTypes';
 
 let initialState = {
   isLoggedIn: false,

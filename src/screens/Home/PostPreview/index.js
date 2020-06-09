@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactNative from 'react-native';
 import styles from './styles';
-import Time from '@components/Time';
+import Time from '../../../components/Time';
 import {connect} from 'react-redux';
-import ImageViewer from '@theme/components/ImageViewer';
+import ImageViewer from '../../../components/ImageViewer';
 import {Container, Header, Content, Text, Thumbnail} from 'native-base';
 import {ModelView} from './modelView';
 

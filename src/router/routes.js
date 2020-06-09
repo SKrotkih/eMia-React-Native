@@ -2,7 +2,7 @@ import React from 'react';
 import {Scene, Router, ActionConst, Stack} from 'react-native-router-flux';
 
 // Start screen
-import Welcome from '@screens/Network/Welcome';
+import Welcome from '../screens/Network/Welcome';
 
 // Authentication Scenes
 import Register from '@screens/Auth/Register';
@@ -10,14 +10,14 @@ import Login from '@screens/Auth/Login';
 import ForgotPassword from '@screens/Auth/ForgotPassword';
 
 // Main Scenes
-import Home from '@screens/Home/Home';
-import PostPreview from '@screens/Home/PostPreview';
-import AddNewPost from '@screens/Home/AddNewPost';
-import MainMenu from '@screens/Settings/MainMenu';
-import EditProfile from '@screens/Settings/EditProfile';
-import Options from '@screens/Home/Options';
+import Home from '../screens/Home/Home';
+import PostPreview from '../screens/Home/PostPreview';
+import AddNewPost from '../screens/Home/AddNewPost';
+import MainMenu from '../screens/Settings/MainMenu';
+import EditProfile from '../screens/Settings/EditProfile';
+import Options from '../screens/Home/Options';
 
-import {color, navTitleStyle, navBarStyle} from '@theme/styles';
+import {color, navTitleStyle, navBarStyle} from '../theme/styles';
 
 export default class extends React.Component {
   constructor() {
@@ -26,7 +26,7 @@ export default class extends React.Component {
   }
 
   render() {
-    var isLoggedIn = this.props.isLoggedIn;
+    let isLoggedIn = this.props.isLoggedIn;
     return (
       <Router>
         <Scene

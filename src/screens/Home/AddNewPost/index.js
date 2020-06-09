@@ -4,11 +4,11 @@ import React from 'react';
 import ReactNative from 'react-native';
 import {TextInput} from 'react-native';
 import {connect} from 'react-redux';
-import ImageViewer from '@theme/components/ImageViewer';
-import styles from './styles';
 import {Button, Icon, Text, Label} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
+import styles from './styles';
 import {Post} from "../../../model/entities/post";
+import ImageViewer from '../../../components/ImageViewer';
 
 const {View} = ReactNative;
 const {Component} = React;

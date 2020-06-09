@@ -1,4 +1,4 @@
-import {Alert} from '../../theme/components/alerts/';
+import {Alert} from '../../components/alerts/';
 import {uploadImage} from '../../model/firebase/utils/uploadImage';
 import {uploadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
 import {storage} from '../../model/firebase/config';

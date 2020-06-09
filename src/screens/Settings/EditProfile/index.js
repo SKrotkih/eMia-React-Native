@@ -6,8 +6,7 @@ import {connect} from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
 import {Button, Icon, Text, Label} from 'native-base';
 import styles from './styles';
-import ImageViewer from '@theme/components/ImageViewer';
-
+import ImageViewer from '../../../components/ImageViewer';
 import {ModelView} from './ModelView';
 
 const {View, TextInput, ScrollView} = ReactNative;

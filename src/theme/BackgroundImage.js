@@ -1,4 +1,4 @@
-import {windowWidth, windowHeight} from '@theme/styles';
+import {windowWidth, windowHeight} from './styles';
 
 const styles = {
   flex: 1,

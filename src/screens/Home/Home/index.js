@@ -20,7 +20,7 @@
 import React from 'react';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
-import {color} from '@theme/styles';
+import {color} from '../../../theme/styles';
 import {config} from '../index';
 import {actions as auth} from '../../Auth/index';
 import TabAllPosts from './TabAllPosts';
@@ -30,7 +30,6 @@ import {
   Container,
   Button,
   Icon,
-  Text,
   Tabs,
   Tab,
   ScrollableTab,

@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import {windowWidth,
   padding,
   color,
-} from '@theme/styles';
+} from '../../../theme/styles';
 
 const styles = StyleSheet.create({
   container: {

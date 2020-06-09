@@ -1,7 +1,7 @@
-import authApi from '@model/firebase/auth/api';
-import {getCurrentUserAsync, getUserAsync} from '@model/firebase/auth/api';
+import authApi from '../../firebase/auth/api';
+import {getCurrentUserAsync, getUserAsync} from '../../firebase/auth/api';
 import {updateUser, fetchAllUsers, getUser} from '../../firebase/database/users';
-import {LOGGED_IN} from '@model/dbinteractor/login/actionTypes';
+import {LOGGED_IN} from '../../dbinteractor/login/actionTypes';
 
 export function register(data, successCB, errorCB) {
   return (dispatch) => {

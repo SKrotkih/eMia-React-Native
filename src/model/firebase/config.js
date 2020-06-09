@@ -1,14 +1,14 @@
 import * as firebase from 'firebase';
-import * as constants from '@config/GoogleService-Info';
+import * as firebaseConstants from '../../config/GoogleService-Info';
 
 // Initialize Firebase
 const config = {
-  apiKey: constants.FIREBASE_API_KEY,
-  authDomain: constants.FIREBASE_AUTH_DOMAIN,
-  databaseURL: constants.FIREBASE_DATABASE_URL,
-  projectId: constants.FIREBASE_PROJECT_ID,
-  storageBucket: constants.FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: constants.FIREBASE_MESSAGING_SENDER_ID,
+  apiKey: firebaseConstants.FIREBASE_API_KEY,
+  authDomain: firebaseConstants.FIREBASE_AUTH_DOMAIN,
+  databaseURL: firebaseConstants.FIREBASE_DATABASE_URL,
+  projectId: firebaseConstants.FIREBASE_PROJECT_ID,
+  storageBucket: firebaseConstants.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: firebaseConstants.FIREBASE_MESSAGING_SENDER_ID,
 };
 
 firebase.initializeApp(config);

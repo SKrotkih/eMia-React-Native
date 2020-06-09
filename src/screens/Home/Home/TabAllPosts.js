@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import ReactNative from 'react-native';
-import {Alert} from '@theme/components/alerts/';
 import Grid from 'react-native-grid-component';
 import {styles, gridItemStyles} from './styles';
 import {Actions} from 'react-native-router-flux';
-import Loader from '@components/Loader';
+import Loader from '../../../components/Loader';
 import {Body, Text} from 'native-base';
 
 const {Image, View, TouchableOpacity} = ReactNative;

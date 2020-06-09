@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {windowWidth, windowHeight} from '@theme/styles';
+import {windowWidth, windowHeight} from '../../../theme/styles';
 
 const resizeMode = 'contain';
 

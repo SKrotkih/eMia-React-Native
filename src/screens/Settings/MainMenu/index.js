@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactNative from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import Loader from '@components/Loader';
-import {logOut} from '@model/dbinteractor/login/dbinteractor';
-import {downloadCurrentUserData} from '@model/dbinteractor/users/dbinteractor';
+import Loader from '../../../components/Loader';
+import {logOut} from '../../../model/dbinteractor/login/dbinteractor';
+import {downloadCurrentUserData} from '../../../model/dbinteractor/users/dbinteractor';
 import styles from './styles';
 
 import {
@@ -65,7 +65,7 @@ export class MainMenu extends Component {
     if (!this.state.loaded) {
       return renderLoadingView();
     }
-    var _this = this;
+    let _this = this;
     return (
       <Container
         style={{margin: 15, marginBottom: 15, backgroundColor: '#00000000'}}>
@@ -141,7 +141,7 @@ function editProfile(user) {
 // Log Out
 
 function renderLogOutMenuItem(_this) {
-  var user = _this.state.user;
+  let user = _this.state.user;
   if (user === null) {
     return null;
   } else {

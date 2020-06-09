@@ -1,6 +1,6 @@
 import React from 'react';
-import {Alert} from '@theme/components/alerts/';
-import * as actions from '@model/dbinteractor/posts/dbinteractor';
+import {Alert} from '../../../components/alerts/';
+import * as actions from '../../../model/dbinteractor/posts/dbinteractor';
 import {TABS} from './styles';
 
 const {fetchPosts} = actions;

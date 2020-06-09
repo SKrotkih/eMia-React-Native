@@ -15,6 +15,8 @@ export const FIREBASE_MESSAGING_SENDER_ID = ''
 export const FACEBOOK_APP_ID = '';
 export const APP_NAME = 'eMia - React Native';
 
+export const IS_ERRORS_LOG_SET_UP = true;
+
 export const THEMES = {
   gitterDefault: {
     name: 'Gitter default theme',

@@ -4,7 +4,7 @@ import {TouchableNativeFeedback, TouchableOpacity, View} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import s from './styles';
 
-import {OLD_ANDROID_VERSIONS} from '@config/constants';
+import {OLD_ANDROID_VERSIONS} from '../../config/constants';
 
 const noop = () => {};
 

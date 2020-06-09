@@ -3,15 +3,15 @@ import {Provider} from 'react-redux';
 import {StyleProvider} from 'native-base';
 import {ImageBackground, StatusBar, YellowBox, StyleSheet} from 'react-native';
 
-import getTheme from '@theme/components';
-import variables from '@theme/variables/commonColor';
+import getTheme from './src/components';
+import variables from './src/theme/variables/commonColor';
 
-import Router from '@router/routes';
-import store from '@redux/store';
+import Router from './src/router/routes';
+import store from './src/redux/store';
 
-import {checkLoginStatus} from '@model/firebase/auth/api';
+import {checkLoginStatus} from './src/model/firebase/auth/api';
 
-import backgroundImage from '@theme/BackgroundImage';
+import backgroundImage from './src/theme/BackgroundImage';
 
 export default class App extends Component {
   constructor() {

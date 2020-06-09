@@ -1,5 +1,5 @@
 // Post
-import {Alert} from '../../theme/components/alerts/';
+import {Alert} from '../../components/alerts/';
 import {uploadImage} from '../../model/firebase/utils/uploadImage';
 import {uploadData} from '../../model/firebase/database/posts';
 import {getCurrentUserAsync} from '../../model/firebase/auth/api';

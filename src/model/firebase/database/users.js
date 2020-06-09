@@ -1,4 +1,4 @@
-import {database} from '../../firebase/config';
+import {database} from '../config';
 import {User} from '../../entities/user';
 
 // Create new user object in realtime database

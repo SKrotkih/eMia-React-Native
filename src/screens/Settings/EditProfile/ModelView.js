@@ -1,4 +1,4 @@
-import {User} from '@model/entities/user';
+import {User} from '../../../model/entities/user';
 
 export class ModelView {
   constructor(user, view) {
