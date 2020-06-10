@@ -49,7 +49,7 @@ export default class App extends Component {
       return (
         <ImageBackground
           style={styles.background}
-          source={require('@assets/images/splash.png')}>
+          source={require('./src/assets/images/splash.png')}>
           <StatusBar translucent barStyle="dark-content" />
         </ImageBackground>
       );

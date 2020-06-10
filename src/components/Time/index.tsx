@@ -5,6 +5,9 @@ import {Text} from 'native-base';
 
 export default class Time extends PureComponent{
 
+    private readonly date: any;
+    private readonly style: any;
+
     constructor(props){
         super(props);
         this.date = props.date;

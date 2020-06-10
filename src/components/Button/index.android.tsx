@@ -1,5 +1,5 @@
+import React, {Children} from 'react';
 import PropTypes from 'prop-types';
-import React, { Children } from 'react';
 import {TouchableNativeFeedback, TouchableOpacity, View} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
 import s from './styles';

@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "module": "commonjs",
     "target": "es5",
     "sourceMap": true,
-    "outDir": "tsbuild"
+    "outDir": "tsbuild",
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules"

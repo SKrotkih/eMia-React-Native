@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import {Component} from 'react';
 import {
     Animated,
     TouchableOpacity,
@@ -51,13 +51,13 @@ const styles = {
     }
 };
 
-function saturate(color, percent) {
-    let R = parseInt(color.substring(1, 3), 16);
-    let G = parseInt(color.substring(3, 5), 16);
-    let B = parseInt(color.substring(5, 7), 16);
-    R = parseInt(R * percent);
-    G = parseInt(G * percent);
-    B = parseInt(B * percent);
+function saturate(color, percent: number) {
+    let R: number = parseInt(color.substring(1, 3), 16);
+    let G: number = parseInt(color.substring(3, 5), 16);
+    let B: number = parseInt(color.substring(5, 7), 16);
+    R = parseInt((R * percent).toString(16));
+    G = parseInt((G * percent).toString(16));
+    B = parseInt((B * percent).toString(16));
     R = (R < 255) ? R : 255;
     G = (G < 255) ? G : 255;
     B = (B < 255) ? B : 255;

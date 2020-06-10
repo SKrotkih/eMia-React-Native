@@ -1,18 +1,17 @@
-import authApi from '../../firebase/auth/api';
-import {getCurrentUserAsync, getUserAsync} from '../../firebase/auth/api';
+import {getCurrentUserAsync, getUserAsync, registerNewUser} from '../../firebase/auth/api';
 import {updateUser, fetchAllUsers, getUser} from '../../firebase/database/users';
 import {LOGGED_IN} from '../../dbinteractor/login/actionTypes';
 
 export function register(data, successCB, errorCB) {
   return (dispatch) => {
-    authApi.register(data, function (success, _data, error) {
-      if (success) {
-        successCB(_data);
-      } else if (error) {
+    registerNewUser(data)
+      .then((user) => {
+        successCB(user);
+      })
+      .catch((error) => {
         errorCB(error);
-      }
-    });
-  };
+      });
+  }
 }
 
 export function getCurrentUserId(callback) {

@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
-import React, { Children } from 'react';
+import React, {Children} from 'react';
 import {TouchableOpacity, View} from 'react-native';
-import s from './styles';
 
 const noop = () => {};
 
@@ -12,7 +11,7 @@ const Button = ({
   children,
   rippleColor,
   style,
-  background
+  background,
 }) => (
   <TouchableOpacity
     onLongPress={onLongPress}
@@ -22,7 +21,7 @@ const Button = ({
       {Children.map(children, child => child)}
     </View>
   </TouchableOpacity>
-)
+);
 
 Button.defaultProps = {
   onPress: noop,
@@ -30,7 +29,7 @@ Button.defaultProps = {
   onLayout: noop,
   rippleColor: '#f0eef0',
   // style: s.button
-}
+};
 
 Button.propTypes = {
   onPress: PropTypes.func,
@@ -38,7 +37,7 @@ Button.propTypes = {
   style: PropTypes.any,
   onLongPress: PropTypes.func,
   onLayout: PropTypes.func,
-  rippleColor: PropTypes.string
-}
+  rippleColor: PropTypes.string,
+};
 
-export default Button
+export default Button;
