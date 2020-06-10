@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import PropTypes from 'prop-types';
 import {View, TextInput, Text} from 'react-native';
 import {isEmpty} from '../../utils/validate';
 import styles from './styles';
@@ -17,6 +16,7 @@ class AuthTextInput extends Component {
       value,
       error,
     } = this.props;
+
     return (
       <View style={styles.container}>
         {showLabel && <Text>{label}</Text>}
@@ -34,23 +34,8 @@ class AuthTextInput extends Component {
         />
         {!isEmpty(error) && <Text>{error}</Text>}
       </View>
-    );
+    )
   }
 }
-
-AuthTextInput.propTypes = {
-  label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  placeholder: PropTypes.string,
-  autoFocus: PropTypes.bool,
-  onChangeText: PropTypes.func.isRequired,
-  secureTextEntry: PropTypes.bool,
-  value: PropTypes.string,
-  error: PropTypes.string,
-};
-
-AuthTextInput.defaultProps = {
-  autoFocus: false,
-  secureTextEntry: false,
-};
 
 export default AuthTextInput;
