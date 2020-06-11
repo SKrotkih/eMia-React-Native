@@ -9,18 +9,29 @@ import styles from './styles';
 import ImageViewer from '../../../components/ImageViewer';
 import {ModelView} from './ModelView';
 
+import {User} from '../../../model/entities/user';
+
 const {View, TextInput, ScrollView} = ReactNative;
 const {Component} = React;
 
 export class EditProfile extends Component {
+
+  private mv: ModelView;
+  private readonly user: User;
+  private readonly completion: any;
+  private readonly setParams: any;
+  private readonly navigation: any;
+
   constructor(props) {
     super(props);
-    const {user, completion} = this.props;
-    this.mv = new ModelView(user, this);
+    this.user = this.props.user;
+    this.completion = this.props.completion;
+    this.navigation = this.props.navigation;
+    this.setParams = this.props.navigation.setParams;
+    this.mv = new ModelView(this.user, this);
     this.state = {
       state: false,
     };
-    this.completion = completion;
     this.doneButtonPressed = this.doneButtonPressed.bind(this);
   }
 
@@ -36,8 +47,7 @@ export class EditProfile extends Component {
 
   setUpNavigationBar() {
     let title = 'My Profile';
-    const {setParams} = this.props.navigation;
-    setParams({
+    this.setParams({
       title: title,
       right: (
         <Icon
@@ -170,7 +180,7 @@ export class EditProfile extends Component {
   doneButtonPressed() {
     this.mv.submitData().then(() => {
       if (this.completion === undefined) {
-        this.props.navigation.goBack();
+        this.navigation.goBack();
       } else {
         this.completion();
       }

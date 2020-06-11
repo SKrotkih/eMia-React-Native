@@ -1,6 +1,12 @@
 import {User} from '../../../model/entities/user';
+import {EditProfile} from "./index";
 
 export class ModelView {
+
+  private _user: User;
+  private _view: EditProfile;
+  private _imageUrl: string;
+
   constructor(user, view) {
     this._user = user;
     this._view = view;
@@ -14,11 +20,13 @@ export class ModelView {
   }
 
   renderView() {
-    this.setUpImage();
+    this.setUpImage().then(() => {
+      this.updateView();
+    })
   }
 
   // Name
-  get name() {
+  get name(): string {
     return this._user.username === undefined ? '' : this._user.username;
   }
 
@@ -28,7 +36,7 @@ export class ModelView {
   }
 
   // Address
-  get address() {
+  get address(): string {
     return this._user.address;
   }
 
@@ -38,7 +46,7 @@ export class ModelView {
   }
 
   // Gender
-  get gender() {
+  get gender(): number {
     return this._user.gender;
   }
 
@@ -48,7 +56,7 @@ export class ModelView {
   }
 
   // Year of birth
-  get yearBirth() {
+  get yearBirth(): number {
     return this._user.yearbirth;
   }
 
@@ -58,7 +66,7 @@ export class ModelView {
   }
 
   // Email
-  get email() {
+  get email(): string {
     return this._user.email;
   }
 
@@ -68,7 +76,7 @@ export class ModelView {
   }
 
   // Image
-  get isImageEmpty() {
+  get isImageEmpty(): boolean {
     let value = this._imageUrl === null || this._imageUrl === '';
     return value;
   }
@@ -82,11 +90,11 @@ export class ModelView {
     this.updateView();
   }
 
-  setUpImage() {
+  private setUpImage(): Promise<void> {
     return new Promise((resolve, reject) => {
       this._user.getDownloadURL().then((url) => {
         this._imageUrl = url;
-        this.updateView();
+        resolve();
       });
     });
   }
