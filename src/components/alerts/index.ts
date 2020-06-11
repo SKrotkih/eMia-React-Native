@@ -1,8 +1,6 @@
 /**
- * Alert and Toast
+ * Alert
  */
 
 import Alert from './Alert';
-import Toast from './Toast';
-
-export {Alert, Toast};
+export {Alert};

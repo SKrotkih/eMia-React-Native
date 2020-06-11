@@ -261,5 +261,3 @@ class Toast extends Component {
         return null;
     }
 }
-
-export default Toast;

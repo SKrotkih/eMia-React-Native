@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactNative from 'react-native';
 import styles from './styles';
-import Time from '../../../components/Time';
+import {Time} from '../../../components/Time';
 import {connect} from 'react-redux';
 import ImageViewer from '../../../components/ImageViewer';
 import {Container, Header, Content, Text, Thumbnail} from 'native-base';
@@ -11,15 +11,20 @@ const {View} = ReactNative;
 const {Component} = React;
 
 export class PostPreview extends Component {
+
+  private mv: ModelView;
+  private readonly navigation: any;
+  private readonly item: any;
+
   constructor(props) {
     super(props);
-    const {item} = this.props;
-    this.mv = new ModelView(item);
-    this.state = this.mv.createState();
+    this.item = this.props.item;
+    this.navigation = this.props.navigation;
+    this.mv = new ModelView(this.item);
   }
 
   setTitle(titleText) {
-    const {setParams} = this.props.navigation;
+    const {setParams} = this.navigation;
     setParams({title: titleText});
   }
 

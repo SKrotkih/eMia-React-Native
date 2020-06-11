@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {FunctionComponent} from 'react';
 import {
   StyleSheet,
   View,
@@ -6,7 +6,8 @@ import {
   ActivityIndicator
 } from 'react-native';
 
-const Loader = props => {
+export const Loader: FunctionComponent = (props) => {
+
   const {
     loading,
     ...attributes
@@ -46,5 +47,3 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around'
   }
 });
-
-export default Loader;

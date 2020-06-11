@@ -20,11 +20,6 @@ import Options from '../screens/Home/Options';
 import {color, navTitleStyle, navBarStyle} from '../theme/styles';
 
 export default class extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
-
   render() {
     let isLoggedIn = this.props.isLoggedIn;
     return (

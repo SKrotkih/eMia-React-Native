@@ -25,7 +25,7 @@ import itemTheme from "./Item";
 import labelTheme from "./Label";
 import textAreaTheme from "./Textarea";
 import textTheme from "./Text";
-import toastTheme from "./Toast";
+import toastTheme from "./ToastTheme";
 import tabTheme from "./Tab";
 import tabBarTheme from "./TabBar";
 import tabContainerTheme from "./TabContainer";
@@ -98,7 +98,7 @@ export default (variables = variable) => {
       ...cardItemTheme(variables)
     },
 
-    "NativeBase.Toast": {
+    "NativeBase.ToastTheme": {
       ...toastTheme(variables)
     },
 

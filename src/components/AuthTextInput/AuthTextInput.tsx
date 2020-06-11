@@ -3,7 +3,7 @@ import {View, TextInput, Text} from 'react-native';
 import {isEmpty} from '../../utils/validate';
 import styles from './styles';
 
-class AuthTextInput extends Component {
+export class AuthTextInput extends Component {
   render() {
     const {
       showLabel,
@@ -34,8 +34,6 @@ class AuthTextInput extends Component {
         />
         {!isEmpty(error) && <Text>{error}</Text>}
       </View>
-    )
+    );
   }
 }
-
-export default AuthTextInput;

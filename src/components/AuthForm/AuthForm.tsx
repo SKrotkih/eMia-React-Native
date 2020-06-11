@@ -7,7 +7,7 @@ import {
   validateEmail,
   validatePassword,
 } from '../../utils/validate';
-import {AuthTextInput} from '../AuthTextInput/index';
+import {AuthTextInput} from '../AuthTextInput';
 import styles from './styles';
 
 class FieldItem {
@@ -82,10 +82,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
       } else if (type === 'password' && !validatePassword(value)) {
         _error[key] = 'Password must be at least 6 characters';
         _success = false;
-      } else if (
-        type === 'confirm_password' &&
-        !confirmPassword(value, parameters.password)
-      ) {
+      } else if (type === 'confirm_password' && !confirmPassword(value, parameters.password)) {
         _error[key] = 'Password does not match.';
         _success = false;
       }
@@ -120,7 +117,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
         {!isEmpty(error.general) && (
           <Text style={styles.errorText}>{error.general}</Text>
         )}
-        {parameters.fields.map((field) => {
+        {parameters.fields.map((field, idx) => {
           return (
             <AuthTextInput
               key={field.key}
