@@ -3,7 +3,7 @@ import React from 'react';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {actions as auth} from '../index';
-import AuthForm from '../../../components/AuthForm';
+import {AuthForm} from '../../../components/AuthForm';
 import {User} from '../../../model/entities/user';
 
 const {register} = auth;
@@ -92,7 +92,7 @@ class Register extends React.Component {
         fields={fields}
         showLabel={false}
         onSubmit={this.onSubmit}
-        buttonTitle={'   OK   '}
+        buttonTitle={'OK'}
         error={this.state.error}
       />
     );

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, FunctionComponent} from 'react';
 import {GestureResponderEvent, Text, View} from 'react-native';
 import Button from '../Button';
 import {
@@ -30,7 +30,7 @@ class FieldItem {
   }
 }
 
-interface IAuth {
+export interface IAuth {
   fields: FieldItem[];
   onSubmit: ({}) => void;
   onForgotPassword: (event: GestureResponderEvent) => void;
@@ -39,7 +39,7 @@ interface IAuth {
   password: string;
 }
 
-export const AuthForm: React.FunctionComponent<IAuth> = props => {
+export const AuthForm: FunctionComponent<IAuth> = props => {
   const [parameters, setParameters] = useState<IAuth>({
     fields: props.fields,
     onSubmit: props.onSubmit,
