@@ -59,7 +59,7 @@ class Login extends React.Component {
       let user = new User(uid, '');
       Actions.EditProfile({
         user: user,
-        completion: function() {
+        completion: () => {
           Actions.Main();
         },
       });
@@ -88,7 +88,7 @@ class Login extends React.Component {
         fields={fields}
         showLabel={false}
         onSubmit={this.onSubmit}
-        buttonTitle={`OK`}
+        buttonTitle={'OK'}
         error={this.state.error}
         onForgotPassword={this.onForgotPassword}
       />

@@ -1,6 +1,6 @@
 import React, {useState, FunctionComponent} from 'react';
 import {GestureResponderEvent, Text, View} from 'react-native';
-import Button from '../Button';
+import {Button} from 'react-native-elements';
 import {
   confirmPassword,
   isEmpty,
@@ -39,9 +39,9 @@ export interface IAuth {
   password: string;
 }
 
-export const AuthForm: FunctionComponent<IAuth> = props => {
+export const AuthForm: FunctionComponent<IAuth> = (props) => {
   const [parameters, setParameters] = useState<IAuth>({
-    fields: props.fields,
+    fields: [],
     onSubmit: props.onSubmit,
     onForgotPassword: props.onForgotPassword,
     buttonTitle: props.buttonTitle,
@@ -49,10 +49,11 @@ export const AuthForm: FunctionComponent<IAuth> = props => {
     password: props.password,
   });
 
-  const [error, setError] = useState<any>(props.error)
+  const [error, setError] = useState<any>(props.error);
 
   props.fields.forEach((field) => {
-    parameters.fields.concat(...parameters.fields, new FieldItem(field));
+    let fieldItem = new FieldItem(field);
+    parameters.fields = parameters.fields.concat([fieldItem]);
   });
 
   function onSubmit() {
@@ -65,27 +66,27 @@ export const AuthForm: FunctionComponent<IAuth> = props => {
   }
 
   function validate() {
-    let error = {};
-    let success = true;
+    let _error = {};
+    let _success = true;
     parameters.fields.forEach((field) => {
       let type = field.type;
       let value = field.value;
       let key = field.key;
       if (isEmpty(value)) {
-        error[key] = 'Your ' + key + ' is required';
-        success = false;
+        _error[key] = 'Your ' + key + ' is required';
+        _success = false;
       } else if (type === 'email' && !validateEmail(value)) {
-        error[key] = 'Enter a valid email address';
-        success = false;
+        _error[key] = 'Enter a valid email address';
+        _success = false;
       } else if (type === 'password' && !validatePassword(value)) {
-        error[key] = 'Password must be at least 6 characters';
-        success = false;
+        _error[key] = 'Password must be at least 6 characters';
+        _success = false;
       } else if (type === 'confirm_password' && !confirmPassword(value, parameters.password)) {
-        error[key] = 'Password does not match.';
-        success = false;
+        _error[key] = 'Password does not match.';
+        _success = false;
       }
     });
-    return {success, error};
+    return {success: _success, error: _error};
   }
 
   function extractData(): {} {
@@ -102,9 +103,8 @@ export const AuthForm: FunctionComponent<IAuth> = props => {
 
   function onChange(key, text) {
     parameters.fields.forEach((field) => {
-      let value = field.value;
       if (key === field.key) {
-        field.value = value;
+        field.value = text;
       }
     });
     setParameters(parameters);
@@ -132,9 +132,15 @@ export const AuthForm: FunctionComponent<IAuth> = props => {
             />
           );
         })}
-        <Button style={[styles.button]} borderRadiusBase={4} onPress={() => onSubmit}>
-          <Text style={styles.buttonText}>{parameters.buttonTitle}</Text>
-        </Button>
+        <Button
+          raised
+          title={parameters.buttonTitle}
+          borderRadius={4}
+          containerViewStyle={styles.containerView}
+          buttonStyle={styles.button}
+          textStyle={styles.buttonText}
+          onPress={onSubmit}
+        />
         {parameters.onForgotPassword !== null && (
           <Text style={styles.forgotText} onPress={parameters.onForgotPassword}>
             Forgot password?
@@ -143,4 +149,4 @@ export const AuthForm: FunctionComponent<IAuth> = props => {
       </View>
     </View>
   );
-}
+};
