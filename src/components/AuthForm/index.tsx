@@ -40,8 +40,14 @@ export interface IAuth {
 }
 
 export const AuthForm: FunctionComponent<IAuth> = (props) => {
+  let array: FieldItem[] = [];
+  props.fields.forEach((field) => {
+    let fieldItem = new FieldItem(field);
+    array = array.concat([fieldItem]);
+  });
+
   const [parameters, setParameters] = useState<IAuth>({
-    fields: [],
+    fields: array,
     onSubmit: props.onSubmit,
     onForgotPassword: props.onForgotPassword,
     buttonTitle: props.buttonTitle,
@@ -50,11 +56,6 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
   });
 
   const [error, setError] = useState<any>(props.error);
-
-  props.fields.forEach((field) => {
-    let fieldItem = new FieldItem(field);
-    parameters.fields = parameters.fields.concat([fieldItem]);
-  });
 
   function onSubmit() {
     const result = validate();
