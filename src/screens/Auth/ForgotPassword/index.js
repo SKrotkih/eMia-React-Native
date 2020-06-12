@@ -5,7 +5,7 @@ import {Actions} from 'react-native-router-flux';
 import {Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {actions as auth} from '../index';
-import {AuthForm} from '../../../components/AuthForm';
+import {AuthForm} from '../AuthForm';
 
 const {forgetPassword} = auth;
 

@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native';
-import { windowWidth, fontSize, fontFamily, normalize } from '../../theme/styles';
+import {StyleSheet} from 'react-native';
+import {windowWidth, fontSize, fontFamily, normalize} from '../../theme/styles';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,6 +13,13 @@ const styles = StyleSheet.create({
     fontFamily: fontFamily.bold,
     borderBottomColor: '#A5A7A9',
   },
+
+  errorText: {
+    fontSize: 12,
+    fontWeight: "normal",
+    color: "red",
+  },
+
 });
 
 export default styles;

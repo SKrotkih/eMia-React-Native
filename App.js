@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Provider} from 'react-redux';
-import {StyleProvider} from 'native-base';
+import {StyleProvider, Root} from 'native-base';
 import {ImageBackground, StatusBar, YellowBox, StyleSheet} from 'react-native';
 
 import getTheme from './src/components';
@@ -55,11 +55,13 @@ export default class App extends Component {
       );
     } else {
       return (
-        <Provider store={store}>
-          <StyleProvider style={getTheme(variables)}>
-            <Router isLoggedIn={this.state.isLoggedIn} />
-          </StyleProvider>
-        </Provider>
+        <Root>
+          <Provider store={store}>
+            <StyleProvider style={getTheme(variables)}>
+              <Router isLoggedIn={this.state.isLoggedIn}/>
+            </StyleProvider>
+          </Provider>
+        </Root>
       );
     }
   }

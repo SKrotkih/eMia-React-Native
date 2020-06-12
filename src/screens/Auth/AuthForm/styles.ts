@@ -7,7 +7,7 @@ import {
   normalize,
   fontSize,
   fontFamily,
-} from '../../theme/styles';
+} from '../../../theme/styles';
 
 const styles = StyleSheet.create({
   container: {

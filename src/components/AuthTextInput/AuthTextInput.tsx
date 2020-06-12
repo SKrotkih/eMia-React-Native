@@ -32,8 +32,9 @@ export class AuthTextInput extends Component {
           keyboardType={type}
           defaultValue={value}
         />
-        {!isEmpty(error) && <Text>{error}</Text>}
+        {!isEmpty(error) && <Text  style={styles.errorText}>{error}</Text>}
       </View>
     );
   }
 }
+
