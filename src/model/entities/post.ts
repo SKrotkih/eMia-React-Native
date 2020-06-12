@@ -1,5 +1,5 @@
 // Post
-import {Alert} from '../../components/alerts/';
+import {Alert} from 'react-native';
 import {uploadImage} from '../../model/firebase/utils/uploadImage';
 import {uploadData} from '../../model/firebase/database/posts';
 import {getCurrentUserAsync} from '../../model/firebase/auth/api';
@@ -40,10 +40,7 @@ export class Post {
 
   submitOnServer(completed) {
     if (this.title === null || this.title.length === 0) {
-      Alert.show('Please, enter post title', {
-        type: 'info',
-        duration: 3000,
-      });
+      Alert.alert('Please, enter post title');
     } else {
       this.addPost(completed);
     }
@@ -68,10 +65,7 @@ export class Post {
               })
               .catch((error) => {
                 if (error !== null) {
-                  Alert.show(`Error while uploading photo: ${error}`, {
-                    type: 'info',
-                    duration: 3000,
-                  });
+                  Alert.alert('Error while uploading photo', `${error}`);
                 }
                 completed(false);
               });

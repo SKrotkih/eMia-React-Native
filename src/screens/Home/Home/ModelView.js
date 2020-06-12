@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert} from '../../../components/alerts/';
+import {Alert} from 'react-native';
 import * as actions from '../../../model/dbinteractor/posts/dbinteractor';
 import {TABS} from './styles';
 

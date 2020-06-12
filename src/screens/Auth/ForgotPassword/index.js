@@ -2,9 +2,9 @@
 //
 import React from 'react';
 import {Actions} from 'react-native-router-flux';
+import {Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {actions as auth} from '../index';
-import {Alert} from '../../../components/alerts/';
 import {AuthForm} from '../../../components/AuthForm';
 
 const {forgetPassword} = auth;
@@ -44,10 +44,9 @@ class ForgotPassword extends React.Component {
   }
 
   onSuccess() {
-    Alert.show('Password Reminder Sent', {
-      type: 'info',
-      duration: 3000,
-    });
+    Alert.alert(
+      `Password Reminder Sent`,
+    )
     Actions.pop();
   }
 

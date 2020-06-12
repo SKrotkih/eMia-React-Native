@@ -14,13 +14,12 @@ import {
   Modal,
   InteractionManager,
   Dimensions,
+  Alert,
 } from 'react-native';
 import {Icon} from 'native-base';
 import PropTypes from 'prop-types';
 import RNFetchBlob from 'rn-fetch-blob';
 import * as Progress from 'react-native-progress';
-// components
-import {Alert} from './alerts/Alert';
 
 const AnimatedImage = Animated.createAnimatedComponent(ImageBackground);
 const DefaultIndicator = Progress.Circle;
@@ -244,30 +243,26 @@ export default class ImageViewer extends Component {
     const uri = this.refs.originalImage.props.source.uri;
 
     if (uri.endsWith('.gif')) {
-      Alert.show('Unfortunately can not download GIF right now.', {
-        type: 'error',
-      });
+      Alert.alert(
+        `System Error`,
+        `Unfortunately can not download GIF right now.`,
+      )
       return;
     }
 
     if (Platform.OS === 'ios') {
       const promise = CameraRoll.saveToCameraRoll(uri, 'photo');
       promise.then(() =>
-        Alert.show('Photo saved successfully!', 'success', {
-          type: 'error',
-        }),
+        Alert.alert(
+          `Photo saved successfully!`,
+        )
       );
     } else {
       const ret = RNFetchBlob.config({
         fileCache: true,
         path: `${RNFetchBlob.fs.dirs.DocumentDir}/${uuid.v4()}.jpg`,
       }).fetch('GET', uri);
-
-      Alert.show('Downloading ...', {
-        type: 'info',
-        duration: 0,
-      });
-
+      // TODO: `Downloading ...` Indicator
       ret.then((res) => {
         const promise = CameraRoll.saveToCameraRoll(
           `file://${res.path()}`,
@@ -276,9 +271,9 @@ export default class ImageViewer extends Component {
         promise.then(() => {
           // removed cache file
           res.flush();
-          Alert.show('Photo saved successfully!', {
-            type: 'success',
-          });
+          Alert.alert(
+            `Photo saved successfully!`,
+          )
         });
       });
     }

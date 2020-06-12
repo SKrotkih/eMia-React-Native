@@ -1,4 +1,4 @@
-import {Alert} from '../../components/alerts/';
+import {Alert} from 'react-native';
 import {uploadImage} from '../../model/firebase/utils/uploadImage';
 import {uploadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
 import {storage} from '../../model/firebase/config';
@@ -41,10 +41,9 @@ export class User {
 
   update(photoUrl: string, completed) {
     if (this.username === null || this.username.length === 0) {
-      Alert.show('Please, enter your name', {
-        type: 'info',
-        duration: 3000,
-      });
+      Alert.alert(
+        `Please, enter your name`,
+      )
       completed(false);
       return;
     }
@@ -52,25 +51,29 @@ export class User {
     uploadCurrentUserData(_this)
       .then(() => {
         uploadImage(photoUrl, _this.id)
-          .then((resolve) => {
+          .then(() => {
             completed(true);
           })
           .catch((error) => {
             if (error !== null) {
-              Alert.show(`Error while uploading photo: ${error}`, {
-                type: 'info',
-                duration: 3000,
-              });
+              Alert.alert(
+                `Error while uploading photo`,
+                `${error}`,
+                [],
+                { cancelable: false }
+              )
             }
-            completed(false);
+            completed(true); // Return OK in case of failed uploading photo
           });
       })
       .catch((error) => {
         if (error !== null) {
-          Alert.show(`Error while uploading photo: ${error}`, {
-            type: 'info',
-            duration: 3000,
-          });
+          Alert.alert(
+            `Error while uploading data on the server`,
+            `${error}`,
+            [],
+            { cancelable: false }
+          )
         }
         completed(false);
       });
