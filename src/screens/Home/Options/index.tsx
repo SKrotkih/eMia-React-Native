@@ -1,38 +1,12 @@
-import React, {PropTypes} from 'react';
-import ReactNative from 'react-native';
+import React from 'react';
 import {requireNativeComponent, Platform} from 'react-native';
 import {connect} from 'react-redux';
 import {windowHeight} from '../../../theme/styles';
 import {
   Container,
   Content,
-  Thumbnail,
-  Header,
-  Title,
-  Footer,
-  FooterTab,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon,
   Text,
 } from 'native-base';
-
-import NativeBase from 'native-base';
-import {Actions} from 'react-native-router-flux';
-import {config} from '../index';
-import styles from './styles';
-
-const {
-  Dimensions,
-  AppRegistry,
-  Image,
-  StyleSheet,
-  View,
-  Alert,
-  TouchableOpacity
-} = ReactNative;
 
 const {Component} = React;
 
@@ -76,8 +50,6 @@ export class Options extends Component {
     }
   }
 }
-
-Options.propTypes = {};
 
 const FilterView = requireNativeComponent('FilterBridgeView', Options);
 
