@@ -38,7 +38,12 @@ export default class extends React.Component {
               initial={true}
               hideNavBar
             />
-            <Scene key="Register" component={Register} title="Sign Up" back />
+            <Scene
+             key="Register"
+             component={Register}
+             title="Sign Up"
+             back
+            />
             <Scene
               key="EditProfile"
               component={EditProfile}
