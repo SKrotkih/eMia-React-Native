@@ -88,7 +88,7 @@ class Login extends React.Component {
         fields={fields}
         showLabel={false}
         onSubmit={this.onSubmit}
-        buttonTitle={'OK'}
+        buttonTitle={'DONE'}
         error={this.state.error}
         onForgotPassword={this.onForgotPassword}
       />

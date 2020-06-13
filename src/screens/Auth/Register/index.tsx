@@ -92,7 +92,8 @@ class Register extends React.Component {
         fields={fields}
         showLabel={false}
         onSubmit={this.onSubmit}
-        buttonTitle={'OK'}
+        onForgotPassword={null}
+        buttonTitle={'DONE'}
         error={this.state.error}
       />
     );

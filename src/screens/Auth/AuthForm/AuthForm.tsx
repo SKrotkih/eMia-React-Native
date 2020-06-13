@@ -1,7 +1,6 @@
 import React, {useState, FunctionComponent} from 'react';
-import {GestureResponderEvent, Text, View} from 'react-native';
+import {GestureResponderEvent, Text, View, Button, SafeAreaView} from 'react-native';
 import {Toast} from 'native-base';
-import {Button} from 'react-native-elements';
 import {
   confirmPassword,
   isEmpty,
@@ -10,6 +9,7 @@ import {
 } from '../../../utils/validate';
 import {AuthTextInput} from '../../../components/AuthTextInput';
 import styles from './styles';
+import { color } from '../../../theme/styles';
 
 class FieldItem {
   key: string;
@@ -121,48 +121,53 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
     setParameters(parameters);
   }
 
+  function Separator() {
+    return <View style={styles.separator} />;
+  }
+
   return (
-      <View style={styles.container}>
-        <View style={styles.wrapper}>
-          {!isEmpty(error.validation) &&
-            Toast.show({
-              text: 'Wrong credentials. Check and try again.',
-              position: 'bottom',
-              buttonText: 'Okay',
-              type: 'warning',
-              duration: 3000,
-            })}
-          {parameters.fields.map((field, idx) => {
-            return (
-              <AuthTextInput
-                key={field.key}
-                label={field.label}
-                showLabel={parameters.showLabel}
-                placeholder={field.placeholder}
-                autoFocus={field.autoFocus}
-                type={field.type}
-                onChangeText={(text) => onChange(field.key, text)}
-                secureTextEntry={field.secureTextEntry}
-                value={field.value}
-                error={error[field.key]}
-              />
-            );
+    <SafeAreaView style={styles.container}>
+      <View>
+        {!isEmpty(error.validation) &&
+          Toast.show({
+            text: 'Wrong credentials. Check and try again.',
+            position: 'bottom',
+            buttonText: 'Okay',
+            type: 'warning',
+            duration: 3000,
           })}
-          <Button
-            raised
-            title={parameters.buttonTitle}
-            borderRadius={4}
-            containerViewStyle={styles.containerView}
-            buttonStyle={styles.button}
-            textStyle={styles.buttonText}
-            onPress={onSubmit}
-          />
-          {parameters.onForgotPassword !== null && (
-            <Text style={styles.forgotText} onPress={parameters.onForgotPassword}>
+        {parameters.fields.map((field, idx) => {
+          return (
+            <AuthTextInput
+              key={field.key}
+              label={field.label}
+              showLabel={parameters.showLabel}
+              placeholder={field.placeholder}
+              autoFocus={field.autoFocus}
+              type={field.type}
+              onChangeText={(text) => onChange(field.key, text)}
+              secureTextEntry={field.secureTextEntry}
+              value={field.value}
+              error={error[field.key]}
+            />
+          );
+        })}
+        <Button
+          title={parameters.buttonTitle}
+          color={color.brand}
+          onPress={onSubmit}
+        />
+        <Separator />
+        {parameters.onForgotPassword !== null && (
+          <View style={styles.forgotButton}>
+            <Text
+              style={styles.forgotText}
+              onPress={parameters.onForgotPassword}>
               Forgot password?
             </Text>
-          )}
-        </View>
+          </View>
+        )}
       </View>
+    </SafeAreaView>
   );
 };

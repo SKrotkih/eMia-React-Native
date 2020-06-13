@@ -6,23 +6,36 @@ import {
   windowWidth,
   normalize,
   fontSize,
-  fontFamily,
 } from '../../../theme/styles';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: color.white,
+    marginTop: 30,
+    marginHorizontal: 16,
   },
 
-  wrapper: {
-    justifyContent: 'center',
-    alignItems: 'center',
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: '#737373',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+
+  forgotButton: {
+    marginVertical: 8,
+  },
+
+  forgotText: {
+    textAlign: 'center',
+    color: color.brand,
+    fontSize: fontSize.regular,
+    fontWeight: 'normal',
   },
 
   errorText: {
     color: color.red,
-    width: (windowWidth - 45),
+    width: windowWidth - 45,
     marginTop: 20,
   },
 
@@ -45,15 +58,7 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontSize: fontSize.regular + 2,
-    fontWeight: "normal",
-  },
-
-  forgotText: {
-    textAlign: 'center',
-    color: color.black,
-    marginBottom: padding,
-    fontSize: fontSize.regular,
-    fontWeight: "normal",
+    fontWeight: 'normal',
   },
 });
 

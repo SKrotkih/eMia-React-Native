@@ -44,9 +44,7 @@ class ForgotPassword extends React.Component {
   }
 
   onSuccess() {
-    Alert.alert(
-      `Password Reminder Sent`,
-    )
+    Alert.alert('Password Reminder Sent');
     Actions.pop();
   }
 
@@ -70,6 +68,7 @@ class ForgotPassword extends React.Component {
       <AuthForm
         fields={fields}
         onSubmit={this.onSubmit}
+        onForgotPassword={null}
         buttonTitle={'SUBMIT'}
         error={this.state.error}
       />

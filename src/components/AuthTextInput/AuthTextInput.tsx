@@ -28,13 +28,12 @@ export class AuthTextInput extends Component {
           autoFocus={autoFocus}
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}
-          style={styles.inputContainer}
+          style={styles.input}
           keyboardType={type}
           defaultValue={value}
         />
-        {!isEmpty(error) && <Text  style={styles.errorText}>{error}</Text>}
+        {!isEmpty(error) && <Text style={styles.errorText}>{error}</Text>}
       </View>
     );
   }
 }
-
