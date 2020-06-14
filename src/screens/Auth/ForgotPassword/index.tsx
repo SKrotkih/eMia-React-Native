@@ -1,79 +1,55 @@
 // ForgotPassword
 //
-import React from 'react';
+import React, {FunctionComponent, useState} from 'react';
 import {Actions} from 'react-native-router-flux';
 import {Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {actions as auth} from '../index';
 import {AuthForm} from '../AuthForm';
 
-const {forgetPassword} = auth;
+const {remindPassword} = auth;
 
-const fields = [
-  {
-    key: 'email',
-    label: 'Email Address',
-    placeholder: 'Email',
-    autoFocus: false,
-    secureTextEntry: false,
-    value: '',
-    type: 'email-address',
-  },
-];
+const ForgotPassword: FunctionComponent = () => {
+  const fields = [
+    {
+      key: 'email',
+      label: 'Email Address',
+      placeholder: 'Email',
+      autoFocus: false,
+      secureTextEntry: false,
+      value: '',
+      type: 'email-address',
+    },
+  ];
 
-const error = {
-  general: '',
-  email: '',
-};
+  const [error, setError] = useState({general: '', email: ''});
 
-class ForgotPassword extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      error: error,
-    };
-
-    this.onSubmit = this.onSubmit.bind(this);
-    this.onSuccess = this.onSuccess.bind(this);
-    this.onError = this.onError.bind(this);
+  function onSubmit(data) {
+    setError({general: '', email: ''}); // clear out error messages
+    remindPassword(data, onSuccess, onError);
   }
 
-  onSubmit(data) {
-    this.setState({error: error}); // clear out error messages
-    this.props.forgetPassword(data, this.onSuccess, this.onError);
-  }
-
-  onSuccess() {
+  function onSuccess() {
     Alert.alert('Password Reminder Sent');
     Actions.pop();
   }
 
-  onError(error) {
-    let errObj = this.state.error;
-
-    if (error.hasOwnProperty('message')) {
-      errObj.general = error.message;
-    } else {
-      let keys = Object.keys(error);
-      keys.map((key, index) => {
-        errObj[key] = error[key];
-      });
-    }
-
-    this.setState({error: errObj});
+  function onError(_error) {
+    error.email = _error.message;
+    setError(error);
   }
 
-  render() {
-    return (
-      <AuthForm
-        fields={fields}
-        onSubmit={this.onSubmit}
-        onForgotPassword={null}
-        buttonTitle={'SUBMIT'}
-        error={this.state.error}
-      />
-    );
-  }
-}
+  return (
+    <AuthForm
+      fields={fields}
+      onSubmit={onSubmit}
+      onForgotPassword={null}
+      buttonTitle={'SUBMIT'}
+      error={error}
+      showLabel={false}
+      password={null}
+    />
+  );
+};
 
-export default connect(null, {forgetPassword})(ForgotPassword);
+export default connect(null, {remindPassword})(ForgotPassword);

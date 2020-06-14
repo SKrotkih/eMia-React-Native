@@ -54,14 +54,3 @@ export function removeStorageItem(key) {
     }
   };
 }
-
-export function cleanStorage() {
-  const _ = async () => {
-    try {
-      await AsyncStorage.cleanStorage;
-      return true;
-    } catch (e) {
-      return false;
-    }
-  };
-}

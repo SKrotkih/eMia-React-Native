@@ -1,4 +1,10 @@
-import {signIn, signOut, registerNewUser, resetPassword, fetchUserData} from '../../firebase/auth/api';
+import {
+  signIn,
+  signOut,
+  registerNewUser,
+  resetPassword,
+  fetchUserData,
+} from '../../firebase/auth/api';
 import {LOGGED_IN} from '../login/actionTypes';
 
 export function login(data, successCB, errorCB) {
@@ -20,7 +26,7 @@ export function login(data, successCB, errorCB) {
         console.log('LOGIN ERROR: ', error);
         errorCB(error);
       });
-  }
+  };
 }
 
 export function register(data, successCB, errorCB) {
@@ -32,7 +38,7 @@ export function register(data, successCB, errorCB) {
       .catch((error) => {
         errorCB(error);
       });
-  }
+  };
 }
 
 export function logOut(successCB, errorCB) {
@@ -45,14 +51,12 @@ export function logOut(successCB, errorCB) {
     });
 }
 
-export function forgetPassword(data, successCB, errorCB) {
-  return (dispatch) => {
-    resetPassword(data)
-      .then(() => {
-        successCB();
-      })
-      .catch((error) => {
-        errorCB(error);
-      });
-  }
+export function remindPassword(data, successCB, errorCB) {
+  resetPassword(data)
+    .then(() => {
+      successCB();
+    })
+    .catch((error) => {
+      errorCB(error);
+    });
 }

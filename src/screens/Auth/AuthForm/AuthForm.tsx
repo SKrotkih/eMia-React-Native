@@ -1,5 +1,11 @@
 import React, {useState, FunctionComponent} from 'react';
-import {GestureResponderEvent, Text, View, Button, SafeAreaView} from 'react-native';
+import {
+  GestureResponderEvent,
+  Text,
+  View,
+  Button,
+  SafeAreaView,
+} from 'react-native';
 import {Toast} from 'native-base';
 import {
   confirmPassword,
@@ -9,7 +15,7 @@ import {
 } from '../../../utils/validate';
 import {AuthTextInput} from '../../../components/AuthTextInput';
 import styles from './styles';
-import { color } from '../../../theme/styles';
+import {color} from '../../../theme/styles';
 
 class FieldItem {
   key: string;
@@ -38,6 +44,7 @@ export interface IAuth {
   buttonTitle: string;
   showLabel: boolean;
   password: string;
+  error: {};
 }
 
 export const AuthForm: FunctionComponent<IAuth> = (props) => {
@@ -54,9 +61,10 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
     buttonTitle: props.buttonTitle,
     showLabel: props.showLabel,
     password: props.password,
+    error: props.error,
   });
 
-  const [error, setError] = useState<any>(props.error);
+  const [error, setError] = useState<any>(parameters.error);
 
   function onSubmit() {
     const result = validate();
@@ -136,7 +144,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
             type: 'warning',
             duration: 3000,
           })}
-        {parameters.fields.map((field, idx) => {
+        {parameters.fields.map((field) => {
           return (
             <AuthTextInput
               key={field.key}

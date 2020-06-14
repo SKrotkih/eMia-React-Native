@@ -57,7 +57,7 @@ export function registerNewUser(data) {
         resolve(user);
       })
       .catch((error) => {
-        resolve(user);
+        reject(error);
       });
   });
 }
