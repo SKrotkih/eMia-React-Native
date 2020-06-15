@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
   },
+  rightBarButton: {
+    marginRight: 8,
+    color: '#fff',
+  },
   label: {
     marginLeft: 15,
     padding: 0,

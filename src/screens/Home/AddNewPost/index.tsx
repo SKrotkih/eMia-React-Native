@@ -1,98 +1,50 @@
 // AddNewPost
 
-import React from 'react';
-import ReactNative from 'react-native';
-import {TextInput} from 'react-native';
+import React, {FunctionComponent, useState, useEffect} from 'react';
+import ReactNative, {TextInput} from 'react-native';
 import {connect} from 'react-redux';
 import {Button, Icon, Text, Label} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
-import {Post} from "../../../model/entities/post";
+import {Post} from '../../../model/entities/post';
 import ImageViewer from '../../../components/ImageViewer';
 
 const {View} = ReactNative;
-const {Component} = React;
 
-export class AddNewPost extends Component {
-  constructor(props) {
-    super(props);
-    this.state = this.createState();
-    this.doneButtonPressed = this.doneButtonPressed.bind(this);
-  }
+const AddNewPost: FunctionComponent = (props) => {
+  const navigation: object = props.navigation;
 
-  createState() {
-    const state = {};
-    state.title = '';
-    state.body = '';
-    state.url = '';
-    return state;
-  }
+  const title = 'New Post';
+  const titleLabelText = 'Title:';
+  const bodyLabelText = 'Body:';
 
-  setUpNavigationBar() {
-    let title = 'New Post';
-    const {setParams} = this.props.navigation;
-    setParams({
+  const _post = new Post('', '', '');
+  const [post, setPost] = useState<Post>(_post);
+  const [update, setUpdate] = useState<boolean>(false);
+
+  useEffect(() => {
+    navigation.setParams({
       title: title,
       right: (
         <Icon
-          style={{marginRight: 8, color: '#fff'}}
+          style={styles.rightBarButton}
           name={'ios-done-all'}
           onPress={() => {
-            this.doneButtonPressed();
+            doneButtonPressed();
           }}
         />
       ),
     });
-  }
+  }, []);
 
-  componentWillMount() {
-    this.setUpNavigationBar();
-  }
-
-  render() {
-    let titleLabelText = 'Title:';
-    let bodyLabelText = 'Body:';
-    return (
-      <View style={styles.container}>
-        <Label style={styles.label}>{titleLabelText}</Label>
-        <TextInput
-          style={styles.input}
-          autoCapitalize="none"
-          clearButtonMode="while-editing"
-          underlineColorAndroid="transparent"
-          placeholder="Type title"
-          autoFocus={true}
-          onChangeText={(text) => this.state.title = text}
-          defaultValue={this.state.title}
-        />
-        <Label style={styles.label}>{bodyLabelText}</Label>
-        <TextInput
-          style={styles.input}
-          autoCapitalize="none"
-          clearButtonMode="while-editing"
-          underlineColorAndroid="transparent"
-          placeholder="Type body"
-          autoFocus={false}
-          onChangeText={(text) => this.state.body = text}
-          defaultValue={this.state.body}
-        />
-        <Button block info style={styles.button}
-                onPress={() => this.takePhotoButtonPressed()}>
-          <Text>Attach a Photo</Text>
-        </Button>
-        <View style={styles.backgroundPhoto}>{this.renderPhoto()}</View>
-      </View>
-    );
-  }
-
-  renderPhoto() {
-    if (this.state.url === '') {
+  function renderPhoto() {
+    if (post.url === '') {
       return null;
     } else {
       return (
         <ImageViewer
           disabled={false}
-          source={{uri: this.state.url}}
+          source={{uri: post.url}}
           downloadable
           doubleTapEnabled={true}
         />
@@ -100,7 +52,7 @@ export class AddNewPost extends Component {
     }
   }
 
-  takePhotoButtonPressed() {
+  function takePhotoButtonPressed() {
     const options = {
       quality: 1.0,
       maxWidth: 500,
@@ -118,21 +70,63 @@ export class AddNewPost extends Component {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        this.setState({
-          url: response.uri,
-        });
+        post.url = response.uri;
+        setPost(post);
+        setUpdate(!update);
       }
     });
   }
 
-  doneButtonPressed() {
-    const post = new Post(this.state.title, this.state.body, this.state.url);
+  function doneButtonPressed() {
     post.submitOnServer((result) => {
       if (result) {
-        this.props.navigation.goBack();
+        navigation.goBack();
       }
     });
   }
-}
+
+  return (
+    <View style={styles.container}>
+      <Label style={styles.label}>{titleLabelText}</Label>
+      <TextInput
+        style={styles.input}
+        autoCapitalize="none"
+        clearButtonMode="while-editing"
+        underlineColorAndroid="transparent"
+        placeholder="Type title"
+        autoFocus={true}
+        onChangeText={(text) => {
+          post.title = text;
+          setPost(post);
+          setUpdate(!update);
+        }}
+        defaultValue={post.title}
+      />
+      <Label style={styles.label}>{bodyLabelText}</Label>
+      <TextInput
+        style={styles.input}
+        autoCapitalize="none"
+        clearButtonMode="while-editing"
+        underlineColorAndroid="transparent"
+        placeholder="Type body"
+        autoFocus={false}
+        onChangeText={(text) => {
+          post.body = text;
+          setPost(post);
+          setUpdate(!update);
+        }}
+        defaultValue={post.body}
+      />
+      <Button
+        block
+        info
+        style={styles.button}
+        onPress={() => takePhotoButtonPressed()}>
+        <Text>Attach a Photo</Text>
+      </Button>
+      <View style={styles.backgroundPhoto}>{renderPhoto()}</View>
+    </View>
+  );
+};
 
 export default connect(null, null)(AddNewPost);

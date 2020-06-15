@@ -22,10 +22,12 @@ const ForgotPassword: FunctionComponent = () => {
     },
   ];
 
-  const [error, setError] = useState({general: '', email: ''});
+  const errorObj = {general: '', email: ''}
+
+  const [error, setError] = useState(errorObj);
 
   function onSubmit(data) {
-    setError({general: '', email: ''}); // clear out error messages
+    setError(errorObj); // clear out error messages
     remindPassword(data, onSuccess, onError);
   }
 

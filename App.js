@@ -6,7 +6,7 @@ import {ImageBackground, StatusBar, YellowBox, StyleSheet} from 'react-native';
 import getTheme from './src/components';
 import variables from './src/theme/variables/commonColor';
 
-import Router from './src/router/routes';
+import Router from './src/screens/routes';
 import store from './src/redux/store';
 
 import {checkLoginStatus} from './src/model/firebase/auth/api';

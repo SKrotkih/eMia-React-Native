@@ -82,7 +82,18 @@ export class Home extends Component {
   }
 
   componentDidMount() {
-    this.onChangeTab(0)
+    this.onChangeTab(0);
+  }
+
+  onChangeTab(newTab) {
+    switch (newTab) {
+      case 0:
+        this.mv.filter = TABS.ALLPOSTS;
+        break;
+      case 1:
+        this.mv.filter = TABS.MYPOSTS;
+        break;
+    }
   }
 
   updateView() {
@@ -94,6 +105,29 @@ export class Home extends Component {
     this.setState({
       active: false,
     });
+  }
+
+  renderActionsButton() {
+    let activeState = this.state.active;
+    return (
+      <Fab
+        active={activeState}
+        direction="up"
+        containerStyle={{}}
+        style={{backgroundColor: color.brand}}
+        position="bottomRight"
+        onPress={() => this.setState({active: !activeState})}>
+        <IconNB name="ios-menu" />
+        <Button
+          style={{backgroundColor: color.brand}}
+          onPress={() => {
+            this.collapseMenuOnButton();
+            createNewPostButtonPressed()
+          }}>
+          <IconNB name="ios-create" />
+        </Button>
+      </Fab>
+    );
   }
 
   render() {
@@ -124,42 +158,10 @@ export class Home extends Component {
       </Container>
     );
   }
+}
 
-  renderActionsButton() {
-    let activeState = this.state.active;
-    return (
-      <Fab
-        active={activeState}
-        direction="up"
-        containerStyle={{}}
-        style={{backgroundColor: color.brand}}
-        position="bottomRight"
-        onPress={() => this.setState({active: !activeState})}>
-        <IconNB name="ios-menu" />
-        <Button
-          style={{backgroundColor: color.brand}}
-          onPress={() => this.createNewPostButtonPressed()}>
-          <IconNB name="ios-create" />
-        </Button>
-      </Fab>
-    );
-  }
-
-  onChangeTab(newTab) {
-    switch (newTab) {
-      case 0:
-        this.mv.filter = TABS.ALLPOSTS;
-        break;
-      case 1:
-        this.mv.filter = TABS.MYPOSTS;
-        break;
-    }
-  }
-
-  createNewPostButtonPressed() {
-    this.collapseMenuOnButton();
-    Actions.AddNewPost();
-  }
+function createNewPostButtonPressed() {
+  Actions.AddNewPost();
 }
 
 function menuButtonPressed() {
