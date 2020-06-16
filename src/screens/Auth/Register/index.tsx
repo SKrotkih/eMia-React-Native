@@ -38,22 +38,25 @@ const Register: FunctionComponent = () => {
     },
   ];
 
-  const emptyError = {
-    general: '',
-    email: '',
-    password: '',
-    confirm_password: '',
-  };
+  function getEmptyError(): any {
+    return {
+      general: '',
+      email: '',
+      password: '',
+      confirm_password: '',
+    };
+  }
 
-  const [error, setError] = useState(emptyError);
+  const [error, setError] = useState(getEmptyError());
 
   function onSubmit(data) {
-    setError(emptyError); // clear out error messages
+    setError(getEmptyError()); // clear out error messages
     register(data, onSuccess, onError);
   }
 
   function onSuccess(data) {
-    let user = new User(data.user.uid, '');
+    const uid = data.user.uid;
+    const user = new User(uid, '');
     Actions.EditProfile({
       user: user,
       completion: function () {
@@ -63,12 +66,12 @@ const Register: FunctionComponent = () => {
   }
 
   function onError(_error) {
-    let errObj = this.state.error;
+    let errObj = getEmptyError();
     if (_error.hasOwnProperty('message')) {
       errObj.general = _error.message;
     } else {
       let keys = Object.keys(_error);
-      keys.map((key, index) => {
+      keys.map((key) => {
         errObj[key] = _error[key];
       });
     }
@@ -86,6 +89,6 @@ const Register: FunctionComponent = () => {
       password={null}
     />
   );
-}
+};
 
 export default connect(null, {register})(Register);

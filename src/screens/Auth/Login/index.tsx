@@ -29,14 +29,23 @@ const Login: FunctionComponent = () => {
     },
   ];
 
-  const [error, setError] = useState({general: '', email: '', password: ''});
+  function getEmptyError(): any {
+    return {
+      general: '',
+      email: '',
+      password: '',
+      confirm_password: '',
+    };
+  }
+
+  const [error, setError] = useState(getEmptyError());
 
   function onForgotPassword() {
     Actions.ForgotPassword();
   }
 
   function onSubmit(data) {
-    setError({general: '', email: '', password: ''}); // clear out error messages
+    setError(getEmptyError()); // clear out error messages
     login(data, onSuccess, onError);
   }
 
@@ -55,7 +64,7 @@ const Login: FunctionComponent = () => {
   }
 
   function onError(_error) {
-    let errObj = error;
+    let errObj = getEmptyError();
     if (_error.hasOwnProperty('message')) {
       errObj.general = _error.message;
     } else {

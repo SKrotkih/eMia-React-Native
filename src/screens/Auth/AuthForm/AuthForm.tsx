@@ -64,7 +64,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
     error: props.error,
   });
 
-  const [error, setError] = useState<any>(parameters.error);
+  const [error, setError] = useState(props.error);
 
   function onSubmit() {
     const result = validate();
@@ -78,23 +78,23 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
   function validate() {
     let _error = {};
     let _success = true;
+    _error['general'] = '';
     parameters.fields.forEach((field) => {
       let type = field.type;
       let value = field.value;
       let key = field.key;
+      _error[key] = '';
       if (isEmpty(value)) {
         _error[key] = 'Your ' + key + ' is required';
         _success = false;
       } else if (type === 'email-address') {
         if (!validateEmail(value)) {
           _error[key] = 'Enter a valid email address';
-          _error['validation'] = 'error';
           _success = false;
         }
       } else if (type === 'default') {
         if (!validatePassword(value)) {
           _error[key] = 'Password must be at least 6 characters';
-          _error['validation'] = 'error';
           _success = false;
         }
       } else if (type === 'confirm_password') {
@@ -125,7 +125,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
         field.value = text;
       }
     });
-    error.validation = null;
+    error[key] = '';
     setParameters(parameters);
   }
 
@@ -133,12 +133,41 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
     return <View style={styles.separator} />;
   }
 
+  console.log('----------------');
+  console.log(parameters.error);
+  console.log(error);
+  console.log('----------------');
+
+  function errorMessage(key: string): string {
+    let message: string;
+    parameters.fields.map((field) => {
+      if (field.key === key) {
+        if (!isEmpty(parameters.error[key])) {
+          message = parameters.error[key];
+        } else if (!isEmpty(error[key])) {
+          message = error[key];
+        }
+      }
+    });
+    return message;
+  }
+
+  function errorMessageInGeneral(): string {
+    let message: string;
+    if (!isEmpty(parameters.error.general)) {
+      message = parameters.error.general;
+    } else if (!isEmpty(error.general)) {
+      message = error.general;
+    }
+    return message;
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        {!isEmpty(error.validation) &&
+        {!isEmpty(errorMessageInGeneral()) &&
           Toast.show({
-            text: 'Wrong credentials. Check and try again.',
+            text: `${errorMessageInGeneral()}`,
             position: 'bottom',
             buttonText: 'Okay',
             type: 'warning',
@@ -156,7 +185,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
               onChangeText={(text) => onChange(field.key, text)}
               secureTextEntry={field.secureTextEntry}
               value={field.value}
-              error={error[field.key]}
+              error={errorMessage(field.key)}
             />
           );
         })}
