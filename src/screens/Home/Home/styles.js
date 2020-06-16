@@ -1,24 +1,33 @@
-import {StyleSheet, Platform, Dimensions} from 'react-native';
-import {windowWidth} from '../../../theme/styles';
-
-const resizeMode = 'contain';
-
-const deviceHeight = Dimensions.get('window').height;
+import {StyleSheet} from 'react-native';
+import {windowWidth, color} from '../../../theme/styles';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    height: Platform.OS === 'ios' ? deviceHeight : deviceHeight - 20,
+  leftNavBarButton: {
+    marginLeft: 8,
+    color: color.white,
   },
-  loading: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
+  rightNavBarButton: {
+    marginRight: 8,
+    color: color.white,
   },
-  separator: {
-    height: 1,
-    marginBottom: 4,
-    backgroundColor: '#eee',
+  actionButton: {
+    backgroundColor: color.brand,
+  },
+  tabUnderlined: {
+    borderBottomWidth: 2,
+  },
+  tab: {
+    backgroundColor: color.white,
+  },
+  tabText: {
+    color: color.brand,
+  },
+  activeTab: {
+    backgroundColor: 'white',
+  },
+  activeTextTab: {
+    color: 'black',
+    fontWeight: 'bold',
   },
 });
 
@@ -52,6 +61,6 @@ const gridItemStyles = StyleSheet.create({
 const TABS = {
   ALLPOSTS: 'allposts',
   MYPOSTS: 'myposts',
-}
+};
 
 export {styles, gridItemStyles, TABS};

@@ -24,7 +24,7 @@ import {color} from '../../../theme/styles';
 import {config} from '../index';
 import {actions as auth} from '../../Auth/index';
 import TabAllPosts from './TabAllPosts';
-import {TABS} from './styles';
+import {TABS, styles} from './styles';
 
 import {
   Container,
@@ -58,7 +58,7 @@ export class Home extends Component {
       title: title,
       left: (
         <Icon
-          style={{marginLeft: 8, color: '#fff'}}
+          style={styles.leftNavBarButton}
           name={'ios-menu'}
           onPress={() => {
             menuButtonPressed();
@@ -67,7 +67,7 @@ export class Home extends Component {
       ),
       right: (
         <Icon
-          style={{marginRight: 8, color: '#fff'}}
+          style={styles.rightNavBarButton}
           name={'ios-options'}
           onPress={() => {
             optionsButtonPressed();
@@ -119,10 +119,10 @@ export class Home extends Component {
         onPress={() => this.setState({active: !activeState})}>
         <IconNB name="ios-menu" />
         <Button
-          style={{backgroundColor: color.brand}}
+          style={styles.actionButton}
           onPress={() => {
             this.collapseMenuOnButton();
-            createNewPostButtonPressed()
+            createNewPostButtonPressed();
           }}>
           <IconNB name="ios-create" />
         </Button>
@@ -134,23 +134,23 @@ export class Home extends Component {
     return (
       <Container>
         <Tabs
-          tabBarUnderlineStyle={{borderBottomWidth: 2}}
+          tabBarUnderlineStyle={styles.tabUnderlined}
           renderTabBar={() => <ScrollableTab/>}
           onChangeTab={({i}) => this.onChangeTab(i)}>
           <Tab
             heading="All Posts"
-            tabStyle={{backgroundColor: 'white'}}
-            textStyle={{color: color.brand}}
-            activeTabStyle={{backgroundColor: 'white'}}
-            activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+            tabStyle={styles.tab}
+            textStyle={styles.tabText}
+            activeTabStyle={styles.activeTab}
+            activeTextStyle={styles.activeTextTab}>
             <TabAllPosts modalView={this.mv} />
           </Tab>
           <Tab
             heading="My Posts"
-            tabStyle={{backgroundColor: 'white'}}
-            textStyle={{color: color.brand}}
-            activeTabStyle={{backgroundColor: 'white'}}
-            activeTextStyle={{color: 'black', fontWeight: 'bold'}}>
+            tabStyle={styles.tab}
+            textStyle={styles.tabText}
+            activeTabStyle={styles.activeTab}
+            activeTextStyle={styles.activeTextTab}>
             <TabAllPosts modalView={this.mv} />
           </Tab>
         </Tabs>

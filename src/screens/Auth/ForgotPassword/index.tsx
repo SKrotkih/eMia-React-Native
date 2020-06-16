@@ -5,7 +5,7 @@ import {Actions} from 'react-native-router-flux';
 import {Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {actions as auth} from '../index';
-import {AuthForm} from '../AuthForm';
+import {AuthForm, getEmptyError} from '../AuthForm';
 
 const {remindPassword} = auth;
 
@@ -22,12 +22,10 @@ const ForgotPassword: FunctionComponent = () => {
     },
   ];
 
-  const errorObj = {general: '', email: ''}
-
-  const [error, setError] = useState(errorObj);
+  const [error, setError] = useState(getEmptyError());
 
   function onSubmit(data) {
-    setError(errorObj); // clear out error messages
+    setError(getEmptyError()); // clear out error messages
     remindPassword(data, onSuccess, onError);
   }
 

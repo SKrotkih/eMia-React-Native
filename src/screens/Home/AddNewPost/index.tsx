@@ -18,7 +18,11 @@ const AddNewPost: FunctionComponent = (props) => {
   const titleLabelText = 'Title:';
   const bodyLabelText = 'Body:';
 
-  const [post, setPost] = useState({title: '', body: '', url: ''});
+  function getPostTemplate(): {} {
+    return {title: '', body: '', url: ''};
+  }
+
+  const [post, setPost] = useState(getPostTemplate());
 
   useEffect(() => {
     navigation.setParams({
@@ -45,6 +49,7 @@ const AddNewPost: FunctionComponent = (props) => {
           source={{uri: post.url}}
           downloadable
           doubleTapEnabled={true}
+          imageStyle={styles.image}
         />
       );
     }
@@ -124,7 +129,7 @@ const AddNewPost: FunctionComponent = (props) => {
         onPress={() => takePhotoButtonPressed()}>
         <Text>Attach a Photo</Text>
       </Button>
-      <View style={styles.backgroundPhoto}>{renderPhoto()}</View>
+      <View style={styles.backgroundImage}>{renderPhoto()}</View>
     </View>
   );
 };

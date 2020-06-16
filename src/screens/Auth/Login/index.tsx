@@ -2,7 +2,7 @@ import React, {FunctionComponent, useState} from 'react';
 import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {actions as auth} from '../index';
-import {AuthForm} from '../AuthForm';
+import {AuthForm, getEmptyError} from '../AuthForm';
 import {User} from '../../../model/entities/user';
 
 const {login} = auth;
@@ -28,15 +28,6 @@ const Login: FunctionComponent = () => {
       type: 'default',
     },
   ];
-
-  function getEmptyError(): any {
-    return {
-      general: '',
-      email: '',
-      password: '',
-      confirm_password: '',
-    };
-  }
 
   const [error, setError] = useState(getEmptyError());
 

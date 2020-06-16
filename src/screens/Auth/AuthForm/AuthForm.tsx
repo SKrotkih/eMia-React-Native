@@ -47,6 +47,15 @@ export interface IAuth {
   error: {};
 }
 
+export function getEmptyError(): any {
+  return {
+    general: '',
+    email: '',
+    password: '',
+    confirm_password: '',
+  };
+}
+
 export const AuthForm: FunctionComponent<IAuth> = (props) => {
   let array: FieldItem[] = [];
   props.fields.forEach((field) => {
@@ -76,9 +85,8 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
   }
 
   function validate() {
-    let _error = {};
+    let _error = getEmptyError();
     let _success = true;
-    _error['general'] = '';
     parameters.fields.forEach((field) => {
       let type = field.type;
       let value = field.value;
@@ -126,17 +134,14 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
       }
     });
     error[key] = '';
+    setError(error);
+    parameters.error[key] = '';
     setParameters(parameters);
   }
 
   function Separator() {
     return <View style={styles.separator} />;
   }
-
-  console.log('----------------');
-  console.log(parameters.error);
-  console.log(error);
-  console.log('----------------');
 
   function errorMessage(key: string): string {
     let message: string;
