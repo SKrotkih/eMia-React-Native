@@ -65,7 +65,7 @@ export class Post {
               })
               .catch((error) => {
                 if (error !== null) {
-                  Alert.alert('Error while uploading photo', `${error}`);
+                  Alert.alert('Error', `${error}`);
                 }
                 completed(false);
               });
@@ -73,6 +73,7 @@ export class Post {
         });
       })
       .catch((error) => {
+        Alert.alert('Error', `${error}`);
         console.log(error);
       });
   }

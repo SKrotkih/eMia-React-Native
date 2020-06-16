@@ -18,9 +18,7 @@ const AddNewPost: FunctionComponent = (props) => {
   const titleLabelText = 'Title:';
   const bodyLabelText = 'Body:';
 
-  const _post = new Post('', '', '');
-  const [post, setPost] = useState<Post>(_post);
-  const [update, setUpdate] = useState<boolean>(false);
+  const [post, setPost] = useState({title: '', body: '', url: ''});
 
   useEffect(() => {
     navigation.setParams({
@@ -30,12 +28,12 @@ const AddNewPost: FunctionComponent = (props) => {
           style={styles.rightBarButton}
           name={'ios-done-all'}
           onPress={() => {
-            doneButtonPressed();
+            doneButtonPressed(post);
           }}
         />
       ),
     });
-  }, []);
+  }, [post]);
 
   function renderPhoto() {
     if (post.url === '') {
@@ -70,18 +68,24 @@ const AddNewPost: FunctionComponent = (props) => {
       } else if (response.customButton) {
         console.log('User tapped custom button: ', response.customButton);
       } else {
-        post.url = response.uri;
-        setPost(post);
-        setUpdate(!update);
+        updateField('url', response.uri);
       }
     });
   }
 
-  function doneButtonPressed() {
-    post.submitOnServer((result) => {
+  function doneButtonPressed(_post: {}) {
+    const newPost = new Post(_post.title, _post.body, _post.url);
+    newPost.submitOnServer((result) => {
       if (result) {
         navigation.goBack();
       }
+    });
+  }
+
+  function updateField(name: string, value: string) {
+    setPost({
+      ...post,
+      [name]: value,
     });
   }
 
@@ -96,9 +100,7 @@ const AddNewPost: FunctionComponent = (props) => {
         placeholder="Type title"
         autoFocus={true}
         onChangeText={(text) => {
-          post.title = text;
-          setPost(post);
-          setUpdate(!update);
+          updateField('title', text);
         }}
         defaultValue={post.title}
       />
@@ -111,9 +113,7 @@ const AddNewPost: FunctionComponent = (props) => {
         placeholder="Type body"
         autoFocus={false}
         onChangeText={(text) => {
-          post.body = text;
-          setPost(post);
-          setUpdate(!update);
+          updateField('body', text);
         }}
         defaultValue={post.body}
       />

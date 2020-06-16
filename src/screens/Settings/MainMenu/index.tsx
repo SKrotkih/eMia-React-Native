@@ -103,7 +103,19 @@ function renderMenuItem(menuItem, _this) {
 function renderProfileMenuItem(_this) {
   var user = _this.state.user;
   if (user === null) {
-    return null;
+    return (
+      <ListItem height={63}>
+        <TouchableOpacity
+          style={styles.avatar}
+          activeOpacity={0.5}
+          onPress={() => {}}>
+          <Body style={{flexDirection: 'row'}}>
+            <Thumbnail circular size={55} source={{uri: 'Icon-Profile'}} />
+            <Text style={styles.description}>{'Undefined User'}</Text>
+          </Body>
+        </TouchableOpacity>
+      </ListItem>
+    );
   } else {
     user.getDownloadURL().then((url) => {
       _this.state.avatarUrl = url;
@@ -118,15 +130,14 @@ function renderProfileMenuItem(_this) {
     return (
       <ListItem height={63}>
         <TouchableOpacity
-          style={{flexDirection: 'row'}} activeOpacity={0.5} onPress={() => {
+          style={styles.avatar}
+          activeOpacity={0.5}
+          onPress={() => {
             editProfile(user);
           }}>
           <Body style={{flexDirection: 'row'}}>
             <Thumbnail circular size={55} source={avatarSource} />
-            <Text
-              style={{alignSelf: 'center', marginLeft: 16, fontWeight: 'bold'}}>
-              {user.username}
-            </Text>
+            <Text style={styles.description}>{user.username}</Text>
           </Body>
         </TouchableOpacity>
       </ListItem>
@@ -141,24 +152,17 @@ function editProfile(user) {
 // Log Out
 
 function renderLogOutMenuItem(_this) {
-  let user = _this.state.user;
-  if (user === null) {
-    return null;
-  } else {
-    return (
-      <ListItem height={63}>
-        <TouchableOpacity style={{flexDirection: 'row'}} activeOpacity={0.5} onPress={() => {
-            onSignOut();
-          }}>
-          <Body style={{flexDirection: 'row'}}>
-            <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>
-              Log Out
-            </Text>
-          </Body>
-        </TouchableOpacity>
-      </ListItem>
-    );
-  }
+  return (
+    <ListItem height={63}>
+      <TouchableOpacity style={{flexDirection: 'row'}} activeOpacity={0.5} onPress={() => {
+          onSignOut();
+        }}>
+        <Body style={{flexDirection: 'row'}}>
+          <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>Log Out</Text>
+        </Body>
+      </TouchableOpacity>
+    </ListItem>
+  );
 }
 
 function onSignOut() {
