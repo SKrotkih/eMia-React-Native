@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {padding, color, fontSize, fontFamily, windowWidth, normalize} from '../../../theme/styles';
+import {padding, color, fontSize, fontFamily, windowWidth, normalize} from '../../theme/styles';
 
 const resizeMode = 'contain';
 
@@ -8,7 +8,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.white,
   },
-
   topContainer: {
     flex: 1,
     paddingHorizontal: 15,
@@ -17,7 +16,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: color.brand,
   },
-
   image: {
     height: 100,
     width: 100,
@@ -25,7 +23,6 @@ const styles = StyleSheet.create({
     marginBottom: padding,
     resizeMode,
   },
-
   title: {
     fontSize: fontSize.large + 2,
     lineHeight: fontSize.large + 4,
@@ -33,7 +30,6 @@ const styles = StyleSheet.create({
     color: color.white,
     letterSpacing: 1,
   },
-
   bottomContainer: {
     backgroundColor: 'white',
     paddingVertical: padding * 3,
@@ -45,40 +41,27 @@ const styles = StyleSheet.create({
       width: 0,
     },
   },
-
   buttonContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-
   containerView: {
     width: windowWidth - 40,
   },
-
-  socialButton: {
-    height: normalize(55),
-    borderRadius: 4,
-    marginTop: 0,
-    marginBottom: 0,
-  },
-
   buttonText: {
     fontSize: fontSize.regular + 2,
     fontFamily: fontFamily.medium,
   },
-
   orContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     height: 40,
     width: windowWidth,
   },
-
   button: {
     backgroundColor: color.brand,
     height: normalize(55),
   },
-
   bottomText: {
     fontSize: fontSize.regular,
     fontFamily: fontFamily.medium,
@@ -97,22 +80,6 @@ const styles = StyleSheet.create({
     fontSize: fontSize.regular,
     color: color.brand,
     fontFamily: fontFamily.medium
-  },
-
-  divider: {
-    backgroundColor: '#D0D5DA',
-    position: 'absolute',
-    top: 19,
-    left: 20,
-    right: 20,
-  },
-
-  orText: {
-    backgroundColor: color.white,
-    fontSize: fontSize.regular,
-    fontFamily: fontFamily.medium,
-    color: '#414141',
-    paddingHorizontal: padding,
   },
 });
 

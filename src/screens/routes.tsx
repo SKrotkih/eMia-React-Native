@@ -2,7 +2,7 @@ import React from 'react';
 import {Scene, Router, ActionConst, Stack} from 'react-native-router-flux';
 
 // Start screen
-import Welcome from './Network/Welcome';
+import SplashScreen from './SplashScreen';
 
 // Authentication Scenes
 import Register from './Auth/Register';
@@ -33,7 +33,7 @@ export default class extends React.Component {
           <Stack key="Auth" initial={!isLoggedIn}>
             <Scene
               key="Welcome"
-              component={Welcome}
+              component={SplashScreen}
               title=""
               initial={true}
               hideNavBar
