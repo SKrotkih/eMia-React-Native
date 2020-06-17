@@ -1,12 +1,18 @@
-import React from 'react';
 import {Alert} from 'react-native';
 import * as actions from '../../../model/dbinteractor/posts/dbinteractor';
 import {TABS} from './styles';
+import {Home} from './index';
 
 const {fetchPosts} = actions;
 
 export class ModelView {
-  constructor(view) {
+  private _view: Home;
+  private _dataSource: any;
+  private _loaded: boolean;
+  private _refreshing: boolean;
+  private _currentFilter: string;
+
+  constructor(view: Home) {
     this._view = view;
     this._dataSource = null;
     this._loaded = false;

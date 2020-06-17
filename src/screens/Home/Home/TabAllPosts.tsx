@@ -5,10 +5,14 @@ import {styles, gridItemStyles} from './styles';
 import {Actions} from 'react-native-router-flux';
 import {Loader} from '../../../components/Loader';
 import {Body, Text} from 'native-base';
+import {ModelView} from './ModelView';
 
 const {Image, View, TouchableOpacity} = ReactNative;
 
 export default class TabAllPosts extends Component {
+  private modalView: ModelView;
+  private filter: string;
+
   constructor(props) {
     super(props);
     this.modalView = props.modalView;
@@ -45,7 +49,7 @@ export default class TabAllPosts extends Component {
   renderLoadingView() {
     return (
       <View style={styles.loading}>
-        <Loader loading={true}/>
+        <Loader loading={true} />
       </View>
     );
   }
@@ -63,7 +67,7 @@ export default class TabAllPosts extends Component {
   renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
     // TODO: The same. Need a key
     let key = '' + sectionID + '-' + rowID;
-    return <View style={styles.separator} key={key}/>;
+    return <View style={styles.separator} key={key} />;
   }
 
   renderItem(item, sectionID, rowID) {

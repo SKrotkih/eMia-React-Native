@@ -13,7 +13,7 @@ import ForgotPassword from './Auth/ForgotPassword';
 import Home from './Home/Home';
 import PostPreview from './Home/PostPreview';
 import AddNewPost from './Home/AddNewPost';
-import MainMenu from './Settings/MainMenu';
+import {MainMenu} from './Settings/MainMenu';
 import EditProfile from './Settings/EditProfile';
 import Options from './Home/Options';
 

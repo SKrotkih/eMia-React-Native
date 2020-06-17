@@ -7,6 +7,7 @@ const color = {
   light_black: '#414141',
   white: '#ffffff',
   light_grey: '#eaeaea',
+  tableSeparator: '#737373',
   grey: '#ccc',
   red: 'red',
   underlayColor: '#ddd',

@@ -1,7 +1,15 @@
 import {StyleSheet} from 'react-native';
-import {windowWidth, windowHeight} from '../../../theme/styles';
+import {color} from '../../../theme/styles';
 
 const styles = StyleSheet.create({
+  container: {
+    margin: 15,
+    marginBottom: 15,
+    backgroundColor: '#00000000',
+  },
+  contentList: {
+    backgroundColor: '#00000000',
+  },
   avatar: {
     flexDirection: 'row',
   },
@@ -12,7 +20,7 @@ const styles = StyleSheet.create({
   },
   loading: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: color.white,
   },
 });
 

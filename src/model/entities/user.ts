@@ -92,6 +92,6 @@ export class User {
         .catch((error) => {
           reject(error);
         });
-    })
+    });
   }
 }

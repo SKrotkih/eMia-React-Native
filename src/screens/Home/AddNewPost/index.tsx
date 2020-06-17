@@ -7,7 +7,7 @@ import {Button, Icon, Text, Label} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 import {Post} from '../../../model/entities/post';
-import ImageViewer from '../../../components/ImageViewer';
+import {ImageViewer} from '../../../components/ImageViewer';
 
 const {View} = ReactNative;
 

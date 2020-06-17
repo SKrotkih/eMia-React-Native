@@ -48,7 +48,7 @@ const backgroundValueCalculation = (x, y, BACKGROUND_VALUES) => {
 
 const DOUBLE_TAP_MILISECONDS = 200;
 
-export default class ImageViewer extends Component {
+export class ImageViewer extends Component {
   static propTypes = {
     // common
     source: Image.propTypes.source,

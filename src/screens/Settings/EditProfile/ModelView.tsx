@@ -2,7 +2,6 @@ import {User} from '../../../model/entities/user';
 import {EditProfile} from "./index";
 
 export class ModelView {
-
   private _user: User;
   private _view: EditProfile;
   private _imageUrl: string;
@@ -22,7 +21,7 @@ export class ModelView {
   renderView() {
     this.setUpImage().then(() => {
       this.updateView();
-    })
+    });
   }
 
   // Name
@@ -92,10 +91,15 @@ export class ModelView {
 
   private setUpImage(): Promise<void> {
     return new Promise((resolve, reject) => {
-      this._user.getDownloadURL().then((url) => {
-        this._imageUrl = url;
-        resolve();
-      });
+      this._user
+        .getDownloadURL()
+        .then((url) => {
+          this._imageUrl = url;
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   }
 
