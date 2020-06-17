@@ -1,13 +1,9 @@
 import React, {useState, useEffect, FunctionComponent} from 'react';
-import {View, Alert, TouchableOpacity} from 'react-native';
+import {View, Alert} from 'react-native';
 import {
   Container,
   Content,
-  Body,
-  Text,
-  Thumbnail,
   List,
-  ListItem,
 } from 'native-base';
 import {Actions} from 'react-native-router-flux';
 import {Loader} from '../../../components/Loader';
@@ -15,6 +11,8 @@ import {logOut} from '../../../model/dbinteractor/login/dbinteractor';
 import {downloadCurrentUserData} from '../../../model/dbinteractor/users/dbinteractor';
 import styles from './styles';
 import {User} from '../../../model/entities/user';
+import {renderProfileMenuItem} from './ProfileMenuItemView';
+import {renderLogOutMenuItem} from './LogOutMenuItemView';
 
 export const MainMenu: FunctionComponent = (props) => {
   const navigation: object = props.navigation;
@@ -57,81 +55,30 @@ export const MainMenu: FunctionComponent = (props) => {
   }
 
   function renderMenuItem(menuItem) {
-    if (menuItem.id === 'logout') {
-      return renderLogOutMenuItem();
-    } else if (menuItem.id === 'profile') {
-      return renderProfileMenuItem();
+    if (menuItem.id === 'profile') {
+      return renderProfileMenuItem(
+        user,
+        avatarUrl,
+        (_url) => {
+          setAvatarUrl(_url);
+        },
+        (_user) => {
+          editProfile(_user);
+        },
+      );
+    } else if (menuItem.id === 'logout') {
+      return renderLogOutMenuItem(() => {
+        onSignOut();
+      });
     } else {
       return null;
     }
   }
 
-  // Profile
-
-  function renderProfileMenuItem() {
-    if (user === null) {
-      return (
-        <ListItem height={63}>
-          <TouchableOpacity
-            style={styles.avatar}
-            activeOpacity={0.5}
-            onPress={() => {}}>
-            <Body style={{flexDirection: 'row'}}>
-              <Thumbnail circular size={55} source={{uri: 'Icon-Profile'}}/>
-              <Text style={styles.description}>{'Undefined User'}</Text>
-            </Body>
-          </TouchableOpacity>
-        </ListItem>
-      );
-    } else {
-      user.getDownloadURL().then((url) => {
-        setAvatarUrl(url);
-      });
-      let avatarSource = {};
-      if (avatarUrl === '') {
-        avatarSource.uri = 'Icon-Profile';
-      } else {
-        avatarSource.uri = avatarUrl;
-      }
-      return (
-        <ListItem height={63}>
-          <TouchableOpacity
-            style={styles.avatar}
-            activeOpacity={0.5}
-            onPress={() => {
-              editProfile(user);
-            }}>
-            <Body style={{flexDirection: 'row'}}>
-              <Thumbnail circular size={55} source={avatarSource}/>
-              <Text style={styles.description}>{user.username}</Text>
-            </Body>
-          </TouchableOpacity>
-        </ListItem>
-      );
-    }
-  }
+  // Actions
 
   function editProfile(user) {
     Actions.EditProfile({user});
-  }
-
-  // Log Out
-
-  function renderLogOutMenuItem() {
-    return (
-      <ListItem height={63}>
-        <TouchableOpacity
-          style={{flexDirection: 'row'}}
-          activeOpacity={0.5}
-          onPress={() => {
-            onSignOut();
-          }}>
-          <Body style={{flexDirection: 'row'}}>
-            <Text style={{alignSelf: 'center', fontWeight: 'bold'}}>Log Out</Text>
-          </Body>
-        </TouchableOpacity>
-      </ListItem>
-    );
   }
 
   function onSignOut() {
@@ -147,9 +94,8 @@ export const MainMenu: FunctionComponent = (props) => {
 
   return (
     (!loaded && renderLoadingView()) || (
-      <Container
-        style={{margin: 15, marginBottom: 15, backgroundColor: '#00000000'}}>
-        <Content style={{backgroundColor: '#00000000'}}>
+      <Container style={styles.container}>
+        <Content style={styles.contentList}>
           <List
             dataArray={menuItems}
             renderRow={(menuItem) => renderMenuItem(menuItem)}

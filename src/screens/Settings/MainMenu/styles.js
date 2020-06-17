@@ -22,6 +22,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.white,
   },
+  menuItemBody: {
+    flexDirection: 'row',
+  },
 });
 
 export default styles;
