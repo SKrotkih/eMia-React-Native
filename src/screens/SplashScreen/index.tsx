@@ -7,6 +7,14 @@ import styles from './styles';
 import * as config from '../../config/constants';
 
 const SplashScreen: FunctionComponent = () => {
+  function signUp() {
+    Actions.Register;
+  }
+
+  function signIn() {
+    Actions.Login;
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.topContainer}>
@@ -25,12 +33,12 @@ const SplashScreen: FunctionComponent = () => {
             containerViewStyle={[styles.containerView]}
             buttonStyle={[styles.button]}
             textStyle={styles.buttonText}
-            onPress={Actions.Register}
+            onPress={signUp()}
           />
         </View>
         <View style={styles.bottom}>
           <Text style={styles.bottomText}>Already have an account?</Text>
-          <TouchableOpacity onPress={Actions.Login}>
+          <TouchableOpacity onPress={signIn()}>
             <Text style={styles.signInText}>Sign in</Text>
           </TouchableOpacity>
         </View>
