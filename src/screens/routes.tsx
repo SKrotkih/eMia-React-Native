@@ -54,7 +54,7 @@ export default function stackNavigation(props) {
             />
           )}}/>
         <Stack.Screen name="PostPreview" component={PostPreview} options={{title: ''}}/>
-        <Stack.Screen name="AddNewPost" component={AddNewPost} options={{title: ''}}/>
+        <Stack.Screen name="AddNewPost" component={AddNewPost} options={{title: 'New Post'}}/>
         <Stack.Screen name="Options" component={Options} options={{title: ''}}/>
       </Stack.Navigator>
     </NavigationContainer>

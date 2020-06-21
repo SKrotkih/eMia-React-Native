@@ -5,12 +5,11 @@ import {styles, gridItemStyles} from './styles';
 import {Loader} from '../../../components/Loader';
 import {Body, Text} from 'native-base';
 import {ModelView} from './ModelView';
-import {Post} from '../../../model/entities/post';
 
 const {Image, View, TouchableOpacity} = ReactNative;
 
-export const TabAllPosts: FunctionComponent = (mv, navigation) => {
-  const modeView: ModelView = mv;
+export const TabAllPosts: FunctionComponent = (props, navigation) => {
+  const modeView: ModelView = props as ModelView;
 
   function renderLoadingView() {
     return (

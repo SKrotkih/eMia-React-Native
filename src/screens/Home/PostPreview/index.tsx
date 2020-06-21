@@ -1,10 +1,10 @@
 import React, {FunctionComponent} from 'react';
-import ReactNative from 'react-native';
+import ReactNative, {Image} from 'react-native';
 import styles from './styles';
 import {Time} from '../../../components/Time';
 import {connect} from 'react-redux';
 import {ImageViewer} from '../../../components/ImageViewer';
-import {Container, Header, Content, Text, Thumbnail} from 'native-base';
+import {Container, Header, Content, Text, Thumbnail, Body} from 'native-base';
 import {ModelView} from './modelView';
 
 const {View} = ReactNative;
@@ -12,7 +12,10 @@ const {View} = ReactNative;
 const PostPreview: FunctionComponent = ({route, navigation}) => {
   const postItem = route.params;
   const modelView = new ModelView(postItem);
-
+  function setTitle() {
+    navigation.setOptions({ title: modelView.title });
+  }
+  setTitle();
   return (
     <Container style={styles.container}>
       <Header style={styles.headerBackground}>
@@ -24,13 +27,17 @@ const PostPreview: FunctionComponent = ({route, navigation}) => {
           <Text style={styles.textUserName}>{modelView.userName}</Text>
         </View>
         <Text style={styles.textDescription}>{modelView.body}</Text>
-        <ImageViewer
-          imageStyle={styles.image}
-          disabled={false}
-          source={modelView.imageUrl}
-          downloadable
-          doubleTapEnabled={true}
+        <Image
+          style={styles.image}
+          source={{cache: 'force-cache', uri: modelView.imageUrl.uri}}
         />
+        {/*<ImageViewer*/}
+        {/*  imageStyle={styles.image}*/}
+        {/*  disabled={false}*/}
+        {/*  source={modelView.imageUrl}*/}
+        {/*  downloadable*/}
+        {/*  doubleTapEnabled={true}*/}
+        {/*/>*/}
         <Text style={styles.timeBackground}>
           <Time date={modelView.publishedAt} style={styles.textPublishedAt} />
         </Text>
