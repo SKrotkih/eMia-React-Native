@@ -1,4 +1,6 @@
+import 'react-native-gesture-handler';
 import React, {Component} from 'react';
+import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
 import {StyleProvider, Root} from 'native-base';
 import {ImageBackground, StatusBar, YellowBox, StyleSheet} from 'react-native';
@@ -6,7 +8,7 @@ import {ImageBackground, StatusBar, YellowBox, StyleSheet} from 'react-native';
 import getTheme from './src/components';
 import variables from './src/theme/variables/commonColor';
 
-import Router from './src/screens/routes';
+import stackNavigation from './src/screens/routes';
 import store from './src/redux/store';
 
 import {checkLoginStatus} from './src/model/firebase/auth/api';
@@ -47,20 +49,24 @@ export default class App extends Component {
   render() {
     if (!this.state.isReady) {
       return (
-        <ImageBackground
-          style={styles.background}
-          source={require('./src/assets/images/splash.png')}>
-          <StatusBar translucent barStyle="dark-content" />
-        </ImageBackground>
+        <Root>
+          <NavigationContainer>
+            <ImageBackground
+              style={styles.background}
+              source={require('./src/assets/images/splash.png')}>
+              <StatusBar translucent barStyle="dark-content"/>
+            </ImageBackground>
+          </NavigationContainer>
+        </Root>
       );
     } else {
       return (
         <Root>
-          <Provider store={store}>
-            <StyleProvider style={getTheme(variables)}>
-              <Router isLoggedIn={this.state.isLoggedIn}/>
-            </StyleProvider>
-          </Provider>
+            <Provider store={store}>
+              <StyleProvider style={getTheme(variables)}>
+                {stackNavigation({isLoggedIn: this.state.isLoggedIn})}
+              </StyleProvider>
+            </Provider>
         </Root>
       );
     }

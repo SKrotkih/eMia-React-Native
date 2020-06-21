@@ -17,57 +17,54 @@
 // https://www.npmjs.com/package/react-native-grid-component?activeTab=readme
 // npm install react-native-grid-component --save
 
-import React from 'react';
-import {Actions} from 'react-native-router-flux';
+import React, {
+  FunctionComponent,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from 'react';
 import {connect} from 'react-redux';
 import {color} from '../../../theme/styles';
-import {config} from '../index';
-import {actions as auth} from '../../Auth/index';
-import TabAllPosts from './TabAllPosts';
+import {TabAllPosts} from './TabAllPosts';
 import {TABS, styles} from './styles';
 
 import {
   Container,
   Button,
-  Icon,
   Tabs,
   Tab,
   ScrollableTab,
   Fab,
   IconNB,
+  Icon,
 } from 'native-base';
 
 import {ModelView} from './ModelView';
 
-const {Component} = React;
-const {login} = auth;
+let _state = false;
+let _modelView: ModelView;
 
-export class Home extends Component {
-  constructor(props) {
-    super(props);
-    this.mv = new ModelView(this);
-    this.state = {
-      state: false,
-    };
+const Home: FunctionComponent = (props) => {
+  const navigation: object = props.navigation;
+  if (_modelView === undefined) {
+    _modelView = new ModelView(() => {
+      _state = !_state;
+      setState(_state);
+    });
   }
 
-  setUpNavigationBar() {
-    let title = config.APP_NAME;
-    const {setParams} = this.props.navigation;
-    setParams({
-      title: title,
-      left: (
+  const [state, setState] = useState(false);
+  const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    onChangeTab(0);
+  }, []);
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
         <Icon
-          style={styles.leftNavBarButton}
-          name={'ios-menu'}
-          onPress={() => {
-            menuButtonPressed();
-          }}
-        />
-      ),
-      right: (
-        <Icon
-          style={styles.rightNavBarButton}
+          style={{color: color.white, marginRight: 8}}
           name={'ios-options'}
           onPress={() => {
             optionsButtonPressed();
@@ -75,101 +72,74 @@ export class Home extends Component {
         />
       ),
     });
-  }
+  }, [navigation]);
 
-  componentWillMount() {
-    this.setUpNavigationBar();
-  }
-
-  componentDidMount() {
-    this.onChangeTab(0);
-  }
-
-  onChangeTab(newTab) {
+  function onChangeTab(newTab) {
     switch (newTab) {
       case 0:
-        this.mv.filter = TABS.ALLPOSTS;
+        _modelView.filter = TABS.ALLPOSTS;
         break;
       case 1:
-        this.mv.filter = TABS.MYPOSTS;
+        _modelView.filter = TABS.MYPOSTS;
         break;
     }
   }
 
-  updateView() {
-    let currentState = !this.state.state;
-    this.setState({state: currentState});
-  }
-
-  collapseMenuOnButton() {
-    this.setState({
-      active: false,
-    });
-  }
-
-  renderActionsButton() {
-    let activeState = this.state.active;
+  function renderActionsButton() {
     return (
       <Fab
-        active={activeState}
+        active={active}
         direction="up"
         containerStyle={{}}
         style={{backgroundColor: color.brand}}
         position="bottomRight"
-        onPress={() => this.setState({active: !activeState})}>
-        <IconNB name="ios-menu" />
+        onPress={() => setActive(!active)}>
+        <IconNB name="ios-menu"/>
         <Button
           style={styles.actionButton}
           onPress={() => {
-            this.collapseMenuOnButton();
             createNewPostButtonPressed();
           }}>
-          <IconNB name="ios-create" />
+          <IconNB name="ios-create"/>
         </Button>
       </Fab>
     );
   }
 
-  render() {
-    return (
-      <Container>
-        <Tabs
-          tabBarUnderlineStyle={styles.tabUnderlined}
-          renderTabBar={() => <ScrollableTab/>}
-          onChangeTab={({i}) => this.onChangeTab(i)}>
-          <Tab
-            heading="All Posts"
-            tabStyle={styles.tab}
-            textStyle={styles.tabText}
-            activeTabStyle={styles.activeTab}
-            activeTextStyle={styles.activeTextTab}>
-            <TabAllPosts modalView={this.mv} />
-          </Tab>
-          <Tab
-            heading="My Posts"
-            tabStyle={styles.tab}
-            textStyle={styles.tabText}
-            activeTabStyle={styles.activeTab}
-            activeTextStyle={styles.activeTextTab}>
-            <TabAllPosts modalView={this.mv} />
-          </Tab>
-        </Tabs>
-        {this.renderActionsButton()}
-      </Container>
-    );
+  function createNewPostButtonPressed() {
+    navigation.navigate('AddNewPost');
   }
-}
 
-function createNewPostButtonPressed() {
-  Actions.AddNewPost();
-}
+  function optionsButtonPressed() {
+    navigation.navigate('Options');
+  }
 
-function menuButtonPressed() {
-  Actions.MainMenu();
-}
+  return (
+    <Container>
+      <Tabs
+        tabBarUnderlineStyle={styles.tabUnderlined}
+        renderTabBar={() => <ScrollableTab/>}
+        onChangeTab={({i}) => onChangeTab(i)}>
+        <Tab
+          heading="All Posts"
+          tabStyle={styles.tab}
+          textStyle={styles.tabText}
+          activeTabStyle={styles.activeTab}
+          activeTextStyle={styles.activeTextTab}>
+          {TabAllPosts(_modelView, navigation)}
+        </Tab>
+        <Tab
+          heading="My Posts"
+          tabStyle={styles.tab}
+          textStyle={styles.tabText}
+          activeTabStyle={styles.activeTab}
+          activeTextStyle={styles.activeTextTab}>
+          {TabAllPosts(_modelView, navigation)}
+        </Tab>
+      </Tabs>
+      {renderActionsButton()}
+    </Container>
+  );
+};
 
-function optionsButtonPressed() {
-  Actions.Options();
-}
-
-export default connect(null, {login})(Home);
+export default connect(null, null)(Home);

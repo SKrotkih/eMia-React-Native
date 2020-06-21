@@ -1,52 +1,18 @@
-import React, {Component} from 'react';
+import React, {FunctionComponent} from 'react';
 import ReactNative from 'react-native';
 import Grid from 'react-native-grid-component';
 import {styles, gridItemStyles} from './styles';
-import {Actions} from 'react-native-router-flux';
 import {Loader} from '../../../components/Loader';
 import {Body, Text} from 'native-base';
 import {ModelView} from './ModelView';
+import {Post} from '../../../model/entities/post';
 
 const {Image, View, TouchableOpacity} = ReactNative;
 
-export default class TabAllPosts extends Component {
-  private modalView: ModelView;
-  private filter: string;
+export const TabAllPosts: FunctionComponent = (mv, navigation) => {
+  const modeView: ModelView = mv;
 
-  constructor(props) {
-    super(props);
-    this.modalView = props.modalView;
-    this.filter = props.filter;
-  }
-
-  render() {
-    if (!this.modalView.loaded) {
-      return this.renderLoadingView();
-    }
-    return (
-      <Grid
-        style={styles.list}
-        renderItem={this.renderItem}
-        renderSeparator={this.renderSeparator.bind(this)}
-        renderPlaceholder={this.renderPlaceholder}
-        data={this.modalView.dataSource}
-        numColumns={2}
-        itemHasChanged={(d1, d2) => d1 !== d2}
-        keyExtractor={(item, index) => index.toString()}
-        refreshing={this.modalView.refreshing}
-        onRefresh={() => {
-          this.modalView.refreshData();
-        }}
-        onEndReached={() => {
-          // this.setState(({ data }) => ({
-          //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
-          // }));
-        }}
-      />
-    );
-  }
-
-  renderLoadingView() {
+  function renderLoadingView() {
     return (
       <View style={styles.loading}>
         <Loader loading={true} />
@@ -54,7 +20,7 @@ export default class TabAllPosts extends Component {
     );
   }
 
-  renderPlaceholder(sectionID, rowID) {
+  function renderPlaceholder(sectionID, rowID) {
     // TODO: create properly key
     let key = '' + sectionID + '-9';
     return (
@@ -64,13 +30,17 @@ export default class TabAllPosts extends Component {
     );
   }
 
-  renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
+  function renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
     // TODO: The same. Need a key
     let key = '' + sectionID + '-' + rowID;
     return <View style={styles.separator} key={key} />;
   }
 
-  renderItem(item, sectionID, rowID) {
+  function selectPostItem(postItem: any) {
+    navigation.navigate('PostPreview', postItem);
+  }
+
+  function renderItem(item, sectionID, rowID) {
     let title = item.post.title;
     let body = item.post.body;
     let key = item.id;
@@ -100,8 +70,28 @@ export default class TabAllPosts extends Component {
       </View>
     );
   }
-}
 
-function selectPostItem(item) {
-  Actions.PostPreview({item});
-}
+  return (
+    (!modeView.loaded && renderLoadingView()) || (
+      <Grid
+        style={styles.list}
+        renderItem={renderItem}
+        renderSeparator={renderSeparator}
+        renderPlaceholder={renderPlaceholder}
+        data={modeView.dataSource}
+        numColumns={2}
+        itemHasChanged={(d1, d2) => d1 !== d2}
+        keyExtractor={(item, index) => index.toString()}
+        refreshing={modeView.refreshing}
+        onRefresh={() => {
+          modeView.refreshData();
+        }}
+        onEndReached={() => {
+          // setState(({ data }) => ({
+          //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
+          // }));
+        }}
+      />
+    )
+  );
+};

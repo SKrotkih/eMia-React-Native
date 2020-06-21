@@ -1,19 +1,18 @@
 import {Alert} from 'react-native';
 import * as actions from '../../../model/dbinteractor/posts/dbinteractor';
 import {TABS} from './styles';
-import {Home} from './index';
 
 const {fetchPosts} = actions;
 
 export class ModelView {
-  private _view: Home;
   private _dataSource: any;
   private _loaded: boolean;
   private _refreshing: boolean;
   private _currentFilter: string;
+  private _updateView: () => void;
 
-  constructor(view: Home) {
-    this._view = view;
+  constructor(updateView: () => void) {
+    this._updateView = updateView;
     this._dataSource = null;
     this._loaded = false;
     this._refreshing = false;
@@ -21,7 +20,7 @@ export class ModelView {
   }
 
   updateView() {
-    this._view.updateView();
+    this._updateView();
   }
 
   get dataSource() {
@@ -30,6 +29,9 @@ export class ModelView {
 
   get loaded() {
     return this._loaded;
+  }
+  set loaded(newValue) {
+    this._loaded = newValue;
   }
 
   get refreshing() {
@@ -53,20 +55,20 @@ export class ModelView {
   }
 
   fetchData(i) {
-    this._loaded = false;
+    this.loaded = false;
     this._refreshing = true;
     this.updateView();
     fetchPosts(i)
       .then((items) => {
         this._dataSource = items;
-        this._loaded = true;
+        this.loaded = true;
         this._refreshing = false;
         this.updateView();
       })
       .catch((error) => {
         Alert.alert('Oops!', error.message);
         this._dataSource = [];
-        this._loaded = true;
+        this.loaded = true;
         this._refreshing = false;
         this.updateView();
       });

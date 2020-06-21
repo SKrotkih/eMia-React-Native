@@ -3,11 +3,10 @@ import {Post} from '../../../model/entities/post';
 import {User} from '../../../model/entities/user';
 
 export class ModelView {
-
-  private _post: Post
-  private _author: User
-  private readonly _avatarUrl: string
-  private readonly _imageUrl: string
+  private _post: Post;
+  private _author: User;
+  private readonly _avatarUrl: string;
+  private readonly _imageUrl: string;
 
   constructor(postItem) {
     this._post = postItem.post;
