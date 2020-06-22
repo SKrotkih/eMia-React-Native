@@ -1,7 +1,6 @@
 // ForgotPassword
 //
 import React, {FunctionComponent, useState} from 'react';
-import {Actions} from 'react-native-router-flux';
 import {Alert} from 'react-native';
 import {connect} from 'react-redux';
 import {actions as auth} from '../index';
@@ -9,7 +8,7 @@ import {AuthForm, getEmptyError} from '../AuthForm';
 
 const {remindPassword} = auth;
 
-const ForgotPassword: FunctionComponent = () => {
+const ForgotPassword: FunctionComponent = ({route, navigation}) => {
   const fields = [
     {
       key: 'email',
@@ -31,7 +30,7 @@ const ForgotPassword: FunctionComponent = () => {
 
   function onSuccess() {
     Alert.alert('Password Reminder Sent');
-    Actions.pop();
+    navigation.goBack();
   }
 
   function onError(_error) {

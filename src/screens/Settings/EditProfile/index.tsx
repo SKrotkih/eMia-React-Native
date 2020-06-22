@@ -1,6 +1,11 @@
 // EditProfile
 
-import React from 'react';
+import React, {
+  FunctionComponent,
+  useLayoutEffect,
+  useState,
+  useEffect,
+} from 'react';
 import ReactNative from 'react-native';
 import {connect} from 'react-redux';
 import ImagePicker from 'react-native-image-picker';
@@ -9,155 +14,46 @@ import styles from './styles';
 import {ImageViewer} from '../../../components/ImageViewer';
 import {ModelView} from './ModelView';
 
-import {User} from '../../../model/entities/user';
-
 const {View, TextInput, ScrollView} = ReactNative;
-const {Component} = React;
+let _modelView: ModelView;
+let _state = false;
 
-export class EditProfile extends Component {
-  private mv: ModelView;
-  private readonly user: User;
-  private readonly completion: any;
-  private readonly setParams: any;
-  private readonly navigation: any;
+const EditProfile: FunctionComponent = ({route, navigation}) => {
+  const {user, completion} = route.params;
+  const [state, setState] = useState(false);
 
-  constructor(props) {
-    super(props);
-    this.user = this.props.user;
-    this.completion = this.props.completion;
-    this.navigation = this.props.navigation;
-    this.setParams = this.props.navigation.setParams;
-    this.mv = new ModelView(this.user, this);
-    this.state = {
-      state: false,
-    };
-    this.doneButtonPressed = this.doneButtonPressed.bind(this);
+  const nameLabelText = 'Name:';
+  const addressLabelText = 'Address:';
+  const genderLabelText = 'Gender:';
+  const yearBirthLabelText = 'Year:';
+  const emailLabelText = 'Email:';
+
+  if (_modelView === undefined) {
+    _modelView = new ModelView(() => {
+      _state = !_state;
+      setState(_state);
+    });
   }
 
-  updateView() {
-    let currentState = !this.state.state;
-    this.setState({state: currentState});
-  }
+  useEffect(() => {
+    _modelView.user = user;
+  }, []);
 
-  componentWillMount() {
-    this.setUpNavigationBar();
-    this.mv.renderView();
-  }
-
-  setUpNavigationBar() {
-    let title = 'My Profile';
-    this.setParams({
-      title: title,
-      right: (
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
         <Icon
-          style={{marginRight: 8, color: '#fff'}}
+          style={{color: color.white, marginRight: 8}}
           name={'ios-done-all'}
           onPress={() => {
-            this.doneButtonPressed();
+            doneButtonPressed();
           }}
         />
       ),
     });
-  }
+  }, [navigation]);
 
-  render() {
-    let nameLabelText = 'Name:';
-    let addressLabelText = 'Address:';
-    let genderLabelText = 'Gender:';
-    let yearBirthLabelText = 'Year:';
-    let emailLabelText = 'Email:';
-    return (
-      <View style={styles.container}>
-        <ScrollView style={[styles.content]}>
-          <Label style={styles.label}>{nameLabelText}</Label>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            clearButtonMode="while-editing"
-            underlineColorAndroid="transparent"
-            placeholder="Type your name"
-            autoFocus={false}
-            onChangeText={(text) => {
-              this.mv.name = text;
-            }}
-            defaultValue={this.mv.name}
-          />
-          <Label style={styles.label}>{addressLabelText}</Label>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            clearButtonMode="while-editing"
-            underlineColorAndroid="transparent"
-            placeholder="Type your address"
-            autoFocus={false}
-            onChangeText={(text) => {
-              this.mv.address = text;
-            }}
-            defaultValue={this.mv.address}
-          />
-          <Label style={styles.label}>{genderLabelText}</Label>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            clearButtonMode="while-editing"
-            underlineColorAndroid="transparent"
-            placeholder="Type your gender"
-            autoFocus={false}
-            onChangeText={(text) => {
-              this.mv.gender = +text;
-            }}
-            defaultValue={'' + this.mv.gender}
-          />
-          <Label style={styles.label}>{yearBirthLabelText}</Label>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            clearButtonMode="while-editing"
-            underlineColorAndroid="transparent"
-            placeholder="Type your year of birth"
-            autoFocus={false}
-            onChangeText={(text) => {
-              this.mv.yearBirth = text;
-            }}
-            defaultValue={this.mv.yearBirth}
-          />
-          <Label style={styles.label}>{emailLabelText}</Label>
-          <TextInput
-            style={styles.input}
-            autoCapitalize="none"
-            clearButtonMode="while-editing"
-            underlineColorAndroid="transparent"
-            placeholder="Type your email"
-            autoFocus={false}
-            onChangeText={(text) => {
-              this.mv.email = text;
-            }}
-            defaultValue={this.mv.email}
-          />
-          <Button
-            block
-            info
-            style={styles.button}
-            onPress={() => this.takePhotoButtonPressed()}>
-            <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
-          </Button>
-          {!this.mv.isImageEmpty && (
-            <View style={styles.backgroundImage}>
-              <ImageViewer
-                imageStyle={styles.image}
-                disabled={false}
-                source={{uri: this.mv.imageUrl}}
-                downloadable={true}
-                doubleTapEnabled={true}
-              />
-            </View>
-          )}
-        </ScrollView>
-      </View>
-    );
-  }
-
-  takePhotoButtonPressed() {
+  function takePhotoButtonPressed() {
     const options = {
       quality: 1.0,
       maxWidth: 500,
@@ -171,20 +67,110 @@ export class EditProfile extends Component {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else {
-        this.mv.imageUrl = response.uri;
+        _modelView.imageUrl = response.uri;
       }
     });
   }
 
-  doneButtonPressed() {
-    this.mv.submitData().then(() => {
-      if (this.completion === undefined) {
-        this.navigation.goBack();
+  function doneButtonPressed() {
+    _modelView.submitData().then(() => {
+      if (completion === undefined) {
+        navigation.goBack();
       } else {
-        this.completion();
+        completion();
       }
     });
   }
-}
+
+  return (
+    <View style={styles.container}>
+      <ScrollView style={[styles.content]}>
+        <Label style={styles.label}>{nameLabelText}</Label>
+        <TextInput
+          style={styles.input}
+          autoCapitalize="none"
+          clearButtonMode="while-editing"
+          underlineColorAndroid="transparent"
+          placeholder="Type your name"
+          autoFocus={false}
+          onChangeText={(text) => {
+            _modelView.name = text;
+          }}
+          defaultValue={_modelView.name}
+        />
+        <Label style={styles.label}>{addressLabelText}</Label>
+        <TextInput
+          style={styles.input}
+          autoCapitalize="none"
+          clearButtonMode="while-editing"
+          underlineColorAndroid="transparent"
+          placeholder="Type your address"
+          autoFocus={false}
+          onChangeText={(text) => {
+            _modelView.address = text;
+          }}
+          defaultValue={_modelView.address}
+        />
+        <Label style={styles.label}>{genderLabelText}</Label>
+        <TextInput
+          style={styles.input}
+          autoCapitalize="none"
+          clearButtonMode="while-editing"
+          underlineColorAndroid="transparent"
+          placeholder="Type your gender"
+          autoFocus={false}
+          onChangeText={(text) => {
+            _modelView.gender = +text;
+          }}
+          defaultValue={'' + _modelView.gender}
+        />
+        <Label style={styles.label}>{yearBirthLabelText}</Label>
+        <TextInput
+          style={styles.input}
+          autoCapitalize="none"
+          clearButtonMode="while-editing"
+          underlineColorAndroid="transparent"
+          placeholder="Type your year of birth"
+          autoFocus={false}
+          onChangeText={(text) => {
+            _modelView.yearBirth = text;
+          }}
+          defaultValue={_modelView.yearBirth}
+        />
+        <Label style={styles.label}>{emailLabelText}</Label>
+        <TextInput
+          style={styles.input}
+          autoCapitalize="none"
+          clearButtonMode="while-editing"
+          underlineColorAndroid="transparent"
+          placeholder="Type your email"
+          autoFocus={false}
+          onChangeText={(text) => {
+            _modelView.email = text;
+          }}
+          defaultValue={_modelView.email}
+        />
+        <Button
+          block
+          info
+          style={styles.button}
+          onPress={() => takePhotoButtonPressed()}>
+          <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
+        </Button>
+        {!this.mv.isImageEmpty && (
+          <View style={styles.backgroundImage}>
+            <ImageViewer
+              imageStyle={styles.image}
+              disabled={false}
+              source={{uri: _modelView.imageUrl}}
+              downloadable={true}
+              doubleTapEnabled={true}
+            />
+          </View>
+        )}
+      </ScrollView>
+    </View>
+  );
+};
 
 export default connect(null, null)(EditProfile);

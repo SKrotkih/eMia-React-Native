@@ -1,5 +1,4 @@
 import React, {FunctionComponent, useState} from 'react';
-import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {actions as auth} from '../index';
 import {AuthForm, getEmptyError} from '../AuthForm';
@@ -7,7 +6,7 @@ import {User} from '../../../model/entities/user';
 
 const {register} = auth;
 
-const Register: FunctionComponent = () => {
+const Register: FunctionComponent = ({route, navigation}) => {
   const fields = [
     {
       key: 'email',
@@ -48,11 +47,8 @@ const Register: FunctionComponent = () => {
   function onSuccess(data) {
     const uid = data.user.uid;
     const user = new User(uid, '');
-    Actions.EditProfile({
-      user: user,
-      completion: function () {
-        Actions.Main();
-      },
+    navigation.navigate('EditProfile', user, () => {
+      navigation.navigate('Main');
     });
   }
 

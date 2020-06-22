@@ -1,18 +1,19 @@
 import React, {FunctionComponent} from 'react';
-import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {Text, View, TouchableOpacity, Image} from 'react-native';
 import {Button} from 'react-native-elements';
 import styles from './styles';
 import * as config from '../../config/constants';
 
-const SplashScreen: FunctionComponent = () => {
+const SplashScreen: FunctionComponent = (props) => {
+  const navigation: object = props.navigation;
+
   function signUp() {
-    Actions.Register;
+    navigation.navigate('Register');
   }
 
   function signIn() {
-    Actions.Login;
+    navigation.navigate('Login');
   }
 
   return (
@@ -33,12 +34,12 @@ const SplashScreen: FunctionComponent = () => {
             containerViewStyle={[styles.containerView]}
             buttonStyle={[styles.button]}
             textStyle={styles.buttonText}
-            onPress={signUp()}
+            onPress={() => signUp()}
           />
         </View>
         <View style={styles.bottom}>
           <Text style={styles.bottomText}>Already have an account?</Text>
-          <TouchableOpacity onPress={signIn()}>
+          <TouchableOpacity onPress={() => signIn()}>
             <Text style={styles.signInText}>Sign in</Text>
           </TouchableOpacity>
         </View>

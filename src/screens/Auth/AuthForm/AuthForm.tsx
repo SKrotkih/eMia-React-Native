@@ -197,14 +197,14 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
         <Button
           title={parameters.buttonTitle}
           color={color.brand}
-          onPress={onSubmit}
+          onPress={() => onSubmit()}
         />
         <Separator />
         {parameters.onForgotPassword !== null && (
           <View style={styles.forgotButton}>
             <Text
               style={styles.forgotText}
-              onPress={parameters.onForgotPassword}>
+              onPress={() => parameters.onForgotPassword()}>
               Forgot password?
             </Text>
           </View>

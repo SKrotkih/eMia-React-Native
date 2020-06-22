@@ -1,5 +1,4 @@
 import React, {FunctionComponent, useState} from 'react';
-import {Actions} from 'react-native-router-flux';
 import {connect} from 'react-redux';
 import {actions as auth} from '../index';
 import {AuthForm, getEmptyError} from '../AuthForm';
@@ -7,7 +6,7 @@ import {User} from '../../../model/entities/user';
 
 const {login} = auth;
 
-const Login: FunctionComponent = () => {
+const Login: FunctionComponent = ({route, navigation}) => {
   const fields = [
     {
       key: 'email',
@@ -32,7 +31,7 @@ const Login: FunctionComponent = () => {
   const [error, setError] = useState(getEmptyError());
 
   function onForgotPassword() {
-    Actions.ForgotPassword();
+    navigation.navigate('ForgotPassword');
   }
 
   function onSubmit(data) {
@@ -43,14 +42,11 @@ const Login: FunctionComponent = () => {
   function onSuccess(uid, currentUser) {
     if (currentUser === null) {
       let user = new User(uid, '');
-      Actions.EditProfile({
-        user: user,
-        completion: () => {
-          Actions.Main();
-        },
+      navigation.navigate('EditProfile', user, () => {
+        navigation.navigate('Main');
       });
     } else {
-      Actions.Main();
+      navigation.navigate('Main');
     }
   }
 

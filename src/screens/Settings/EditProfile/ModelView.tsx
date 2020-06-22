@@ -1,21 +1,23 @@
 import {User} from '../../../model/entities/user';
-import {EditProfile} from "./index";
 
 export class ModelView {
   private _user: User;
-  private _view: EditProfile;
   private _imageUrl: string;
+  private _update: () => void;
 
-  constructor(user, view) {
-    this._user = user;
-    this._view = view;
+  constructor(update: () => void) {
+    this._update = update;
     this._imageUrl = '';
     this.setUpImage = this.setUpImage.bind(this);
     this.submitData = this.submitData.bind(this);
   }
 
+  set user(newValue: User) {
+    this._user = newValue;
+  }
+
   updateView() {
-    this._view.updateView();
+    this._update();
   }
 
   renderView() {
