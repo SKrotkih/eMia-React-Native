@@ -10,6 +10,8 @@ import {
   DrawerNavigationProp,
 } from '@react-navigation/drawer';
 
+import {DrawerContent} from './DrawerContent';
+
 import {color} from '../theme/styles';
 // Start screen
 import SplashScreen from './SplashScreen';
@@ -36,6 +38,9 @@ export default function stackNavigation(props) {
   if (isLoggedIn) {
     return (
       <NavigationContainer>
+        {/*<Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>*/}
+        {/*  <Drawer.Screen name="AddNewPost" component={AddNewPost}/>*/}
+        {/*</Drawer.Navigator>*/}
         <Stack.Navigator initialRouteName="Main" screenOptions={{
           headerStyle: {
             backgroundColor: color.brand,
