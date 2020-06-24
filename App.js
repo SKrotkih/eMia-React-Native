@@ -75,7 +75,7 @@ export default class App extends Component {
 
 function setUpIgnoreYellowMessage() {
   console.disableYellowBox = true;
-  YellowBox.ignoreWarnings(['Setting a timer', 'Warning:']);
+  YellowBox.ignoreWarnings(['Setting a timer', 'Warning:', 'Require cycle:', 'Warning: Async Storage']);
 }
 
 App.navigatorStyle = {

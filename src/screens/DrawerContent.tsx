@@ -1,22 +1,19 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {
-  DrawerContentScrollView,
-  DrawerItem,
-} from '@react-navigation/drawer';
-import {
-  useTheme,
-  Avatar,
   Title,
   Caption,
   Paragraph,
   Drawer,
+  useTheme,
+  Avatar,
   Text,
   TouchableRipple,
   Switch
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {User} from "../model/entities/user";
+import {User} from '../model/entities/user';
 
 export function DrawerContent(props) {
   return (
@@ -25,9 +22,9 @@ export function DrawerContent(props) {
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
             <View style={{flexDirection: 'row', marginTop: 15}}>
-              <View style={{marginLeft: 15, flexDirection: 'column'}}>
-                <Title style={styles.title}>John Doe</Title>
-                <Caption style={styles.caption}>@j_doe</Caption>
+              <View style={{flexDirection: 'column'}}>
+                <Title style={styles.title}>eMia React Native</Title>
+                <Caption style={styles.caption}>build 1.0.1</Caption>
               </View>
             </View>
             <View style={styles.row}>
@@ -43,17 +40,23 @@ export function DrawerContent(props) {
           </View>
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
-              icon={({color, size}) => (
-                <Icon
-                  name="home-outline"
-                  color={color}
-                  size={size}
-                />
-              )}
-              label="Home"
+              // icon={({color, size}) => (
+              //   <Icon
+              //     name="home-outline"
+              //     color={color}
+              //     size={size}
+              //   />
+              // )}
+              label="My Profile"
               onPress={() => {
                 let user = new User('111', '');
                 props.navigation.navigate('EditProfile', user);
+              }}
+            />
+            <DrawerItem
+              label="Log Out"
+              onPress={() => {
+                console.log('LOG OUT');
               }}
             />
           </Drawer.Section>
