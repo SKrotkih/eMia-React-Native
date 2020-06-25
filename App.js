@@ -1,4 +1,6 @@
+// Must be on top of:
 import 'react-native-gesture-handler';
+
 import React, {Component} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {Provider} from 'react-redux';
@@ -11,53 +13,32 @@ import variables from './src/theme/variables/commonColor';
 import store from './src/redux/store';
 
 import backgroundImage from './src/theme/BackgroundImage';
-import Navigator, {
-  createNavigationContainer,
-} from './src/screens/routes/drawer';
+
+import {authNavigation, mainNavigation} from "./src/screens/routes/routes";
+import {checkLoginStatus} from "./src/model/firebase/auth/api";
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       isReady: false,
+      isLoggedIn: false,
     };
   }
 
   async componentWillMount() {
     setUpIgnoreYellowMessage();
-
-    // clean next comment lines to use expo
-    // await Expo.Font.loadAsync({
-    //   "Roboto": require('native-base/Fonts/Roboto.ttf'),
-    //   "Roboto_medium": require("native-base/Fonts/Roboto_medium.ttf"),
-    //   "RobotoExtraBold": require('@assets/fonts/Roboto-Black.ttf'),
-    //   "RobotoBold": require('@assets/fonts/Roboto-Bold.ttf'),
-    //   "RobotoMedium": require('@assets/fonts/Roboto-Medium.ttf'),
-    //   "RobotoRegular": require('@assets/fonts/Roboto-Regular.ttf'),
-    //   "RobotoLight": require('@assets/fonts/Roboto-Light.ttf'),
-    //   "Ionicons": require("native-base/Fonts/Ionicons.ttf")
-    // });
-
     store.dispatch(
-      createNavigationContainer().then(() => {
-        this.setState({isReady: true});
+      checkLoginStatus((isLoggedIn) => {
+        this.setState({isReady: true, isLoggedIn: isLoggedIn});
       }),
     );
   }
 
   render() {
-    if (this.state.isReady) {
+    if (!this.state.isReady) {
       return (
-        <Root>
-          <Provider store={store}>
-            <StyleProvider style={getTheme(variables)}>
-              <Navigator/>
-            </StyleProvider>
-          </Provider>
-        </Root>
-      );
-    } else {
-      return (
+        // Splash Screen
         <Root>
           <NavigationContainer>
             <ImageBackground
@@ -66,6 +47,16 @@ export default class App extends Component {
               <StatusBar translucent barStyle="dark-content"/>
             </ImageBackground>
           </NavigationContainer>
+        </Root>
+      );
+    } else {
+      return (
+        <Root>
+          <Provider store={store}>
+            <StyleProvider style={getTheme(variables)}>
+              {(this.state.isLoggedIn && mainNavigation()) || authNavigation()}
+            </StyleProvider>
+          </Provider>
         </Root>
       );
     }

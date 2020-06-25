@@ -4,7 +4,7 @@ import {createAppContainer} from 'react-navigation';
 // stacks
 import HomeStack from './homeStack';
 import AuthStack from './authStack';
-import {getCurrentUser} from '../../model/firebase/auth/api';
+import {checkLoginStatus} from '../../model/firebase/auth/api';
 
 // drawer navigation options
 const HomeScreens = {
@@ -20,19 +20,19 @@ const AuthScreens = {
   },
 };
 
-let drawer;
+let drawer = null;
 
 export function createNavigationContainer() {
   return new Promise(function (resolve, reject) {
-    getCurrentUser((user) => {
-      if (user === null) {
-        drawer = createDrawerNavigator(AuthScreens);
-      } else {
+    checkLoginStatus((isLoggedIn) => {
+      if (isLoggedIn) {
         drawer = createDrawerNavigator(HomeScreens);
+      } else {
+        drawer = createDrawerNavigator(AuthScreens);
       }
       resolve();
     });
   });
 }
 
-export default createAppContainer(drawer);
+export default createAppContainer(createDrawerNavigator(HomeScreens));

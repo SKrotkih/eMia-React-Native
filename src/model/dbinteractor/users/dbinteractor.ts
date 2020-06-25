@@ -1,4 +1,4 @@
-import {getCurrentUserAsync, getUserAsync, registerNewUser} from '../../firebase/auth/api';
+import {getCurrentUserAsync, getFirebaseUserId, registerNewUser} from '../../firebase/auth/api';
 import {updateUser, fetchAllUsers, getUser} from '../../firebase/database/users';
 import {LOGGED_IN} from '../../dbinteractor/login/actionTypes';
 
@@ -15,7 +15,7 @@ export function register(data, successCB, errorCB) {
 }
 
 export function getCurrentUserId(callback) {
-  getUserAsync()
+  getFirebaseUserId()
     .then((uid) => {
       callback(uid);
     })

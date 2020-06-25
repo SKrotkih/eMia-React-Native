@@ -1,6 +1,6 @@
 import {database} from '../config';
 import {getUser} from './users';
-import {getUserAsync} from '../auth/api';
+import {getFirebaseUserId} from '../auth/api';
 import {Post} from '../../entities/post';
 
 export function fetchAllPosts() {
@@ -32,8 +32,8 @@ export function fetchAllPosts() {
 export function fetchMyPosts() {
   console.log('API. fetchMyPosts');
   return new Promise((resolve, reject) => {
-    getUserAsync()
-      .then((currentUser) => {
+    getFirebaseUserId()
+      .then((uid) => {
         database
           .ref('main')
           .child('posts')
@@ -41,7 +41,7 @@ export function fetchMyPosts() {
           .then((snapshot) => {
             let items = [];
             parsePosts(snapshot, items, function (post) {
-              return post.uid === currentUser.uid;
+              return post.uid === uid;
             });
             putUrlsPhoto(items, (data, error) => {
               if (error) {

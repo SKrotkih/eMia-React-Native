@@ -62,47 +62,31 @@ export function registerNewUser(data) {
   });
 }
 
-export function getUserAsync() {
-  return new Promise((resolve, reject) => {
-    auth.onAuthStateChanged((user) => {
-      if (user === null) {
-        reject('The User has not signed in yet');
-      } else {
-        resolve(user);
-      }
-    });
-  });
-}
-
 export function checkLoginStatus(callback) {
   return (dispatch) => {
-    getCurrentUser((user) => {
-      if (user === null) {
+    getCurrentUserAsync()
+      .then((user) => {
+        if (user === null) {
+          dispatch({type: LOGGED_OUT});
+          callback(false);
+        } else {
+          dispatch({type: LOGGED_IN, data: user});
+          callback(true);
+        }
+      })
+      .catch(() => {
         dispatch({type: LOGGED_OUT});
-      } else {
-        dispatch({type: LOGGED_IN, data: user});
-      }
-    });
+        callback(false);
+      });
   };
-}
-
-export function getCurrentUser(callback) {
-  getUserAsync()
-    .then((user) => {
-      callback(user);
-    })
-    .catch(() => {
-      callback(null);
-    });
 }
 
 // Get current registered user from the Authentication Firebase database
 export function getCurrentUserAsync() {
   console.log('API. getCurrentUserAsync');
   return new Promise((resolve, reject) => {
-    getUserAsync()
-      .then((user) => {
-        let uid = user.uid;
+    getFirebaseUserId()
+      .then((uid) => {
         fetchUserData(uid)
           .then((currentUser) => {
             resolve(currentUser);
@@ -114,6 +98,18 @@ export function getCurrentUserAsync() {
       .catch((error) => {
         reject(`Could not get Auth User response. Error: ${error}`);
       });
+  });
+}
+
+export function getFirebaseUserId() {
+  return new Promise((resolve, reject) => {
+    auth.onAuthStateChanged((user) => {
+      if (user === null) {
+        reject('The User has not signed in yet');
+      } else {
+        resolve(user.uid);
+      }
+    });
   });
 }
 

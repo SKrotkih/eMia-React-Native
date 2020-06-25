@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation-stack';
+import {createStackNavigator} from 'react-navigation-stack';
 import SplashScreen from "../SplashScreen";
 import Register from "../Auth/Register";
 import EditProfile from "../Settings/EditProfile";
@@ -10,34 +10,34 @@ const screens = {
   SplashScreen: {
     screen: SplashScreen,
     navigationOptions: {
-      title: ''
+      title: '',
     },
   },
   Register: {
     screen: Register,
     navigationOptions: {
-      title: 'Sign Up'
+      title: 'Sign Up',
     },
   },
   EditProfile: {
     screen: EditProfile,
     navigationOptions: {
-      title: 'My Profile'
+      title: 'My Profile',
     },
   },
   Login: {
     screen: Login,
     navigationOptions: {
-      title: 'Login'
+      title: 'Login',
     },
   },
   ForgotPassword: {
     screen: ForgotPassword,
     navigationOptions: {
-      title: 'Restore Password'
+      title: 'Restore Password',
     },
   },
-}
+};
 
 const AuthStack = createStackNavigator(screens, {
   defaultNavigationOptions: {

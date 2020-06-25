@@ -33,6 +33,7 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
       _state = !_state;
       setState(_state);
     });
+    _modelView.user = user;
   }
 
   useEffect(() => {
@@ -157,7 +158,7 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
           onPress={() => takePhotoButtonPressed()}>
           <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
         </Button>
-        {!this.mv.isImageEmpty && (
+        {!_modelView.isImageEmpty && (
           <View style={styles.backgroundImage}>
             <ImageViewer
               imageStyle={styles.image}
