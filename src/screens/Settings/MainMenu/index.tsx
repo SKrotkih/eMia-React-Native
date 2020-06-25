@@ -75,10 +75,9 @@ export const MainMenu: FunctionComponent = (props) => {
     }
   }
 
-  // Actions
-
   function editProfile(user) {
-    Actions.EditProfile({user});
+    navigation.navigate('EditProfile', user, () => {
+    });
   }
 
   function onSignOut() {

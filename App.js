@@ -8,19 +8,18 @@ import {ImageBackground, StatusBar, YellowBox, StyleSheet} from 'react-native';
 import getTheme from './src/components';
 import variables from './src/theme/variables/commonColor';
 
-import stackNavigation from './src/screens/routes';
 import store from './src/redux/store';
 
-import {checkLoginStatus} from './src/model/firebase/auth/api';
-
 import backgroundImage from './src/theme/BackgroundImage';
+import Navigator, {
+  createNavigationContainer,
+} from './src/screens/routes/drawer';
 
 export default class App extends Component {
   constructor() {
     super();
     this.state = {
       isReady: false,
-      isLoggedIn: false,
     };
   }
 
@@ -40,14 +39,24 @@ export default class App extends Component {
     // });
 
     store.dispatch(
-      checkLoginStatus((isLoggedIn) => {
-        this.setState({isReady: true, isLoggedIn});
+      createNavigationContainer().then(() => {
+        this.setState({isReady: true});
       }),
     );
   }
 
   render() {
-    if (!this.state.isReady) {
+    if (this.state.isReady) {
+      return (
+        <Root>
+          <Provider store={store}>
+            <StyleProvider style={getTheme(variables)}>
+              <Navigator/>
+            </StyleProvider>
+          </Provider>
+        </Root>
+      );
+    } else {
       return (
         <Root>
           <NavigationContainer>
@@ -57,16 +66,6 @@ export default class App extends Component {
               <StatusBar translucent barStyle="dark-content"/>
             </ImageBackground>
           </NavigationContainer>
-        </Root>
-      );
-    } else {
-      return (
-        <Root>
-            <Provider store={store}>
-              <StyleProvider style={getTheme(variables)}>
-                {stackNavigation({isLoggedIn: this.state.isLoggedIn})}
-              </StyleProvider>
-            </Provider>
         </Root>
       );
     }

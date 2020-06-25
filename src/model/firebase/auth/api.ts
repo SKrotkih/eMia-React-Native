@@ -76,16 +76,24 @@ export function getUserAsync() {
 
 export function checkLoginStatus(callback) {
   return (dispatch) => {
-    getUserAsync()
-      .then((user) => {
-        dispatch({type: LOGGED_IN, data: user});
-        callback(true);
-      })
-      .catch((error) => {
+    getCurrentUser((user) => {
+      if (user === null) {
         dispatch({type: LOGGED_OUT});
-        callback(false);
-      });
+      } else {
+        dispatch({type: LOGGED_IN, data: user});
+      }
+    });
   };
+}
+
+export function getCurrentUser(callback) {
+  getUserAsync()
+    .then((user) => {
+      callback(user);
+    })
+    .catch(() => {
+      callback(null);
+    });
 }
 
 // Get current registered user from the Authentication Firebase database
