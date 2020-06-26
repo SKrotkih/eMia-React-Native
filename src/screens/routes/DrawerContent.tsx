@@ -75,7 +75,7 @@ function editProfile(props) {
   downloadCurrentUserData((user) => {
     props.navigation.navigate('EditProfile', {user: user, completion: null});
   });
-}1
+}
 
 function handleLogOut(props) {
   logOut(
