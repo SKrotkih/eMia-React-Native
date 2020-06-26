@@ -2,21 +2,21 @@ import React from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {
-  Title,
   Caption,
   Paragraph,
   Drawer,
+  Title,
   useTheme,
   Avatar,
   Text,
   TouchableRipple,
-  Switch
+  Switch,
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {User} from '../../model/entities/user';
-import {downloadCurrentUserData} from "../../model/dbinteractor/users/dbinteractor";
-import {Actions} from "react-native-router-flux";
-import {logOut} from "../../model/dbinteractor/login/dbinteractor";
+import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
+import {Actions} from 'react-native-router-flux';
+import {logOut} from '../../model/dbinteractor/login/dbinteractor';
 
 export function DrawerContent(props) {
   return (
@@ -53,11 +53,15 @@ export function DrawerContent(props) {
               //   />
               // )}
               label="My Profile"
-              onPress={() => {editProfile(props)}}
+              onPress={() => {
+                editProfile(props);
+              }}
             />
             <DrawerItem
               label="Log Out"
-              onPress={() => {handleLogOut(props)}}
+              onPress={() => {
+                handleLogOut(props);
+              }}
             />
           </Drawer.Section>
         </View>
@@ -69,7 +73,7 @@ export function DrawerContent(props) {
 // Actions
 
 function closeDrawer(props) {
-  props.navigation.navigate('Root'); // closeDrawer();
+  props.navigation.navigate('Root');
 }
 
 function editProfile(props) {
@@ -126,7 +130,7 @@ const styles = StyleSheet.create({
   bottomDrawerSection: {
     marginBottom: 15,
     borderTopColor: '#f4f4f4',
-    borderTopWidth: 1
+    borderTopWidth: 1,
   },
   preference: {
     flexDirection: 'row',
