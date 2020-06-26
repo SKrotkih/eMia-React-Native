@@ -29,7 +29,9 @@ export function DrawerContent(props) {
                 <Drawer.Section style={styles.drawerSection}>
                   <DrawerItem
                     label="eMia React Native"
-                    onPress={() => {closeDrawer(props)}}
+                    onPress={() => {
+                      closeDrawer(props);
+                    }}
                   />
                 </Drawer.Section>
               </View>
@@ -67,7 +69,7 @@ export function DrawerContent(props) {
 // Actions
 
 function closeDrawer(props) {
-  props.navigation.closeDrawer();
+  props.navigation.navigate('Root'); // closeDrawer();
 }
 
 function editProfile(props) {
