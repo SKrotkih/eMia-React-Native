@@ -2,9 +2,9 @@ import React from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {
+  Drawer,
   Caption,
   Paragraph,
-  Drawer,
   Title,
   useTheme,
   Avatar,
@@ -12,55 +12,55 @@ import {
   TouchableRipple,
   Switch,
 } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {User} from '../../model/entities/user';
 import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
-import {Actions} from 'react-native-router-flux';
 import {logOut} from '../../model/dbinteractor/login/dbinteractor';
 import store from "../../redux/store";
-import {LOGGED_IN, LOGGED_OUT} from "../../redux/actionTypes";
+import {LOGGED_OUT} from "../../redux/actionTypes";
+import {color} from "../../theme/styles";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export function DrawerContent(props) {
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
-          <View style={styles.userInfoSection}>
-            <View style={{flexDirection: 'row', marginTop: 15}}>
-              <View style={{flexDirection: 'column'}}>
-                <Drawer.Section style={styles.drawerSection}>
-                  <DrawerItem
-                    label="eMia React Native"
-                    onPress={() => {
-                      closeDrawer(props);
-                    }}
-                  />
-                </Drawer.Section>
-              </View>
-            </View>
-            <View style={styles.row}>
-              <View style={styles.section}>
-                <Paragraph style={[styles.paragraph, styles.caption]}>80</Paragraph>
-                <Caption style={styles.caption}>Following</Caption>
-              </View>
-            </View>
-          </View>
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
-              // icon={({color, size}) => (
-              //   <Icon
-              //     name="home-outline"
-              //     color={color}
-              //     size={size}
-              //   />
-              // )}
+              icon={({ size, color }) => (
+                <MaterialIcons
+                  size={size}
+                  color={color}
+                  name="home"/>
+              )}
+              label="Home"
+              labelStyle={styles.drawerLabel}
+              onPress={() => {
+                closeDrawer(props);
+              }}
+            />
+            <DrawerItem
+              // https://oblador.github.io/react-native-vector-icons/  in 'Materislicons'
+              icon={({ size, color }) => (
+                <MaterialIcons
+                  size={size}
+                  color={color}
+                  name="person"/>
+              )}
               label="My Profile"
+              labelStyle={styles.drawerLabel}
               onPress={() => {
                 editProfile(props);
               }}
             />
             <DrawerItem
+              icon={({ size, color }) => (
+                <MaterialIcons
+                  size={size}
+                  color={color}
+                  name="stop"/>
+              )}
               label="Log Out"
+              labelStyle={styles.drawerLabel}
               onPress={() => {
                 handleLogOut(props);
               }}
@@ -130,7 +130,11 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
   drawerSection: {
-    marginTop: 15,
+    marginTop: 35,
+    marginLeft: 25,
+  },
+  drawerLabel: {
+    color: color.brand,
   },
   bottomDrawerSection: {
     marginBottom: 15,
