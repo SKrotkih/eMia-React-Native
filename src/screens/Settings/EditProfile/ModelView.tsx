@@ -26,6 +26,10 @@ export class ModelView {
     });
   }
 
+  get title(): string {
+    return this.name;
+  }
+
   // Name
   get name(): string {
     return this._user.username === undefined ? '' : this._user.username;

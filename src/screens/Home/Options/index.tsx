@@ -2,11 +2,7 @@ import React from 'react';
 import {requireNativeComponent, Platform} from 'react-native';
 import {connect} from 'react-redux';
 import {windowHeight} from '../../../theme/styles';
-import {
-  Container,
-  Content,
-  Text,
-} from 'native-base';
+import {Container, Content, Text} from 'native-base';
 
 const {Component} = React;
 

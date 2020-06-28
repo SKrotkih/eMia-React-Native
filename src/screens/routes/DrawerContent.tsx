@@ -81,7 +81,10 @@ function closeDrawer(props) {
 function editProfile(props) {
   // TODO: Activity indication needed
   downloadCurrentUserData((user) => {
-    props.navigation.navigate('EditProfile', {user: user, completion: null});
+    props.navigation.navigate('Root', {
+      screen: 'EditProfile',
+      params: {user: user, completion: null},
+    });
   });
 }
 

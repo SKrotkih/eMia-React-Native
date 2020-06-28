@@ -80,7 +80,11 @@ const AddNewPost: FunctionComponent = (props) => {
   }
 
   function doneButtonPressed(_post: {}) {
-    if (_post.title === null || _post.title === '' || _post.body === null || _post.body === '') {
+    if (_post.title === null ||
+      _post.title === '' ||
+      _post.body === null ||
+      _post.body === ''
+    ) {
       return;
     }
     const newPost = new Post(_post.title, _post.body, _post.url);

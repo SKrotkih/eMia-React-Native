@@ -41,10 +41,13 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
   }, []);
 
   useLayoutEffect(() => {
+    navigation.setParams({
+      title: _modelView.title,
+    });
     navigation.setOptions({
       headerRight: () => (
         <Icon
-          style={{color: color.white, marginRight: 8}}
+          style={styles.rightBarButton}
           name={'ios-done-all'}
           onPress={() => {
             doneButtonPressed();

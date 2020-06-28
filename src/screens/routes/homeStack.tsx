@@ -61,11 +61,11 @@ function Root(props) {
         component={AddNewPost}
         options={{title: 'New Post'}}
       />
-      <Stack.Screen name="Options" component={Options} options={{title: ''}} />
+      <Stack.Screen name="Options" component={Options} options={{title: 'Filter'}} />
       <Stack.Screen
         name="EditProfile"
         component={EditProfile}
-        options={{title: ''}}
+        options={{title: 'My Profile'}}
       />
     </Stack.Navigator>
   );
@@ -75,11 +75,6 @@ export function homeNavigator() {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Root" component={Root} />
-      <Drawer.Screen
-        name="EditProfile"
-        component={EditProfile}
-        options={{title: ''}}
-      />
     </Drawer.Navigator>
   );
 }

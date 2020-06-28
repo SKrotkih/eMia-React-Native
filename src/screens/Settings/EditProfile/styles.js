@@ -10,6 +10,10 @@ const styles = StyleSheet.create({
   },
   content: {
   },
+  rightBarButton: {
+    color: color.white,
+    marginRight: 8,
+  },
   label: {
     fontWeight: 'normal',
     fontSize: 12,
