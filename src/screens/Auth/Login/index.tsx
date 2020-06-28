@@ -3,6 +3,9 @@ import {connect} from 'react-redux';
 import {actions as auth} from '../index';
 import {AuthForm, getEmptyError} from '../AuthForm';
 import {User} from '../../../model/entities/user';
+import {updateUser} from "../../../model/firebase/database/users";
+import {LOGGED_IN} from "../../../redux/actionTypes";
+import store from "../../../redux/store";
 
 const {login} = auth;
 
@@ -43,10 +46,10 @@ const Login: FunctionComponent = ({route, navigation}) => {
     if (currentUser === null) {
       let user = new User(uid, '');
       navigation.navigate('EditProfile', user, () => {
-        navigation.navigate('Main');
+        store.dispatch({type: LOGGED_IN, data: user});
       });
     } else {
-      navigation.navigate('Main');
+      store.dispatch({type: LOGGED_IN, data: currentUser});
     }
   }
 

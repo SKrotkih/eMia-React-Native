@@ -27,7 +27,9 @@ const AddNewPost: FunctionComponent = (props) => {
   useEffect(() => {
     navigation.setParams({
       title: title,
-      right: (
+    });
+    navigation.setOptions({
+      headerRight: (
         <Icon
           style={styles.rightBarButton}
           name={'ios-done-all'}
@@ -37,6 +39,7 @@ const AddNewPost: FunctionComponent = (props) => {
         />
       ),
     });
+
   }, [post]);
 
   function renderPhoto() {

@@ -26,7 +26,7 @@ function toggleDrawer(props) {
 function Root(props) {
   return (
     <Stack.Navigator
-      initialRouteName="Main"
+      initialRouteName="Home"
       screenOptions={{
         headerStyle: {
           backgroundColor: color.brand,
@@ -40,7 +40,7 @@ function Root(props) {
         headerTitleAlign: 'center',
       }}>
       <Stack.Screen
-        name="Main"
+        name="Home"
         component={Home}
         options={{
           title: 'eMia-React Native',
@@ -69,17 +69,21 @@ function Root(props) {
   );
 }
 
+export function homeNavigator() {
+  return (
+    <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
+      <Drawer.Screen name="Root" component={Root} />
+      <Drawer.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={{title: ''}}
+      />
+    </Drawer.Navigator>
+  );
+}
+
 export default function mainNavigation() {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-        <Drawer.Screen name="Root" component={Root} />
-        <Drawer.Screen
-          name="EditProfile"
-          component={EditProfile}
-          options={{title: ''}}
-        />
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <NavigationContainer>{homeNavigator()}</NavigationContainer>
   );
 }

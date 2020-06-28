@@ -1,6 +1,7 @@
 import {auth} from '../config';
 import {getUser} from '../database/users';
-import {LOGGED_IN, LOGGED_OUT} from '../../dbinteractor/login/actionTypes';
+import {LOGGED_IN, LOGGED_OUT} from '../../../redux/actionTypes';
+import {Dispatch} from 'redux';
 
 // Sign user in with their email and password
 export function signIn(data) {
@@ -42,7 +43,7 @@ export function signOut() {
         resolve();
       })
       .catch((error) => {
-        reject(error)
+        reject(error);
       });
   });
 }
@@ -62,23 +63,18 @@ export function registerNewUser(data) {
   });
 }
 
-export function checkLoginStatus(callback) {
-  return (dispatch) => {
-    getCurrentUserAsync()
-      .then((user) => {
-        if (user === null) {
-          dispatch({type: LOGGED_OUT});
-          callback(false);
-        } else {
-          dispatch({type: LOGGED_IN, data: user});
-          callback(true);
-        }
-      })
-      .catch(() => {
-        dispatch({type: LOGGED_OUT});
+export function checkLoginStatus(callback: (boolean) => void) {
+  getCurrentUserAsync()
+    .then((user) => {
+      if (user === null) {
         callback(false);
-      });
-  };
+      } else {
+        callback(true);
+      }
+    })
+    .catch(() => {
+      callback(false);
+    });
 }
 
 // Get current registered user from the Authentication Firebase database

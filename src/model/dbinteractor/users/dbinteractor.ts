@@ -1,17 +1,15 @@
 import {getCurrentUserAsync, getFirebaseUserId, registerNewUser} from '../../firebase/auth/api';
 import {updateUser, fetchAllUsers, getUser} from '../../firebase/database/users';
-import {LOGGED_IN} from '../../dbinteractor/login/actionTypes';
+import {LOGGED_IN} from '../../../redux/actionTypes';
 
 export function register(data, successCB, errorCB) {
-  return (dispatch) => {
-    registerNewUser(data)
-      .then((user) => {
-        successCB(user);
-      })
-      .catch((error) => {
-        errorCB(error);
-      });
-  }
+  registerNewUser(data)
+    .then((user) => {
+      successCB(user);
+    })
+    .catch((error) => {
+      errorCB(error);
+    });
 }
 
 export function getCurrentUserId(callback) {
@@ -49,16 +47,13 @@ export function uploadCurrentUserData(user) {
 }
 
 export function updateUserProfileData(user, successCB, errorCB) {
-  return (dispatch) => {
-    updateUser(user)
-      .then(() => {
-        dispatch({type: LOGGED_IN, data: user});
-        successCB();
-      })
-      .catch((error) => {
-        errorCB(error);
-      });
-  };
+  updateUser(user)
+    .then(() => {
+      successCB();
+    })
+    .catch((error) => {
+      errorCB(error);
+    });
 }
 
 export function fetchUser(uid, callback) {
@@ -72,13 +67,11 @@ export function fetchUser(uid, callback) {
 }
 
 export function fetchUsers(completion, failed) {
-  return (dispatch) => {
-    fetchAllUsers()
-      .then((users) => {
-        completion(users);
-      })
-      .catch((error) => {
-        failed(error);
-      })
-  }
+  fetchAllUsers()
+    .then((users) => {
+      completion(users);
+    })
+    .catch((error) => {
+      failed(error);
+    })
 }

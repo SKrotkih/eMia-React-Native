@@ -15,12 +15,12 @@ export function login(data, successCB, errorCB) {
           successCB(uid, currentUser);
         })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
           successCB(uid, null);
         });
     })
     .catch((error) => {
-      console.log('LOGIN ERROR: ', error);
+      console.error('LOGIN ERROR: ', error);
       errorCB(error);
     });
 }

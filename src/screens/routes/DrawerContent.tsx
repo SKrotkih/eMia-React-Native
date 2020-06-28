@@ -17,6 +17,8 @@ import {User} from '../../model/entities/user';
 import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
 import {Actions} from 'react-native-router-flux';
 import {logOut} from '../../model/dbinteractor/login/dbinteractor';
+import store from "../../redux/store";
+import {LOGGED_IN, LOGGED_OUT} from "../../redux/actionTypes";
 
 export function DrawerContent(props) {
   return (
@@ -86,7 +88,7 @@ function editProfile(props) {
 function handleLogOut(props) {
   logOut(
     () => {
-      Actions.reset('Auth');
+      store.dispatch({type: LOGGED_OUT});
     },
     (error) => {
       Alert.alert('Oops!', error.message);

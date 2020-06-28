@@ -66,7 +66,7 @@ const Home: FunctionComponent = (props) => {
         <Icon
           style={{color: color.white, marginRight: 8}}
           name={'ios-options'}
-          onPress={() => {
+          onPress={ () => {
             optionsButtonPressed();
           }}
         />

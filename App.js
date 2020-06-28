@@ -14,8 +14,9 @@ import store from './src/redux/store';
 
 import backgroundImage from './src/theme/BackgroundImage';
 
-import {authNavigation, mainNavigation} from "./src/screens/routes/routes";
-import {checkLoginStatus} from "./src/model/firebase/auth/api";
+import AuthNavigation from './src/screens/routes/logInStack.tsx';
+import MainNavigation from './src/screens/routes/homeStack';
+import {checkLoginStatus} from './src/model/firebase/auth/api';
 
 export default class App extends Component {
   constructor() {
@@ -28,39 +29,62 @@ export default class App extends Component {
 
   async componentWillMount() {
     setUpIgnoreYellowMessage();
-    store.dispatch(
-      checkLoginStatus((isLoggedIn) => {
-        this.setState({isReady: true, isLoggedIn: isLoggedIn});
-      }),
-    );
+    checkLoginStatus((isLoggedIn) => {
+      this.setState({isReady: true, isLoggedIn: isLoggedIn});
+    });
+    store.subscribe(() => {
+      const reducer = store.getState().authReducer;
+      this.setState({isReady: true, isLoggedIn: reducer.isLoggedIn});
+    });
   }
 
   render() {
     if (!this.state.isReady) {
-      return (
-        // Splash Screen
-        <Root>
-          <NavigationContainer>
-            <ImageBackground
-              style={styles.background}
-              source={require('./src/assets/images/splash.png')}>
-              <StatusBar translucent barStyle="dark-content"/>
-            </ImageBackground>
-          </NavigationContainer>
-        </Root>
-      );
+      return splashScreen();
+    } else if (this.state.isLoggedIn) {
+      return homeScreen();
     } else {
-      return (
-        <Root>
-          <Provider store={store}>
-            <StyleProvider style={getTheme(variables)}>
-              {(this.state.isLoggedIn && mainNavigation()) || authNavigation()}
-            </StyleProvider>
-          </Provider>
-        </Root>
-      );
+      return logInScreen();
     }
   }
+}
+
+function splashScreen() {
+  return (
+    <Root>
+      <NavigationContainer>
+        <ImageBackground
+          style={styles.background}
+          source={require('./src/assets/images/splash.png')}>
+          <StatusBar translucent barStyle="dark-content"/>
+        </ImageBackground>
+      </NavigationContainer>
+    </Root>
+  );
+}
+
+function homeScreen() {
+  return (
+    <Root>
+      <Provider store={store}>
+        <StyleProvider style={getTheme(variables)}>
+          <MainNavigation />
+        </StyleProvider>
+      </Provider>
+    </Root>
+  );
+}
+
+function logInScreen() {
+  return (
+    <Root>
+      <Provider store={store}>
+        <StyleProvider style={getTheme(variables)}>
+          <AuthNavigation />
+        </StyleProvider>
+      </Provider>
+    </Root>
+  );
 }
 
 function setUpIgnoreYellowMessage() {
