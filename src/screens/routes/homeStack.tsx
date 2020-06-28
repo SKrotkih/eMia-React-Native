@@ -12,9 +12,6 @@ import EditProfile from '../Settings/EditProfile';
 import PostPreview from '../Home/PostPreview';
 import AddNewPost from '../Home/AddNewPost';
 import Options from '../Home/Options';
-import {Dimensions} from 'react-native';
-
-const WIDTH = Dimensions.get('window').width;
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -65,6 +62,11 @@ function Root(props) {
         options={{title: 'New Post'}}
       />
       <Stack.Screen name="Options" component={Options} options={{title: ''}} />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfile}
+        options={{title: ''}}
+      />
     </Stack.Navigator>
   );
 }
@@ -83,7 +85,5 @@ export function homeNavigator() {
 }
 
 export default function mainNavigation() {
-  return (
-    <NavigationContainer>{homeNavigator()}</NavigationContainer>
-  );
+  return <NavigationContainer>{homeNavigator()}</NavigationContainer>;
 }

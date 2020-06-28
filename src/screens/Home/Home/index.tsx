@@ -66,7 +66,7 @@ const Home: FunctionComponent = (props) => {
         <Icon
           style={{color: color.white, marginRight: 8}}
           name={'ios-options'}
-          onPress={ () => {
+          onPress={() => {
             optionsButtonPressed();
           }}
         />
@@ -94,13 +94,13 @@ const Home: FunctionComponent = (props) => {
         style={{backgroundColor: color.brand}}
         position="bottomRight"
         onPress={() => setActive(!active)}>
-        <IconNB name="ios-menu"/>
+        <IconNB name="ios-menu" />
         <Button
           style={styles.actionButton}
           onPress={() => {
             createNewPostButtonPressed();
           }}>
-          <IconNB name="ios-create"/>
+          <IconNB name="ios-create" />
         </Button>
       </Fab>
     );

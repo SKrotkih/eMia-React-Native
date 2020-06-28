@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   image: {
-    overflow: "hidden",
+    overflow: 'hidden',
     backgroundColor: color.white,
     margin: 0,
     marginLeft: 0,

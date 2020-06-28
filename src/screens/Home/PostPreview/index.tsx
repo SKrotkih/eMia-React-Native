@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import ReactNative, {Image} from 'react-native';
+import ReactNative, {Image, ImageURISource} from 'react-native';
 import styles from './styles';
 import {Time} from '../../../components/Time';
 import {connect} from 'react-redux';
@@ -13,8 +13,9 @@ const PostPreview: FunctionComponent = ({route, navigation}) => {
   const postItem = route.params;
   const modelView = new ModelView(postItem);
   function setTitle() {
-    navigation.setOptions({ title: modelView.title });
+    navigation.setOptions({title: modelView.title});
   }
+  const imageSource: ImageURISource = modelView.imageUrl;
   setTitle();
   return (
     <Container style={styles.container}>
@@ -29,7 +30,7 @@ const PostPreview: FunctionComponent = ({route, navigation}) => {
         <Text style={styles.textDescription}>{modelView.body}</Text>
         <Image
           style={styles.image}
-          source={{cache: 'force-cache', uri: modelView.imageUrl.uri}}
+          source={{cache: 'force-cache', imageSource}}
         />
         {/*<ImageViewer*/}
         {/*  imageStyle={styles.image}*/}

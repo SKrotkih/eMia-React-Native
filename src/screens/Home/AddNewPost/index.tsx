@@ -29,9 +29,8 @@ const AddNewPost: FunctionComponent = (props) => {
       title: title,
     });
     navigation.setOptions({
-      headerRight: (
-        <Icon
-          style={styles.rightBarButton}
+      headerRight: () => (
+        <Icon style={styles.rightBarButton}
           name={'ios-done-all'}
           onPress={() => {
             doneButtonPressed(post);
@@ -39,7 +38,6 @@ const AddNewPost: FunctionComponent = (props) => {
         />
       ),
     });
-
   }, [post]);
 
   function renderPhoto() {
@@ -82,6 +80,9 @@ const AddNewPost: FunctionComponent = (props) => {
   }
 
   function doneButtonPressed(_post: {}) {
+    if (_post.title === null || _post.title === '' || _post.body === null || _post.body === '') {
+      return;
+    }
     const newPost = new Post(_post.title, _post.body, _post.url);
     newPost.submitOnServer((result) => {
       if (result) {
