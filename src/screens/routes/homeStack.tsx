@@ -42,7 +42,8 @@ function Root(props) {
         options={{
           title: 'eMia-React Native',
           headerLeft: () => (
-            <Icon style={{color: color.white, marginLeft: 8}}
+            <Icon
+              style={{color: color.white, marginLeft: 8}}
               name={'ios-menu'}
               onPress={() => {
                 toggleDrawer(props);
