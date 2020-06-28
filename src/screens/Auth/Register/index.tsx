@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 import {actions as auth} from '../index';
 import {AuthForm, getEmptyError} from '../AuthForm';
 import {User} from '../../../model/entities/user';
+import store from "../../../redux/store";
+import {LOGGED_IN} from "../../../redux/actionTypes";
 
 const {register} = auth;
 
@@ -48,7 +50,7 @@ const Register: FunctionComponent = ({route, navigation}) => {
     const uid = data.user.uid;
     const user = new User(uid, '');
     navigation.navigate('EditProfile', user, () => {
-      navigation.navigate('Main');
+      store.dispatch({type: LOGGED_IN, data: user});
     });
   }
 

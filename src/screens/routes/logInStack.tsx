@@ -5,7 +5,7 @@ import {color} from "../../theme/styles";
 
 import SplashScreen from "../SplashScreen";
 import Register from "../Auth/Register";
-import EditProfile from "../Settings/EditProfile";
+import EditProfile from "../EditProfile";
 import Login from "../Auth/Login";
 import ForgotPassword from "../Auth/ForgotPassword";
 import HomeNavigator from './homeStack';

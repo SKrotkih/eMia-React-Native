@@ -8,7 +8,7 @@ import {color} from '../../theme/styles';
 import {DrawerContent} from './DrawerContent';
 
 import Home from '../Home/Home';
-import EditProfile from '../Settings/EditProfile';
+import EditProfile from '../EditProfile';
 import PostPreview from '../Home/PostPreview';
 import AddNewPost from '../Home/AddNewPost';
 import Options from '../Home/Options';
