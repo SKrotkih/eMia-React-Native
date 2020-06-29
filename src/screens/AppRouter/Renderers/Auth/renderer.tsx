@@ -4,14 +4,14 @@ import getTheme from "../../../../components";
 import variables from "../../../../theme/variables/commonColor";
 import React from "react";
 import {Provider} from 'react-redux';
-import AuthNavigation from './navigationStack';
+import NavigationStack from './navigationStack';
 
 export default function logInScreen() {
   return (
     <Root>
       <Provider store={store}>
         <StyleProvider style={getTheme(variables)}>
-          <AuthNavigation />
+          <NavigationStack />
         </StyleProvider>
       </Provider>
     </Root>

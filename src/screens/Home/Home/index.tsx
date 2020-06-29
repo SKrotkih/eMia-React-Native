@@ -36,7 +36,7 @@ import {
   ScrollableTab,
   Fab,
   IconNB,
-  Icon,
+  Icon, RnTextStyleProp, RnViewStyleProp,
 } from 'native-base';
 
 import {ModelView} from './ModelView';
@@ -117,6 +117,7 @@ const Home: FunctionComponent = (props) => {
   return (
     <Container>
       <Tabs
+        tabBarBackgroundColor={'white'}
         tabBarUnderlineStyle={styles.tabUnderlined}
         renderTabBar={() => <ScrollableTab/>}
         onChangeTab={({i}) => onChangeTab(i)}>

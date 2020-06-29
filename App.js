@@ -1,6 +1,6 @@
 // Must be on top of:
 import 'react-native-gesture-handler';
-import React, {Component} from 'react';
+import {Component} from 'react';
 import {YellowBox} from 'react-native';
 import store from './src/redux/store';
 import splashScreenRenderer from './src/screens/AppRouter/Renderers/Splash/renderer';

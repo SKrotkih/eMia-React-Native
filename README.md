@@ -2,7 +2,7 @@
 
 Here is an entire source code application developed with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
 
-How it looks on iOS device: 
+How it looks on an iOS device: 
 
 ![reactnative_ios](https://user-images.githubusercontent.com/2775621/40759771-2bb84a6e-649c-11e8-86b2-be6e8ed46ad1.gif)
 
@@ -14,7 +14,7 @@ You will get  push-notification if another user likes your post.
 
 eMia uses Firebase database, storage, authentication and cloud messages.
 
-Notes. This React Native version contains also some native things. For example there is Filter View Controller (iOS, Swift 5) which is launched with using options menu button.  
+Notes. This React Native version contains also some native things. For example there is Filter View Controller (iOS) which is launched with using 'Options' menu button.  
 
 ## Requirements
 
@@ -23,7 +23,7 @@ Notes. This React Native version contains also some native things. For example t
 
 ## Preparing for using
 
-If you wont to try eMia by yourself, you should register app on Firebase. Please follow next instructions:
+If you are going to try eMia by yourself, you should register app on Firebase. Follow following instructions:
 
 For iOS
 Sign in your Google account, open Firebase console https://console.firebase.google.com

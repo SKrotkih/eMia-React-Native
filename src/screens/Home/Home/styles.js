@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     color: color.brand,
   },
   activeTab: {
-    backgroundColor: 'white',
+    backgroundColor: color.white,
   },
   activeTextTab: {
     color: 'black',

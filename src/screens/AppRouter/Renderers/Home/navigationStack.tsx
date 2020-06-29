@@ -8,10 +8,10 @@ import {color} from "../../../../theme/styles";
 import {DrawerContent} from '../Drawer/contentRenderer';
 
 import Home from '../../../Home/Home';
-import EditProfile from '../../../EditProfile';
 import PostPreview from '../../../Home/PostPreview';
 import AddNewPost from '../../../Home/AddNewPost';
 import Options from '../../../Home/Options';
+import EditProfile from '../../../EditProfile';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
