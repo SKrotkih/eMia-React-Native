@@ -1,21 +1,11 @@
 // Must be on top of:
 import 'react-native-gesture-handler';
-
 import React, {Component} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
-import {Provider} from 'react-redux';
-import {StyleProvider, Root} from 'native-base';
-import {ImageBackground, StatusBar, YellowBox, StyleSheet} from 'react-native';
-
-import getTheme from './src/components';
-import variables from './src/theme/variables/commonColor';
-
+import {YellowBox} from 'react-native';
 import store from './src/redux/store';
-
-import backgroundImage from './src/theme/BackgroundImage';
-
-import AuthNavigation from './src/screens/routes/logInStack.tsx';
-import MainNavigation from './src/screens/routes/homeStack';
+import splashScreenRenderer from './src/screens/AppRouter/Renderers/Splash/renderer';
+import homeScreenRenderer from './src/screens/AppRouter/Renderers/Home/renderer';
+import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer';
 import {checkLoginStatus} from './src/model/firebase/auth/api';
 
 export default class App extends Component {
@@ -40,51 +30,13 @@ export default class App extends Component {
 
   render() {
     if (!this.state.isReady) {
-      return splashScreen();
+      return splashScreenRenderer();
     } else if (this.state.isLoggedIn) {
-      return homeScreen();
+      return homeScreenRenderer();
     } else {
-      return logInScreen();
+      return authScreenRenderer();
     }
   }
-}
-
-function splashScreen() {
-  return (
-    <Root>
-      <NavigationContainer>
-        <ImageBackground
-          style={styles.background}
-          source={require('./src/assets/images/splash.png')}>
-          <StatusBar translucent barStyle="dark-content"/>
-        </ImageBackground>
-      </NavigationContainer>
-    </Root>
-  );
-}
-
-function homeScreen() {
-  return (
-    <Root>
-      <Provider store={store}>
-        <StyleProvider style={getTheme(variables)}>
-          <MainNavigation />
-        </StyleProvider>
-      </Provider>
-    </Root>
-  );
-}
-
-function logInScreen() {
-  return (
-    <Root>
-      <Provider store={store}>
-        <StyleProvider style={getTheme(variables)}>
-          <AuthNavigation />
-        </StyleProvider>
-      </Provider>
-    </Root>
-  );
 }
 
 function setUpIgnoreYellowMessage() {
@@ -96,11 +48,3 @@ App.navigatorStyle = {
   navBarHidden: true,
   statusBarBlur: true,
 };
-
-const styles = StyleSheet.create({
-  background: {
-    ...backgroundImage,
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-});

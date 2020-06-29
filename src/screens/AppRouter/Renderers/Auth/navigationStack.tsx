@@ -1,18 +1,18 @@
 import * as React from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
-import {color} from "../../theme/styles";
+import {color} from "../../../../theme/styles";
 
-import SplashScreen from "../SplashScreen";
-import Register from "../Auth/Register";
-import EditProfile from "../EditProfile";
-import Login from "../Auth/Login";
-import ForgotPassword from "../Auth/ForgotPassword";
-import HomeNavigator from './homeStack';
+import SplashScreen from "../../../SplashScreen";
+import Register from "../../../Auth/Register";
+import EditProfile from "../../../EditProfile";
+import Login from "../../../Auth/Login";
+import ForgotPassword from "../../../Auth/ForgotPassword";
+import HomeNavigator from '../../Renderers/Home/navigationStack';
 
 const Stack = createStackNavigator();
 
-export default function authNavigation() {
+export default function authNavigationStack() {
   return (
     <NavigationContainer>
       <Stack.Navigator

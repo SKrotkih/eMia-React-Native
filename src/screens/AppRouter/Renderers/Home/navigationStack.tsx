@@ -3,15 +3,15 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Icon} from 'native-base';
-import {color} from '../../theme/styles';
+import {color} from "../../../../theme/styles";
 
-import {DrawerContent} from './DrawerContent';
+import {DrawerContent} from '../Drawer/contentRenderer';
 
-import Home from '../Home/Home';
-import EditProfile from '../EditProfile';
-import PostPreview from '../Home/PostPreview';
-import AddNewPost from '../Home/AddNewPost';
-import Options from '../Home/Options';
+import Home from '../../../Home/Home';
+import EditProfile from '../../../EditProfile';
+import PostPreview from '../../../Home/PostPreview';
+import AddNewPost from '../../../Home/AddNewPost';
+import Options from '../../../Home/Options';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -72,7 +72,7 @@ function Root(props) {
   );
 }
 
-export function homeNavigator() {
+export function homeNavigationStack() {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="Root" component={Root} />
@@ -81,5 +81,5 @@ export function homeNavigator() {
 }
 
 export default function mainNavigation() {
-  return <NavigationContainer>{homeNavigator()}</NavigationContainer>;
+  return <NavigationContainer>{homeNavigationStack()}</NavigationContainer>;
 }

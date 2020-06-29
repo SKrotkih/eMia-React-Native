@@ -1,23 +1,13 @@
-import React from 'react';
+import React from "react";
 import {View, StyleSheet, Alert} from 'react-native';
-import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
-import {
-  Drawer,
-  Caption,
-  Paragraph,
-  Title,
-  useTheme,
-  Avatar,
-  Text,
-  TouchableRipple,
-  Switch,
-} from 'react-native-paper';
-import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
-import {logOut} from '../../model/dbinteractor/login/dbinteractor';
-import store from "../../redux/store";
-import {LOGGED_OUT} from "../../redux/actionTypes";
-import {color} from "../../theme/styles";
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
+import {Drawer} from 'react-native-paper';
+import store from '../../../../redux/store';
+import {LOGGED_OUT} from '../../../../redux/actionTypes';
+import {color} from '../../../../theme/styles';
+import {downloadCurrentUserData} from '../../../../model/dbinteractor/users/dbinteractor';
+import {logOut} from '../../../../model/dbinteractor/login/dbinteractor';
 
 export function DrawerContent(props) {
   return (
