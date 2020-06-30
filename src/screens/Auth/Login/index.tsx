@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {actions as auth} from '../index';
 import {AuthForm, getEmptyError} from '../AuthForm';
 import {User} from '../../../model/entities/user';
-import {updateUser} from "../../../model/firebase/database/users";
 import {LOGGED_IN} from "../../../redux/actionTypes";
 import store from "../../../redux/store";
 
