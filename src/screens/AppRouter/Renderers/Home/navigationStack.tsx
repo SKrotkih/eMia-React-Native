@@ -114,8 +114,8 @@ export default function mainNavigation() {
     }
   }
   const paperTheme = useTheme();
-  const theme = paperTheme.dark ? CustomDarkTheme : CustomDefaultTheme;
-  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+  const [isDarkTheme, setIsDarkTheme] = React.useState(paperTheme.dark);
+  const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
   const appContext = React.useMemo(
     () => ({

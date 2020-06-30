@@ -15,15 +15,13 @@ import HomeNavigator from '../../Renderers/Home/navigationStack';
 import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
-  DarkTheme as PaperDarkTheme
+  DarkTheme as PaperDarkTheme, useTheme
 } from 'react-native-paper';
 import {AppContext} from '../../../../components/context';
 
 const Stack = createStackNavigator();
 
 export default function authNavigationStack() {
-
-  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
   const CustomDefaultTheme = {
     ...NavigationDefaultTheme,
@@ -47,6 +45,8 @@ export default function authNavigationStack() {
     }
   }
 
+  const paperTheme = useTheme();
+  const [isDarkTheme, setIsDarkTheme] = React.useState(paperTheme.dark);
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
   const appContext = React.useMemo(
