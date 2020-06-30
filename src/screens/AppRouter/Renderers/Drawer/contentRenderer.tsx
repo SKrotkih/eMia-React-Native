@@ -1,15 +1,20 @@
-import React from "react";
+import React from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
-import {Drawer, Title, Avatar, Caption, Paragraph} from 'react-native-paper';
+import {Text, Drawer, Title, Avatar, Caption, Paragraph, TouchableRipple, Switch, useTheme} from 'react-native-paper';
 import store from '../../../../redux/store';
 import {LOGGED_OUT} from '../../../../redux/actionTypes';
 import {color} from '../../../../theme/styles';
 import {downloadCurrentUserData} from '../../../../model/dbinteractor/users/dbinteractor';
 import {logOut} from '../../../../model/dbinteractor/login/dbinteractor';
 
+import {AppContext} from '../../../../components/context';
+
 export function DrawerContent(props) {
+  const paperTheme = useTheme();
+  const {toggleTheme} = React.useContext(AppContext);
+
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
@@ -17,7 +22,7 @@ export function DrawerContent(props) {
           <View style={{flexDirection: 'row', marginTop: 15, marginLeft: 30}}>
             <Avatar.Image
               source={{
-                uri: 'Icon-Profile'
+                uri: 'Icon-Profile',
               }}
               size={35}
             />
@@ -68,6 +73,18 @@ export function DrawerContent(props) {
                 handleLogOut(props);
               }}
             />
+          </Drawer.Section>
+          <Drawer.Section title="Preferences">
+            <TouchableRipple onPress={() => {
+              toggleTheme()
+            }}>
+              <View style={styles.preference}>
+                <Text>Dark Theme</Text>
+                <View pointerEvents="none">
+                  <Switch value={paperTheme.dark}/>
+                </View>
+              </View>
+            </TouchableRipple>
           </Drawer.Section>
         </View>
       </DrawerContentScrollView>

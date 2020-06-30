@@ -17,12 +17,13 @@ import {
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme
 } from 'react-native-paper';
+import {AppContext} from '../../../../components/context';
 
 const Stack = createStackNavigator();
 
 export default function authNavigationStack() {
 
-  const isDarkTheme = true;
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
   const CustomDefaultTheme = {
     ...NavigationDefaultTheme,
@@ -48,55 +49,64 @@ export default function authNavigationStack() {
 
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
+  const appContext = React.useMemo(
+    () => ({
+      toggleTheme: () => {
+        setIsDarkTheme(isDarkTheme => !isDarkTheme);
+      },
+    }), []);
+
   return (
     <PaperProvider theme={theme}>
-      <NavigationContainer theme={theme}>
-        <Stack.Navigator
-          initialRouteName="Welcome"
-          screenOptions={{
-            headerStyle: {
-              backgroundColor: color.brand,
-            },
-            headerTintColor: color.white,
-            headerTitleStyle: {
-              fontSize: 18,
-              fontWeight: 'normal',
-            },
-            headerBackTitleVisible: false,
-            headerTitleAlign: 'center',
-          }}>
-          <Stack.Screen
-            name="Welcome"
-            component={SplashScreen}
-            options={{title: ''}}
-          />
-          <Stack.Screen
-            name="Register"
-            component={Register}
-            options={{title: 'Sign Up'}}
-          />
-          <Stack.Screen
-            name="EditProfile"
-            component={EditProfile}
-            options={{title: 'My Profile'}}
-          />
-          <Stack.Screen
-            name="Login"
-            component={Login}
-            options={{title: 'Sign In'}}
-          />
-          <Stack.Screen
-            name="ForgotPassword"
-            component={ForgotPassword}
-            options={{title: 'Restore Password'}}
-          />
-          <Stack.Screen
-            name="Home"
-            component={HomeNavigator}
-            options={{title: 'Home'}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <AppContext.Provider value={appContext}>
+        <NavigationContainer theme={theme}>
+          <Stack.Navigator
+            initialRouteName="Welcome"
+            screenOptions={{
+              headerStyle: {
+                backgroundColor: color.brand,
+              },
+              headerTintColor: color.white,
+              headerTitleStyle: {
+                fontSize: 18,
+                fontWeight: 'normal',
+              },
+              headerBackTitleVisible: false,
+              headerTitleAlign: 'center',
+            }}>
+            <Stack.Screen
+              name="Welcome"
+              component={SplashScreen}
+              options={{title: ''}}
+            />
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={{title: 'Sign Up'}}
+            />
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfile}
+              options={{title: 'My Profile'}}
+            />
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{title: 'Sign In'}}
+            />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPassword}
+              options={{title: 'Restore Password'}}
+            />
+            <Stack.Screen
+              name="Home"
+              component={HomeNavigator}
+              options={{title: 'Home'}}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </AppContext.Provider>
     </PaperProvider>
   );
 }

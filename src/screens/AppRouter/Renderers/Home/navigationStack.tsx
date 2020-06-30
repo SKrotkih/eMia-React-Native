@@ -19,8 +19,9 @@ import EditProfile from '../../../EditProfile';
 import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
-  DarkTheme as PaperDarkTheme
+  DarkTheme as PaperDarkTheme, useTheme
 } from 'react-native-paper';
+import {AppContext} from '../../../../components/context';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -71,7 +72,7 @@ function Root(props) {
         component={AddNewPost}
         options={{title: 'New Post'}}
       />
-      <Stack.Screen name="Options" component={Options} options={{title: 'Filter'}} />
+      <Stack.Screen name="Options" component={Options} options={{title: 'Filter'}}/>
       <Stack.Screen
         name="EditProfile"
         component={EditProfile}
@@ -84,14 +85,12 @@ function Root(props) {
 export function homeNavigationStack() {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Root" component={Root} />
+      <Drawer.Screen name="Root" component={Root}/>
     </Drawer.Navigator>
   );
 }
 
 export default function mainNavigation() {
-
-  const isDarkTheme = true;
 
   const CustomDefaultTheme = {
     ...NavigationDefaultTheme,
@@ -114,14 +113,24 @@ export default function mainNavigation() {
       text: '#ffffff'
     }
   }
+  const paperTheme = useTheme();
+  const theme = paperTheme.dark ? CustomDarkTheme : CustomDefaultTheme;
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
 
-  const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
+  const appContext = React.useMemo(
+    () => ({
+      toggleTheme: () => {
+        setIsDarkTheme(isDarkTheme => !isDarkTheme);
+      },
+    }), []);
 
   return (
     <PaperProvider theme={theme}>
-      <NavigationContainer theme={theme}>
-        {homeNavigationStack()}
-      </NavigationContainer>
+      <AppContext.Provider value={appContext}>
+        <NavigationContainer theme={theme}>
+          {homeNavigationStack()}
+        </NavigationContainer>
+      </AppContext.Provider>
     </PaperProvider>
   );
 }
