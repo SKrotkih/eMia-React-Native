@@ -5,10 +5,14 @@ import variables from "../../../../theme/variables/commonColor";
 import React from "react";
 import {Provider} from 'react-redux';
 import NavigationStack from './navigationStack';
+import {useTheme} from "@react-navigation/native";
+import {StatusBar} from "react-native";
 
 export default function logInScreen() {
+  const theme = useTheme();
   return (
     <Root>
+      <StatusBar barStyle={theme.dark ? "light-content" : "dark-content"}/>
       <Provider store={store}>
         <StyleProvider style={getTheme(variables)}>
           <NavigationStack />

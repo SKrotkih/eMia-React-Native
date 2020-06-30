@@ -1,5 +1,9 @@
 import * as React from 'react';
-import {NavigationContainer} from '@react-navigation/native';
+import {
+  NavigationContainer,
+  DefaultTheme as NavigationDefaultTheme,
+  DarkTheme as NavigationDarkTheme,
+} from "@react-navigation/native";
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {createStackNavigator} from '@react-navigation/stack';
 import {Icon} from 'native-base';
@@ -12,6 +16,11 @@ import PostPreview from '../../../Home/PostPreview';
 import AddNewPost from '../../../Home/AddNewPost';
 import Options from '../../../Home/Options';
 import EditProfile from '../../../EditProfile';
+import {
+  Provider as PaperProvider,
+  DefaultTheme as PaperDefaultTheme,
+  DarkTheme as PaperDarkTheme
+} from 'react-native-paper';
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -81,5 +90,38 @@ export function homeNavigationStack() {
 }
 
 export default function mainNavigation() {
-  return <NavigationContainer>{homeNavigationStack()}</NavigationContainer>;
+
+  const isDarkTheme = true;
+
+  const CustomDefaultTheme = {
+    ...NavigationDefaultTheme,
+    ...PaperDefaultTheme,
+    colors: {
+      ...NavigationDefaultTheme.colors,
+      ...PaperDefaultTheme.colors,
+      background: '#ffffff',
+      text: '#333333'
+    }
+  }
+
+  const CustomDarkTheme = {
+    ...NavigationDarkTheme,
+    ...PaperDarkTheme,
+    colors: {
+      ...NavigationDarkTheme.colors,
+      ...PaperDarkTheme.colors,
+      background: '#333333',
+      text: '#ffffff'
+    }
+  }
+
+  const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
+
+  return (
+    <PaperProvider theme={theme}>
+      <NavigationContainer theme={theme}>
+        {homeNavigationStack()}
+      </NavigationContainer>
+    </PaperProvider>
+  );
 }

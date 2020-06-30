@@ -1,5 +1,5 @@
 // Must be on top of:
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import {YellowBox} from 'react-native';
 import store from './src/redux/store';
@@ -9,27 +9,39 @@ import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer'
 import {checkLoginStatus} from './src/model/firebase/auth/api';
 
 export default function App() {
-  const [isReady, setIsReady] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [viewState, setViewState] = useState<ViewState>(new ViewState(false, false));
 
   useEffect(() => {
     setUpIgnoreYellowMessage();
     checkLoginStatus((_isLoggedIn) => {
-      setIsLoggedIn(_isLoggedIn);
-      setIsReady(true);
+      setViewState(new ViewState(true, _isLoggedIn));
     });
     store.subscribe(() => {
       const reducer = store.getState().authReducer;
-      setIsLoggedIn(reducer.isLoggedIn);
-      setIsReady(true);
+      setViewState(new ViewState(true, reducer.isLoggedIn));
     });
   }, []);
 
   return (
-    (!isReady && splashScreenRenderer()) ||
-    (isLoggedIn && homeScreenRenderer()) ||
+    (viewState.isNoLoggedIn && splashScreenRenderer()) ||
+    (viewState.isLoggedIn && homeScreenRenderer()) ||
     authScreenRenderer()
   );
+}
+
+class ViewState {
+  _isReady: boolean;
+  _isLoggedIn: boolean;
+  constructor(isReady: boolean, isLoggedIn: boolean) {
+    this._isReady = isReady;
+    this._isLoggedIn = isLoggedIn;
+  }
+  get isNoLoggedIn() {
+    return !this._isReady;
+  }
+  get isLoggedIn() {
+    return this._isLoggedIn;
+  }
 }
 
 function setUpIgnoreYellowMessage() {
