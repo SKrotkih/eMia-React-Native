@@ -2,7 +2,7 @@ import React from "react";
 import {View, StyleSheet, Alert} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
-import {Drawer} from 'react-native-paper';
+import {Drawer, Title, Avatar, Caption, Paragraph} from 'react-native-paper';
 import store from '../../../../redux/store';
 import {LOGGED_OUT} from '../../../../redux/actionTypes';
 import {color} from '../../../../theme/styles';
@@ -14,6 +14,19 @@ export function DrawerContent(props) {
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
+          <View style={{flexDirection: 'row', marginTop: 15, marginLeft: 30}}>
+            <Avatar.Image
+              source={{
+                uri: 'Icon-Profile'
+              }}
+              size={35}
+            />
+            <View style={{marginLeft: 25, flexDirection: 'column'}}>
+              <Title style={styles.title}>eMia React Native</Title>
+              <Paragraph style={[styles.paragraph, styles.caption]}>---</Paragraph>
+              <Caption style={styles.caption}>ver. 1.0.1</Caption>
+            </View>
+          </View>
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
               icon={({ size, color }) => (
@@ -120,8 +133,8 @@ const styles = StyleSheet.create({
     marginRight: 3,
   },
   drawerSection: {
-    marginTop: 35,
-    marginLeft: 25,
+    marginTop: 15,
+    marginLeft: 15,
   },
   drawerLabel: {
     color: color.brand,
