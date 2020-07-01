@@ -1,39 +1,50 @@
-import React, {Component} from 'react';
+import React, {FunctionComponent} from 'react';
 import {View, TextInput, Text} from 'react-native';
 import {isEmpty} from '../../utils/validate';
+import {connect} from 'react-redux';
 import styles from './styles';
+import {color} from "../../theme/styles";
+import {useTheme} from 'react-native-paper';
 
-export class AuthTextInput extends Component {
-  render() {
-    const {
-      showLabel,
-      placeholder,
-      autoFocus,
-      onChangeText,
-      secureTextEntry,
-      type,
-      label,
-      value,
-      error,
-    } = this.props;
+const AuthTextInput: FunctionComponent = (props) => {
+  const {
+    showLabel,
+    placeholder,
+    autoFocus,
+    onChangeText,
+    secureTextEntry,
+    type,
+    label,
+    value,
+    error,
+    onEndEditing,
+  } = props;
 
-    return (
-      <View style={styles.container}>
-        {showLabel && <Text>{label}</Text>}
-        <TextInput
-          autoCapitalize="none"
-          clearButtonMode="while-editing"
-          underlineColorAndroid={'#fff'}
-          placeholder={placeholder}
-          autoFocus={autoFocus}
-          onChangeText={onChangeText}
-          secureTextEntry={secureTextEntry}
-          style={styles.input}
-          keyboardType={type}
-          defaultValue={value}
-        />
-        {!isEmpty(error) && <Text style={styles.errorText}>{error}</Text>}
-      </View>
-    );
-  }
+  const paperTheme = useTheme();
+  const textColor = paperTheme.dark ? color.white : color.black;
+
+  return (
+    <View style={styles.container}>
+      {showLabel && <Text>{label}</Text>}
+      <TextInput
+        autoCapitalize="none"
+        clearButtonMode="while-editing"
+        underlineColorAndroid={'#fff'}
+        placeholder={placeholder}
+        placeholderTextColor="#666666"
+        autoFocus={autoFocus}
+        secureTextEntry={secureTextEntry}
+        style={[styles.textInput, {
+          color: textColor,
+        }]}
+        keyboardType={type}
+        defaultValue={value}
+        onChangeText={onChangeText}
+        onEndEditing={(e) => onEndEditing(e.nativeEvent.text)}
+      />
+      {!isEmpty(error) && <Text style={styles.errorText}>{error}</Text>}
+    </View>
+  );
 }
+
+export default connect(null, null)(AuthTextInput);

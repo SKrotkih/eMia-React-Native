@@ -5,8 +5,7 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 10,
   },
-
-  input: {
+  textInput: {
     fontSize: 12,
     margin: 5,
     marginLeft: 0,
@@ -17,7 +16,6 @@ const styles = StyleSheet.create({
     borderColor: color.brand,
     borderWidth: 1,
   },
-
   errorText: {
     fontSize: 12,
     fontWeight: 'normal',

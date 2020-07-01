@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, {useState, useMemo} from 'react';
 import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
@@ -22,7 +22,6 @@ import {AppContext} from '../../../../components/context';
 const Stack = createStackNavigator();
 
 export default function authNavigationStack() {
-
   const CustomDefaultTheme = {
     ...NavigationDefaultTheme,
     ...PaperDefaultTheme,
@@ -30,9 +29,9 @@ export default function authNavigationStack() {
       ...NavigationDefaultTheme.colors,
       ...PaperDefaultTheme.colors,
       background: '#ffffff',
-      text: '#333333'
-    }
-  }
+      text: '#333333',
+    },
+  };
 
   const CustomDarkTheme = {
     ...NavigationDarkTheme,
@@ -41,24 +40,16 @@ export default function authNavigationStack() {
       ...NavigationDarkTheme.colors,
       ...PaperDarkTheme.colors,
       background: '#333333',
-      text: '#ffffff'
-    }
-  }
+      text: '#ffffff',
+    },
+  };
 
-  const paperTheme = useTheme();
-  const [isDarkTheme, setIsDarkTheme] = React.useState(paperTheme.dark);
+  const isDarkTheme = true;
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
-
-  const appContext = React.useMemo(
-    () => ({
-      toggleTheme: () => {
-        setIsDarkTheme(isDarkTheme => !isDarkTheme);
-      },
-    }), []);
 
   return (
     <PaperProvider theme={theme}>
-      <AppContext.Provider value={appContext}>
+      <AppContext.Provider>
         <NavigationContainer theme={theme}>
           <Stack.Navigator
             initialRouteName="Welcome"

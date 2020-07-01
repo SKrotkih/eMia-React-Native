@@ -13,7 +13,7 @@ import {
   validateEmail,
   validatePassword,
 } from '../../../utils/validate';
-import {AuthTextInput} from '../../../components/AuthTextInput';
+import AuthTextInput from '../../../components/AuthTextInput/AuthTextInput';
 import styles from './styles';
 import {color} from '../../../theme/styles';
 
@@ -188,6 +188,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
               autoFocus={field.autoFocus}
               type={field.type}
               onChangeText={(text) => onChange(field.key, text)}
+              onEndEditing={(text) => console.log(text)}
               secureTextEntry={field.secureTextEntry}
               value={field.value}
               error={errorMessage(field.key)}

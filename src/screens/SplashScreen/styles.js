@@ -6,7 +6,7 @@ const resizeMode = 'contain';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: color.white,
+    backgroundColor: 'transparent',
   },
   topContainer: {
     flex: 1,
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   bottomContainer: {
-    backgroundColor: 'white',
+    backgroundColor: 'transparent',
     paddingVertical: padding * 3,
     shadowColor: '#000000',
     shadowOpacity: 0.8,
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     fontSize: fontSize.regular,
     fontFamily: fontFamily.medium,
     marginRight: 5,
-    color: '#414141',
+    color: color.white,
   },
 
   bottom: {
