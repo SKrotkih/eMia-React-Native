@@ -13,6 +13,8 @@ import {Button, Icon, Text, Label} from 'native-base';
 import styles from './styles';
 import {ImageViewer} from '../../components/ImageViewer';
 import {ModelView} from './ModelView';
+import {useTheme} from "react-native-paper";
+import {color} from "../../theme/styles";
 
 const {View, TextInput, ScrollView} = ReactNative;
 let _modelView: ModelView;
@@ -27,6 +29,7 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
   const genderLabelText = 'Gender:';
   const yearBirthLabelText = 'Year:';
   const emailLabelText = 'Email:';
+  const darkTheme = useTheme().dark;
 
   if (_modelView === undefined) {
     _modelView = new ModelView(() => {
@@ -87,11 +90,11 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: darkTheme ? color.dark : color.white}]}>
       <ScrollView style={[styles.content]}>
-        <Label style={styles.label}>{nameLabelText}</Label>
+        <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{nameLabelText}</Label>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: darkTheme ? color.white : color.black}]}
           autoCapitalize="none"
           clearButtonMode="while-editing"
           underlineColorAndroid="transparent"
@@ -102,9 +105,9 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
           }}
           defaultValue={_modelView.name}
         />
-        <Label style={styles.label}>{addressLabelText}</Label>
+        <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{addressLabelText}</Label>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: darkTheme ? color.white : color.black}]}
           autoCapitalize="none"
           clearButtonMode="while-editing"
           underlineColorAndroid="transparent"
@@ -115,9 +118,9 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
           }}
           defaultValue={_modelView.address}
         />
-        <Label style={styles.label}>{genderLabelText}</Label>
+        <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{genderLabelText}</Label>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: darkTheme ? color.white : color.black}]}
           autoCapitalize="none"
           clearButtonMode="while-editing"
           underlineColorAndroid="transparent"
@@ -128,9 +131,9 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
           }}
           defaultValue={'' + _modelView.gender}
         />
-        <Label style={styles.label}>{yearBirthLabelText}</Label>
+        <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{yearBirthLabelText}</Label>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: darkTheme ? color.white : color.black}]}
           autoCapitalize="none"
           clearButtonMode="while-editing"
           underlineColorAndroid="transparent"
@@ -141,9 +144,9 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
           }}
           defaultValue={_modelView.yearBirth}
         />
-        <Label style={styles.label}>{emailLabelText}</Label>
+        <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{emailLabelText}</Label>
         <TextInput
-          style={styles.input}
+          style={[styles.input, {color: darkTheme ? color.white : color.black}]}
           autoCapitalize="none"
           clearButtonMode="while-editing"
           underlineColorAndroid="transparent"

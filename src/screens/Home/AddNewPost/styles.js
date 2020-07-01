@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     paddingTop: 23,
     margin: 0,
     marginBottom: 0,
-    backgroundColor: color.white,
   },
   label: {
     marginLeft: 15,

@@ -8,6 +8,8 @@ import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 import {Post} from '../../../model/entities/post';
 import {ImageViewer} from '../../../components/ImageViewer';
+import {useTheme} from "react-native-paper";
+import {color} from "../../../theme/styles";
 
 const {View} = ReactNative;
 
@@ -17,6 +19,7 @@ const AddNewPost: FunctionComponent = (props) => {
   const title = 'New Post';
   const titleLabelText = 'Title:';
   const bodyLabelText = 'Body:';
+  const darkTheme = useTheme().dark;
 
   function getPostTemplate(): {} {
     return {title: '', body: '', url: ''};
@@ -103,10 +106,10 @@ const AddNewPost: FunctionComponent = (props) => {
   }
 
   return (
-    <View style={styles.container}>
-      <Label style={styles.label}>{titleLabelText}</Label>
+    <View style={[styles.container, {backgroundColor: darkTheme ? color.dark : color.white}]}>
+      <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{titleLabelText}</Label>
       <TextInput
-        style={styles.input}
+        style={[styles.input, {color: darkTheme ? color.white : color.black}]}
         autoCapitalize="none"
         clearButtonMode="while-editing"
         underlineColorAndroid="transparent"
@@ -117,9 +120,9 @@ const AddNewPost: FunctionComponent = (props) => {
         }}
         defaultValue={post.title}
       />
-      <Label style={styles.label}>{bodyLabelText}</Label>
+      <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{bodyLabelText}</Label>
       <TextInput
-        style={styles.input}
+        style={[styles.input, {color: darkTheme ? color.white : color.black}]}
         autoCapitalize="none"
         clearButtonMode="while-editing"
         underlineColorAndroid="transparent"

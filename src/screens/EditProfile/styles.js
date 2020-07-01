@@ -6,7 +6,6 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 15,
     margin: 0,
-    backgroundColor: color.white,
   },
   content: {
   },
