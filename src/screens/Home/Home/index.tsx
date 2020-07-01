@@ -28,6 +28,7 @@ import {color} from '../../../theme/styles';
 import {TabAllPosts} from './TabAllPosts';
 import {TABS, styles} from './styles';
 
+
 import {
   Container,
   Button,
@@ -40,6 +41,7 @@ import {
 } from 'native-base';
 
 import {ModelView} from './ModelView';
+import {useTheme} from "react-native-paper";
 
 let _state = false;
 let _modelView: ModelView;
@@ -114,10 +116,12 @@ const Home: FunctionComponent = (props) => {
     navigation.navigate('Options');
   }
 
+  const darkTheme = useTheme().dark;
+
   return (
     <Container>
       <Tabs
-        tabBarBackgroundColor={'white'}
+        tabBarBackgroundColor={'transparent'}
         tabBarUnderlineStyle={styles.tabUnderlined}
         renderTabBar={() => <ScrollableTab/>}
         onChangeTab={({i}) => onChangeTab(i)}>
@@ -125,9 +129,9 @@ const Home: FunctionComponent = (props) => {
           heading="All Posts"
           tabStyle={styles.tab}
           textStyle={styles.tabText}
-          activeTabStyle={styles.activeTab}
-          activeTextStyle={styles.activeTextTab}>
-          {TabAllPosts(_modelView, navigation)}
+          activeTabStyle={darkTheme ? styles.activeTabDark : styles.activeTab}
+          activeTextStyle={darkTheme ? styles.activeTextTabDark : styles.activeTextTab}>
+          {TabAllPosts(_modelView, navigation, darkTheme)}
         </Tab>
         <Tab
           heading="My Posts"
@@ -135,7 +139,7 @@ const Home: FunctionComponent = (props) => {
           textStyle={styles.tabText}
           activeTabStyle={styles.activeTab}
           activeTextStyle={styles.activeTextTab}>
-          {TabAllPosts(_modelView, navigation)}
+          {TabAllPosts(_modelView, navigation, darkTheme)}
         </Tab>
       </Tabs>
       {renderActionsButton()}

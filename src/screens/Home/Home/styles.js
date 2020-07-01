@@ -17,16 +17,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
   },
   tab: {
-    backgroundColor: color.white,
+    backgroundColor: 'transparent',
   },
   tabText: {
     color: color.brand,
   },
   activeTab: {
-    backgroundColor: color.white,
+    backgroundColor: 'transparent',
+  },
+  activeTabDark: {
+    backgroundColor: 'transparent',
   },
   activeTextTab: {
     color: 'black',
+    fontWeight: 'bold',
+  },
+  activeTextTabDark: {
+    color: 'white',
     fontWeight: 'bold',
   },
 });
@@ -39,11 +46,20 @@ const gridItemStyles = StyleSheet.create({
     height: 220,
     margin: 1,
   },
+  containerDark: {
+    flex: 1,
+    backgroundColor: color.black,
+    flexDirection: 'column',
+    alignItems: 'center',
+    height: 220,
+    margin: 1,
+  },
   image: {
     alignSelf: 'center', // 'stretch'􏰸 'contain'􏰸 'cover'􏰸 'repeat' 'center'
     resizeMode: 'cover',
     height: 160,
     width: (windowWidth - 8) / 2,
+    borderRadius: 15,
   },
   title: {
     fontSize: 12,

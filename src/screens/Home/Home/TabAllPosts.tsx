@@ -5,10 +5,11 @@ import {styles, gridItemStyles} from './styles';
 import {Loader} from '../../../components/Loader';
 import {Body, Text} from 'native-base';
 import {ModelView} from './ModelView';
+import {color} from '../../../theme/styles'
 
 const {Image, View, TouchableOpacity} = ReactNative;
 
-export const TabAllPosts: FunctionComponent = (props, navigation) => {
+export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => {
   const modeView: ModelView = props as ModelView;
 
   function renderLoadingView() {
@@ -32,7 +33,7 @@ export const TabAllPosts: FunctionComponent = (props, navigation) => {
   function renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
     // TODO: The same. Need a key
     let key = '' + sectionID + '-' + rowID;
-    return <View style={styles.separator} key={key} />;
+    return <View key={key} />;
   }
 
   function selectPostItem(postItem: any) {
@@ -45,7 +46,7 @@ export const TabAllPosts: FunctionComponent = (props, navigation) => {
     let key = item.id;
     let url = item.imageUrl;
     return (
-      <View style={gridItemStyles.container} key={key}>
+      <View style={[gridItemStyles.container, {backgroundColor: darkTheme ? '#333333' : color.white}]} key={key}>
         <TouchableOpacity
           key={key}
           style={{flexDirection: 'row'}}
@@ -58,10 +59,12 @@ export const TabAllPosts: FunctionComponent = (props, navigation) => {
               style={gridItemStyles.image}
               source={{cache: 'force-cache', uri: url}}
             />
-            <Text style={gridItemStyles.title} numberOfLines={1}>
+            <Text style={[gridItemStyles.title, {color: darkTheme ? color.white : color.black}, {backgroundColor: 'transparent'}]}
+                  numberOfLines={1}>
               {title}
             </Text>
-            <Text style={gridItemStyles.description} numberOfLines={3}>
+            <Text style={[gridItemStyles.description, {color: darkTheme ? color.white : color.black}]}
+                  numberOfLines={3}>
               {body}
             </Text>
           </Body>
@@ -73,7 +76,7 @@ export const TabAllPosts: FunctionComponent = (props, navigation) => {
   return (
     (!modeView.loaded && renderLoadingView()) || (
       <Grid
-        style={styles.list}
+        style={{backgroundColor: darkTheme ? '#333333' : color.white}}
         renderItem={renderItem}
         renderSeparator={renderSeparator}
         renderPlaceholder={renderPlaceholder}
