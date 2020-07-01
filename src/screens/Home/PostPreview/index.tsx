@@ -34,7 +34,7 @@ const PostPreview: FunctionComponent = ({route, navigation}) => {
           {modelView.title}
         </Text>
       </Header>
-      <Content style={styles.content}>
+      <Content style={[styles.content, {backgroundColor: darkTheme ? color.dark : color.white}]}>
         <View style={styles.thumbnail}>
           <Thumbnail circular size={55} source={modelView.avatarUrl} />
           <Text style={[styles.textUserName, {color: darkTheme ? color.white : color.black}]}>{modelView.userName}</Text>
