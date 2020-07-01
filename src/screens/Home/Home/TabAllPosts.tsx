@@ -46,7 +46,7 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
     let key = item.id;
     let url = item.imageUrl;
     return (
-      <View style={[gridItemStyles.container, {backgroundColor: darkTheme ? '#333333' : color.white}]} key={key}>
+      <View style={[gridItemStyles.container, {backgroundColor: darkTheme ? color.dark : color.white}]} key={key}>
         <TouchableOpacity
           key={key}
           style={{flexDirection: 'row'}}
@@ -76,7 +76,7 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
   return (
     (!modeView.loaded && renderLoadingView()) || (
       <Grid
-        style={{backgroundColor: darkTheme ? '#333333' : color.white}}
+        style={{backgroundColor: darkTheme ? color.dark : color.white}}
         renderItem={renderItem}
         renderSeparator={renderSeparator}
         renderPlaceholder={renderPlaceholder}

@@ -99,7 +99,7 @@ export default function mainNavigation() {
       ...NavigationDefaultTheme.colors,
       ...PaperDefaultTheme.colors,
       background: '#ffffff',
-      text: '#333333'
+      text: color.dark,
     }
   }
 
@@ -109,7 +109,7 @@ export default function mainNavigation() {
     colors: {
       ...NavigationDarkTheme.colors,
       ...PaperDarkTheme.colors,
-      background: '#333333',
+      background: color.dark,
       text: '#ffffff'
     }
   }

@@ -5,10 +5,8 @@ const styles = StyleSheet.create({
   container: {
     margin: 0,
     marginBottom: 0,
-    backgroundColor: '#fff',
   },
   headerBackground: {
-    backgroundColor: 'white',
   },
   textHeader: {
     fontSize: 16,
@@ -19,7 +17,7 @@ const styles = StyleSheet.create({
   content: {
     margin: 15,
     marginBottom: 15,
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
   },
   thumbnail: {
     marginLeft: 4,
@@ -42,7 +40,7 @@ const styles = StyleSheet.create({
     height: windowWidth - 30,
     alignSelf: 'center',
     resizeMode: 'contain',
-    backgroundColor: color.white
+    borderRadius: 15,
   },
   timeBackground: {
     marginRight: 15,
@@ -51,7 +49,6 @@ const styles = StyleSheet.create({
   textPublishedAt: {
     fontSize: 12,
     textAlign: 'right',
-    color: color.black,
     marginTop: 15,
   },
 });

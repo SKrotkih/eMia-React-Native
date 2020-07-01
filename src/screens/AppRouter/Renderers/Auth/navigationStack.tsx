@@ -1,4 +1,4 @@
-import React, {useState, useMemo} from 'react';
+import React from 'react';
 import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
@@ -29,7 +29,7 @@ export default function authNavigationStack() {
       ...NavigationDefaultTheme.colors,
       ...PaperDefaultTheme.colors,
       background: '#ffffff',
-      text: '#333333',
+      text: color.dark,
     },
   };
 
@@ -39,7 +39,7 @@ export default function authNavigationStack() {
     colors: {
       ...NavigationDarkTheme.colors,
       ...PaperDarkTheme.colors,
-      background: '#333333',
+      background: color.dark,
       text: '#ffffff',
     },
   };
