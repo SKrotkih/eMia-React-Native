@@ -2,16 +2,15 @@ import React, {FunctionComponent} from 'react';
 import ReactNative, {Image, ImageURISource} from 'react-native';
 import styles from './styles';
 import {Time} from '../../../components/Time';
-import {connect} from 'react-redux';
 import {ImageViewer} from '../../../components/ImageViewer';
 import {Container, Header, Content, Text, Thumbnail} from 'native-base';
-import {ModelView} from './modelView';
+import ModelView from './modelView';
 import {color} from "../../../theme/styles";
 import {useTheme} from "react-native-paper";
 
 const {View} = ReactNative;
 
-const PostPreview: FunctionComponent = ({route, navigation}) => {
+export const PostPreview: FunctionComponent = ({route, navigation}) => {
   const darkTheme = useTheme().dark;
   const postItem = route.params;
   const modelView = new ModelView(postItem);
@@ -54,5 +53,3 @@ const PostPreview: FunctionComponent = ({route, navigation}) => {
     </Container>
   );
 };
-
-export default connect(null, null)(PostPreview);

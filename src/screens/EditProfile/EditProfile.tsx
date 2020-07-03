@@ -19,7 +19,7 @@ import {color} from "../../theme/styles";
 const {View, TextInput, ScrollView} = ReactNative;
 let _modelView: ModelView;
 
-const EditProfile: FunctionComponent = ({route, navigation}) => {
+export const EditProfile: FunctionComponent = ({route, navigation}) => {
   const {user, completion} = route.params;
   const [state, setState] = useState(false);
 
@@ -32,7 +32,7 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
 
   if (_modelView === undefined) {
     _modelView = new ModelView(() => {
-      setState(!state);
+      setState(state => !state);
     });
     _modelView.user = user;
   }
@@ -147,5 +147,3 @@ const EditProfile: FunctionComponent = ({route, navigation}) => {
     </View>
   );
 };
-
-export default connect(null, null)(EditProfile);

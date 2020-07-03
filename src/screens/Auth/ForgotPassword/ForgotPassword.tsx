@@ -1,14 +1,13 @@
-// ForgotPassword
-//
+
 import React, {FunctionComponent, useState} from 'react';
 import {Alert} from 'react-native';
-import {connect} from 'react-redux';
 import {actions as auth} from '../index';
-import {AuthForm, getEmptyError} from '../AuthForm';
+import AuthForm from '../AuthForm';
+import {getEmptyError} from '../AuthForm/AuthForm';
 
 const {remindPassword} = auth;
 
-const ForgotPassword: FunctionComponent = ({route, navigation}) => {
+export const ForgotPassword: FunctionComponent = ({route, navigation}) => {
   const fields = [
     {
       key: 'email',
@@ -34,8 +33,9 @@ const ForgotPassword: FunctionComponent = ({route, navigation}) => {
   }
 
   function onError(_error) {
-    error.email = _error.message;
-    setError(error);
+    setError((prevState) => {
+      return {...prevState, email: _error.message};
+    });
   }
 
   return (
@@ -50,5 +50,3 @@ const ForgotPassword: FunctionComponent = ({route, navigation}) => {
     />
   );
 };
-
-export default connect(null, {remindPassword})(ForgotPassword);

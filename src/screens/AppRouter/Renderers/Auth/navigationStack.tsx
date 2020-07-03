@@ -4,19 +4,19 @@ import {
   DefaultTheme as NavigationDefaultTheme,
   DarkTheme as NavigationDarkTheme,
 } from "@react-navigation/native";
-import {createStackNavigator} from "@react-navigation/stack";
-import {color} from "../../../../theme/styles";
-import SplashScreen from "../../../SplashScreen";
-import Register from "../../../Auth/Register";
-import EditProfile from "../../../EditProfile";
-import Login from "../../../Auth/Login";
-import ForgotPassword from "../../../Auth/ForgotPassword";
-import HomeNavigator from '../../Renderers/Home/navigationStack';
 import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme, useTheme
 } from 'react-native-paper';
+import {createStackNavigator} from "@react-navigation/stack";
+import {color} from "../../../../theme/styles";
+import {SplashScreen} from "../../../SplashScreen";
+import {Register} from "../../../Auth/Register/Register";
+import {EditProfile} from "../../../EditProfile";
+import {Login} from "../../../Auth/Login";
+import {ForgotPassword} from "../../../Auth/ForgotPassword";
+import HomeNavigator from '../../Renderers/Home/navigationStack';
 import {AppContext} from '../../../../components/context';
 
 const Stack = createStackNavigator();

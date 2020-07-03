@@ -1,14 +1,14 @@
 import React, {FunctionComponent, useState} from 'react';
-import {connect} from 'react-redux';
 import {actions as auth} from '../index';
-import {AuthForm, getEmptyError} from '../AuthForm';
+import AuthForm from '../AuthForm';
+import {getEmptyError} from '../AuthForm/AuthForm';
 import {User} from '../../../model/entities/user';
 import store from "../../../redux/store";
 import {LOGGED_IN} from "../../../redux/actionTypes";
 
 const {register} = auth;
 
-const Register: FunctionComponent = ({route, navigation}) => {
+export const Register: FunctionComponent = ({route, navigation}) => {
   const fields = [
     {
       key: 'email',
@@ -79,5 +79,3 @@ const Register: FunctionComponent = ({route, navigation}) => {
     />
   );
 };
-
-export default connect(null, {register})(Register);

@@ -1,11 +1,10 @@
 import React, {FunctionComponent} from 'react';
-import {connect} from 'react-redux';
 import {Text, View, TouchableOpacity, Image} from 'react-native';
 import {Button} from 'react-native-elements';
 import styles from './styles';
 import * as config from '../../config/constants';
 
-const SplashScreen: FunctionComponent = (props) => {
+export const SplashScreen: FunctionComponent = (props) => {
   const navigation: object = props.navigation;
 
   function signUp() {
@@ -47,5 +46,3 @@ const SplashScreen: FunctionComponent = (props) => {
     </View>
   );
 };
-
-export default connect(null, {})(SplashScreen);

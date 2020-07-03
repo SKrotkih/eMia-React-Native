@@ -2,7 +2,7 @@
 import {Post} from '../../../model/entities/post';
 import {User} from '../../../model/entities/user';
 
-export class ModelView {
+export default class ModelView {
   private _post: Post;
   private _author: User;
   private readonly _avatarUrl: string;

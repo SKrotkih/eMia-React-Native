@@ -4,7 +4,7 @@ import {TABS} from './styles';
 
 const {fetchPosts} = actions;
 
-export class ModelView {
+export default class ModelView {
   private _dataSource: any;
   private _loaded: boolean;
   private _refreshing: boolean;

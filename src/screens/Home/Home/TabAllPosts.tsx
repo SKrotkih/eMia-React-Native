@@ -4,7 +4,7 @@ import Grid from 'react-native-grid-component';
 import {styles, gridItemStyles} from './styles';
 import {Loader} from '../../../components/Loader';
 import {Body, Text} from 'native-base';
-import {ModelView} from './ModelView';
+import ModelView from './ModelView';
 import {color} from '../../../theme/styles'
 
 const {Image, View, TouchableOpacity} = ReactNative;

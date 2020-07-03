@@ -1,6 +1,5 @@
 import {getCurrentUserAsync, getFirebaseUserId, registerNewUser} from '../../firebase/auth/api';
 import {updateUser, fetchAllUsers, getUser} from '../../firebase/database/users';
-import {LOGGED_IN} from '../../../redux/actionTypes';
 
 export function register(data, successCB, errorCB) {
   registerNewUser(data)

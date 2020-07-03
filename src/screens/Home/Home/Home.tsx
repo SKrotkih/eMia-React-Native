@@ -23,11 +23,9 @@ import React, {
   useLayoutEffect,
   useState,
 } from 'react';
-import {connect} from 'react-redux';
 import {color} from '../../../theme/styles';
 import {TabAllPosts} from './TabAllPosts';
 import {TABS, styles} from './styles';
-
 
 import {
   Container,
@@ -40,13 +38,13 @@ import {
   Icon, RnTextStyleProp, RnViewStyleProp,
 } from 'native-base';
 
-import {ModelView} from './ModelView';
+import ModelView from './ModelView';
 import {useTheme} from "react-native-paper";
 
 let _state = false;
 let _modelView: ModelView;
 
-const Home: FunctionComponent = (props) => {
+export const Home: FunctionComponent = (props) => {
   const navigation: object = props.navigation;
   if (_modelView === undefined) {
     _modelView = new ModelView(() => {
@@ -95,7 +93,7 @@ const Home: FunctionComponent = (props) => {
         containerStyle={{}}
         style={{backgroundColor: color.brand}}
         position="bottomRight"
-        onPress={() => setActive(!active)}>
+        onPress={() => setActive(active => !active)}>
         <IconNB name="ios-menu" />
         <Button
           style={styles.actionButton}
@@ -146,5 +144,3 @@ const Home: FunctionComponent = (props) => {
     </Container>
   );
 };
-
-export default connect(null, null)(Home);

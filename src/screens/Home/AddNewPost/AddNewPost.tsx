@@ -13,7 +13,7 @@ import {color} from "../../../theme/styles";
 
 const {View} = ReactNative;
 
-const AddNewPost: FunctionComponent = (props) => {
+export const AddNewPost: FunctionComponent = (props) => {
   const navigation: object = props.navigation;
 
   const title = 'New Post';
@@ -144,5 +144,3 @@ const AddNewPost: FunctionComponent = (props) => {
     </View>
   );
 };
-
-export default connect(null, null)(AddNewPost);

@@ -5,6 +5,7 @@ import {
   View,
   Button,
   SafeAreaView,
+  StyleSheet,
 } from 'react-native';
 import {Toast} from 'native-base';
 import {
@@ -14,8 +15,7 @@ import {
   validatePassword,
 } from '../../../utils/validate';
 import AuthTextInput from '../../../components/AuthTextInput/AuthTextInput';
-import styles from './styles';
-import {color} from '../../../theme/styles';
+import {color, fontSize} from '../../../theme/styles';
 
 class FieldItem {
   key: string;
@@ -128,15 +128,17 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
   }
 
   function onChange(key, text) {
-    parameters.fields.forEach((field) => {
-      if (key === field.key) {
-        field.value = text;
-      }
+    setParameters((prevState) => {
+      prevState.fields.forEach((field) => {
+        if (key === field.key) {
+          field.value = text;
+        }
+      });
+      error[key] = '';
+      setError(error);
+      prevState.error[key] = '';
+      return prevState;
     });
-    error[key] = '';
-    setError(error);
-    parameters.error[key] = '';
-    setParameters(parameters);
   }
 
   function Separator() {
@@ -214,3 +216,26 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: color.tableSeparator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    marginTop: 30,
+    marginHorizontal: 16,
+  },
+  forgotButton: {
+    marginVertical: 8,
+  },
+  forgotText: {
+    textAlign: 'center',
+    color: color.brand,
+    fontSize: fontSize.regular,
+    fontWeight: 'normal',
+  },
+});
