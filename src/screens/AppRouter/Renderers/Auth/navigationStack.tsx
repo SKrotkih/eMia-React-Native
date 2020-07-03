@@ -11,11 +11,11 @@ import {
 } from 'react-native-paper';
 import {createStackNavigator} from "@react-navigation/stack";
 import {color} from "../../../../theme/styles";
-import {SplashScreen} from "../../../SplashScreen";
-import {Register} from "../../../Auth/Register/Register";
-import {EditProfile} from "../../../EditProfile";
-import {Login} from "../../../Auth/Login";
-import {ForgotPassword} from "../../../Auth/ForgotPassword";
+import SplashScreen from "../../../SplashScreen";
+import Register from "../../../Auth/Register";
+import EditProfile from "../../../EditProfile";
+import Login from "../../../Auth/Login";
+import ForgotPassword from "../../../Auth/ForgotPassword";
 import HomeNavigator from '../../Renderers/Home/navigationStack';
 import {AppContext} from '../../../../components/context';
 

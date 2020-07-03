@@ -1,3 +1,13 @@
+import {
+  login,
+  register,
+  logOut,
+  remindPassword,
+} from './dbinteractor';
 
-export * from './dbinteractor';
-
+export {
+  login,
+  register,
+  logOut,
+  remindPassword,
+}

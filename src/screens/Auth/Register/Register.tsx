@@ -3,12 +3,12 @@ import {actions as auth} from '../index';
 import AuthForm from '../AuthForm';
 import {getEmptyError} from '../AuthForm/AuthForm';
 import {User} from '../../../model/entities/user';
-import store from "../../../redux/store";
-import {LOGGED_IN} from "../../../redux/actionTypes";
+import store from '../../../redux/store';
+import {LOGGED_IN} from '../../../redux/actionTypes';
 
 const {register} = auth;
 
-export const Register: FunctionComponent = ({route, navigation}) => {
+export const Register: FunctionComponent = ({navigation}) => {
   const fields = [
     {
       key: 'email',

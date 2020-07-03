@@ -1,2 +1,2 @@
-
-export * from './SplashScreen';
+import {SplashScreen} from "./SplashScreen";
+export default SplashScreen;
