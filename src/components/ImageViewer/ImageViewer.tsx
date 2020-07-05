@@ -20,6 +20,7 @@ import {Icon} from 'native-base';
 import PropTypes from 'prop-types';
 import RNFetchBlob from 'rn-fetch-blob';
 import * as Progress from 'react-native-progress';
+import {Loader} from "../Loader";
 
 const AnimatedImage = Animated.createAnimatedComponent(ImageBackground);
 const DefaultIndicator = Progress.Circle;
@@ -455,9 +456,8 @@ export class ImageViewer extends Component {
       if ((loading || progress < 1) && thresholdReached) {
         const IndicatorComponent = DefaultIndicator;
         content = (
-          <IndicatorComponent
-            progress={progress}
-            indeterminate={!loading || !progress}
+          <Loader
+            loading={loading || progress}
           />
         );
       }

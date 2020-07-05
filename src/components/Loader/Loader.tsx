@@ -1,8 +1,10 @@
 import React, {FunctionComponent} from 'react';
 import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
+import {color} from "../../theme/styles";
+import {bool} from "prop-types";
 
 export const Loader: FunctionComponent = (props) => {
-  const {loading, ...attributes} = props;
+  const {loading} = props;
 
   return (
     <Modal
@@ -14,12 +16,19 @@ export const Loader: FunctionComponent = (props) => {
       }}>
       <View style={styles.modalBackground}>
         <View style={styles.activityIndicatorWrapper}>
-          <ActivityIndicator animating={loading} />
+          <ActivityIndicator animating={loading}
+                             color = {color.brand}
+                             size = 'large'
+          />
         </View>
       </View>
     </Modal>
   );
 };
+
+Loader.propTypes = {
+  loading: bool,
+}
 
 const styles = StyleSheet.create({
   modalBackground: {

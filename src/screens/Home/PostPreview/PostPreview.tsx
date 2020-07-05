@@ -1,5 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import ReactNative, {Image, ImageURISource} from 'react-native';
+import ReactNative from 'react-native';
 import styles from './styles';
 import {Time} from '../../../components/Time';
 import {ImageViewer} from '../../../components/ImageViewer';

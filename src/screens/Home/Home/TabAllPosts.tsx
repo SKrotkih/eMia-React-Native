@@ -12,11 +12,9 @@ const {Image, View, TouchableOpacity} = ReactNative;
 export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => {
   const modeView: ModelView = props as ModelView;
 
-  function renderLoadingView() {
+  function renderActivityIndicator() {
     return (
-      <View style={styles.loading}>
-        <Loader loading={true} />
-      </View>
+      <Loader loading={true} />
     );
   }
 
@@ -74,7 +72,7 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
   }
 
   return (
-    (!modeView.loaded && renderLoadingView()) || (
+    (!modeView.loaded && renderActivityIndicator()) || (
       <Grid
         style={{backgroundColor: darkTheme ? color.dark : color.white}}
         renderItem={renderItem}

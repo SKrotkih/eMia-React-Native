@@ -26,6 +26,7 @@ import React, {
 import {color} from '../../../theme/styles';
 import {TabAllPosts} from './TabAllPosts';
 import {TABS, styles} from './styles';
+import * as Permissions from 'expo-permissions';
 
 import {
   Container,
@@ -35,11 +36,13 @@ import {
   ScrollableTab,
   Fab,
   IconNB,
-  Icon, RnTextStyleProp, RnViewStyleProp,
+  Icon,
+  RnTextStyleProp,
+  RnViewStyleProp,
 } from 'native-base';
 
 import ModelView from './ModelView';
-import {useTheme} from "react-native-paper";
+import {useTheme} from 'react-native-paper';
 
 let _state = false;
 let _modelView: ModelView;
@@ -57,8 +60,14 @@ export const Home: FunctionComponent = (props) => {
   const [active, setActive] = useState(false);
 
   useEffect(() => {
+    setUpPermissions();
     onChangeTab(0);
   }, []);
+
+  async function setUpPermissions() {
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    await Permissions.askAsync(Permissions.CAMERA);
+  }
 
   useLayoutEffect(() => {
     navigation.setOptions({
