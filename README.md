@@ -92,11 +92,15 @@ There are also two native examples of the app:
 iOS - [eMia-iOS](https://github.com/SKrotkih/eMia-iOS)
 Android - [eMia-Android](https://github.com/SKrotkih/eMia-Android).
 
-
 ## Demo video
 
 https://youtu.be/tgvxxnFq-Sk
 
 First build was developed: 07-05-2018
 
-Last updated: 05-22-2020  ("react-native": "0.62.2")
+Last updating: 05-22-2020.
+Changes description:
+- moved on the 0.62.2 [react-native](https://reactnative.dev/) package version.
+- updated dependencies
+- started porting on the TypeScript: renamed almost all js file to ts/tsx,
+  for some ts-modules were applied TypeScript rules. 
