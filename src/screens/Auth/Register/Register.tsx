@@ -1,7 +1,8 @@
 import React, {FunctionComponent, useState} from 'react';
 import {actions as auth} from '../index';
 import AuthForm from '../AuthForm';
-import {getEmptyError} from '../AuthForm/AuthForm';
+import AuthError from '../AuthError';
+import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import store from '../../../redux/store';
 import {LOGGED_IN} from '../../../redux/actionTypes';
@@ -9,40 +10,20 @@ import {LOGGED_IN} from '../../../redux/actionTypes';
 const {register} = auth;
 
 export const Register: FunctionComponent = ({navigation}) => {
-  const fields = [
-    {
-      key: 'email',
-      label: 'Email Address',
-      placeholder: 'Email Address',
-      autoFocus: false,
-      secureTextEntry: false,
-      value: '',
-      type: 'email-address',
-    },
-    {
-      key: 'password',
-      label: 'Password',
-      placeholder: 'Password',
-      autoFocus: false,
-      secureTextEntry: true,
-      value: '',
-      type: 'default',
-    },
-    {
-      key: 'confirm_password',
-      label: 'Confirm Password',
-      placeholder: 'Confirm Password',
-      autoFocus: false,
-      secureTextEntry: true,
-      value: '',
-      type: 'default',
-    },
-  ];
+  const [error, setError] = useState<AuthError>(new AuthError());
 
-  const [error, setError] = useState(getEmptyError());
-
-  function onSubmit(data) {
-    setError(getEmptyError()); // clear out error messages
+  function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
+    setError(new AuthError()); // clear out error messages
+    let data = {};
+    fields.forEach((field) => {
+      if (field.type === AuthInputModel.AuthInputType.Email) {
+        data['email'] = field.value;
+      } else if (field.type === AuthInputModel.AuthInputType.Password) {
+        data['password'] = field.value;
+      } else if (field.type === AuthInputModel.AuthInputType.ConfirmPassword) {
+        data['confirm_password'] = field.value;
+      }
+    });
     register(data, onSuccess, onError);
   }
 
@@ -55,21 +36,12 @@ export const Register: FunctionComponent = ({navigation}) => {
   }
 
   function onError(_error) {
-    let errObj = getEmptyError();
-    if (_error.hasOwnProperty('message')) {
-      errObj.general = _error.message;
-    } else {
-      let keys = Object.keys(_error);
-      keys.map((key) => {
-        errObj[key] = _error[key];
-      });
-    }
-    setError(errObj);
+    setError(AuthError.parseMessage(_error));
   }
 
   return (
     <AuthForm
-      fields={fields}
+      fields={AuthInputModel.RegisterFields}
       showLabel={false}
       onSubmit={onSubmit}
       onForgotPassword={null}

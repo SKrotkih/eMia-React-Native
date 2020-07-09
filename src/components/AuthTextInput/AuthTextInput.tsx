@@ -1,7 +1,7 @@
 import React, {FunctionComponent} from 'react';
 import {View, TextInput, Text} from 'react-native';
-import {isEmpty} from '../../utils/validate';
 import {connect} from 'react-redux';
+import {isEmpty} from '../../utils/validate';
 import styles from './styles';
 import {color} from "../../theme/styles";
 import {useTheme} from 'react-native-paper';

@@ -1,7 +1,8 @@
 import React, {FunctionComponent, useState} from 'react';
 import {actions as auth} from '../index';
 import AuthForm from '../AuthForm';
-import {getEmptyError} from '../AuthForm/AuthForm';
+import AuthError from '../AuthError';
+import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import {LOGGED_IN} from "../../../redux/actionTypes";
 import store from "../../../redux/store";
@@ -9,35 +10,22 @@ import store from "../../../redux/store";
 const {login} = auth;
 
 export const Login: FunctionComponent = ({route, navigation}) => {
-  const fields = [
-    {
-      key: 'email',
-      label: 'Email Address',
-      placeholder: 'Email Address',
-      autoFocus: false,
-      secureTextEntry: false,
-      value: '',
-      type: 'email-address',
-    },
-    {
-      key: 'password',
-      label: 'Password',
-      placeholder: 'Password',
-      autoFocus: false,
-      secureTextEntry: true,
-      value: '',
-      type: 'default',
-    },
-  ];
-
-  const [error, setError] = useState(getEmptyError());
+  const [error, setError] = useState<AuthError>(new AuthError);
 
   function onForgotPassword() {
     navigation.navigate('ForgotPassword');
   }
 
-  function onSubmit(data) {
-    setError(getEmptyError()); // clear out error messages
+  function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
+    setError(new AuthError); // clear out error messages
+    let data = {};
+    fields.forEach( (field) => {
+      if (field.type == AuthInputModel.AuthInputType.Email) {
+        data['email'] = field.value;
+      } else if (field.type == AuthInputModel.AuthInputType.Password) {
+        data['password'] = field.value;
+      }
+    });
     login(data, onSuccess, onError);
   }
 
@@ -53,21 +41,12 @@ export const Login: FunctionComponent = ({route, navigation}) => {
   }
 
   function onError(_error) {
-    let errObj = getEmptyError();
-    if (_error.hasOwnProperty('message')) {
-      errObj.general = _error.message;
-    } else {
-      let keys = Object.keys(_error);
-      keys.map((key) => {
-        errObj[key] = _error[key];
-      });
-    }
-    setError(errObj);
+    setError(AuthError.parseMessage(_error));
   }
 
   return (
     <AuthForm
-      fields={fields}
+      fields={AuthInputModel.LoginFields}
       showLabel={false}
       onSubmit={onSubmit}
       buttonTitle={'DONE'}
