@@ -4,29 +4,30 @@ import AuthForm from '../AuthForm';
 import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
-import {LOGGED_IN} from "../../../redux/actionTypes";
-import store from "../../../redux/store";
+import {LOGGED_IN} from '../../../redux/actionTypes';
+import store from '../../../redux/store';
 
 const {login} = auth;
 
-export const Login: FunctionComponent = ({route, navigation}) => {
-  const [error, setError] = useState<AuthError>(new AuthError);
+export const Login: FunctionComponent = ({navigation}) => {
+  const [error, setError] = useState<AuthError>(new AuthError());
 
   function onForgotPassword() {
     navigation.navigate('ForgotPassword');
   }
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
-    setError(new AuthError); // clear out error messages
-    let data = {};
-    fields.forEach( (field) => {
-      if (field.type == AuthInputModel.AuthInputType.Email) {
-        data['email'] = field.value;
-      } else if (field.type == AuthInputModel.AuthInputType.Password) {
-        data['password'] = field.value;
+    setError(new AuthError()); // clear out error messages
+    let email = '';
+    let password = '';
+    fields.forEach((field) => {
+      if (field.type === AuthInputModel.AuthInputType.Email) {
+        email = field.value;
+      } else if (field.type === AuthInputModel.AuthInputType.Password) {
+        password = field.value;
       }
     });
-    login(data, onSuccess, onError);
+    login({email, password}, onSuccess, onError);
   }
 
   function onSuccess(uid, currentUser) {

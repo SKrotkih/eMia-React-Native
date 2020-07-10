@@ -20,7 +20,7 @@ export function login(data, successCB, errorCB) {
         });
     })
     .catch((error) => {
-      console.error('LOGIN ERROR: ', error);
+      console.log('LOGIN ERROR: ', error);
       errorCB(error);
     });
 }

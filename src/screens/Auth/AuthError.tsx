@@ -1,23 +1,24 @@
-import {AuthInputModel} from "./AuthModel";
+import {AuthInputModel} from './AuthModel';
+import {isEmpty} from '../../utils/validate';
 
 export default class AuthError {
-  type: AuthInputModel.AuthInputType
-  message: string
+  type: AuthInputModel.AuthInputType;
+  message: string;
 
   constructor() {
     this.type = AuthInputModel.AuthInputType.Undefined;
+    this.message = '';
+  }
+
+  get isAbsent(): boolean {
+    return isEmpty(this.message);
   }
 
   static parseMessage(_error): AuthError {
-    let errObj = new AuthError;
+    let errObj = new AuthError();
     if (_error.hasOwnProperty('message')) {
-      errObj.type = AuthInputType.General;
+      errObj.type = AuthInputModel.AuthInputType.General;
       errObj.message = _error.message;
-    } else {
-      let keys = Object.keys(_error);
-      keys.map((key) => {
-        errObj[key] = _error[key];
-      });
     }
     return errObj;
   }

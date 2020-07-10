@@ -1,7 +1,14 @@
 import React, {FunctionComponent, useState} from 'react';
-import {Button, GestureResponderEvent, SafeAreaView, StyleSheet, Text, View,} from 'react-native';
+import {
+  Button,
+  GestureResponderEvent,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {Toast} from 'native-base';
-import {isEmpty,} from '../../../utils/validate';
+import {isEmpty} from '../../../utils/validate';
 import AuthTextInput from '../../../components/AuthTextInput/AuthTextInput';
 import {color, fontSize} from '../../../theme/styles';
 import {AuthInputModel} from '../AuthModel';
@@ -27,8 +34,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
     password: props.password,
     error: props.error,
   });
-
-  const [error, setError] = useState<AuthError>(props.error as AuthError);
+  const [error, setError] = useState<AuthError>(props.error);
 
   function onSubmit() {
     const result = AuthInputModel.validateFields(parameters.fields);
@@ -59,10 +65,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
   }
 
   function errorMessage(type: AuthInputModel.AuthInputType): string {
-    let externalError = parameters.error as AuthError;
-    if (!isEmpty(externalError.message)) {
-      return externalError.message;
-    } else if (error.type === type && !isEmpty(error.message)) {
+    if (error.type === type && !isEmpty(error.message)) {
       return error.message;
     } else {
       return '';
@@ -70,14 +73,13 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
   }
 
   function errorMessageInGeneral(): string {
-    let message: string;
-    let externalError = parameters.error as AuthError;
-    if (externalError.type === AuthInputModel.AuthInputType.General) {
-      message = externalError.message;
-    } else if (error.type === AuthInputModel.AuthInputType.General) {
-      message = error.message;
+    if (
+      error.isAbsent &&
+      props.error.type === AuthInputModel.AuthInputType.General
+    ) {
+      return props.error.message;
     }
-    return message;
+    return '';
   }
 
   return (
