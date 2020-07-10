@@ -23,6 +23,7 @@ export namespace AuthInputModel {
     secureTextEntry: boolean;
     value: string;
     type: AuthInputType;
+    keyboardType: string;
   }
 
   export const LoginFields: AuthInputItem[] = [
@@ -34,6 +35,7 @@ export namespace AuthInputModel {
       secureTextEntry: false,
       value: '',
       type: AuthInputType.Email,
+      keyboardType: 'email-address',
     },
     {
       key: 'password',
@@ -43,6 +45,7 @@ export namespace AuthInputModel {
       secureTextEntry: true,
       value: '',
       type: AuthInputType.Password,
+      keyboardType: 'default',
     },
   ];
 
@@ -55,6 +58,7 @@ export namespace AuthInputModel {
       secureTextEntry: false,
       value: '',
       type: AuthInputType.Email,
+      keyboardType: 'email-address',
     },
     {
       key: 'password',
@@ -64,6 +68,7 @@ export namespace AuthInputModel {
       secureTextEntry: true,
       value: '',
       type: AuthInputType.Password,
+      keyboardType: 'default',
     },
     {
       key: 'confirm_password',
@@ -73,6 +78,7 @@ export namespace AuthInputModel {
       secureTextEntry: true,
       value: '',
       type: AuthInputType.ConfirmPassword,
+      keyboardType: 'default',
     },
   ];
 
@@ -85,6 +91,7 @@ export namespace AuthInputModel {
       secureTextEntry: false,
       value: '',
       type: AuthInputType.Email,
+      keyboardType: 'email-address',
     },
   ];
 

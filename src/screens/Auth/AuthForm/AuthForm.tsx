@@ -101,7 +101,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
               showLabel={parameters.showLabel}
               placeholder={field.placeholder}
               autoFocus={field.autoFocus}
-              type={field.type}
+              type={field.keyboardType}
               onChangeText={(text) => onChange(field.type, text)}
               onEndEditing={(text) => console.log(text)}
               secureTextEntry={field.secureTextEntry}
