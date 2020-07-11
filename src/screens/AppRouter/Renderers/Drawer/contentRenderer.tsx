@@ -18,12 +18,7 @@ export function DrawerContent(props) {
       <DrawerContentScrollView {...props}>
         <View style={styles.drawerContent}>
           <View style={{flexDirection: 'row', marginTop: 15, marginLeft: 30}}>
-            <Avatar.Image
-              source={{
-                uri: 'Icon-Profile',
-              }}
-              size={35}
-            />
+            <Avatar.Image source={{uri: 'Icon-Profile'}} size={35} />
             <View style={{marginLeft: 25, flexDirection: 'column'}}>
               <Title style={styles.title}>eMia React Native</Title>
               <Paragraph style={[styles.paragraph, styles.caption]}>---</Paragraph>
@@ -32,11 +27,8 @@ export function DrawerContent(props) {
           </View>
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
-              icon={({ size, color }) => (
-                <MaterialIcons
-                  size={size}
-                  color={color}
-                  name="home"/>
+              icon={({size, color}) => (
+                <MaterialIcons size={size} color={color} name="home" />
               )}
               label="Home"
               labelStyle={styles.drawerLabel}
@@ -46,11 +38,8 @@ export function DrawerContent(props) {
             />
             <DrawerItem
               // https://oblador.github.io/react-native-vector-icons/  in 'Materislicons'
-              icon={({ size, color }) => (
-                <MaterialIcons
-                  size={size}
-                  color={color}
-                  name="person"/>
+              icon={({size, color}) => (
+                <MaterialIcons size={size} color={color} name="person" />
               )}
               label="My Profile"
               labelStyle={styles.drawerLabel}
@@ -60,10 +49,7 @@ export function DrawerContent(props) {
             />
             <DrawerItem
               icon={({ size, color }) => (
-                <MaterialIcons
-                  size={size}
-                  color={color}
-                  name="stop"/>
+                <MaterialIcons size={size} color={color} name="stop" />
               )}
               label="Log Out"
               labelStyle={styles.drawerLabel}
@@ -79,7 +65,7 @@ export function DrawerContent(props) {
               <View style={styles.preference}>
                 <Text>Dark Theme</Text>
                 <View pointerEvents="none">
-                  <Switch value={paperTheme.dark}/>
+                  <Switch value={paperTheme.dark} />
                 </View>
               </View>
             </TouchableRipple>
@@ -92,12 +78,12 @@ export function DrawerContent(props) {
 
 // Actions
 
-function closeDrawer(props) {
-  props.navigation.navigate('Root');
+function closeDrawer({navigation}) {
+  navigation.navigate('Root');
 }
 
-function editProfile(props) {
-  props.navigation.navigate('Root', {
+function editProfile({navigation}) {
+  navigation.navigate('Root', {
     screen: 'EditProfile',
     params: {completion: null},
   });

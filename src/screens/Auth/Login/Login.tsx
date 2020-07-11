@@ -28,9 +28,12 @@ export const Login: FunctionComponent = ({navigation}) => {
 
   function onSuccess(uid, currentUser) {
     if (currentUser === null) {
-      let user = new User(uid, '');
-      navigation.navigate('EditProfile', user, () => {
-        store.dispatch({type: LOGGED_IN, data: user});
+      let newUser = new User(uid, '');
+      navigation.navigate('EditProfile', {
+        newUser: newUser,
+        completion: () => {
+          store.dispatch({type: LOGGED_IN, data: newUser});
+        },
       });
     } else {
       store.dispatch({type: LOGGED_IN, data: currentUser});

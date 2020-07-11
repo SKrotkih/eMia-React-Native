@@ -20,11 +20,6 @@ import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteract
 const {View, TextInput, ScrollView} = ReactNative;
 
 export const EditProfile: FunctionComponent = ({route, navigation}) => {
-  const {completion} = route.params;
-  const [state, setState] = useState(false);
-
-  const [user, setUser] = useState<User>(new User('', ''));
-
   const nameLabelText = 'Name:';
   const addressLabelText = 'Address:';
   const genderLabelText = 'Gender:';
@@ -32,21 +27,28 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
   const emailLabelText = 'Email:';
   const darkTheme = useTheme().dark;
 
-  let _modelView = new ModelView(() => {
+  const newUser = route.params.newUser;
+  const completion = route.params.completion;
+  const [state, setState] = useState(false);
+  const [user, setUser] = useState<User>(newUser === null ? new User('', '') : newUser);
+  const modelView = new ModelView(() => {
     setState((_state) => !_state);
   });
-  _modelView.user = user;
+  modelView.user = user;
 
   useEffect(() => {
     downloadCurrentUserData((_user) => {
+      if (_user === null) {
+        return;
+      }
       setUser(_user);
-      _modelView.user = _user;
+      modelView.user = _user;
     });
   }, []);
 
   useLayoutEffect(() => {
     navigation.setParams({
-      title: _modelView.title,
+      title: modelView.title,
     });
     navigation.setOptions({
       headerRight: () => (
@@ -75,13 +77,13 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else {
-        _modelView.imageUrl = response.uri;
+        modelView.imageUrl = response.uri;
       }
     });
   }
 
   function doneButtonPressed() {
-    _modelView.submitData().then(() => {
+    modelView.submitData().then(() => {
       if (completion === undefined) {
         navigation.goBack();
       } else {
@@ -114,20 +116,20 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
     <View
       style={[styles.container, {backgroundColor: darkTheme ? color.dark : color.white}]}>
       <ScrollView style={[styles.content]}>
-        {textInput(nameLabelText, 'Type your name', _modelView.name, (text) => {
-          _modelView.name = text;
+        {textInput(nameLabelText, 'Type your name', modelView.name, (text) => {
+          modelView.name = text;
         })}
-        {textInput(addressLabelText, 'Type your address', _modelView.address, (text) => {
-          _modelView.address = text;
+        {textInput(addressLabelText, 'Type your address', modelView.address, (text) => {
+          modelView.address = text;
         })}
-        {textInput(genderLabelText, 'Type your gender', +_modelView.gender, (text) => {
-          _modelView.gender = +text;
+        {textInput(genderLabelText, 'Type your gender', +modelView.gender, (text) => {
+          modelView.gender = +text;
         })}
-        {textInput(yearBirthLabelText, 'Type your year of birth', +_modelView.yearBirth, (text) => {
-          _modelView.yearBirth = text;
+        {textInput(yearBirthLabelText, 'Type your year of birth', +modelView.yearBirth, (text) => {
+          modelView.yearBirth = text;
         })}
-        {textInput(emailLabelText, 'Type your email', _modelView.email, (text) => {
-          _modelView.email = text;
+        {textInput(emailLabelText, 'Type your email', modelView.email, (text) => {
+          modelView.email = text;
         })}
         <Button
           block
@@ -136,12 +138,12 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
           onPress={() => takePhotoButtonPressed()}>
           <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
         </Button>
-        {!_modelView.isImageEmpty && (
+        {!modelView.isImageEmpty && (
           <View style={styles.backgroundImage}>
             <ImageViewer
               imageStyle={styles.image}
               disabled={false}
-              source={{uri: _modelView.imageUrl}}
+              source={{uri: modelView.imageUrl}}
               downloadable={true}
               doubleTapEnabled={true}
             />

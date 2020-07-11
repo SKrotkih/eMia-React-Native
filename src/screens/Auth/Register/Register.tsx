@@ -29,9 +29,12 @@ export const Register: FunctionComponent = ({navigation}) => {
 
   function onSuccess(data) {
     const uid = data.user.uid;
-    const user = new User(uid, '');
-    navigation.navigate('EditProfile', user, () => {
-      store.dispatch({type: LOGGED_IN, data: user});
+    const newUser = new User(uid, '');
+    navigation.navigate('EditProfile', {
+      newUser: newUser,
+      completion: () => {
+        store.dispatch({type: LOGGED_IN, data: newUser});
+      },
     });
   }
 
