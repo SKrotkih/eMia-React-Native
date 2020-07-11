@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useState} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import {
   Button,
   GestureResponderEvent,
@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import {Toast} from 'native-base';
+import {warningToast} from '../../../components/Toast/WarningToast';
 import {isEmpty} from '../../../utils/validate';
 import AuthTextInput from '../../../components/AuthTextInput/AuthTextInput';
 import {color, fontSize} from '../../../theme/styles';
@@ -34,7 +34,13 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
     password: props.password,
     error: props.error,
   });
-  const [error, setError] = useState<AuthError>(props.error);
+
+  const [error, setError] = useState<AuthError>(new AuthError())
+  const [generalError, setGeneralError] = useState<AuthError>(props.error)
+
+  useEffect(() => {
+    setGeneralError(props.error)
+  }, [props]);
 
   function onSubmit() {
     const result = AuthInputModel.validateFields(parameters.fields);
@@ -46,6 +52,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
   }
 
   function onChange(type: AuthInputModel.AuthInputType, text) {
+    setGeneralError(new AuthError());
     setParameters((prevState) => {
       prevState.fields.forEach((field) => {
         if (type === field.type) {
@@ -64,20 +71,10 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
     return <View style={styles.separator} />;
   }
 
-  function errorMessage(type: AuthInputModel.AuthInputType): string {
-    if (error.type === type && !isEmpty(error.message)) {
-      return error.message;
-    } else {
-      return '';
-    }
-  }
-
-  function errorMessageInGeneral(): string {
-    if (
-      error.isAbsent &&
-      props.error.type === AuthInputModel.AuthInputType.General
-    ) {
-      return props.error.message;
+  function generalMessage(): string {
+    let message = generalError.getMessage(AuthInputModel.AuthInputType.General);
+    if (error.isEmpty && !isEmpty(message)) {
+      return message;
     }
     return '';
   }
@@ -85,14 +82,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        {!isEmpty(errorMessageInGeneral()) &&
-          Toast.show({
-            text: `${errorMessageInGeneral()}`,
-            position: 'bottom',
-            buttonText: 'Okay',
-            type: 'warning',
-            duration: 3000,
-          })}
+        {warningToast(generalMessage())}
         {parameters.fields.map((field) => {
           return (
             <AuthTextInput
@@ -106,7 +96,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
               onEndEditing={(text) => console.log(text)}
               secureTextEntry={field.secureTextEntry}
               value={field.value}
-              error={errorMessage(field.type)}
+              error={error.getMessage(field.type)}
             />
           );
         })}

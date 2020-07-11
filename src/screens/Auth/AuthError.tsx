@@ -10,8 +10,16 @@ export default class AuthError {
     this.message = '';
   }
 
-  get isAbsent(): boolean {
+  get isEmpty(): boolean {
     return isEmpty(this.message);
+  }
+
+  getMessage(type: AuthInputModel.AuthInputType): string {
+    if (this.type === type && !isEmpty(this.message)) {
+      return this.message;
+    } else {
+      return '';
+    }
   }
 
   static parseMessage(_error): AuthError {
