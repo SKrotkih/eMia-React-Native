@@ -14,33 +14,15 @@ import {color, fontSize} from '../../../theme/styles';
 import {AuthInputModel} from '../AuthModel';
 import AuthError from '../AuthError';
 
-export interface IAuth {
-  fields: AuthInputModel.AuthInputItem[];
-  onSubmit: ({}) => void;
-  onForgotPassword: (event: GestureResponderEvent) => void;
-  buttonTitle: string;
-  showLabel: boolean;
-  password: string;
-  error: AuthError;
-}
-
-export const AuthForm: FunctionComponent<IAuth> = (props) => {
-  const [parameters, setParameters] = useState<IAuth>({
-    fields: props.fields,
-    onSubmit: props.onSubmit,
-    onForgotPassword: props.onForgotPassword,
-    buttonTitle: props.buttonTitle,
-    showLabel: props.showLabel,
-    password: props.password,
-    error: props.error,
-  });
+export const AuthForm: FunctionComponent<AuthInputModel.AuthParameters> = ({data}) => {
+  const [parameters, setParameters] = useState<AuthInputModel.AuthParameters>(data);
 
   const [error, setError] = useState<AuthError>(new AuthError())
-  const [generalError, setGeneralError] = useState<AuthError>(props.error)
+  const [generalError, setGeneralError] = useState<AuthError>(data.error)
 
   useEffect(() => {
-    setGeneralError(props.error)
-  }, [props]);
+    setGeneralError(data.error)
+  }, [data]);
 
   function onSubmit() {
     const result = AuthInputModel.validateFields(parameters.fields);
@@ -51,7 +33,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
     }
   }
 
-  function onChange(type: AuthInputModel.AuthInputType, text) {
+  function onFieldChange(type: AuthInputModel.AuthInputType, text) {
     setGeneralError(new AuthError());
     setParameters((prevState) => {
       prevState.fields.forEach((field) => {
@@ -92,7 +74,7 @@ export const AuthForm: FunctionComponent<IAuth> = (props) => {
               placeholder={field.placeholder}
               autoFocus={field.autoFocus}
               type={field.keyboardType}
-              onChangeText={(text) => onChange(field.type, text)}
+              onChangeText={(text) => onFieldChange(field.type, text)}
               onEndEditing={(text) => console.log(text)}
               secureTextEntry={field.secureTextEntry}
               value={field.value}

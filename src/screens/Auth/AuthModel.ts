@@ -5,6 +5,7 @@ import {
   validateEmail,
   validatePassword,
 } from '../../utils/validate';
+import {GestureResponderEvent} from "react-native";
 
 export namespace AuthInputModel {
   export enum AuthInputType {
@@ -94,6 +95,25 @@ export namespace AuthInputModel {
       keyboardType: 'email-address',
     },
   ];
+
+  export class AuthParameters {
+    fields: AuthInputItem[];
+    onSubmit: ({}) => void;
+    onForgotPassword: (event: GestureResponderEvent) => void;
+    buttonTitle: string;
+    showLabel: boolean;
+    password: string;
+    error: AuthError;
+    constructor(_fields, _onSubmit, _onForgotPassword, _buttonTitle, _showLabel, _password, _error) {
+      this.fields = _fields;
+      this.onSubmit = _onSubmit;
+      this.onForgotPassword = _onForgotPassword;
+      this.buttonTitle = _buttonTitle;
+      this.showLabel = _showLabel;
+      this.password = _password;
+      this.error = _error;
+    }
+  }
 
   export class AuthResult {
     success: boolean;

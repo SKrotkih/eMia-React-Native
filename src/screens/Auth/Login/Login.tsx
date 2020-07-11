@@ -12,10 +12,6 @@ const {login} = auth;
 export const Login: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState<AuthError>(new AuthError());
 
-  function onForgotPassword() {
-    navigation.navigate('ForgotPassword');
-  }
-
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
     let email = '';
@@ -45,15 +41,22 @@ export const Login: FunctionComponent = ({navigation}) => {
     setError(AuthError.parseMessage(_error));
   }
 
-  return (
-    <AuthForm
-      fields={AuthInputModel.LoginFields}
-      showLabel={false}
-      onSubmit={onSubmit}
-      buttonTitle={'DONE'}
-      error={error}
-      onForgotPassword={onForgotPassword}
-      password={null}
-    />
-  );
+  function onForgotPassword() {
+    navigation.navigate('ForgotPassword');
+  }
+
+  function parameters(): AuthInputModel.AuthParameters {
+    const params = new AuthInputModel.AuthParameters(
+      AuthInputModel.LoginFields,
+      onSubmit,
+      onForgotPassword,
+      'DONE',
+      false,
+      null,
+      error,
+    );
+    return params;
+  }
+
+  return (<AuthForm data={parameters()} />);
 };

@@ -33,15 +33,18 @@ export const ForgotPassword: FunctionComponent = ({route, navigation}) => {
     });
   }
 
-  return (
-    <AuthForm
-      fields={AuthInputModel.ForgotPasswordFields}
-      onSubmit={onSubmit}
-      onForgotPassword={null}
-      buttonTitle={'SUBMIT'}
-      error={error}
-      showLabel={false}
-      password={null}
-    />
-  );
+  function parameters(): AuthInputModel.AuthParameters {
+    const params = new AuthInputModel.AuthParameters(
+      AuthInputModel.ForgotPasswordFields,
+      onSubmit,
+      null,
+      'SUBMIT',
+      false,
+      null,
+      error,
+    );
+    return params;
+  }
+
+  return (<AuthForm data={parameters()} />);
 };

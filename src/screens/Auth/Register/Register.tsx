@@ -39,15 +39,18 @@ export const Register: FunctionComponent = ({navigation}) => {
     setError(AuthError.parseMessage(_error));
   }
 
-  return (
-    <AuthForm
-      fields={AuthInputModel.RegisterFields}
-      showLabel={false}
-      onSubmit={onSubmit}
-      onForgotPassword={null}
-      buttonTitle={'DONE'}
-      error={error}
-      password={null}
-    />
-  );
+  function parameters(): AuthInputModel.AuthParameters {
+    const params = new AuthInputModel.AuthParameters(
+      AuthInputModel.RegisterFields,
+      onSubmit,
+      null,
+      'DONE',
+      false,
+      null,
+      error,
+    );
+    return params;
+  }
+
+  return (<AuthForm data={parameters()} />);
 };
