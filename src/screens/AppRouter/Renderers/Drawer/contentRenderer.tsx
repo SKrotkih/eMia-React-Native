@@ -85,7 +85,7 @@ function closeDrawer({navigation}) {
 function editProfile({navigation}) {
   navigation.navigate('Root', {
     screen: 'EditProfile',
-    params: {completion: null},
+    params: {newUser: null, completion: null},
   });
 }
 

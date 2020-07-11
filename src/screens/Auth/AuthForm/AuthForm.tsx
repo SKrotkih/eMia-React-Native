@@ -2,7 +2,7 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {warningToast} from '../../../components/Toast/WarningToast';
 import {isEmpty} from '../../../utils/validate';
-import AuthTextInput from '../../../components/AuthTextInput/AuthTextInput';
+import InputAuthText from '../../../components/InputAuthText/InputAuthText';
 import {color, fontSize} from '../../../theme/styles';
 import {AuthInputModel} from '../AuthModel';
 import AuthError from '../AuthError';
@@ -60,7 +60,7 @@ export const AuthForm: FunctionComponent<AuthInputModel.AuthParameters> = ({data
         {warningToast(generalMessage())}
         {parameters.fields.map((field) => {
           return (
-            <AuthTextInput
+            <InputAuthText
               key={field.key}
               label={field.label}
               showLabel={parameters.showLabel}

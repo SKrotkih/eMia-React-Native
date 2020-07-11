@@ -1,12 +1,11 @@
 import React, {FunctionComponent} from 'react';
-import {View, TextInput, Text} from 'react-native';
+import {View, TextInput, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import {isEmpty} from '../../utils/validate';
-import styles from './styles';
 import {color} from "../../theme/styles";
 import {useTheme} from 'react-native-paper';
 
-const AuthTextInput: FunctionComponent = (props) => {
+const InputAuthText: FunctionComponent = (props) => {
   const {
     showLabel,
     placeholder,
@@ -47,4 +46,27 @@ const AuthTextInput: FunctionComponent = (props) => {
   );
 }
 
-export default connect(null, null)(AuthTextInput);
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 10,
+  },
+  textInput: {
+    fontSize: 12,
+    margin: 5,
+    marginLeft: 0,
+    marginRight: 0,
+    paddingLeft: 15,
+    height: 35,
+    borderRadius: 8,
+    borderColor: color.brand,
+    borderWidth: 1,
+  },
+  errorText: {
+    fontSize: 12,
+    fontWeight: 'normal',
+    color: 'red',
+  },
+});
+
+
+export default connect(null, null)(InputAuthText);

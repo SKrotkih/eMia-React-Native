@@ -16,6 +16,7 @@ import {useTheme} from 'react-native-paper';
 import {color} from '../../theme/styles';
 import {User} from '../../model/entities/user';
 import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
+import inputText from "../../components/InputText/InputText";
 
 const {View, TextInput, ScrollView} = ReactNative;
 
@@ -84,7 +85,7 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
 
   function doneButtonPressed() {
     modelView.submitData().then(() => {
-      if (completion === undefined) {
+      if (completion === null) {
         navigation.goBack();
       } else {
         completion();
@@ -92,43 +93,23 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
     });
   }
 
-  function textInput(title, placeholder, defaultValue, onChangeText) {
-    return (
-      <>
-        <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{title}</Label>
-        <TextInput
-          style={[styles.input, {color: darkTheme ? color.white : color.black}]}
-          autoCapitalize="none"
-          clearButtonMode="while-editing"
-          underlineColorAndroid="transparent"
-          placeholder={placeholder}
-          autoFocus={false}
-          onChangeText={(text) => {
-            onChangeText(text);
-          }}
-          defaultValue={defaultValue}
-        />
-      </>
-    );
-  }
-
   return (
     <View
       style={[styles.container, {backgroundColor: darkTheme ? color.dark : color.white}]}>
       <ScrollView style={[styles.content]}>
-        {textInput(nameLabelText, 'Type your name', modelView.name, (text) => {
+        {inputText(nameLabelText, 'Type your name', modelView.name, darkTheme,(text) => {
           modelView.name = text;
         })}
-        {textInput(addressLabelText, 'Type your address', modelView.address, (text) => {
+        {inputText(addressLabelText, 'Type your address', modelView.address, darkTheme, (text) => {
           modelView.address = text;
         })}
-        {textInput(genderLabelText, 'Type your gender', +modelView.gender, (text) => {
+        {inputText(genderLabelText, 'Type your gender', +modelView.gender, darkTheme, (text) => {
           modelView.gender = +text;
         })}
-        {textInput(yearBirthLabelText, 'Type your year of birth', +modelView.yearBirth, (text) => {
+        {inputText(yearBirthLabelText, 'Type your year of birth', +modelView.yearBirth, darkTheme, (text) => {
           modelView.yearBirth = text;
         })}
-        {textInput(emailLabelText, 'Type your email', modelView.email, (text) => {
+        {inputText(emailLabelText, 'Type your email', modelView.email, darkTheme, (text) => {
           modelView.email = text;
         })}
         <Button

@@ -1,4 +1,3 @@
-
 import React, {FunctionComponent, useState} from 'react';
 import {Alert} from 'react-native';
 import {actions as auth} from '../index';
@@ -8,15 +7,15 @@ import {AuthInputModel} from '../AuthModel';
 
 const {remindPassword} = auth;
 
-export const ForgotPassword: FunctionComponent = ({route, navigation}) => {
+export const ForgotPassword: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState(new AuthError());
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
-    let data = {};
+    let data = {email: null};
     fields.forEach((field) => {
       if (field.type === AuthInputModel.AuthInputType.Email) {
-        data['email'] = field.value;
+        data.email = field.value;
       }
     });
     remindPassword(data, onSuccess, onError);
@@ -33,18 +32,15 @@ export const ForgotPassword: FunctionComponent = ({route, navigation}) => {
     });
   }
 
-  function parameters(): AuthInputModel.AuthParameters {
-    const params = new AuthInputModel.AuthParameters(
-      AuthInputModel.ForgotPasswordFields,
-      onSubmit,
-      null,
-      'SUBMIT',
-      false,
-      null,
-      error,
-    );
-    return params;
-  }
+  const params = new AuthInputModel.AuthParameters(
+    AuthInputModel.ForgotPasswordFields,
+    onSubmit,
+    null,
+    'SUBMIT',
+    false,
+    null,
+    error,
+  );
 
-  return <AuthForm data={parameters()} />;
+  return <AuthForm data={params} />;
 };

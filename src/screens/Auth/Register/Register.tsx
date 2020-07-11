@@ -14,14 +14,14 @@ export const Register: FunctionComponent = ({navigation}) => {
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
-    let data = {};
+    let data = {email: null, password: null, confirm_password: null};
     fields.forEach((field) => {
       if (field.type === AuthInputModel.AuthInputType.Email) {
-        data['email'] = field.value;
+        data.email = field.value;
       } else if (field.type === AuthInputModel.AuthInputType.Password) {
-        data['password'] = field.value;
+        data.password = field.value;
       } else if (field.type === AuthInputModel.AuthInputType.ConfirmPassword) {
-        data['confirm_password'] = field.value;
+        data.confirm_password = field.value;
       }
     });
     register(data, onSuccess, onError);
@@ -42,18 +42,15 @@ export const Register: FunctionComponent = ({navigation}) => {
     setError(AuthError.parseMessage(_error));
   }
 
-  function parameters(): AuthInputModel.AuthParameters {
-    const params = new AuthInputModel.AuthParameters(
-      AuthInputModel.RegisterFields,
-      onSubmit,
-      null,
-      'DONE',
-      false,
-      null,
-      error,
-    );
-    return params;
-  }
+  const params = new AuthInputModel.AuthParameters(
+    AuthInputModel.RegisterFields,
+    onSubmit,
+    null,
+    'DONE',
+    false,
+    null,
+    error,
+  );
 
-  return <AuthForm data={parameters()} />;
+  return <AuthForm data={params} />;
 };

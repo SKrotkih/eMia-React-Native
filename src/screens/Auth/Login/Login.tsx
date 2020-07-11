@@ -48,18 +48,15 @@ export const Login: FunctionComponent = ({navigation}) => {
     navigation.navigate('ForgotPassword');
   }
 
-  function parameters(): AuthInputModel.AuthParameters {
-    const params = new AuthInputModel.AuthParameters(
-      AuthInputModel.LoginFields,
-      onSubmit,
-      onForgotPassword,
-      'DONE',
-      false,
-      null,
-      error,
-    );
-    return params;
-  }
+  const params = new AuthInputModel.AuthParameters(
+    AuthInputModel.LoginFields,
+    onSubmit,
+    onForgotPassword,
+    'DONE',
+    false,
+    null,
+    error,
+  );
 
-  return <AuthForm data={parameters()} />;
+  return <AuthForm data={params} />;
 };
