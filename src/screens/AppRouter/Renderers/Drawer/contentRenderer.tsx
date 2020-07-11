@@ -6,9 +6,7 @@ import {Text, Drawer, Title, Avatar, Caption, Paragraph, TouchableRipple, Switch
 import store from '../../../../redux/store';
 import {LOGGED_OUT} from '../../../../redux/actionTypes';
 import {color} from '../../../../theme/styles';
-import {downloadCurrentUserData} from '../../../../model/dbinteractor/users/dbinteractor';
 import {logOut} from '../../../../model/dbinteractor/login/dbinteractor';
-
 import {AppContext} from '../../../../components/context';
 
 export function DrawerContent(props) {
@@ -99,12 +97,9 @@ function closeDrawer(props) {
 }
 
 function editProfile(props) {
-  // TODO: Activity indication needed
-  downloadCurrentUserData((user) => {
-    props.navigation.navigate('Root', {
-      screen: 'EditProfile',
-      params: {user: user, completion: null},
-    });
+  props.navigation.navigate('Root', {
+    screen: 'EditProfile',
+    params: {completion: null},
   });
 }
 

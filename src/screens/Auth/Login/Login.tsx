@@ -58,5 +58,5 @@ export const Login: FunctionComponent = ({navigation}) => {
     return params;
   }
 
-  return (<AuthForm data={parameters()} />);
+  return <AuthForm data={parameters()} />;
 };

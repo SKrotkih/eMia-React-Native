@@ -1,3 +1,3 @@
-import {AuthForm} from "./AuthForm";
+import {AuthForm} from './AuthForm';
 
 export default AuthForm;

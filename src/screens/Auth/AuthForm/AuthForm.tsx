@@ -1,12 +1,5 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import {
-  Button,
-  GestureResponderEvent,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Button, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {warningToast} from '../../../components/Toast/WarningToast';
 import {isEmpty} from '../../../utils/validate';
 import AuthTextInput from '../../../components/AuthTextInput/AuthTextInput';
@@ -17,11 +10,11 @@ import AuthError from '../AuthError';
 export const AuthForm: FunctionComponent<AuthInputModel.AuthParameters> = ({data}) => {
   const [parameters, setParameters] = useState<AuthInputModel.AuthParameters>(data);
 
-  const [error, setError] = useState<AuthError>(new AuthError())
-  const [generalError, setGeneralError] = useState<AuthError>(data.error)
+  const [error, setError] = useState<AuthError>(new AuthError());
+  const [generalError, setGeneralError] = useState<AuthError>(data.error);
 
   useEffect(() => {
-    setGeneralError(data.error)
+    setGeneralError(data.error);
   }, [data]);
 
   function onSubmit() {

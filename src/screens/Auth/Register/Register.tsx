@@ -52,5 +52,5 @@ export const Register: FunctionComponent = ({navigation}) => {
     return params;
   }
 
-  return (<AuthForm data={parameters()} />);
+  return <AuthForm data={parameters()} />;
 };

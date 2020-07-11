@@ -9,13 +9,13 @@ import {AuthInputModel} from '../AuthModel';
 const {remindPassword} = auth;
 
 export const ForgotPassword: FunctionComponent = ({route, navigation}) => {
-  const [error, setError] = useState(new AuthError);
+  const [error, setError] = useState(new AuthError());
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
-    setError(new AuthError); // clear out error messages
+    setError(new AuthError()); // clear out error messages
     let data = {};
-    fields.forEach( (field) => {
-      if (field.type == AuthInputModel.AuthInputType.Email) {
+    fields.forEach((field) => {
+      if (field.type === AuthInputModel.AuthInputType.Email) {
         data['email'] = field.value;
       }
     });
@@ -46,5 +46,5 @@ export const ForgotPassword: FunctionComponent = ({route, navigation}) => {
     return params;
   }
 
-  return (<AuthForm data={parameters()} />);
+  return <AuthForm data={parameters()} />;
 };
