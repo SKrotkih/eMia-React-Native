@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, {useState, useMemo} from 'react';
+import {Appearance} from 'react-native';
 import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
@@ -20,7 +21,6 @@ import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme,
-  useTheme,
 } from 'react-native-paper';
 import {AppContext} from '../../../../components/context';
 
@@ -113,14 +113,14 @@ export default function mainNavigation() {
       text: '#ffffff',
     },
   };
-  const paperTheme = useTheme();
-  const [isDarkTheme, setIsDarkTheme] = React.useState(paperTheme.dark);
+  const colorScheme = Appearance.getColorScheme();
+  const [isDarkTheme, setIsDarkTheme] = useState(colorScheme === 'dark');
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
-  const appContext = React.useMemo(
+  const appContext = useMemo(
     () => ({
       toggleTheme: () => {
-        setIsDarkTheme(isDarkTheme => !isDarkTheme);
+        setIsDarkTheme((isDarkTheme) => !isDarkTheme);
       },
     }), []);
 
