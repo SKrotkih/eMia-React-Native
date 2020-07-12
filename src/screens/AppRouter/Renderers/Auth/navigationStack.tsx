@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
@@ -44,9 +44,14 @@ export default function authNavigationStack() {
       text: '#ffffff',
     },
   };
+
   const colorScheme = Appearance.getColorScheme();
-  const isDarkTheme = colorScheme === 'dark';
+  const [isDarkTheme, setIsDarkTheme] = useState(colorScheme === 'dark');
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
+  const ddd = Appearance.addChangeListener(() => {
+    setIsDarkTheme(Appearance.getColorScheme() === 'dark');
+  });
+  console.log(ddd);
 
   return (
     <PaperProvider theme={theme}>
