@@ -7,8 +7,9 @@ import {
 import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
-  DarkTheme as PaperDarkTheme, useTheme
+  DarkTheme as PaperDarkTheme,
 } from 'react-native-paper';
+import {Appearance} from 'react-native';
 import {createStackNavigator} from "@react-navigation/stack";
 import {color} from "../../../../theme/styles";
 import SplashScreen from "../../../SplashScreen";
@@ -43,8 +44,8 @@ export default function authNavigationStack() {
       text: '#ffffff',
     },
   };
-
-  const isDarkTheme = true;
+  const colorScheme = Appearance.getColorScheme();
+  const isDarkTheme = colorScheme === 'dark';
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
 
   return (

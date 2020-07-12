@@ -96,16 +96,16 @@ export const AuthForm: FunctionComponent<AuthInputModel.AuthParameters> = ({data
 };
 
 const styles = StyleSheet.create({
-  separator: {
-    marginVertical: 8,
-    borderBottomColor: color.tableSeparator,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
   container: {
     flex: 1,
     backgroundColor: 'transparent',
     marginTop: 30,
     marginHorizontal: 16,
+  },
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: color.tableSeparator,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   forgotButton: {
     marginVertical: 8,
