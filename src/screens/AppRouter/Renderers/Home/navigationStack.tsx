@@ -113,10 +113,13 @@ export default function mainNavigation() {
       text: '#ffffff',
     },
   };
+
   const colorScheme = Appearance.getColorScheme();
   const [isDarkTheme, setIsDarkTheme] = useState(colorScheme === 'dark');
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
-
+  Appearance.addChangeListener(() => {
+    setIsDarkTheme(Appearance.getColorScheme() === 'dark');
+  });
   const appContext = useMemo(
     () => ({
       toggleTheme: () => {
