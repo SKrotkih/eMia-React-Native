@@ -10,13 +10,7 @@ import {color} from '../../../theme/styles'
 const {Image, View, TouchableOpacity} = ReactNative;
 
 export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => {
-  const modeView: ModelView = props as ModelView;
-
-  function renderActivityIndicator() {
-    return (
-      <Loader loading={true} />
-    );
-  }
+  const modelView: ModelView = props as ModelView;
 
   function renderPlaceholder(sectionID, rowID) {
     // TODO: create properly key
@@ -57,8 +51,9 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
               style={gridItemStyles.image}
               source={{cache: 'force-cache', uri: url}}
             />
-            <Text style={[gridItemStyles.title, {color: darkTheme ? color.white : color.black}, {backgroundColor: 'transparent'}]}
-                  numberOfLines={1}>
+            <Text
+              style={[gridItemStyles.title, {color: darkTheme ? color.white : color.black}, {backgroundColor: 'transparent'}]}
+              numberOfLines={1}>
               {title}
             </Text>
             <Text style={[gridItemStyles.description, {color: darkTheme ? color.white : color.black}]}
@@ -72,26 +67,31 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
   }
 
   return (
-    (!modeView.loaded && renderActivityIndicator()) || (
-      <Grid
-        style={{backgroundColor: darkTheme ? color.dark : color.white}}
-        renderItem={renderItem}
-        renderSeparator={renderSeparator}
-        renderPlaceholder={renderPlaceholder}
-        data={modeView.dataSource}
-        numColumns={2}
-        itemHasChanged={(d1, d2) => d1 !== d2}
-        keyExtractor={(item, index) => index.toString()}
-        refreshing={modeView.refreshing}
-        onRefresh={() => {
-          modeView.refreshData();
-        }}
-        onEndReached={() => {
-          // setState(({ data }) => ({
-          //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
-          // }));
-        }}
-      />
-    )
-  );
+    RenderActivityIndicator(modelView.loaded) ||
+    <Grid
+      style={{backgroundColor: darkTheme ? color.dark : color.white}}
+      renderItem={renderItem}
+      renderSeparator={renderSeparator}
+      renderPlaceholder={renderPlaceholder}
+      data={modelView.dataSource}
+      numColumns={2}
+      itemHasChanged={(d1, d2) => d1 !== d2}
+      keyExtractor={(item, index) => index.toString()}
+      refreshing={modelView.refreshing}
+      onRefresh={() => {
+        modelView.refreshData();
+      }}
+      onEndReached={() => {
+        // setState(({ data }) => ({
+        //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
+        // }));
+      }}
+    />
+  )
 };
+
+function RenderActivityIndicator(props) {
+  return (
+    <Loader loading={!props.loaded}/>
+  );
+}

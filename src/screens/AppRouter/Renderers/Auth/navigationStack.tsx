@@ -48,10 +48,9 @@ export default function authNavigationStack() {
   const colorScheme = Appearance.getColorScheme();
   const [isDarkTheme, setIsDarkTheme] = useState(colorScheme === 'dark');
   const theme = isDarkTheme ? CustomDarkTheme : CustomDefaultTheme;
-  const ddd = Appearance.addChangeListener(() => {
+  Appearance.addChangeListener(() => {
     setIsDarkTheme(Appearance.getColorScheme() === 'dark');
   });
-  console.log(ddd);
 
   return (
     <PaperProvider theme={theme}>

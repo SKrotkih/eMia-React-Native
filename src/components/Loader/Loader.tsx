@@ -1,11 +1,16 @@
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
 import {color} from "../../theme/styles";
 import {bool} from "prop-types";
 
 export const Loader: FunctionComponent = (props) => {
-  const {loading} = props;
+  const [loading, setLoading] = useState(props.loading);
 
+  useEffect(() => {
+    setLoading(props.loading);
+  }, [props.loading]);
+
+  //const {loading} = props;
   return (
     <Modal
       transparent={true}
@@ -14,17 +19,23 @@ export const Loader: FunctionComponent = (props) => {
       onRequestClose={() => {
         console.log('close modal');
       }}>
-      <View style={styles.modalBackground}>
-        <View style={styles.activityIndicatorWrapper}>
-          <ActivityIndicator animating={loading}
-                             color = {color.brand}
-                             size = 'large'
-          />
-        </View>
-      </View>
+      <Progress loading={loading} />
     </Modal>
   );
 };
+
+function Progress(props) {
+  return (
+    <View style={styles.modalBackground}>
+      <View style={styles.activityIndicatorWrapper}>
+        <ActivityIndicator animating={props.loading}
+                           color = {color.brand}
+                           size = 'large'
+        />
+      </View>
+    </View>
+  )
+}
 
 Loader.propTypes = {
   loading: bool,
