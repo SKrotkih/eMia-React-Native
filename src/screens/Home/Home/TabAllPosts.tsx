@@ -66,9 +66,8 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
     );
   }
 
-  return (
-    (!modelView.loaded && RenderActivityIndicator(modelView.loaded)) || (
-      modelView.loaded &&
+  function renderGrid() {
+    return (
       <Grid
         style={{backgroundColor: darkTheme ? color.dark : color.white}}
         renderItem={renderItem}
@@ -89,11 +88,8 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
         }}
       />
     )
-  )
-};
+  }
 
-function RenderActivityIndicator(props) {
   return (
-    <Loader loading={!props.loaded}/>
-  );
-}
+    (!modelView.loaded && <Loader loading={true}/>) || renderGrid());
+};
