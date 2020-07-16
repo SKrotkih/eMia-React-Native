@@ -39,8 +39,6 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 12,
   },
-  backgroundImage: {
-  },
   image: {
     overflow: "hidden",
     backgroundColor: color.grey,

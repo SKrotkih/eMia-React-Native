@@ -1,4 +1,4 @@
-import {removeStorageItem, setStorageObjectItem} from '../utils/storage';
+import {removeStorageItem, setStorageObjectItem} from '../model/LocalStorage/storage';
 import {LOGGED_IN, LOGGED_OUT} from './actionTypes';
 
 let initialState = {

@@ -1,16 +1,17 @@
 import {Root} from "native-base";
 import {NavigationContainer} from "@react-navigation/native";
-import {ImageBackground, StatusBar, StyleSheet} from "react-native";
+import {Dimensions, ImageBackground, StatusBar, StyleSheet, useWindowDimensions} from "react-native";
 import React from "react";
-import backgroundImage from "../../../../theme/BackgroundImage";
 
 export default function splashScreenRenderer() {
+  const windowWidth = Dimensions.get('window').width;
+  const windowHeight = Dimensions.get('window').height;
   let splashImg = '../../../../assets/images/splash.png';
   return (
     <Root>
       <NavigationContainer>
         <ImageBackground
-          style={styles.background}
+          style={[styles.background, {width: windowWidth}, {height: windowHeight}]}
           source={require(splashImg)}>
           <StatusBar translucent barStyle="dark-content"/>
         </ImageBackground>
@@ -21,7 +22,7 @@ export default function splashScreenRenderer() {
 
 const styles = StyleSheet.create({
   background: {
-    ...backgroundImage,
+    flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
   },

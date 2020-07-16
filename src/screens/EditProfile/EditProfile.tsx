@@ -18,7 +18,7 @@ import {User} from '../../model/entities/user';
 import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
 import inputText from "../../components/InputText/InputText";
 
-const {View, TextInput, ScrollView} = ReactNative;
+const {View, ScrollView} = ReactNative;
 
 export const EditProfile: FunctionComponent = ({route, navigation}) => {
   const nameLabelText = 'Name:';
@@ -120,7 +120,7 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
           <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
         </Button>
         {!modelView.isImageEmpty && (
-          <View style={styles.backgroundImage}>
+          <View>
             <ImageViewer
               imageStyle={styles.image}
               disabled={false}

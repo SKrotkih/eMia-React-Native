@@ -12,7 +12,7 @@ import {
 import {Appearance} from 'react-native';
 import {createStackNavigator} from "@react-navigation/stack";
 import {color} from "../../../../theme/styles";
-import SplashScreen from "../../../SplashScreen";
+import WelkomeScreen from '../../../WelkomeScreen'
 import Register from "../../../Auth/Register";
 import EditProfile from "../../../EditProfile";
 import Login from "../../../Auth/Login";
@@ -72,7 +72,7 @@ export default function authNavigationStack() {
             }}>
             <Stack.Screen
               name="Welcome"
-              component={SplashScreen}
+              component={WelkomeScreen}
               options={{title: ''}}
             />
             <Stack.Screen

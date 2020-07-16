@@ -1,4 +1,3 @@
-import {Dimensions, Platform, StatusBar} from 'react-native';
 import { moderateScale as normalize } from 'react-native-size-matters';
 
 const color = {
@@ -36,9 +35,6 @@ const fontFamily = {
 };
 
 const padding = 8;
-const statusBarHeight = Platform.OS === "ios" ? 0 : 20;
-const tabColor = (Platform.OS === 'ios') ? 'rgba(73,75,76, .5)' : 'rgba(255,255,255,.8)';
-const selectedTabColor = (Platform.OS === 'ios') ? 'rgb(73,75,76)' : '#fff';
 
 export {
   padding,
