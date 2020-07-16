@@ -5,21 +5,18 @@ import {bool} from "prop-types";
 
 export const Loader: FunctionComponent = (props) => {
   const [loading, setLoading] = useState(props.loading);
-
   useEffect(() => {
     setLoading(props.loading);
   }, [props.loading]);
-
-  //const {loading} = props;
   return (
+    (!loading && <></>) ||
     <Modal
       transparent={true}
       animationType={'none'}
-      visible={loading}
       onRequestClose={() => {
         console.log('close modal');
       }}>
-      <Progress loading={loading} />
+      <Progress loading={true} />
     </Modal>
   );
 };

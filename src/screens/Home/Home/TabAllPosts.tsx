@@ -25,7 +25,7 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
   function renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
     // TODO: The same. Need a key
     let key = '' + sectionID + '-' + rowID;
-    return <View key={key} />;
+    return <View key={key}/>;
   }
 
   function selectPostItem(postItem: any) {
@@ -67,26 +67,28 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
   }
 
   return (
-    RenderActivityIndicator(modelView.loaded) ||
-    <Grid
-      style={{backgroundColor: darkTheme ? color.dark : color.white}}
-      renderItem={renderItem}
-      renderSeparator={renderSeparator}
-      renderPlaceholder={renderPlaceholder}
-      data={modelView.dataSource}
-      numColumns={2}
-      itemHasChanged={(d1, d2) => d1 !== d2}
-      keyExtractor={(item, index) => index.toString()}
-      refreshing={modelView.refreshing}
-      onRefresh={() => {
-        modelView.refreshData();
-      }}
-      onEndReached={() => {
-        // setState(({ data }) => ({
-        //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
-        // }));
-      }}
-    />
+    (!modelView.loaded && RenderActivityIndicator(modelView.loaded)) || (
+      modelView.loaded &&
+      <Grid
+        style={{backgroundColor: darkTheme ? color.dark : color.white}}
+        renderItem={renderItem}
+        renderSeparator={renderSeparator}
+        renderPlaceholder={renderPlaceholder}
+        data={modelView.dataSource}
+        numColumns={2}
+        itemHasChanged={(d1, d2) => d1 !== d2}
+        keyExtractor={(item, index) => index.toString()}
+        refreshing={modelView.refreshing}
+        onRefresh={() => {
+          modelView.refreshData();
+        }}
+        onEndReached={() => {
+          // setState(({ data }) => ({
+          //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
+          // }));
+        }}
+      />
+    )
   )
 };
 
