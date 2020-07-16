@@ -1,15 +1,16 @@
 // AddNewPost
 
 import React, {FunctionComponent, useState, useEffect} from 'react';
-import ReactNative from 'react-native';
-import {Button, Icon, Text, Label} from 'native-base';
-import ImagePicker from 'react-native-image-picker';
+import ReactNative, {Alert} from 'react-native';
+import {Button, Icon, Text} from 'native-base';
 import styles from './styles';
 import {Post} from '../../../model/entities/post';
 import {useTheme} from "react-native-paper";
 import {color} from "../../../theme/styles";
 import InputData from "./Components/InputPostTextItem";
 import Photo from "./Components/PostPhoto";
+import takePhoto from "./Utils/TakePhoto";
+import {isEmpty} from "../../../utils/validate";
 
 const {View} = ReactNative;
 
@@ -44,42 +45,26 @@ export const AddNewPost: FunctionComponent = (props) => {
   }, [post]);
 
   function takePhotoButtonPressed() {
-    const options = {
-      quality: 1.0,
-      maxWidth: 500,
-      maxHeight: 500,
-      storageOptions: {
-        skipBackup: true,
-      },
-    };
-    ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-      if (response.didCancel) {
-        console.log('User cancelled photo picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-        updateField('url', response.uri);
-      }
-    });
+    takePhoto()
+      .then((url) => {
+        updateField('url', url);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
   }
 
   function doneButtonPressed(_post: {}) {
-    if (_post.title === null ||
-      _post.title === '' ||
-      _post.body === null ||
-      _post.body === ''
-    ) {
-      return;
-    }
     const newPost = new Post(_post.title, _post.body, _post.url);
-    newPost.submitOnServer((result) => {
-      if (result) {
+    newPost.submitOnServer()
+      .then(() => {
         navigation.goBack();
-      }
-    });
+      })
+      .catch((error) => {
+         if (!isEmpty(error)) {
+           Alert.alert(error);
+         }
+      })
   }
 
   function updateField(name: string, value: string) {

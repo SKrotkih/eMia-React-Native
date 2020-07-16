@@ -30,6 +30,3 @@ const styles = StyleSheet.create({
     width: windowWidth - 30,
   },
 });
-
-
-

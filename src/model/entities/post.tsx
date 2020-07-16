@@ -4,6 +4,7 @@ import {uploadImage} from '../../model/firebase/utils/uploadImage';
 import {uploadData} from '../../model/firebase/database/posts';
 import {getCurrentUserAsync} from '../../model/firebase/auth/api';
 import {storage} from '../../model/firebase/config';
+import {isEmpty} from "../../utils/validate";
 
 export class Post {
   author: string;
@@ -38,12 +39,22 @@ export class Post {
     })
   }
 
-  submitOnServer(completed) {
-    if (this.title === null || this.title.length === 0) {
-      Alert.alert('Please, enter post title');
-    } else {
-      this.addPost(completed);
-    }
+  submitOnServer() {
+    return new Promise((resolve, reject) => {
+      if (this.title === null || isEmpty(this.title)) {
+        reject('Please, enter post title');
+      } else if (this.body === null || isEmpty(this.body)) {
+        reject('Please, enter post body');
+      } else {
+        this.addPost((success) => {
+          if (success) {
+            resolve();
+          }  else {
+            reject('');
+          }
+        });
+      }
+    })
   }
 
   private addPost(completed) {
