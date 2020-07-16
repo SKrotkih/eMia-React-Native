@@ -25,7 +25,7 @@ import React, {
 } from 'react';
 import {color} from '../../../theme/styles';
 import {TabAllPosts} from './TabAllPosts';
-import {TABS, styles} from './styles';
+import {styles} from './styles';
 import * as Permissions from 'expo-permissions';
 
 import {
@@ -37,8 +37,6 @@ import {
   Fab,
   IconNB,
   Icon,
-  RnTextStyleProp,
-  RnViewStyleProp,
 } from 'native-base';
 
 import ModelView from './ModelView';
@@ -49,12 +47,6 @@ let _modelView: ModelView;
 
 export const Home: FunctionComponent = (props) => {
   const navigation: object = props.navigation;
-  if (_modelView === undefined) {
-    _modelView = new ModelView(() => {
-      _state = !_state;
-      setState(_state);
-    });
-  }
 
   const [state, setState] = useState(false);
   const [active, setActive] = useState(false);
@@ -64,6 +56,13 @@ export const Home: FunctionComponent = (props) => {
     onChangeTab(0);
   }, []);
 
+  if (_modelView === undefined) {
+    _modelView = new ModelView(() => {
+      _state = !_state;
+      setState(_state);
+    });
+  }
+
   async function setUpPermissions() {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
     await Permissions.askAsync(Permissions.CAMERA);
@@ -72,29 +71,28 @@ export const Home: FunctionComponent = (props) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Icon
-          style={{color: color.white, marginRight: 8}}
-          name={'ios-options'}
-          onPress={() => {
-            optionsButtonPressed();
-          }}
-        />
+        <RightBarButtonItem />
       ),
     });
   }, [navigation]);
 
   function onChangeTab(newTab) {
-    switch (newTab) {
-      case 0:
-        _modelView.filter = TABS.ALLPOSTS;
-        break;
-      case 1:
-        _modelView.filter = TABS.MYPOSTS;
-        break;
-    }
+    _modelView.onChangeTab(newTab);
   }
 
-  function renderActionsButton() {
+  const RightBarButtonItem = () => {
+    return (
+      <Icon
+        style={{color: color.white, marginRight: 8}}
+        name={'ios-options'}
+        onPress={() => {
+          optionsButtonPressed();
+        }}
+      />
+    )
+  }
+
+  const ActionsButton = () => {
     return (
       <Fab
         active={active}
@@ -144,12 +142,12 @@ export const Home: FunctionComponent = (props) => {
           heading="My Posts"
           tabStyle={styles.tab}
           textStyle={styles.tabText}
-          activeTabStyle={styles.activeTab}
-          activeTextStyle={styles.activeTextTab}>
+          activeTabStyle={darkTheme ? styles.activeTabDark : styles.activeTab}
+          activeTextStyle={darkTheme ? styles.activeTextTabDark : styles.activeTextTab}>
           {TabAllPosts(_modelView, navigation, darkTheme)}
         </Tab>
       </Tabs>
-      {renderActionsButton()}
+      {ActionsButton()}
     </Container>
   );
 };

@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactNative from 'react-native';
+import ReactNative, {useWindowDimensions} from 'react-native';
 import {StyleSheet} from 'react-native';
-import {color, windowWidth} from '../../../theme/styles';
+import {color} from '../../../../theme/styles';
 import {Body, Text} from 'native-base';
-import {isEmpty} from "../../../utils/validate";
+import {isEmpty} from "../../../../utils/validate";
 
 const {Image, TouchableOpacity, View} = ReactNative;
 
@@ -36,11 +36,12 @@ export default function PostGridItem(props) {
 // Components
 
 function AttachedImage(props) {
+  const screenWidth = useWindowDimensions().width
   const {url} = props;
   return (
-    (isEmpty(url) && <View style={styles.image} />) ||
+    (isEmpty(url) && <View style={[styles.image, {height: 160}, {width: (screenWidth - 8) / 2}]} />) ||
     <Image
-      style={styles.image}
+      style={[styles.image, {height: 160}, {width: (screenWidth - 8) / 2}]}
       source={{cache: 'force-cache', uri: url}}
     />
   )
@@ -94,8 +95,6 @@ const styles = StyleSheet.create({
   image: {
     alignSelf: 'center', // 'stretch'􏰸 'contain'􏰸 'cover'􏰸 'repeat' 'center'
     resizeMode: 'cover',
-    height: 160,
-    width: (windowWidth - 8) / 2,
     borderRadius: 15,
   },
   title: {

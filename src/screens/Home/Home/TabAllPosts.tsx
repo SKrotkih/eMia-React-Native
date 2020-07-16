@@ -5,7 +5,7 @@ import {Loader} from '../../../components/Loader';
 import {Text} from 'native-base';
 import ModelView from './ModelView';
 import {color} from '../../../theme/styles';
-import PostGridItem from "./GridPostItem";
+import PostGridItem from "./Components/GridPostItem";
 
 const {View} = ReactNative;
 

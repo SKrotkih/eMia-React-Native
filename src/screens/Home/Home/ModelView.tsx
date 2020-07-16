@@ -54,6 +54,17 @@ export default class ModelView {
     }
   }
 
+  onChangeTab(newTab) {
+    switch (newTab) {
+      case 0:
+        this.filter = TABS.ALLPOSTS;
+        break;
+      case 1:
+        this.filter = TABS.MYPOSTS;
+        break;
+    }
+  }
+
   fetchData(i) {
     this.loaded = false;
     this._refreshing = true;

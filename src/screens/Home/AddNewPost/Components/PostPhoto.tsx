@@ -1,11 +1,13 @@
 import {ImageViewer} from "../../../../components/ImageViewer";
 import React from "react";
-import {StyleSheet} from "react-native";
-import {color, windowWidth} from "../../../../theme/styles";
+import {StyleSheet, useWindowDimensions} from "react-native";
+import {color} from "../../../../theme/styles";
 import {isEmpty} from "../../../../utils/validate";
 
 export default function Photo(props) {
   const {url} = props;
+  const windowWidth = useWindowDimensions().width
+
   return (
     (isEmpty(url) && <></>) || (
       <ImageViewer
@@ -13,7 +15,7 @@ export default function Photo(props) {
         source={{uri: url}}
         downloadable
         doubleTapEnabled={true}
-        imageStyle={styles.image}
+        imageStyle={[styles.image, {height: windowWidth - 30}, {width: windowWidth - 30}]}
       />
     )
   );
@@ -26,7 +28,5 @@ const styles = StyleSheet.create({
     margin: 0,
     marginLeft: 0,
     marginRight: 0,
-    height: windowWidth - 30,
-    width: windowWidth - 30,
   },
 });

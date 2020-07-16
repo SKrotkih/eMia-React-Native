@@ -34,15 +34,12 @@ export const AddNewPost: FunctionComponent = (props) => {
     });
     navigation.setOptions({
       headerRight: () => (
-        <Icon style={styles.rightBarButton}
-          name={'ios-done-all'}
-          onPress={() => {
-            doneButtonPressed(post);
-          }}
-        />
+        <RightBarButtonItem />
       ),
     });
   }, [post]);
+
+  // Actions
 
   function takePhotoButtonPressed() {
     takePhoto()
@@ -72,6 +69,19 @@ export const AddNewPost: FunctionComponent = (props) => {
       ...post,
       [name]: value,
     });
+  }
+
+  // Components
+
+  const RightBarButtonItem = () => {
+    return (
+      <Icon style={styles.rightBarButton}
+            name={'ios-done-all'}
+            onPress={() => {
+              doneButtonPressed(post);
+            }}
+      />
+    );
   }
 
   const AttachedPhoto = (props) => {
