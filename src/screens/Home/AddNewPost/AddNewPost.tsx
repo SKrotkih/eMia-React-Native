@@ -1,20 +1,20 @@
 // AddNewPost
 
 import React, {FunctionComponent, useState, useEffect} from 'react';
-import ReactNative, {TextInput} from 'react-native';
-import {connect} from 'react-redux';
+import ReactNative from 'react-native';
 import {Button, Icon, Text, Label} from 'native-base';
 import ImagePicker from 'react-native-image-picker';
 import styles from './styles';
 import {Post} from '../../../model/entities/post';
-import {ImageViewer} from '../../../components/ImageViewer';
 import {useTheme} from "react-native-paper";
 import {color} from "../../../theme/styles";
+import InputData from "./Components/InputPostTextItem";
+import Photo from "./Components/PostPhoto";
 
 const {View} = ReactNative;
 
 export const AddNewPost: FunctionComponent = (props) => {
-  const navigation: object = props.navigation;
+  const {navigation} = props;
 
   const title = 'New Post';
   const titleLabelText = 'Title:';
@@ -42,22 +42,6 @@ export const AddNewPost: FunctionComponent = (props) => {
       ),
     });
   }, [post]);
-
-  function renderPhoto() {
-    if (post.url === '') {
-      return null;
-    } else {
-      return (
-        <ImageViewer
-          disabled={false}
-          source={{uri: post.url}}
-          downloadable
-          doubleTapEnabled={true}
-          imageStyle={styles.image}
-        />
-      );
-    }
-  }
 
   function takePhotoButtonPressed() {
     const options = {
@@ -105,34 +89,32 @@ export const AddNewPost: FunctionComponent = (props) => {
     });
   }
 
+  const AttachedPhoto = (props) => {
+    return (
+      <View style={styles.backgroundImage}>
+        <Photo url={props.url} />
+      </View>
+    )
+  }
+
   return (
     <View style={[styles.container, {backgroundColor: darkTheme ? color.dark : color.white}]}>
-      <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{titleLabelText}</Label>
-      <TextInput
-        style={[styles.input, {color: darkTheme ? color.white : color.black}]}
-        autoCapitalize="none"
-        clearButtonMode="while-editing"
-        underlineColorAndroid="transparent"
-        placeholder="Type title"
-        autoFocus={true}
-        onChangeText={(text) => {
-          updateField('title', text);
-        }}
+      <InputData
+        title={titleLabelText}
+        placeholder={'Type title'}
+        fieldName={'title'}
         defaultValue={post.title}
-      />
-      <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{bodyLabelText}</Label>
-      <TextInput
-        style={[styles.input, {color: darkTheme ? color.white : color.black}]}
-        autoCapitalize="none"
-        clearButtonMode="while-editing"
-        underlineColorAndroid="transparent"
-        placeholder="Type body"
-        autoFocus={false}
-        onChangeText={(text) => {
-          updateField('body', text);
-        }}
+        autoFocus={true}
+        darkTheme={darkTheme}
+        updateField={updateField} />
+      <InputData
+        title={bodyLabelText}
+        placeholder={'Type body'}
+        fieldName={'body'}
         defaultValue={post.body}
-      />
+        autoFocus={false}
+        darkTheme={darkTheme}
+        updateField={updateField} />
       <Button
         block
         info
@@ -140,7 +122,7 @@ export const AddNewPost: FunctionComponent = (props) => {
         onPress={() => takePhotoButtonPressed()}>
         <Text>Attach a Photo</Text>
       </Button>
-      <View style={styles.backgroundImage}>{renderPhoto()}</View>
+      <AttachedPhoto url={post.url} />
     </View>
   );
 };

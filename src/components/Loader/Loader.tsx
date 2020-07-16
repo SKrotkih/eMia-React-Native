@@ -4,10 +4,13 @@ import {color} from "../../theme/styles";
 import {bool} from "prop-types";
 
 export const Loader: FunctionComponent = (props) => {
+
   const [loading, setLoading] = useState(props.loading);
+
   useEffect(() => {
     setLoading(props.loading);
   }, [props.loading]);
+
   return (
     (!loading && <></>) ||
     <Modal
