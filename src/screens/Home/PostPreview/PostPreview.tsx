@@ -1,23 +1,41 @@
 import React, {FunctionComponent} from 'react';
-import ReactNative from 'react-native';
 import styles from './styles';
-import {Time} from '../../../components/Time';
-import {ImageViewer} from '../../../components/ImageViewer';
 import {Container, Header, Content, Text, Thumbnail} from 'native-base';
 import ModelView from './modelView';
 import {color} from "../../../theme/styles";
 import {useTheme} from "react-native-paper";
-
-const {View} = ReactNative;
+import AuthorName from "./Components/AuthorName";
+import AttachedImage from "./Components/AttachedImage";
+import Body from "./Components/Body";
+import DatePublished from "./Components/DatePublished";
 
 export const PostPreview: FunctionComponent = ({route, navigation}) => {
   const darkTheme = useTheme().dark;
   const postItem = route.params;
   const modelView = new ModelView(postItem);
+
   function setTitle() {
     navigation.setOptions({title: modelView.title});
   }
+
   setTitle();
+
+  const renderContent = (darkTheme) => {
+    const authorAvatarUrl = modelView.avatarUrl;
+    const authorName = modelView.userName;
+    const textBody = modelView.body;
+    const attachedImageUrl = modelView.imageUrl;
+    const datePublished = modelView.publishedAt;
+    return (
+      <>
+        <AuthorName authorAvatarUrl={authorAvatarUrl} authorName={authorName} darkTheme={darkTheme} />
+        <Body text={textBody} darkTheme={darkTheme}/>
+        <AttachedImage url={attachedImageUrl} darkTheme={darkTheme}/>
+        <DatePublished date={datePublished} darkTheme={darkTheme}/>
+      </>
+    )
+  }
+
   return (
     <Container
       style={[
@@ -34,21 +52,7 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
         </Text>
       </Header>
       <Content style={[styles.content, {backgroundColor: darkTheme ? color.dark : color.white}]}>
-        <View style={styles.thumbnail}>
-          <Thumbnail circular size={55} source={modelView.avatarUrl} />
-          <Text style={[styles.textUserName, {color: darkTheme ? color.white : color.black}]}>{modelView.userName}</Text>
-        </View>
-        <Text style={[styles.textDescription, {color: darkTheme ? color.white : color.black}]}>{modelView.body}</Text>
-        <ImageViewer
-          imageStyle={[styles.image, {backgroundColor: darkTheme ? color.dark : color.white}]}
-          disabled={false}
-          source={modelView.imageUrl}
-          downloadable
-          doubleTapEnabled={true}
-        />
-        <Text style={[styles.timeBackground, {color: darkTheme ? color.white : color.black}]}>
-          <Time date={modelView.publishedAt} style={[styles.textPublishedAt, {color: darkTheme ? color.white : color.black}]} />
-        </Text>
+        {renderContent(darkTheme)}
       </Content>
     </Container>
   );
