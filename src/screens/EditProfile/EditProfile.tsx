@@ -7,16 +7,16 @@ import React, {
   useEffect,
 } from 'react';
 import ReactNative from 'react-native';
-import ImagePicker from 'react-native-image-picker';
-import {Button, Icon, Text, Label} from 'native-base';
+import {Button, Icon, Text} from 'native-base';
 import styles from './styles';
-import {ImageViewer} from '../../components/ImageViewer';
 import {ModelView} from './ModelView';
 import {useTheme} from 'react-native-paper';
 import {color} from '../../theme/styles';
 import {User} from '../../model/entities/user';
 import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
-import inputText from "../../components/InputText/InputText";
+import inputText from "../../components/InputText/InputText"
+import Photo from "../Home/AddNewPost/Components/PostPhoto";
+import takePhoto from "../Home/AddNewPost/Utils/TakePhoto";
 
 const {View, ScrollView} = ReactNative;
 
@@ -30,10 +30,11 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
 
   const newUser = route.params.newUser;
   const completion = route.params.completion;
-  const [state, setState] = useState(false);
+  const [updated, setUpdated] = useState(false);
+  const [imageUrl, setImageUrl] = useState('');
   const [user, setUser] = useState<User>(newUser === null ? new User('', '') : newUser);
   const modelView = new ModelView(() => {
-    setState((_state) => !_state);
+    setUpdated(!updated);
   });
   modelView.user = user;
 
@@ -44,6 +45,10 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
       }
       setUser(_user);
       modelView.user = _user;
+      modelView.setUpImage()
+        .then((url) => {
+          setImageUrl(url);
+        })
     });
   }, []);
 
@@ -65,22 +70,15 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
   }, [navigation]);
 
   function takePhotoButtonPressed() {
-    const options = {
-      quality: 1.0,
-      maxWidth: 500,
-      maxHeight: 500,
-      storageOptions: {
-        skipBackup: true,
-      },
-    };
-    ImagePicker.showImagePicker(options, (response) => {
-      console.log('Response = ', response);
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else {
-        modelView.imageUrl = response.uri;
-      }
-    });
+    takePhoto()
+      .then((url) => {
+        const _url: string = url as string;
+        setImageUrl(_url);
+        modelView.imageUrl = _url;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   function doneButtonPressed() {
@@ -103,10 +101,10 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
         {inputText(addressLabelText, 'Type your address', modelView.address, darkTheme, (text) => {
           modelView.address = text;
         })}
-        {inputText(genderLabelText, 'Type your gender', +modelView.gender, darkTheme, (text) => {
-          modelView.gender = +text;
+        {inputText(genderLabelText, 'Type your gender', modelView.gender, darkTheme, (text) => {
+          modelView.gender = text;
         })}
-        {inputText(yearBirthLabelText, 'Type your year of birth', +modelView.yearBirth, darkTheme, (text) => {
+        {inputText(yearBirthLabelText, 'Type your year of birth', modelView.yearBirth, darkTheme, (text) => {
           modelView.yearBirth = text;
         })}
         {inputText(emailLabelText, 'Type your email', modelView.email, darkTheme, (text) => {
@@ -119,17 +117,7 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
           onPress={() => takePhotoButtonPressed()}>
           <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
         </Button>
-        {!modelView.isImageEmpty && (
-          <View>
-            <ImageViewer
-              imageStyle={styles.image}
-              disabled={false}
-              source={{uri: modelView.imageUrl}}
-              downloadable={true}
-              doubleTapEnabled={true}
-            />
-          </View>
-        )}
+        <Photo url={imageUrl} />
       </ScrollView>
     </View>
   );

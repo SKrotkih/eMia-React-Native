@@ -12,18 +12,24 @@ const authReducer = (state = initialState, action) => {
       const user = action.data;
 
       // Save token and data to the AsyncStorage
-      setStorageObjectItem('user', user);
-
-      state = Object.assign({}, state, {isLoggedIn: true, user: user});
-
-      return state;
+      setStorageObjectItem('user', user)
+        .then(() => {
+          state = Object.assign({}, state, {isLoggedIn: true, user: user});
+          return state;
+        })
+        .catch((error) => {
+          console.log(`Error: ${error}`)
+          return state;
+        });
 
     case LOGGED_OUT:
-      removeStorageItem('user');
-
-      state = Object.assign({}, state, {isLoggedIn: false, user: null});
-
-      return state;
+      removeStorageItem('user')
+        .then(() => {
+          state = Object.assign({}, state, {isLoggedIn: false, user: null});
+        })
+        .catch((error) => {
+          return state;
+        })
 
     default:
       return state;

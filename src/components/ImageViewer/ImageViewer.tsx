@@ -453,13 +453,14 @@ export class ImageViewer extends Component {
     }
 
     if (!hideProgress) {
-      if ((loading || progress < 1) && thresholdReached) {
-        const IndicatorComponent = DefaultIndicator;
-        content = (
-          <Loader
-            loading={loading || progress}
-          />
-        );
+      if (!thresholdReached) {
+        return <></>;
+      } else if (loading) {
+        content = <Loader loading={true} />;
+      } else if (!loading || progress < 1) {
+        content = <Loader loading={false} />;
+      } else {
+        content = <Loader loading={true} />;
       }
     }
 

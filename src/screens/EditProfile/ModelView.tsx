@@ -1,4 +1,6 @@
 import {User} from '../../model/entities/user';
+import {isEmpty} from "../../utils/validate";
+import {number} from "prop-types";
 
 export class ModelView {
   private _user: User;
@@ -7,8 +9,6 @@ export class ModelView {
 
   constructor(update: () => void) {
     this._update = update;
-    this._imageUrl = '';
-    this.setUpImage = this.setUpImage.bind(this);
     this.submitData = this.submitData.bind(this);
   }
 
@@ -51,22 +51,30 @@ export class ModelView {
   }
 
   // Gender
-  get gender(): number {
-    return this._user.gender;
+  get gender(): string {
+    return  this._user.gender === null ? '' : this._user.gender.toString();
   }
 
   set gender(newValue) {
-    this._user.gender = newValue;
+    if (isEmpty(newValue)) {
+      this._user.gender = null;
+    } else {
+      this._user.gender = +newValue;
+    }
     this.updateView();
   }
 
   // Year of birth
-  get yearBirth(): number {
-    return this._user.yearbirth;
+  get yearBirth(): string {
+    return this._user.yearbirth === null ? '' : this._user.yearbirth.toString();
   }
 
   set yearBirth(newValue) {
-    this._user.yearbirth = newValue;
+    if (isEmpty(newValue)) {
+      this._user.yearbirth = null;
+    } else {
+      this._user.yearbirth = +newValue;
+    }
     this.updateView();
   }
 
@@ -86,22 +94,17 @@ export class ModelView {
     return value;
   }
 
-  get imageUrl() {
-    return this._imageUrl;
-  }
-
-  set imageUrl(newValue) {
+  set imageUrl(newValue: string) {
     this._imageUrl = newValue;
-    this.updateView();
   }
 
-  private setUpImage(): Promise<void> {
+  private setUpImage(): Promise<string> {
     return new Promise((resolve, reject) => {
       this._user
         .getDownloadURL()
         .then((url) => {
-          this._imageUrl = url;
-          resolve();
+          this._imageUrl = url as string;
+          resolve(this._imageUrl);
         })
         .catch((error) => {
           reject(error);

@@ -1,6 +1,5 @@
 import React, {FunctionComponent} from 'react';
-import styles from './styles';
-import {Container, Header, Content, Text, Thumbnail} from 'native-base';
+import {Container, Content} from 'native-base';
 import ModelView from './modelView';
 import {color} from "../../../theme/styles";
 import {useTheme} from "react-native-paper";
@@ -8,6 +7,8 @@ import AuthorName from "./Components/AuthorName";
 import AttachedImage from "./Components/AttachedImage";
 import Body from "./Components/Body";
 import DatePublished from "./Components/DatePublished";
+import {StyleSheet} from "react-native";
+import PostsHeader from "./Components/Header";
 
 export const PostPreview: FunctionComponent = ({route, navigation}) => {
   const darkTheme = useTheme().dark;
@@ -20,19 +21,19 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
 
   setTitle();
 
-  const renderContent = (darkTheme) => {
+  const renderContent = () => {
     const authorAvatarUrl = modelView.avatarUrl;
     const authorName = modelView.userName;
     const textBody = modelView.body;
     const attachedImageUrl = modelView.imageUrl;
     const datePublished = modelView.publishedAt;
     return (
-      <>
+      <Content style={[styles.content, {backgroundColor: darkTheme ? color.dark : color.white}]}>
         <AuthorName authorAvatarUrl={authorAvatarUrl} authorName={authorName} darkTheme={darkTheme} />
         <Body text={textBody} darkTheme={darkTheme}/>
         <AttachedImage url={attachedImageUrl} darkTheme={darkTheme}/>
         <DatePublished date={datePublished} darkTheme={darkTheme}/>
-      </>
+      </Content>
     )
   }
 
@@ -42,18 +43,22 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
         styles.container,
         {backgroundColor: darkTheme ? color.dark : color.white},
       ]}>
-      <Header style={[{backgroundColor: darkTheme ? color.dark : color.white}]}>
-        <Text
-          style={[
-            styles.textHeader,
-            {color: darkTheme ? color.white : color.black},
-          ]}>
-          {modelView.title}
-        </Text>
-      </Header>
-      <Content style={[styles.content, {backgroundColor: darkTheme ? color.dark : color.white}]}>
-        {renderContent(darkTheme)}
-      </Content>
+      <PostsHeader
+        title={modelView.title}
+        darkTheme={darkTheme}
+      />
+      {renderContent()}
     </Container>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 0,
+    marginBottom: 0,
+  },
+  content: {
+    margin: 15,
+    marginBottom: 15,
+  },
+});
