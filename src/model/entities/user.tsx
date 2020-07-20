@@ -22,6 +22,7 @@ export class User {
     this.tokenIOS = '';
     this.username = name;
     this.yearbirth = 1970;
+    this.update = this.update.bind(this);
   }
 
   // Snapshot from Firebase Users table item
@@ -40,13 +41,6 @@ export class User {
   }
 
   update(photoUrl: string, completed) {
-    if (this.username === null || this.username.length === 0) {
-      Alert.alert(
-        `Please, enter your name`,
-      )
-      completed(false);
-      return;
-    }
     let _this = this;
     uploadCurrentUserData(_this)
       .then(() => {

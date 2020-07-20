@@ -74,7 +74,7 @@ export const EditProfile: FunctionComponent = ({route, navigation}) => {
       .then((url) => {
         const _url: string = url as string;
         setImageUrl(_url);
-        modelView.imageUrl = _url;
+        modelView.localImagePath = _url;
       })
       .catch((error) => {
         console.log(error);

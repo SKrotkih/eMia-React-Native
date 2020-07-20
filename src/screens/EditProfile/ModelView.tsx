@@ -5,10 +5,13 @@ import {number} from "prop-types";
 export class ModelView {
   private _user: User;
   private _imageUrl: string;
+  private _localImagePath: string;
   private _update: () => void;
 
   constructor(update: () => void) {
     this._update = update;
+    this._imageUrl = null;
+    this._localImagePath = null;
     this.submitData = this.submitData.bind(this);
   }
 
@@ -89,13 +92,12 @@ export class ModelView {
   }
 
   // Image
-  get isImageEmpty(): boolean {
-    let value = this._imageUrl === null || this._imageUrl === '';
-    return value;
-  }
-
   set imageUrl(newValue: string) {
     this._imageUrl = newValue;
+  }
+
+  set localImagePath(newValue: string) {
+    this._localImagePath = newValue;
   }
 
   private setUpImage(): Promise<string> {
@@ -115,9 +117,13 @@ export class ModelView {
   // Send user data on server
   submitData() {
     return new Promise((resolve, reject) => {
-      this._user.update(this._imageUrl, (result) => {
-        resolve();
-      });
+      if (isEmpty(this.name)) {
+        reject('Please, enter your name');
+      } else {
+        this._user.update(this._localImagePath, (result) => {
+          resolve();
+        });
+      }
     });
   }
 }
