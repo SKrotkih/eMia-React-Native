@@ -5,10 +5,10 @@ import {isEmpty} from 'lodash';
 
 export function uploadImage(uri, id) {
   return new Promise((resolve, reject) => {
-    const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
-    if (isEmpty(uploadUri)) {
-      reject('Source file name to upload is not presented!');
+    if (isEmpty(uri)) {
+      reject(null);
     } else {
+      const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
       const Blob = RNFetchBlob.polyfill.Blob;
       const fs = RNFetchBlob.fs;
       window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;

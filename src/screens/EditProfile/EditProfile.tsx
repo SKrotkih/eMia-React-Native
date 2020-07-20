@@ -20,105 +20,148 @@ import takePhoto from "../Home/AddNewPost/Utils/TakePhoto";
 
 const {View, ScrollView} = ReactNative;
 
-export const EditProfile: FunctionComponent = ({route, navigation}) => {
-  const nameLabelText = 'Name:';
-  const addressLabelText = 'Address:';
-  const genderLabelText = 'Gender:';
-  const yearBirthLabelText = 'Year:';
-  const emailLabelText = 'Email:';
-  const darkTheme = useTheme().dark;
+interface EditProfileState {
+  updated: boolean;
+  imageUrl: string;
+  user: User;
+}
 
-  const newUser = route.params.newUser;
-  const completion = route.params.completion;
-  const [updated, setUpdated] = useState(false);
-  const [imageUrl, setImageUrl] = useState('');
-  const [user, setUser] = useState<User>(newUser === null ? new User('', '') : newUser);
-  const modelView = new ModelView(() => {
-    setUpdated(!updated);
-  });
-  modelView.user = user;
+interface EditProfileProps {
+  route: any;
+  navigation: any;
+}
 
-  useEffect(() => {
+export class EditProfile extends React.Component<
+  EditProfileProps,
+  EditProfileState
+> {
+  private route = null;
+  private navigation = null;
+  private completion = null;
+  private modelView = null;
+
+  constructor(props) {
+    super(props);
+    this.route = this.props.route;
+    this.navigation = this.props.navigation;
+    this.completion = this.props.route.params.completion;
+    const newUser = this.props.route.params.newUser;
+    this.state = {
+      updated: false,
+      imageUrl: '',
+      user: newUser === null ? new User('', '') : newUser,
+    };
+    this.modelView = new ModelView(() => {
+      this.setState({
+        updated: !this.state.updated,
+      });
+    });
+  }
+
+  componentDidMount() {
     downloadCurrentUserData((_user) => {
       if (_user === null) {
         return;
       }
-      setUser(_user);
-      modelView.user = _user;
-      modelView.setUpImage()
-        .then((url) => {
-          setImageUrl(url);
-        })
+      this.modelView.user = _user;
+      this.setState({
+        user: _user,
+      });
+      this.navigation.setParams({
+        title: this.modelView.title,
+      });
+      this.modelView.setUpImage().then((url) => {
+        this.setState({
+          imageUrl: url,
+        });
+      });
     });
-  }, []);
-
-  useLayoutEffect(() => {
-    navigation.setParams({
-      title: modelView.title,
-    });
-    navigation.setOptions({
+    this.navigation.setOptions({
       headerRight: () => (
         <Icon
           style={styles.rightBarButton}
           name={'ios-done-all'}
           onPress={() => {
-            doneButtonPressed();
+            this.doneButtonPressed();
           }}
         />
       ),
     });
-  }, [navigation]);
+  }
 
-  function takePhotoButtonPressed() {
+  takePhotoButtonPressed() {
     takePhoto()
       .then((url) => {
         const _url: string = url as string;
-        setImageUrl(_url);
-        modelView.localImagePath = _url;
+        this.setState({
+          imageUrl: _url,
+        });
+        this.modelView.localImagePath = _url;
       })
       .catch((error) => {
         console.log(error);
       });
   }
 
-  function doneButtonPressed() {
-    modelView.submitData().then(() => {
-      if (completion === null) {
-        navigation.goBack();
+  doneButtonPressed() {
+    this.modelView.submitData().then(() => {
+      if (this.completion === null) {
+        this.navigation.goBack();
       } else {
-        completion();
+        this.completion();
       }
     });
   }
 
-  return (
-    <View
-      style={[styles.container, {backgroundColor: darkTheme ? color.dark : color.white}]}>
-      <ScrollView style={[styles.content]}>
-        {inputText(nameLabelText, 'Type your name', modelView.name, darkTheme,(text) => {
-          modelView.name = text;
-        })}
-        {inputText(addressLabelText, 'Type your address', modelView.address, darkTheme, (text) => {
-          modelView.address = text;
-        })}
-        {inputText(genderLabelText, 'Type your gender', modelView.gender, darkTheme, (text) => {
-          modelView.gender = text;
-        })}
-        {inputText(yearBirthLabelText, 'Type your year of birth', modelView.yearBirth, darkTheme, (text) => {
-          modelView.yearBirth = text;
-        })}
-        {inputText(emailLabelText, 'Type your email', modelView.email, darkTheme, (text) => {
-          modelView.email = text;
-        })}
-        <Button
-          block
-          info
-          style={styles.button}
-          onPress={() => takePhotoButtonPressed()}>
-          <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
-        </Button>
-        <Photo url={imageUrl} />
-      </ScrollView>
-    </View>
-  );
+  render() {
+    const nameLabelText = 'Name:';
+    const addressLabelText = 'Address:';
+    const genderLabelText = 'Gender:';
+    const yearBirthLabelText = 'Year:';
+    const emailLabelText = 'Email:';
+    const darkTheme = true; //  useTheme().dark;
+
+    if (this.modelView.user === undefined) {
+      return <></>;
+    } else {
+      return (
+        <View
+          style={[
+            styles.container,
+            {backgroundColor: darkTheme ? color.dark : color.white},
+          ]}>
+          <ScrollView style={[styles.content]}>
+            {inputText(nameLabelText, 'Type your name', this.modelView.name, darkTheme, (text) => {
+                this.modelView.name = text;
+              },
+            )}
+            {inputText(addressLabelText, 'Type your address', this.modelView.address, darkTheme, (text) => {
+                this.modelView.address = text;
+              },
+            )}
+            {inputText(genderLabelText, 'Type your gender', this.modelView.gender, darkTheme, (text) => {
+                this.modelView.gender = text;
+              },
+            )}
+            {inputText(yearBirthLabelText, 'Type your year of birth', this.modelView.yearBirth, darkTheme, (text) => {
+                this.modelView.yearBirth = text;
+              },
+            )}
+            {inputText(emailLabelText, 'Type your email', this.modelView.email, darkTheme, (text) => {
+                this.modelView.email = text;
+              },
+            )}
+            <Button
+              block
+              info
+              style={styles.button}
+              onPress={() => this.takePhotoButtonPressed()}>
+              <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
+            </Button>
+            <Photo url={this.state.imageUrl} />
+          </ScrollView>
+        </View>
+      );
+    }
+  }
 };

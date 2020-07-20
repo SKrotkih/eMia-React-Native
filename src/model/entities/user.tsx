@@ -22,7 +22,6 @@ export class User {
     this.tokenIOS = '';
     this.username = name;
     this.yearbirth = 1970;
-    this.update = this.update.bind(this);
   }
 
   // Snapshot from Firebase Users table item
@@ -50,12 +49,9 @@ export class User {
           })
           .catch((error) => {
             if (error !== null) {
-              Alert.alert(
-                `Error while uploading photo`,
-                `${error}`,
-                [],
-                { cancelable: false }
-              )
+              Alert.alert('Error while uploading photo', `${error}`, [], {
+                cancelable: false,
+              });
             }
             completed(true); // Return OK in case of failed uploading photo
           });

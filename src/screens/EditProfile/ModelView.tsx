@@ -19,6 +19,10 @@ export class ModelView {
     this._user = newValue;
   }
 
+  get user(): User {
+    return this._user;
+  }
+
   updateView() {
     this._update();
   }
@@ -100,7 +104,7 @@ export class ModelView {
     this._localImagePath = newValue;
   }
 
-  private setUpImage(): Promise<string> {
+  setUpImage(): Promise<string> {
     return new Promise((resolve, reject) => {
       this._user
         .getDownloadURL()
@@ -116,11 +120,12 @@ export class ModelView {
 
   // Send user data on server
   submitData() {
+    const _this = this;
     return new Promise((resolve, reject) => {
-      if (isEmpty(this.name)) {
+      if (isEmpty(_this.name)) {
         reject('Please, enter your name');
       } else {
-        this._user.update(this._localImagePath, (result) => {
+        _this._user.update(_this._localImagePath, (result) => {
           resolve();
         });
       }
