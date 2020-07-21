@@ -71,7 +71,7 @@ export class User {
 
   getDownloadURL() {
     console.log('User. getDownloadURL');
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       const photoName = this.id + '.jpg';
       const imageRef = storage.ref(photoName);
       imageRef

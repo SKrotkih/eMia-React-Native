@@ -1,18 +1,57 @@
 import {User} from '../../model/entities/user';
 import {isEmpty} from "../../utils/validate";
-import {number} from "prop-types";
+import {EditProfile} from "./EditProfile";
+import {downloadCurrentUserData} from "../../model/dbinteractor/users/dbinteractor";
+import takePhoto from "../Home/AddNewPost/Utils/TakePhoto";
 
 export class ModelView {
   private _user: User;
   private _imageUrl: string;
   private _localImagePath: string;
-  private _update: () => void;
+  private readonly _update: () => void;
+  private readonly _view: EditProfile;
 
-  constructor(update: () => void) {
+  constructor(view: EditProfile, user: User, update: () => void) {
+    this._view = view;
+    this._user = user;
     this._update = update;
     this._imageUrl = null;
     this._localImagePath = null;
-    this.submitData = this.submitData.bind(this);
+  }
+
+  configure() {
+    downloadCurrentUserData((_user) => {
+      this.currentUserDataDidDownload(_user);
+    });
+  }
+
+  updateView() {
+    this._update();
+  }
+
+  currentUserDataDidDownload(user: User) {
+    if (user === null) {
+      return;
+    }
+    this.user = user;
+    this._view.setUpTitle();
+    this.updateView();
+    this.setUpImage().then((url) => {
+      this._imageUrl = url;
+      this.updateView();
+    });
+  }
+
+  selectAvatar() {
+    takePhoto()
+      .then((url) => {
+        this.imageUrl = url;
+        this.localImagePath = url;
+        this.updateView();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   set user(newValue: User) {
@@ -21,16 +60,6 @@ export class ModelView {
 
   get user(): User {
     return this._user;
-  }
-
-  updateView() {
-    this._update();
-  }
-
-  renderView() {
-    this.setUpImage().then(() => {
-      this.updateView();
-    });
   }
 
   get title(): string {
@@ -100,6 +129,10 @@ export class ModelView {
     this._imageUrl = newValue;
   }
 
+  get imageUrl(): string {
+    return this._imageUrl;
+  }
+
   set localImagePath(newValue: string) {
     this._localImagePath = newValue;
   }
@@ -109,13 +142,62 @@ export class ModelView {
       this._user
         .getDownloadURL()
         .then((url) => {
-          this._imageUrl = url as string;
-          resolve(this._imageUrl);
+          resolve(url);
         })
         .catch((error) => {
           reject(error);
         });
     });
+  }
+
+  textEditFields(): Array<TextEditItem> {
+    return [
+      {
+        key: 'name',
+        label: 'Name:',
+        placeholder: 'Type your name',
+        value: this.name,
+        onChangeText: (text) => {
+          this.name = text;
+        },
+      },
+      {
+        key: 'address',
+        label: 'Address:',
+        placeholder: 'Type your address',
+        value: this.address,
+        onChangeText: (text) => {
+          this.address = text;
+        },
+      },
+      {
+        key: 'sex',
+        label: 'Gender:',
+        placeholder: 'Type your gender',
+        value: this.gender,
+        onChangeText: (text) => {
+          this.gender = text;
+        },
+      },
+      {
+        key: 'year_birth',
+        label: 'Year:',
+        placeholder: 'Type your year of birth',
+        value: this.yearBirth,
+        onChangeText: (text) => {
+          this.yearBirth = text;
+        },
+      },
+      {
+        key: 'email',
+        label: 'Email:',
+        placeholder: 'Type your email',
+        value: this.email,
+        onChangeText: (text) => {
+          this.email = text;
+        },
+      },
+    ];
   }
 
   // Send user data on server
@@ -131,4 +213,12 @@ export class ModelView {
       }
     });
   }
+}
+
+interface TextEditItem {
+  key: string;
+  label: string;
+  placeholder: string;
+  value: string;
+  onChangeText: (text: string) => void;
 }

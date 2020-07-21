@@ -1,12 +1,21 @@
-import {Label} from "native-base";
+import {Label, View} from "native-base";
 import {StyleSheet, TextInput} from 'react-native';
 import {color} from "../../theme/styles";
 import React from "react";
 
-export default function inputText(title: string, placeholder: string, defaultValue: any, darkTheme: boolean, onChangeText: (string) => void) {
+export default function inputText(
+  key: string,
+  title: string,
+  placeholder: string,
+  defaultValue: any,
+  darkTheme: boolean,
+  onChangeText: (string) => void) {
   return (
-    <>
-      <Label style={[styles.label, {color: darkTheme ? color.white : color.black}]}>{title}</Label>
+    <View key={key}>
+      <Label
+        style={[styles.label, {color: darkTheme ? color.white : color.black}]}>
+        {title}
+      </Label>
       <TextInput
         style={[styles.input, {color: darkTheme ? color.white : color.black}]}
         autoCapitalize="none"
@@ -19,7 +28,7 @@ export default function inputText(title: string, placeholder: string, defaultVal
         }}
         defaultValue={defaultValue}
       />
-    </>
+    </View>
   );
 }
 
