@@ -117,9 +117,8 @@ export class EditProfile extends React.Component<
           ]}>
           <ScrollView style={[styles.content]}>
             {this.modelView.textEditFields().map((item, _) => (
-              <View>
+              <View key={item.key}>
                 {inputText(
-                  item.key,
                   item.label,
                   item.placeholder,
                   item.value,

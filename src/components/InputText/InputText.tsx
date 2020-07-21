@@ -1,17 +1,16 @@
-import {Label, View} from "native-base";
+import {Label} from "native-base";
 import {StyleSheet, TextInput} from 'react-native';
 import {color} from "../../theme/styles";
 import React from "react";
 
 export default function inputText(
-  key: string,
   title: string,
   placeholder: string,
   defaultValue: any,
   darkTheme: boolean,
   onChangeText: (string) => void) {
   return (
-    <View key={key}>
+    <>
       <Label
         style={[styles.label, {color: darkTheme ? color.white : color.black}]}>
         {title}
@@ -28,7 +27,7 @@ export default function inputText(
         }}
         defaultValue={defaultValue}
       />
-    </View>
+    </>
   );
 }
 
