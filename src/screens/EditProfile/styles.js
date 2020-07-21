@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   image: {
-    overflow: "hidden",
+    overflow: 'hidden',
     backgroundColor: color.grey,
     margin: 0,
     marginLeft: 0,
