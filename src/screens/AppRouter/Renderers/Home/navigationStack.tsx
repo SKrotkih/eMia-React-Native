@@ -10,7 +10,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Icon} from 'native-base';
 import {color} from '../../../../theme/styles';
 
-import {DrawerContent} from '../Drawer/contentRenderer';
+import {DrawerContent} from '../Drawer/MenuContent';
 
 import Home from '../../../Home/Home';
 import PostPreview from '../../../Home/PostPreview';
