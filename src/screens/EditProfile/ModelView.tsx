@@ -36,7 +36,7 @@ export class ModelView {
     this.user = user;
     this._view.setTitle(this.title);
     this.updateView();
-    this.setUpImage().then((url) => {
+    this.getAvatarUrl().then((url) => {
       this._imageUrl = url;
       this.updateView();
     });
@@ -138,17 +138,8 @@ export class ModelView {
     this._localImagePath = newValue;
   }
 
-  setUpImage(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      this._user
-        .getDownloadURL()
-        .then((url) => {
-          resolve(url);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+  getAvatarUrl(): Promise<string> {
+    return this._user.getAvatarUrl();
   }
 
   textEditFields(): Array<TextEditItem> {

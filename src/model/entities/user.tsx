@@ -69,6 +69,18 @@ export class User {
       });
   }
 
+  getAvatarUrl(): Promise<string> {
+      return new Promise((resolve, reject) => {
+        this.getDownloadURL()
+          .then((url) => {
+            resolve(url);
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+  }
+
   getDownloadURL() {
     console.log('User. getDownloadURL');
     return new Promise<string>((resolve, reject) => {

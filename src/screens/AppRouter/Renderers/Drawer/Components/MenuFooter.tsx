@@ -1,6 +1,6 @@
-import {Switch, Text, TouchableRipple, useTheme} from "react-native-paper";
-import {StyleSheet, View} from "react-native";
-import React from "react";
+import React from 'react';
+import {Switch, Text, TouchableRipple, useTheme} from 'react-native-paper';
+import {StyleSheet, View} from 'react-native';
 import {AppContext} from '../../../../../components/context';
 
 export default function MenuFooter() {
@@ -8,9 +8,8 @@ export default function MenuFooter() {
   const {toggleTheme} = React.useContext(AppContext);
 
   return (
-    <TouchableRipple onPress={() => {
-      toggleTheme()
-    }}>
+    <TouchableRipple
+      onPress={() => {toggleTheme()}}>
       <View style={styles.preference}>
         <Text>Dark Theme</Text>
         <View pointerEvents="none">
@@ -18,7 +17,7 @@ export default function MenuFooter() {
         </View>
       </View>
     </TouchableRipple>
-  )
+  );
 }
 
 const styles = StyleSheet.create({

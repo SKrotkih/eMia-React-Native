@@ -65,7 +65,7 @@ export function DrawerContent(props) {
               return <MenuItem item={item}></MenuItem>;
             })}
           </Drawer.Section>
-          <Drawer.Section title="Preferences">
+          <Drawer.Section style={styles.drawerSection} title="Preferences">
             <MenuFooter />
           </Drawer.Section>
         </View>
