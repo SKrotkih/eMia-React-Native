@@ -29,13 +29,11 @@ export const AddNewPost: FunctionComponent = (props) => {
   const [post, setPost] = useState(getPostTemplate());
 
   useEffect(() => {
-    navigation.setParams({
-      title: title,
-    });
     navigation.setOptions({
       headerRight: () => (
         <RightBarButtonItem />
       ),
+      title: title,
     });
   }, [post]);
 

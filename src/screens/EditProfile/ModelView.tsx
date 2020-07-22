@@ -34,7 +34,7 @@ export class ModelView {
       return;
     }
     this.user = user;
-    this._view.setUpTitle();
+    this._view.setTitle(this.title);
     this.updateView();
     this.setUpImage().then((url) => {
       this._imageUrl = url;
@@ -73,6 +73,7 @@ export class ModelView {
 
   set name(newValue) {
     this._user.username = newValue;
+    this._view.setTitle(this.title);
     this.updateView();
   }
 

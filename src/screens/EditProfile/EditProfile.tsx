@@ -40,15 +40,17 @@ export class EditProfile extends React.Component<
     this.navigation = this.props.navigation;
     this.completion = this.props.route.params.completion;
 
-    this.setUpState();
-    this.configureModalView();
+    this.setUpState()
+    this.setUpModelView();
   }
 
+  // Component Life Cycle
   componentDidMount() {
-    this.modelView.configure();
-    this.setUpRightBarButtonItem();
+    this.configureView();
+    this.configureModelView();
   }
 
+  // State
   private setUpState() {
     this.state = {
       updated: false,
@@ -61,18 +63,13 @@ export class EditProfile extends React.Component<
     });
   }
 
-  configureModalView() {
-    const newUser = this.route.params.newUser;
-    let user = newUser === null ? new User('', '') : newUser;
-    this.modelView = new ModelView(this, user,() => {
-      this.updateView();
-    });
+  // Configure View
+  configureView() {
+    this.setUpRightBarButtonItem();
   }
 
-  setUpTitle() {
-    this.navigation.setParams({
-      title: this.modelView.title,
-    });
+  setTitle(text: string) {
+    this.navigation.setOptions({title: text});
   }
 
   setUpRightBarButtonItem() {
@@ -89,6 +86,20 @@ export class EditProfile extends React.Component<
     });
   }
 
+  // Configure the Model View
+  setUpModelView() {
+    const newUser = this.route.params.newUser;
+    let user = newUser === null ? new User('', '') : newUser;
+    this.modelView = new ModelView(this, user,() => {
+      this.updateView();
+    });
+  }
+
+  configureModelView() {
+    this.modelView.configure();
+  }
+
+  // User Activity
   takePhotoButtonPressed() {
     this.modelView.selectAvatar();
   }
@@ -103,6 +114,7 @@ export class EditProfile extends React.Component<
     });
   }
 
+  // Render View
   render() {
     if (this.modelView.user === undefined) {
       return <></>;
@@ -116,17 +128,18 @@ export class EditProfile extends React.Component<
             {backgroundColor: darkTheme ? color.dark : color.white},
           ]}>
           <ScrollView style={[styles.content]}>
-            {this.modelView.textEditFields().map((item, _) => (
-              <View key={item.key}>
-                {inputText(
+            {this.modelView
+              .textEditFields()
+              .map((item, _) =>
+                inputText(
+                  item.key,
                   item.label,
                   item.placeholder,
                   item.value,
                   darkTheme,
                   item.onChangeText,
-                )}
-              </View>
-            ))}
+                ),
+              )}
             <Button
               block
               info
