@@ -1,5 +1,3 @@
-// EditProfile
-
 import React from 'react';
 import ReactNative from 'react-native';
 import {Button, Icon, Text} from 'native-base';
@@ -7,10 +5,8 @@ import styles from './styles';
 import {ModelView} from './ModelView';
 import {color} from '../../theme/styles';
 import {User} from '../../model/entities/user';
-import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
 import inputText from '../../components/InputText/InputText';
 import Photo from '../Home/AddNewPost/Components/PostPhoto';
-import takePhoto from '../Home/AddNewPost/Utils/TakePhoto';
 import {useTheme} from "react-native-paper";
 
 const {View, ScrollView} = ReactNative;
@@ -40,7 +36,7 @@ export class EditProfile extends React.Component<
     this.navigation = this.props.navigation;
     this.completion = this.props.route.params.completion;
 
-    this.setUpState()
+    this.setUpState();
     this.setUpModelView();
   }
 

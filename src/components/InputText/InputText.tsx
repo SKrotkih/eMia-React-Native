@@ -1,7 +1,8 @@
-import {Label} from "native-base";
+import {Label} from 'native-base';
 import {StyleSheet, TextInput, View} from 'react-native';
-import {color} from "../../theme/styles";
-import React from "react";
+import {color} from '../../theme/styles';
+import React from 'react';
+import CategoryPicker from '../DropDownList';
 
 export default function inputText(
   key: string,
@@ -9,25 +10,46 @@ export default function inputText(
   placeholder: string,
   defaultValue: any,
   darkTheme: boolean,
-  onChangeText: (string) => void) {
+  onChangeText: (string) => void,
+) {
+  function getItem() {
+    if (key === 'sex') {
+      getGender();
+    } else {
+      return getText();
+    }
+  }
+
+  function getText() {
+    return (
+      <>
+        <TextInput
+          style={[styles.input, {color: darkTheme ? color.white : color.black}]}
+          autoCapitalize="none"
+          clearButtonMode="while-editing"
+          underlineColorAndroid="transparent"
+          placeholder={placeholder}
+          autoFocus={false}
+          onChangeText={(text) => {
+            onChangeText(text);
+          }}
+          defaultValue={defaultValue}
+        />
+      </>
+    );
+  }
+
+  function getGender() {
+    return CategoryPicker();
+  }
+
   return (
     <View key={key}>
       <Label
         style={[styles.label, {color: darkTheme ? color.white : color.black}]}>
         {title}
       </Label>
-      <TextInput
-        style={[styles.input, {color: darkTheme ? color.white : color.black}]}
-        autoCapitalize="none"
-        clearButtonMode="while-editing"
-        underlineColorAndroid="transparent"
-        placeholder={placeholder}
-        autoFocus={false}
-        onChangeText={(text) => {
-          onChangeText(text);
-        }}
-        defaultValue={defaultValue}
-      />
+      {getItem()}
     </View>
   );
 }
