@@ -11,10 +11,11 @@ export default function inputText(
   defaultValue: any,
   darkTheme: boolean,
   onChangeText: (string) => void,
+  onSelectCategory: (string) => void,
 ) {
   function getItem() {
     if (key === 'sex') {
-      getGender();
+      return getGender();
     } else {
       return getText();
     }
@@ -40,7 +41,9 @@ export default function inputText(
   }
 
   function getGender() {
-    return CategoryPicker();
+    return (
+      <CategoryPicker onSelect={onSelectCategory} category={defaultValue} />
+    );
   }
 
   return (

@@ -1,8 +1,11 @@
-import React, {useState, FunctionComponent} from 'react';
+import React, {FunctionComponent} from 'react';
 import {Picker, View, StyleSheet} from 'react-native';
 import {color} from '../../theme/styles';
 
 export const CategoryPicker: FunctionComponent = (props) => {
+
+  const {onSelectItem, category} = props;
+
   const categories = [
     {
       itemName: 'Female',
@@ -12,32 +15,24 @@ export const CategoryPicker: FunctionComponent = (props) => {
     },
   ];
 
-  const [selectedCategory, useSelectedCategory] = useState('');
-
-  function onSelectCategory(value: string) {
-    useSelectedCategory(value);
-  }
-
   return (
-    <>
-      <View style={styles.viewStyle}>
-        <Picker
-          itemStyle={styles.itemStyle}
-          mode="dropdown"
-          style={styles.pickerStyle}
-          selectedValue={selectedCategory}
-          onValueChange={onSelectCategory}>
-          {categories.map((item, index) => (
-            <Picker.Item
-              color="#0087F0"
-              label={item.itemName}
-              value={item.itemName}
-              index={index}
-            />
-          ))}
-        </Picker>
-      </View>
-    </>
+    <View style={styles.viewStyle}>
+      <Picker
+        itemStyle={styles.itemStyle}
+        mode="dropdown"
+        style={styles.pickerStyle}
+        selectedValue={category}
+        onValueChange={onSelectItem}>
+        {categories.map((item, index) => (
+          <Picker.Item
+            color="#0087F0"
+            label={item.itemName}
+            value={item.itemName}
+            index={index}
+          />
+        ))}
+      </Picker>
+    </View>
   );
 };
 

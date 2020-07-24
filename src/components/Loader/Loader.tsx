@@ -1,10 +1,9 @@
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
-import {color} from "../../theme/styles";
-import {bool} from "prop-types";
+import {color} from '../../theme/styles';
+import {bool} from 'prop-types';
 
 export const Loader: FunctionComponent = (props) => {
-
   const [loading, setLoading] = useState(props.loading);
 
   useEffect(() => {
@@ -28,18 +27,19 @@ function Progress(props) {
   return (
     <View style={styles.modalBackground}>
       <View style={styles.activityIndicatorWrapper}>
-        <ActivityIndicator animating={props.loading}
-                           color = {color.brand}
-                           size = 'large'
+        <ActivityIndicator
+          animating={props.loading}
+          color={color.brand}
+          size='large'
         />
       </View>
     </View>
-  )
+  );
 }
 
 Loader.propTypes = {
   loading: bool,
-}
+};
 
 const styles = StyleSheet.create({
   modalBackground: {

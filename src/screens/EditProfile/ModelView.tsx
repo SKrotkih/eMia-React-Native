@@ -1,8 +1,8 @@
 import {User} from '../../model/entities/user';
-import {isEmpty} from "../../utils/validate";
-import {EditProfile} from "./EditProfile";
-import {downloadCurrentUserData} from "../../model/dbinteractor/users/dbinteractor";
-import takePhoto from "../Home/AddNewPost/Utils/TakePhoto";
+import {isEmpty} from '../../utils/validate';
+import {EditProfile} from './EditProfile';
+import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
+import takePhoto from '../Home/AddNewPost/Utils/TakePhoto';
 
 export class ModelView {
   private _user: User;
@@ -17,6 +17,7 @@ export class ModelView {
     this._update = update;
     this._imageUrl = null;
     this._localImagePath = null;
+    this.submitData = this.submitData.bind(this);
   }
 
   configure() {
@@ -152,6 +153,7 @@ export class ModelView {
         onChangeText: (text) => {
           this.name = text;
         },
+        onSelectItem: (_) => {},
       },
       {
         key: 'address',
@@ -161,6 +163,7 @@ export class ModelView {
         onChangeText: (text) => {
           this.address = text;
         },
+        onSelectItem: (_) => {},
       },
       {
         key: 'sex',
@@ -169,6 +172,9 @@ export class ModelView {
         value: this.gender,
         onChangeText: (text) => {
           this.gender = text;
+        },
+        onSelectItem: (category) => {
+          this.gender = category;
         },
       },
       {
@@ -179,6 +185,7 @@ export class ModelView {
         onChangeText: (text) => {
           this.yearBirth = text;
         },
+        onSelectItem: (_) => {},
       },
       {
         key: 'email',
@@ -188,18 +195,19 @@ export class ModelView {
         onChangeText: (text) => {
           this.email = text;
         },
+        onSelectItem: (_) => {},
       },
     ];
   }
 
   // Send user data on server
   submitData() {
-    const _this = this;
+    // const _this = this;
     return new Promise((resolve, reject) => {
-      if (isEmpty(_this.name)) {
+      if (isEmpty(this.name)) {
         reject('Please, enter your name');
       } else {
-        _this._user.update(_this._localImagePath, (result) => {
+        this._user.update(this._localImagePath, (result) => {
           resolve();
         });
       }
@@ -213,4 +221,5 @@ interface TextEditItem {
   placeholder: string;
   value: string;
   onChangeText: (text: string) => void;
+  onSelectItem: (text: string) => void;
 }

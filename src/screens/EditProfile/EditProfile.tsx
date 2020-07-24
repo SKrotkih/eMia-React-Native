@@ -134,6 +134,7 @@ export class EditProfile extends React.Component<
                   item.value,
                   darkTheme,
                   item.onChangeText,
+                  item.onSelectItem,
                 ),
               )}
             <Button
