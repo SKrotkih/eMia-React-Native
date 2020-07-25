@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactNative from 'react-native';
-import {Button, Icon, Text} from 'native-base';
+import {Button, Icon, Label, Text} from 'native-base';
 import styles from './styles';
-import {ModelView} from './ModelView';
+import {ModelView, TextEditItem} from './ModelView';
 import {color} from '../../theme/styles';
 import {User} from '../../model/entities/user';
 import inputText from '../../components/InputText/InputText';
 import Photo from '../Home/AddNewPost/Components/PostPhoto';
 import {useTheme} from "react-native-paper";
+import {CategoryPicker} from "../../components/DropDownList/DropDownList";
 
 const {View, ScrollView} = ReactNative;
 
@@ -20,10 +21,8 @@ interface EditProfileProps {
   navigation: any;
 }
 
-export class EditProfile extends React.Component<
-  EditProfileProps,
-  EditProfileState
-> {
+export class EditProfile extends React.Component<EditProfileProps,
+  EditProfileState> {
   private readonly route = null;
   private readonly navigation = null;
   private readonly completion = null;
@@ -86,7 +85,7 @@ export class EditProfile extends React.Component<
   setUpModelView() {
     const newUser = this.route.params.newUser;
     let user = newUser === null ? new User('', '') : newUser;
-    this.modelView = new ModelView(this, user,() => {
+    this.modelView = new ModelView(this, user, () => {
       this.updateView();
     });
   }
@@ -110,6 +109,29 @@ export class EditProfile extends React.Component<
     });
   }
 
+  renderItem(item: TextEditItem, darkTheme: boolean) {
+    if (item.key === 'sex') {
+      return (
+        <CategoryPicker
+          data={this.modelView.genderCategories}
+          onSelectItem={item.onSelectItem}
+          value={item.value}
+        />)
+    } else {
+      return (
+        inputText(
+          item.key,
+          item.label,
+          item.placeholder,
+          item.value,
+          darkTheme,
+          item.onChangeText,
+          item.onSelectItem,
+        )
+      )
+    }
+  }
+
   // Render View
   render() {
     if (this.modelView.user === undefined) {
@@ -126,17 +148,18 @@ export class EditProfile extends React.Component<
           <ScrollView style={[styles.content]}>
             {this.modelView
               .textEditFields()
-              .map((item, _) =>
-                inputText(
-                  item.key,
-                  item.label,
-                  item.placeholder,
-                  item.value,
-                  darkTheme,
-                  item.onChangeText,
-                  item.onSelectItem,
-                ),
-              )}
+              .map((item, _) => {
+                return (
+                  <>
+                    <Label
+                      style={[styles.label, {color: darkTheme ? color.white : color.black}]}>
+                      {item.label}
+                    </Label>
+                    {this.renderItem(item, darkTheme)}
+                  </>
+                )
+              }
+            )}
             <Button
               block
               info
@@ -144,7 +167,7 @@ export class EditProfile extends React.Component<
               onPress={() => this.takePhotoButtonPressed()}>
               <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
             </Button>
-            <Photo url={this.modelView.imageUrl} />
+            <Photo url={this.modelView.imageUrl}/>
           </ScrollView>
         </View>
       );

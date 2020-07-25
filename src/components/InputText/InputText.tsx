@@ -8,19 +8,11 @@ export default function inputText(
   key: string,
   title: string,
   placeholder: string,
-  defaultValue: any,
+  value: any,
   darkTheme: boolean,
   onChangeText: (string) => void,
   onSelectCategory: (string) => void,
 ) {
-  function getItem() {
-    if (key === 'sex') {
-      return getGender();
-    } else {
-      return getText();
-    }
-  }
-
   function getText() {
     return (
       <>
@@ -34,25 +26,15 @@ export default function inputText(
           onChangeText={(text) => {
             onChangeText(text);
           }}
-          defaultValue={defaultValue}
+          defaultValue={value}
         />
       </>
     );
   }
 
-  function getGender() {
-    return (
-      <CategoryPicker onSelect={onSelectCategory} category={defaultValue} />
-    );
-  }
-
   return (
     <View key={key}>
-      <Label
-        style={[styles.label, {color: darkTheme ? color.white : color.black}]}>
-        {title}
-      </Label>
-      {getItem()}
+      {getText()}
     </View>
   );
 }

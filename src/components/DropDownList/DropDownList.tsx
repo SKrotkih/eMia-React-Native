@@ -3,59 +3,53 @@ import {Picker, View, StyleSheet} from 'react-native';
 import {color} from '../../theme/styles';
 
 export const CategoryPicker: FunctionComponent = (props) => {
-
-  const {onSelectItem, category} = props;
-
-  const categories = [
-    {
-      itemName: 'Female',
-    },
-    {
-      itemName: 'Male',
-    },
-  ];
-
+  const {data, onSelectItem, value} = props;
   return (
     <View style={styles.viewStyle}>
-      <Picker
-        itemStyle={styles.itemStyle}
-        mode="dropdown"
-        style={styles.pickerStyle}
-        selectedValue={category}
-        onValueChange={onSelectItem}>
-        {categories.map((item, index) => (
-          <Picker.Item
-            color="#0087F0"
-            label={item.itemName}
-            value={item.itemName}
-            index={index}
-          />
-        ))}
-      </Picker>
+      <View style={{flex: 0.7, fontSize: 14}}>
+        <Picker
+          itemStyle={styles.itemStyle}
+          mode="dropdown"
+          style={styles.pickerStyle}
+          selectedValue={value}
+          onValueChange={onSelectItem}>
+          {data.map((item, index) => (
+            <Picker.Item
+              color="#0087F0"
+              label={item.itemName}
+              value={item.itemName}
+              index={index}
+            />
+          ))}
+        </Picker>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   viewStyle: {
-    margin: 15,
-    paddingLeft: 15,
-    height: 40,
-    borderRadius: 8,
-    borderColor: color.brand,
-    borderWidth: 1,
+    flex: 1,
+    alignSelf: "center",
+    flexDirection: "row",
+    width: "92%",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   itemStyle: {
     fontSize: 10,
-    color: color.brand,
+    fontFamily: "Roboto-Regular",
+    color: color.brand
   },
   pickerStyle: {
-    width: '100%',
+    width: "100%",
     height: 40,
     color: color.brand,
     fontSize: 14,
+    fontFamily: "Roboto-Regular"
   },
   textStyle: {
     fontSize: 14,
+    fontFamily: "Roboto-Regular"
   },
 });

@@ -102,6 +102,17 @@ export class ModelView {
     this.updateView();
   }
 
+  get genderCategories(): Array<any> {
+    return [
+      {
+        itemName: 'Female',
+      },
+      {
+        itemName: 'Male',
+      },
+    ]
+  };
+
   // Year of birth
   get yearBirth(): string {
     return this._user.yearbirth === null ? '' : this._user.yearbirth.toString();
@@ -169,12 +180,12 @@ export class ModelView {
         key: 'sex',
         label: 'Gender:',
         placeholder: 'Type your gender',
-        value: this.gender,
+        value: Number(this.gender) === 1 ? 'Male' : 'Female',
         onChangeText: (text) => {
           this.gender = text;
         },
         onSelectItem: (category) => {
-          this.gender = category;
+          this.gender = category === 'Male' ? '1' : '2';
         },
       },
       {
@@ -215,7 +226,7 @@ export class ModelView {
   }
 }
 
-interface TextEditItem {
+export interface TextEditItem {
   key: string;
   label: string;
   placeholder: string;
