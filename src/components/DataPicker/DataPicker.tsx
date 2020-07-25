@@ -2,7 +2,13 @@ import React, {FunctionComponent} from 'react';
 import {Picker, View, StyleSheet} from 'react-native';
 import {color} from '../../theme/styles';
 
-export const CategoryPicker: FunctionComponent = (props) => {
+interface DataPickerProps {
+  data: Array<any>;
+  onSelectItem: (text: string) => void;
+  value: string;
+}
+
+export const DataPicker: FunctionComponent<DataPickerProps> = (props) => {
   const {data, onSelectItem, value} = props;
   return (
     <View style={styles.viewStyle}>
@@ -15,7 +21,7 @@ export const CategoryPicker: FunctionComponent = (props) => {
           onValueChange={onSelectItem}>
           {data.map((item, index) => (
             <Picker.Item
-              color="#0087F0"
+              color={color.brand}
               label={item.itemName}
               value={item.itemName}
               index={index}

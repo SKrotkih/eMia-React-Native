@@ -2,7 +2,7 @@ import {Label} from 'native-base';
 import {StyleSheet, TextInput, View} from 'react-native';
 import {color} from '../../theme/styles';
 import React from 'react';
-import CategoryPicker from '../DropDownList';
+import DataPicker from '../DataPicker';
 
 export default function inputText(
   key: string,

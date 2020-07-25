@@ -7,8 +7,7 @@ import {color} from '../../theme/styles';
 import {User} from '../../model/entities/user';
 import inputText from '../../components/InputText/InputText';
 import Photo from '../Home/AddNewPost/Components/PostPhoto';
-import {useTheme} from "react-native-paper";
-import {CategoryPicker} from "../../components/DropDownList/DropDownList";
+import {DataPicker} from "../../components/DataPicker/DataPicker";
 
 const {View, ScrollView} = ReactNative;
 
@@ -112,7 +111,7 @@ export class EditProfile extends React.Component<EditProfileProps,
   renderItem(item: TextEditItem, darkTheme: boolean) {
     if (item.key === 'sex') {
       return (
-        <CategoryPicker
+        <DataPicker
           data={this.modelView.genderCategories}
           onSelectItem={item.onSelectItem}
           value={item.value}

@@ -2,7 +2,7 @@ import React, {useState, FunctionComponent} from 'react';
 import {Picker, View, StyleSheet} from 'react-native';
 import {color} from '../../theme/styles';
 
-export default const CategoryPicker: FunctionComponent = (props) => {
+export default const DataPicker: FunctionComponent = (props) => {
   const categories = [
     {
       itemName: 'Female',
