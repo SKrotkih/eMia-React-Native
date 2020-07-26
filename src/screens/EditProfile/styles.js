@@ -51,6 +51,21 @@ const styles = StyleSheet.create({
     borderColor: color.brand,
     borderWidth: 1,
   },
+  category: {
+    margin: 15,
+    paddingLeft: 15,
+    height: 40,
+    borderRadius: 8,
+    borderColor: color.brand,
+    borderWidth: 1,
+  },
+  categoryName: {
+    fontWeight: 'normal',
+    fontSize: 12,
+    marginLeft: 15,
+    padding: 0,
+    height: 20,
+  },
 });
 
 export default styles;

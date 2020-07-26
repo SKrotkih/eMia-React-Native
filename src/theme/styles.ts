@@ -1,4 +1,4 @@
-import { moderateScale as normalize } from 'react-native-size-matters';
+import {moderateScale as normalize} from 'react-native-size-matters';
 
 const color = {
   brand: '#21AEED',
@@ -36,10 +36,4 @@ const fontFamily = {
 
 const padding = 8;
 
-export {
-  padding,
-  color,
-  fontSize,
-  fontFamily,
-  normalize,
-};
+export {padding, color, fontSize, fontFamily, normalize};

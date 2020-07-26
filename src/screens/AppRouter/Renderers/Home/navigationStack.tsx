@@ -23,6 +23,7 @@ import {
   DarkTheme as PaperDarkTheme,
 } from 'react-native-paper';
 import {AppContext} from '../../../../components/context';
+import {CategoryPicker} from "../../../EditProfile/CategoryPicker";
 
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
@@ -66,6 +67,11 @@ function Root(props) {
       <Stack.Screen
         name="PostPreview"
         component={PostPreview}
+        options={{title: ''}}
+      />
+      <Stack.Screen
+        name="CategoryPicker"
+        component={CategoryPicker}
         options={{title: ''}}
       />
       <Stack.Screen

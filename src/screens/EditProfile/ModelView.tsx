@@ -90,7 +90,7 @@ export class ModelView {
 
   // Gender
   get gender(): string {
-    return  this._user.gender === null ? '' : this._user.gender.toString();
+    return this._user.gender === null ? '' : this._user.gender.toString();
   }
 
   set gender(newValue) {
@@ -105,10 +105,12 @@ export class ModelView {
   get genderCategories(): Array<any> {
     return [
       {
-        itemName: 'Female',
+        id: '2',
+        title: 'Female',
       },
       {
-        itemName: 'Male',
+        id: '1',
+        title: 'Male',
       },
     ]
   };

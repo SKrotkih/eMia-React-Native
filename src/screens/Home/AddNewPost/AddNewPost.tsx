@@ -30,9 +30,7 @@ export const AddNewPost: FunctionComponent = (props) => {
 
   useEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <RightBarButtonItem />
-      ),
+      headerRight: () => <RightBarButtonItem />,
       title: title,
     });
   }, [post]);
@@ -46,20 +44,21 @@ export const AddNewPost: FunctionComponent = (props) => {
       })
       .catch((error) => {
         console.log(error);
-      })
+      });
   }
 
   function doneButtonPressed(_post: {}) {
     const newPost = new Post(_post.title, _post.body, _post.url);
-    newPost.submitOnServer()
+    newPost
+      .submitOnServer()
       .then(() => {
         navigation.goBack();
       })
       .catch((error) => {
-         if (!isEmpty(error)) {
-           Alert.alert(error);
-         }
-      })
+        if (!isEmpty(error)) {
+          Alert.alert(error);
+        }
+      });
   }
 
   function updateField(name: string, value: string) {
@@ -73,22 +72,23 @@ export const AddNewPost: FunctionComponent = (props) => {
 
   const RightBarButtonItem = () => {
     return (
-      <Icon style={styles.rightBarButton}
-            name={'ios-done-all'}
-            onPress={() => {
-              doneButtonPressed(post);
-            }}
+      <Icon
+        style={styles.rightBarButton}
+        name={'ios-done-all'}
+        onPress={() => {
+          doneButtonPressed(post);
+        }}
       />
     );
-  }
+  };
 
   const AttachedPhoto = (props) => {
     return (
       <View style={styles.backgroundImage}>
         <Photo url={props.url} />
       </View>
-    )
-  }
+    );
+  };
 
   return (
     <View style={[styles.container, {backgroundColor: darkTheme ? color.dark : color.white}]}>
@@ -99,7 +99,8 @@ export const AddNewPost: FunctionComponent = (props) => {
         defaultValue={post.title}
         autoFocus={true}
         darkTheme={darkTheme}
-        updateField={updateField} />
+        updateField={updateField}
+      />
       <InputData
         title={bodyLabelText}
         placeholder={'Type body'}
@@ -107,7 +108,8 @@ export const AddNewPost: FunctionComponent = (props) => {
         defaultValue={post.body}
         autoFocus={false}
         darkTheme={darkTheme}
-        updateField={updateField} />
+        updateField={updateField}
+      />
       <Button
         block
         info

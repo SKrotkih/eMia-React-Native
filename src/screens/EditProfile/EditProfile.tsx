@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactNative from 'react-native';
+import ReactNative, {TouchableHighlight} from 'react-native';
 import {Button, Icon, Label, Text} from 'native-base';
 import styles from './styles';
 import {ModelView, TextEditItem} from './ModelView';
@@ -13,6 +13,7 @@ const {View, ScrollView} = ReactNative;
 
 interface EditProfileState {
   updated: boolean;
+  darkTheme: boolean;
 }
 
 interface EditProfileProps {
@@ -48,6 +49,8 @@ export class EditProfile extends React.Component<EditProfileProps,
   private setUpState() {
     this.state = {
       updated: false,
+      darkTheme: false, // TODO: check dark mode
+      // darkTheme: useTheme().dark;
     };
   }
 
@@ -98,6 +101,19 @@ export class EditProfile extends React.Component<EditProfileProps,
     this.modelView.selectAvatar();
   }
 
+  openCategoryPicker() {
+    this.navigation.navigate('Root', {
+      screen: 'CategoryPicker',
+      params: {
+        categories: this.modelView.genderCategories,
+        onSelectItem: (id) => {
+          this.modelView.gender = id;
+        },
+        darkTheme: this.state.darkTheme,
+      },
+    });
+  }
+
   doneButtonPressed() {
     this.modelView.submitData().then(() => {
       if (this.completion === null) {
@@ -108,26 +124,38 @@ export class EditProfile extends React.Component<EditProfileProps,
     });
   }
 
-  renderItem(item: TextEditItem, darkTheme: boolean) {
+  renderCategoryItem(category: string) {
+    return (
+      <TouchableHighlight
+        activeOpacity={0.6}
+        underlayColor="#DDDDDD"
+        onPress={() => this.openCategoryPicker()}>
+        <View style={styles.category}>
+          <Label
+            style={[
+              styles.categoryName,
+              {color: this.state.darkTheme ? color.white : color.black},
+            ]}>
+            {category}
+          </Label>
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
+  renderItem(item: TextEditItem) {
     if (item.key === 'sex') {
-      return (
-        <DataPicker
-          data={this.modelView.genderCategories}
-          onSelectItem={item.onSelectItem}
-          value={item.value}
-        />)
+      return this.renderCategoryItem(item.value);
     } else {
-      return (
-        inputText(
-          item.key,
-          item.label,
-          item.placeholder,
-          item.value,
-          darkTheme,
-          item.onChangeText,
-          item.onSelectItem,
-        )
-      )
+      return inputText(
+        item.key,
+        item.label,
+        item.placeholder,
+        item.value,
+        this.state.darkTheme,
+        item.onChangeText,
+        item.onSelectItem,
+      );
     }
   }
 
@@ -136,28 +164,24 @@ export class EditProfile extends React.Component<EditProfileProps,
     if (this.modelView.user === undefined) {
       return <></>;
     } else {
-      const darkTheme = false; // TODO: check dark mode
-      // const darkTheme = useTheme().dark;
       return (
         <View
           style={[
             styles.container,
-            {backgroundColor: darkTheme ? color.dark : color.white},
+            {backgroundColor: this.state.darkTheme ? color.dark : color.white},
           ]}>
           <ScrollView style={[styles.content]}>
-            {this.modelView
-              .textEditFields()
-              .map((item, _) => {
-                return (
-                  <>
-                    <Label
-                      style={[styles.label, {color: darkTheme ? color.white : color.black}]}>
-                      {item.label}
-                    </Label>
-                    {this.renderItem(item, darkTheme)}
-                  </>
-                )
-              }
+            {this.modelView.textEditFields().map((item, _) => {
+              return (
+                <>
+                  <Label
+                    style={[styles.label, {color: this.state.darkTheme ? color.white : color.black}]}>
+                    {item.label}
+                  </Label>
+                  {this.renderItem(item, this.state.darkTheme)}
+                </>
+              );
+            }
             )}
             <Button
               block
@@ -166,7 +190,7 @@ export class EditProfile extends React.Component<EditProfileProps,
               onPress={() => this.takePhotoButtonPressed()}>
               <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
             </Button>
-            <Photo url={this.modelView.imageUrl}/>
+            <Photo url={this.modelView.imageUrl} />
           </ScrollView>
         </View>
       );

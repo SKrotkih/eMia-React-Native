@@ -8,6 +8,12 @@ interface DataPickerProps {
   value: string;
 }
 
+// <DataPicker
+//   data={this.modelView.genderCategories}
+//   onSelectItem={item.onSelectItem}
+//   value={item.value}
+// />
+
 export const DataPicker: FunctionComponent<DataPickerProps> = (props) => {
   const {data, onSelectItem, value} = props;
   return (
