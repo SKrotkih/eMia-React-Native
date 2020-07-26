@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   category: {
     flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    alignContent: 'flex-start',
     justifyContent: 'space-between',
     margin: 15,
     paddingLeft: 0,
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
   categoryName: {
     flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap',
     justifyContent: 'space-between',
     fontWeight: 'normal',
     fontSize: 12,
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
   detailsIcon: {
     flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    alignSelf: 'flex-end',
     justifyContent: 'space-between',
   }
 });

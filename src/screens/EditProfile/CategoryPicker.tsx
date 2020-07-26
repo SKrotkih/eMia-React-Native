@@ -6,18 +6,28 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from 'react-native';
-import {Label} from 'native-base';
+import {Icon, Label} from 'native-base';
 import {color} from '../../theme/styles';
+import {CheckBox} from 'react-native-elements';
 
-interface EditProfileProps {
+interface CatPickerProps {
   categories: Array<any>;
+  value: string;
 }
 
-export class CategoryPicker extends React.Component<EditProfileProps> {
+interface CatPickerState {
+  checkedId: string;
+}
+
+export class CategoryPicker extends React.Component<
+  CatPickerProps,
+  CatPickerState
+> {
   private readonly navigation = null;
   private readonly categories = null;
   private readonly darkTheme = null;
   private readonly onSelectItem = null;
+  private readonly value = null;
 
   constructor(props) {
     super(props);
@@ -25,24 +35,60 @@ export class CategoryPicker extends React.Component<EditProfileProps> {
     this.navigation = props.navigation;
     let parameters = props.route.params;
     this.categories = parameters.categories;
+    this.value = parameters.value;
     this.darkTheme = parameters.darkTheme;
     this.onSelectItem = parameters.onSelectItem;
+    this.setUpState();
     this.setTitle('Gender');
+  }
+
+  componentDidMount() {
+    this.setUpRightBarButtonItem();
+    this.selectId(this.value);
+  }
+
+  private setUpState() {
+    this.state = {
+      checkedId: '0',
+    };
   }
 
   setTitle(text: string) {
     this.navigation.setOptions({title: text});
   }
 
+  setUpRightBarButtonItem() {
+    this.navigation.setOptions({
+      headerRight: () => (
+        <Icon
+          style={styles.rightBarButton}
+          name={'ios-done-all'}
+          onPress={() => {
+            this.doneButtonPressed();
+          }}
+        />
+      ),
+    });
+  }
+
   selectId(id: string) {
-    this.onSelectItem(id);
+    this.setState({
+      checkedId: id,
+    });
+  }
+
+  doneButtonPressed() {
+    this.onSelectItem(this.state.checkedId);
     this.navigation.goBack();
   }
 
   renderItem = ({item}) => (
     <Item
       item={item}
-      onSelect={(id) => this.selectId(id)}
+      onSelect={(id) => {
+        this.selectId(id);
+      }}
+      checkedId={this.state.checkedId}
       darkTheme={this.darkTheme}
     />
   );
@@ -60,16 +106,21 @@ export class CategoryPicker extends React.Component<EditProfileProps> {
   }
 }
 
-const Item = ({item, onSelect, darkTheme}) => (
+const Item = ({item, onSelect, checkedId, darkTheme}) => (
   <TouchableHighlight
     activeOpacity={0.6}
-    underlayColor="#DDDDDD"
-    onPress={() => onSelect(item.id)}>
+    underlayColor="#DDDDDD">
     <View style={styles.item}>
-      <Label
-        style={[styles.title, {color: darkTheme ? color.white : color.black}]}>
-        {item.title}
-      </Label>
+      <CheckBox
+        title={item.title}
+        checked={item.id === checkedId}
+        iconType='material'
+        checkedIcon='check'
+        uncheckedIcon='check-box-outline-blank'
+        checkedColor={color.brand}
+        uncheckedColor={color.brand}
+        onPress={() => onSelect(item.id)}
+      />
       <Separator />
     </View>
   </TouchableHighlight>
@@ -96,5 +147,9 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     borderBottomColor: color.tableSeparator,
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  rightBarButton: {
+    color: color.white,
+    marginRight: 8,
   },
 });

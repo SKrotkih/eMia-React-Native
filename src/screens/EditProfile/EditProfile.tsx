@@ -106,6 +106,7 @@ export class EditProfile extends React.Component<EditProfileProps,
       screen: 'CategoryPicker',
       params: {
         categories: this.modelView.genderCategories,
+        value: this.modelView.gender,
         onSelectItem: (id) => {
           this.modelView.gender = id;
         },
@@ -179,7 +180,7 @@ export class EditProfile extends React.Component<EditProfileProps,
                     style={[styles.label, {color: this.state.darkTheme ? color.white : color.black}]}>
                     {item.label}
                   </Label>
-                  {this.renderItem(item, this.state.darkTheme)}
+                  {this.renderItem(item)}
                 </>
               );
             }
