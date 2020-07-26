@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactNative, {TouchableHighlight} from 'react-native';
+import ReactNative, {Image, TouchableHighlight} from 'react-native';
 import {Button, Icon, Label, Text} from 'native-base';
 import styles from './styles';
 import {ModelView, TextEditItem} from './ModelView';
@@ -7,7 +7,7 @@ import {color} from '../../theme/styles';
 import {User} from '../../model/entities/user';
 import inputText from '../../components/InputText/InputText';
 import Photo from '../Home/AddNewPost/Components/PostPhoto';
-import {DataPicker} from "../../components/DataPicker/DataPicker";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 const {View, ScrollView} = ReactNative;
 
@@ -138,6 +138,7 @@ export class EditProfile extends React.Component<EditProfileProps,
             ]}>
             {category}
           </Label>
+          <MaterialIcons style={styles.detailsIcon} size={18} name={'chevron-right'} />
         </View>
       </TouchableHighlight>
     );

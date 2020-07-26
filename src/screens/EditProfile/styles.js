@@ -4,6 +4,7 @@ import {windowWidth, color} from '../../theme/styles';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
     padding: 15,
     margin: 0,
   },
@@ -52,20 +53,31 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   category: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
     margin: 15,
-    paddingLeft: 15,
-    height: 40,
-    borderRadius: 8,
-    borderColor: color.brand,
-    borderWidth: 1,
+    paddingLeft: 0,
+    height: 20,
   },
   categoryName: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
     fontWeight: 'normal',
     fontSize: 12,
     marginLeft: 15,
     padding: 0,
-    height: 20,
+    height: 15,
   },
+  detailsIcon: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  }
 });
 
 export default styles;
