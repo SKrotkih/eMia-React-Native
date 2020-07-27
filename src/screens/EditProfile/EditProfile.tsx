@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactNative, {Image, TouchableHighlight} from 'react-native';
+import ReactNative, {TouchableHighlight} from 'react-native';
 import {Button, Icon, Label, Text} from 'native-base';
 import styles from './styles';
 import {ModelView, TextEditItem} from './ModelView';
@@ -25,8 +25,8 @@ export class EditProfile extends React.Component<EditProfileProps,
   private readonly navigation = null;
   private readonly completion = null;
   private modelView = null;
-  private newUser = null;
-  private darkTheme = null;
+  private readonly newUser = null;
+  private readonly darkTheme = null;
 
   constructor(props) {
     super(props);
@@ -108,8 +108,24 @@ export class EditProfile extends React.Component<EditProfileProps,
       params: {
         categories: this.modelView.genderCategories,
         value: this.modelView.gender,
+        title: 'Gender',
         onSelectItem: (id) => {
           this.modelView.gender = id;
+        },
+        darkTheme: this.darkTheme,
+      },
+    });
+  }
+
+  openYearsPicker() {
+    this.navigation.navigate('Root', {
+      screen: 'YearsPicker',
+      params: {
+        categories: this.modelView.years,
+        value: this.modelView.yearBirth,
+        title: 'Year Birthday',
+        onSelectItem: (year) => {
+          this.modelView.yearBirth = +year;
         },
         darkTheme: this.darkTheme,
       },
@@ -146,9 +162,31 @@ export class EditProfile extends React.Component<EditProfileProps,
     );
   }
 
+  renderYearsItem(year: string) {
+    return (
+      <TouchableHighlight
+        activeOpacity={0.6}
+        underlayColor="#DDDDDD"
+        onPress={() => this.openYearsPicker()}>
+        <View style={styles.category}>
+          <Label
+            style={[
+              styles.categoryName,
+              {color: this.darkTheme ? color.white : color.black},
+            ]}>
+            {year}
+          </Label>
+          <MaterialIcons style={styles.detailsIcon} size={18} name={'chevron-right'} />
+        </View>
+      </TouchableHighlight>
+    );
+  }
+
   renderItem(item: TextEditItem) {
     if (item.key === 'sex') {
       return this.renderCategoryItem(item.value);
+    } else if (item.key === 'year_birth') {
+      return this.renderYearsItem(item.value);
     } else {
       return inputText(
         item.key,

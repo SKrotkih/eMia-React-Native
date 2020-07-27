@@ -103,16 +103,16 @@ export class ModelView {
   }
 
   get genderCategories(): Array<any> {
-    return [
-      {
-        id: '2',
-        title: 'Female',
-      },
-      {
-        id: '1',
-        title: 'Male',
-      },
-    ]
+    let categories = Array<CategoryItem>();
+    categories.push({
+      id: '1',
+      title: 'Male',
+    })
+    categories.push({
+      id: '2',
+      title: 'Female',
+    })
+    return categories;
   };
 
   // Year of birth
@@ -128,6 +128,19 @@ export class ModelView {
     }
     this.updateView();
   }
+
+  get years(): Array<any> {
+    let today = new Date();
+    let currentYear = today.getFullYear() - 17;
+    let years = Array<CategoryItem>();
+    for (let year = currentYear; year > currentYear - 80; year--) {
+      years.push({
+        id: String(year),
+        title: String(year),
+      })
+    }
+    return years;
+  };
 
   // Email
   get email(): string {
@@ -236,3 +249,9 @@ export interface TextEditItem {
   onChangeText: (text: string) => void;
   onSelectItem: (text: string) => void;
 }
+
+export interface CategoryItem {
+  id: string;
+  title: string;
+}
+

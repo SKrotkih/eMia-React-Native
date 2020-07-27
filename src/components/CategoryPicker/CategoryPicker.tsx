@@ -1,14 +1,12 @@
 import React from 'react';
 import {
-  View,
   FlatList,
   SafeAreaView,
   StyleSheet,
-  TouchableHighlight,
 } from 'react-native';
 import {Icon} from 'native-base';
 import {color} from '../../theme/styles';
-import {CheckBox} from 'react-native-elements';
+import {Item} from './CategoryPickerItem';
 
 interface CatPickerProps {
   categories: Array<any>;
@@ -39,7 +37,7 @@ export class CategoryPicker extends React.Component<
     this.darkTheme = parameters.darkTheme;
     this.onSelectItem = parameters.onSelectItem;
     this.setUpState();
-    this.setTitle('Gender');
+    this.setTitle(parameters.title);
   }
 
   componentDidMount() {
@@ -71,15 +69,15 @@ export class CategoryPicker extends React.Component<
     });
   }
 
+  doneButtonPressed() {
+    this.onSelectItem(this.state.checkedId);
+    this.navigation.goBack();
+  }
+
   selectId(id: string) {
     this.setState({
       checkedId: id,
     });
-  }
-
-  doneButtonPressed() {
-    this.onSelectItem(this.state.checkedId);
-    this.navigation.goBack();
   }
 
   renderItem = ({item}) => (
@@ -106,51 +104,14 @@ export class CategoryPicker extends React.Component<
   }
 }
 
-const Item = ({item, onSelect, checkedId, darkTheme}) => (
-  <TouchableHighlight activeOpacity={0.6} underlayColor="#DDDDDD">
-    <View style={styles.item}>
-      <CheckBox
-        title={item.title}
-        checked={item.id === checkedId}
-        iconType="material"
-        checkedIcon="check"
-        uncheckedIcon="check-box-outline-blank"
-        checkedColor={color.brand}
-        uncheckedColor={color.brand}
-        textStyle={[{color: darkTheme ? color.white : color.black}]}
-        containerStyle={[
-          styles.itemContainer,
-          {backgroundColor: darkTheme ? color.dark : color.white},
-        ]}
-        onPress={() => onSelect(item.id)}
-      />
-      <Separator />
-    </View>
-  </TouchableHighlight>
-);
-
-const Separator = () => <View style={styles.separator} />;
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginVertical: 25,
   },
-  item: {
-    backgroundColor: 'transparent',
-    padding: 5,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  itemContainer: {},
   title: {
     fontSize: 16,
     backgroundColor: 'transparent',
-  },
-  separator: {
-    marginVertical: 0,
-    borderBottomColor: color.tableSeparator,
-    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   rightBarButton: {
     color: color.white,
