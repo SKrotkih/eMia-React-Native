@@ -6,7 +6,7 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from 'react-native';
-import {Icon, Label} from 'native-base';
+import {Icon} from 'native-base';
 import {color} from '../../theme/styles';
 import {CheckBox} from 'react-native-elements';
 
@@ -107,18 +107,21 @@ export class CategoryPicker extends React.Component<
 }
 
 const Item = ({item, onSelect, checkedId, darkTheme}) => (
-  <TouchableHighlight
-    activeOpacity={0.6}
-    underlayColor="#DDDDDD">
+  <TouchableHighlight activeOpacity={0.6} underlayColor="#DDDDDD">
     <View style={styles.item}>
       <CheckBox
         title={item.title}
         checked={item.id === checkedId}
-        iconType='material'
-        checkedIcon='check'
-        uncheckedIcon='check-box-outline-blank'
+        iconType="material"
+        checkedIcon="check"
+        uncheckedIcon="check-box-outline-blank"
         checkedColor={color.brand}
         uncheckedColor={color.brand}
+        textStyle={[{color: darkTheme ? color.white : color.black}]}
+        containerStyle={[
+          styles.itemContainer,
+          {backgroundColor: darkTheme ? color.dark : color.white},
+        ]}
         onPress={() => onSelect(item.id)}
       />
       <Separator />
@@ -139,6 +142,7 @@ const styles = StyleSheet.create({
     marginVertical: 8,
     marginHorizontal: 16,
   },
+  itemContainer: {},
   title: {
     fontSize: 16,
     backgroundColor: 'transparent',

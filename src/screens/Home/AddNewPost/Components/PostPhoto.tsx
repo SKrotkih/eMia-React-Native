@@ -5,7 +5,7 @@ import {color} from "../../../../theme/styles";
 import {isEmpty} from "../../../../utils/validate";
 
 export default function Photo(props) {
-  const {url} = props;
+  const {url, darkTheme} = props;
   const windowWidth = useWindowDimensions().width
 
   return (
@@ -16,6 +16,7 @@ export default function Photo(props) {
         downloadable
         doubleTapEnabled={true}
         imageStyle={[styles.image, {height: windowWidth - 30}, {width: windowWidth - 30}]}
+        darkTheme={darkTheme}
       />
     )
   );

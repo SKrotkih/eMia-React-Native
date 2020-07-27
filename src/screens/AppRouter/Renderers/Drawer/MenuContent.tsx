@@ -9,6 +9,7 @@ import {color} from '../../../../theme/styles';
 import {logOut} from '../../../../model/dbinteractor/login/dbinteractor';
 import MenuHeader from './Components/MenuHeader';
 import MenuFooter from './Components/MenuFooter';
+import {useTheme} from 'react-native-paper';
 
 interface ContentDriverItem {
   key: string;
@@ -18,6 +19,8 @@ interface ContentDriverItem {
 }
 
 export function DrawerContent(props) {
+  const darkTheme = useTheme().dark;
+
   const menuItems: Array<ContentDriverItem> = [
     {
       key: 'home',
@@ -30,7 +33,7 @@ export function DrawerContent(props) {
       key: 'person',
       icon: 'person',
       label: 'My Profile',
-      onSelect: () => editProfile(props),
+      onSelect: () => editProfile({...props, darkTheme: darkTheme}),
     },
     {
       key: 'stop',
@@ -80,10 +83,10 @@ function closeDrawer({navigation}) {
   navigation.navigate('Root');
 }
 
-function editProfile({navigation}) {
+function editProfile({navigation, darkTheme}) {
   navigation.navigate('Root', {
     screen: 'EditProfile',
-    params: {newUser: null, completion: null},
+    params: {newUser: null, completion: null, darkTheme: darkTheme},
   });
 }
 

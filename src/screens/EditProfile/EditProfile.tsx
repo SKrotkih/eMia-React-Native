@@ -13,7 +13,6 @@ const {View, ScrollView} = ReactNative;
 
 interface EditProfileState {
   updated: boolean;
-  darkTheme: boolean;
 }
 
 interface EditProfileProps {
@@ -23,17 +22,22 @@ interface EditProfileProps {
 
 export class EditProfile extends React.Component<EditProfileProps,
   EditProfileState> {
-  private readonly route = null;
   private readonly navigation = null;
   private readonly completion = null;
   private modelView = null;
+  private newUser = null;
+  private darkTheme = null;
 
   constructor(props) {
     super(props);
 
-    this.route = this.props.route;
+    let route = this.props.route;
     this.navigation = this.props.navigation;
-    this.completion = this.props.route.params.completion;
+    this.newUser = route.newUser;
+    this.completion = route.params.completion;
+    this.darkTheme = route.params.darkTheme;
+
+    console.log(this.darkTheme);
 
     this.setUpState();
     this.setUpModelView();
@@ -49,8 +53,6 @@ export class EditProfile extends React.Component<EditProfileProps,
   private setUpState() {
     this.state = {
       updated: false,
-      darkTheme: false, // TODO: check dark mode
-      // darkTheme: useTheme().dark;
     };
   }
 
@@ -85,8 +87,7 @@ export class EditProfile extends React.Component<EditProfileProps,
 
   // Configure the Model View
   setUpModelView() {
-    const newUser = this.route.params.newUser;
-    let user = newUser === null ? new User('', '') : newUser;
+    let user = this.newUser === null ? new User('', '') : this.newUser;
     this.modelView = new ModelView(this, user, () => {
       this.updateView();
     });
@@ -110,7 +111,7 @@ export class EditProfile extends React.Component<EditProfileProps,
         onSelectItem: (id) => {
           this.modelView.gender = id;
         },
-        darkTheme: this.state.darkTheme,
+        darkTheme: this.darkTheme,
       },
     });
   }
@@ -135,7 +136,7 @@ export class EditProfile extends React.Component<EditProfileProps,
           <Label
             style={[
               styles.categoryName,
-              {color: this.state.darkTheme ? color.white : color.black},
+              {color: this.darkTheme ? color.white : color.black},
             ]}>
             {category}
           </Label>
@@ -154,7 +155,7 @@ export class EditProfile extends React.Component<EditProfileProps,
         item.label,
         item.placeholder,
         item.value,
-        this.state.darkTheme,
+        this.darkTheme,
         item.onChangeText,
         item.onSelectItem,
       );
@@ -170,14 +171,14 @@ export class EditProfile extends React.Component<EditProfileProps,
         <View
           style={[
             styles.container,
-            {backgroundColor: this.state.darkTheme ? color.dark : color.white},
+            {backgroundColor: this.darkTheme ? color.dark : color.white},
           ]}>
           <ScrollView style={[styles.content]}>
             {this.modelView.textEditFields().map((item, _) => {
               return (
                 <>
                   <Label
-                    style={[styles.label, {color: this.state.darkTheme ? color.white : color.black}]}>
+                    style={[styles.label, {color: this.darkTheme ? color.white : color.black}]}>
                     {item.label}
                   </Label>
                   {this.renderItem(item)}
@@ -192,7 +193,7 @@ export class EditProfile extends React.Component<EditProfileProps,
               onPress={() => this.takePhotoButtonPressed()}>
               <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
             </Button>
-            <Photo url={this.modelView.imageUrl} />
+            <Photo url={this.modelView.imageUrl} darkTheme={this.darkTheme} />
           </ScrollView>
         </View>
       );
