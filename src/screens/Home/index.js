@@ -1,6 +1,6 @@
+import * as config from '../../config/constants';
 import * as actions from '../../model/dbinteractor/posts/dbinteractor';
 import * as actionTypes from '../../redux/actionTypes';
-import reducer from '../../redux/reducer';
-import * as config from '../../config/constants';
+import homeReducer from '../../redux/authreducer';
 
-export {actions, actionTypes, reducer, config};
+export {actions, actionTypes, homeReducer, config};

@@ -16,18 +16,19 @@ export function getStorageItem(key) {
     };
   });
 }
+
 export function getStorageObjectItem(key) {
   return new Promise((resolve, reject) => {
     const _ = async () => {
       try {
         const jsonValue = await AsyncStorage.getItem(key);
         if (jsonValue === null) {
-          reject('Failed parse of the storage item')
+          reject('Failed parse of the storage item');
         } else {
           resolve(JSON.parse(jsonValue));
         }
       } catch (e) {
-        reject(e)
+        reject(e);
       }
     };
   });
@@ -48,28 +49,23 @@ export function setStorageItem(key, value) {
 
 export function setStorageObjectItem(key, value) {
   return new Promise((resolve, reject) => {
-      const _ = async (value) => {
-        try {
-          const jsonValue = JSON.stringify(value);
-          await AsyncStorage.setItem(key, jsonValue);
-          resolve();
-        } catch (e) {
-          reject(e);
-        }
-      };
+    try {
+      const jsonValue = JSON.stringify(value);
+      AsyncStorage.setItem(key, jsonValue);
+      resolve();
+    } catch (e) {
+      reject(e);
     }
-  )
+  });
 }
 
 export function removeStorageItem(key) {
   return new Promise((resolve, reject) => {
-    const _ = async () => {
-      try {
-        await AsyncStorage.removeItem(key);
-        resolve();
-      } catch (e) {
-        reject(e);
-      }
-    };
+    try {
+      AsyncStorage.removeItem(key);
+      resolve();
+    } catch (e) {
+      reject(e);
+    }
   });
 }

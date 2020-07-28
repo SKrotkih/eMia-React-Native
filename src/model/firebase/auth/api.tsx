@@ -1,7 +1,5 @@
 import {auth} from '../config';
 import {getUser} from '../database/users';
-import {LOGGED_IN, LOGGED_OUT} from '../../../redux/actionTypes';
-import {Dispatch} from 'redux';
 
 // Sign user in with their email and password
 export function signIn(data) {

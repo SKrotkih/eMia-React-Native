@@ -4,12 +4,12 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {Drawer} from 'react-native-paper';
 import store from '../../../../redux/store';
-import {LOGGED_OUT} from '../../../../redux/actionTypes';
 import {color} from '../../../../theme/styles';
 import {logOut} from '../../../../model/dbinteractor/login/dbinteractor';
 import MenuHeader from './Components/MenuHeader';
 import MenuFooter from './Components/MenuFooter';
 import {useTheme} from 'react-native-paper';
+import {logOut as logOutAction} from '../../../../redux/authActions';
 
 interface ContentDriverItem {
   key: string;
@@ -93,7 +93,7 @@ function editProfile({navigation, darkTheme}) {
 function handleLogOut(props) {
   logOut(
     () => {
-      store.dispatch({type: LOGGED_OUT});
+      store.dispatch(logOutAction());
     },
     (error) => {
       Alert.alert('Oops!', error.message);

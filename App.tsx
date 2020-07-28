@@ -1,5 +1,5 @@
 // Must be on top of:
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import {YellowBox} from 'react-native';
 import store from './src/redux/store';
@@ -9,7 +9,10 @@ import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer'
 import {checkLoginStatus} from './src/model/firebase/auth/api';
 
 export default function App() {
-  const [viewState, setViewState] = useState({isReady: false, isLoggedIn: false});
+  const [viewState, setViewState] = useState({
+    isReady: false,
+    isLoggedIn: false,
+  });
 
   useEffect(() => {
     setUpIgnoreYellowMessage();
@@ -19,7 +22,7 @@ export default function App() {
       });
     });
     store.subscribe(() => {
-      const reducer = store.getState().authReducer;
+      const reducer = store.getState().auth;
       setViewState((prevState) => {
         return {...prevState, isReady: true, isLoggedIn: reducer.isLoggedIn};
       });
@@ -35,5 +38,10 @@ export default function App() {
 
 function setUpIgnoreYellowMessage() {
   console.disableYellowBox = true;
-  YellowBox.ignoreWarnings(['Setting a timer', 'Warning:', 'Require cycle:', 'Warning: Async Storage']);
+  YellowBox.ignoreWarnings([
+    'Setting a timer',
+    'Warning:',
+    'Require cycle:',
+    'Warning: Async Storage',
+  ]);
 }

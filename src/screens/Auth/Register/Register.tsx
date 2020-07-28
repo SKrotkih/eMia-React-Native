@@ -6,6 +6,7 @@ import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import store from '../../../redux/store';
 import {LOGGED_IN} from '../../../redux/actionTypes';
+import {logIn} from "../../../redux/authActions";
 
 const {register} = auth;
 
@@ -33,7 +34,7 @@ export const Register: FunctionComponent = ({navigation}) => {
     navigation.navigate('EditProfile', {
       newUser: newUser,
       completion: () => {
-        store.dispatch({type: LOGGED_IN, data: newUser});
+        store.dispatch(logIn(newUser));
       },
     });
   }
