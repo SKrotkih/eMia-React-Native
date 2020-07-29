@@ -3,8 +3,8 @@ import thunk from 'redux-thunk';
 
 import rootReducer from './rootReducer';
 
-//const enhancer = compose(applyMiddleware(thunk));
+const enhancer = compose(applyMiddleware(thunk));
 
 // Create a Redux store holding the state of the app.
 // Its API is { subscribe, dispatch, getState }.
-export default createStore(rootReducer, applyMiddleware(thunk));
+export default createStore(rootReducer, enhancer);

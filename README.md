@@ -1,6 +1,17 @@
 # eMia - React Native
 
-Here is an entire source code application developed with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html) and [Firebase](https://firebase.google.com/docs/).
+Here is an entire source code cross-platform mobile application something like easy social network, developed with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html). 
+What else you can found here:
+- JavaScript
+- TypeScript
+- Redux
+- [Firebase](https://firebase.google.com/docs/) - backend
+- react-navigation
+- Native iOS components on Swift
+- current React Native 0.63
+- custom components
+- async Redux actions 
+- Function components with hooks
 
 How it looks on an iOS device: 
 

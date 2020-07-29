@@ -5,6 +5,8 @@ let initialState = {
   user: null,
 };
 
+// Redux reducer for the authentication on the Firebase server
+
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGGED_IN:

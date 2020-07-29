@@ -2,6 +2,8 @@ import {LOGGED_IN, LOGGED_OUT} from './actionTypes';
 import {User} from '../model/entities/user';
 import {removeStorageItem, setStorageObjectItem} from '../model/LocalStorage/storage';
 
+// Async Redux Actions
+
 export function logIn(user: User) {
   return function (dispatch) {
     setStorageObjectItem('user', user)
