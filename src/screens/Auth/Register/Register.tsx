@@ -5,8 +5,7 @@ import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import store from '../../../redux/store';
-import {LOGGED_IN} from '../../../redux/actionTypes';
-import {logIn} from "../../../redux/authActions";
+import {signUp} from "../../../redux/authActions";
 
 const {register} = auth;
 
@@ -34,7 +33,7 @@ export const Register: FunctionComponent = ({navigation}) => {
     navigation.navigate('EditProfile', {
       newUser: newUser,
       completion: () => {
-        store.dispatch(logIn(newUser));
+        store.dispatch(signUp(newUser));
       },
     });
   }

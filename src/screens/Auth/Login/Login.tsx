@@ -5,7 +5,7 @@ import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import store from '../../../redux/store';
-import {logIn} from '../../../redux/authActions';
+import {logIn, signUp} from '../../../redux/authActions';
 
 const {login} = auth;
 
@@ -32,7 +32,7 @@ export const Login: FunctionComponent = ({navigation}) => {
       navigation.navigate('EditProfile', {
         newUser: newUser,
         completion: () => {
-          store.dispatch(logIn(newUser));
+          store.dispatch(signUp(newUser));
         },
       });
     } else {

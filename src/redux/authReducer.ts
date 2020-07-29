@@ -10,7 +10,7 @@ let initialState = {
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGGED_IN:
-      const user = action.data;
+      const user = action.payload;
       return Object.assign({}, state, {isLoggedIn: true, user: user});
     case LOGGED_OUT:
       return Object.assign({}, state, {isLoggedIn: false, user: null});
