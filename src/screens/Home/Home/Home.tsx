@@ -41,6 +41,7 @@ import {
 
 import ModelView from './ModelView';
 import {useTheme} from 'react-native-paper';
+import {isSimulator} from "../../../utils/utils";
 
 let _state = false;
 let _modelView: ModelView;
@@ -64,8 +65,10 @@ export const Home: FunctionComponent = (props) => {
   }
 
   async function setUpPermissions() {
-    await Permissions.askAsync(Permissions.CAMERA_ROLL);
-    await Permissions.askAsync(Permissions.CAMERA);
+    if (!isSimulator()) {
+      await Permissions.askAsync(Permissions.CAMERA_ROLL);
+      await Permissions.askAsync(Permissions.CAMERA);
+    }
   }
 
   useLayoutEffect(() => {

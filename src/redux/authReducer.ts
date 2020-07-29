@@ -1,6 +1,12 @@
 import {LOGGED_IN, LOGGED_OUT, REGISTERED_NEW_USER} from './actionTypes';
+import {User} from "../model/entities/user";
 
-let initialState = {
+interface IAuthModel {
+  isLoggedIn: boolean,
+  user: User,
+}
+
+let initialState: IAuthModel = {
   isLoggedIn: false,
   user: null,
 };

@@ -1,6 +1,11 @@
 import {ADD_POST} from './actionTypes';
+import {Post} from "../model/entities/post";
 
-let initialState = {newPost: null};
+interface IPostModel {
+  newPost: Post,
+}
+
+let initialState: IPostModel = {newPost: null};
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {

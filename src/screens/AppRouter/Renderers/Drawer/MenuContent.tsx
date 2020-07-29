@@ -65,7 +65,7 @@ export function DrawerContent(props) {
           <MenuHeader />
           <Drawer.Section style={styles.drawerSection}>
             {menuItems.map((item, _) => {
-              return <MenuItem item={item}></MenuItem>;
+              return <MenuItem key={item.key} item={item}></MenuItem>;
             })}
           </Drawer.Section>
           <Drawer.Section style={styles.drawerSection} title="Preferences">

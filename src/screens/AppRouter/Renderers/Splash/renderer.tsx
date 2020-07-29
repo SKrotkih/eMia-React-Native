@@ -1,6 +1,6 @@
 import {Root} from "native-base";
 import {NavigationContainer} from "@react-navigation/native";
-import {Dimensions, ImageBackground, StatusBar, StyleSheet, useWindowDimensions} from "react-native";
+import {Dimensions, ImageBackground, StatusBar, StyleSheet} from "react-native";
 import React from "react";
 
 export default function splashScreenRenderer() {
