@@ -7,6 +7,7 @@ import splashScreenRenderer from './src/screens/AppRouter/Renderers/Splash/rende
 import homeScreenRenderer from './src/screens/AppRouter/Renderers/Home/renderer';
 import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer';
 import {checkLoginStatus} from './src/model/firebase/auth/api';
+import {LOGGED_IN, LOGGED_OUT, isAuthAction} from './src/redux/actionTypes';
 
 export default function App() {
   const [viewState, setViewState] = useState({
@@ -16,18 +17,30 @@ export default function App() {
 
   useEffect(() => {
     setUpIgnoreYellowMessage();
+    subscribeOnActionDispatch();
     checkLoginStatus((_isLoggedIn) => {
+      // TODO: Make current user instead of null:
+      if (_isLoggedIn) {
+        store.dispatch({type: LOGGED_IN, payload: null});
+      } else {
+        store.dispatch({type: LOGGED_OUT});
+      }
       setViewState((prevState) => {
         return {...prevState, isReady: true, isLoggedIn: _isLoggedIn};
       });
     });
-    store.subscribe(() => {
-      const reducer = store.getState().auth;
-      setViewState((prevState) => {
-        return {...prevState, isReady: true, isLoggedIn: reducer.isLoggedIn};
-      });
-    });
   }, []);
+
+  function subscribeOnActionDispatch() {
+    store.subscribe(() => {
+      if (isAuthAction(store.getState().lastAction)) {
+        const state = store.getState().auth;
+        setViewState((prevState) => {
+          return {...prevState, isReady: true, isLoggedIn: state.isLoggedIn};
+        });
+      }
+    });
+  }
 
   return (
     (!viewState.isReady && splashScreenRenderer()) ||

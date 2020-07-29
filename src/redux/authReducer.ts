@@ -1,4 +1,4 @@
-import {LOGGED_IN, LOGGED_OUT} from './actionTypes';
+import {LOGGED_IN, LOGGED_OUT, REGISTERED_NEW_USER} from './actionTypes';
 
 let initialState = {
   isLoggedIn: false,
@@ -14,6 +14,9 @@ const authReducer = (state = initialState, action) => {
       return Object.assign({}, state, {isLoggedIn: true, user: user});
     case LOGGED_OUT:
       return Object.assign({}, state, {isLoggedIn: false, user: null});
+    case REGISTERED_NEW_USER:
+      const newUser = action.payload;
+      return Object.assign({}, state, {isLoggedIn: true, user: newUser});
     default:
       return state;
   }

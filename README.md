@@ -6,7 +6,7 @@ What else you can found here:
 - TypeScript
 - Redux
 - [Firebase](https://firebase.google.com/docs/) - backend
-- react-navigation
+- React Navigation
 - Native iOS components on Swift
 - current React Native 0.63
 - custom components
