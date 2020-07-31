@@ -15,7 +15,7 @@ What else you can found here:
 
 How it looks on an iOS device: 
 
-![reactnative_ios](https://user-images.githubusercontent.com/2775621/40759771-2bb84a6e-649c-11e8-86b2-be6e8ed46ad1.gif)
+![emia1](https://user-images.githubusercontent.com/2775621/89017559-29fd3e80-d323-11ea-9372-f9680df561f6.gif)
 
 ## Introduction
 
