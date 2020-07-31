@@ -13,7 +13,7 @@ What else you can found here:
 - async Redux actions 
 - Function components with hooks
 
-How it looks on an iOS device: 
+How it looks on an iOS device (on the left side) and on Android (on the right): 
 
 ![emia1](https://user-images.githubusercontent.com/2775621/89017559-29fd3e80-d323-11ea-9372-f9680df561f6.gif)
 
