@@ -17,6 +17,8 @@ How it looks on an iOS device:
 
 ![emia1](https://user-images.githubusercontent.com/2775621/89017559-29fd3e80-d323-11ea-9372-f9680df561f6.gif)
 
+![emia2](https://user-images.githubusercontent.com/2775621/89018458-975d9f00-d324-11ea-90f7-0b9ddfe84851.gif)
+
 ## Introduction
 
 eMia is a simple social network. 
