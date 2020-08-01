@@ -6,8 +6,8 @@
  * @flow
  */
 
-import {ADD_POST} from './actionTypes';
-import {Post} from "../model/entities/post";
+import ACTIONS from './types';
+import {Post} from '../model/entities/post';
 
 interface IPostModel {
   newPost: Post,
@@ -17,7 +17,7 @@ let initialState: IPostModel = {newPost: null};
 
 const postReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_POST:
+    case ACTIONS.Types.ADD_POST:
       const post = action.payload;
       return Object.assign({}, state, {newPost: post});
     default:

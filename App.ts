@@ -14,7 +14,7 @@ import splashScreenRenderer from './src/screens/AppRouter/Renderers/Splash/rende
 import homeScreenRenderer from './src/screens/AppRouter/Renderers/Home/renderer';
 import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer';
 import {checkLoginStatus} from './src/model/firebase/auth/api';
-import {LOGGED_IN, LOGGED_OUT, isAuthAction} from './src/redux/actionTypes';
+import ACTIONS from './src/redux/types';
 
 export default function App() {
   const [viewState, setViewState] = useState({
@@ -28,9 +28,9 @@ export default function App() {
     checkLoginStatus((_isLoggedIn) => {
       // TODO: Make current user instead of null:
       if (_isLoggedIn) {
-        store.dispatch({type: LOGGED_IN, payload: null});
+        store.dispatch(ACTIONS.loggedIn(null));
       } else {
-        store.dispatch({type: LOGGED_OUT});
+        store.dispatch(ACTIONS.loggedOut());
       }
       setViewState((prevState) => {
         return {...prevState, isReady: true, isLoggedIn: _isLoggedIn};
@@ -40,7 +40,7 @@ export default function App() {
 
   function subscribeOnActionDispatch() {
     store.subscribe(() => {
-      if (isAuthAction(store.getState().lastAction)) {
+      if (ACTIONS.isAuthAction(store.getState().lastAction)) {
         const state = store.getState().auth;
         setViewState((prevState) => {
           return {...prevState, isReady: true, isLoggedIn: state.isLoggedIn};

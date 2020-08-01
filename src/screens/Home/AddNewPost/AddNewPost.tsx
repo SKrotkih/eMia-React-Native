@@ -18,7 +18,7 @@ import Photo from "./Components/PostPhoto";
 import takePhoto from "./Utils/TakePhoto";
 import {isEmpty} from "../../../utils/validate";
 import store from "../../../redux/store";
-import {ADD_POST} from "../../../redux/actionTypes";
+import {ADD_POST} from "../../../redux/types";
 
 const {View} = ReactNative;
 
