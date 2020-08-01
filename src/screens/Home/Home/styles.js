@@ -38,9 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-const TABS = {
-  ALLPOSTS: 'allposts',
-  MYPOSTS: 'myposts',
-};
-
-export {styles, TABS};
+export {styles};

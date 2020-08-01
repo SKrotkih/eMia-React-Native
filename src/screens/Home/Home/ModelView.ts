@@ -8,7 +8,7 @@
 
 import {Alert} from 'react-native';
 import * as actions from '../../../model/dbinteractor/posts/dbinteractor';
-import {TABS} from './styles';
+import {PostsTabs, FilerItem} from './Tabs';
 
 const {fetchPosts} = actions;
 
@@ -16,7 +16,7 @@ export default class ModelView {
   private _dataSource: any;
   private _loaded: boolean;
   private _refreshing: boolean;
-  private _currentFilter: string;
+  private _currentFilterItem: FilerItem;
   private _updateView: () => void;
 
   constructor(updateView: () => void) {
@@ -24,7 +24,7 @@ export default class ModelView {
     this._dataSource = null;
     this._loaded = false;
     this._refreshing = false;
-    this._currentFilter = TABS.ALLPOSTS;
+    this._currentFilterItem = FilerItem.ALL_POSTS;
   }
 
   updateView() {
@@ -47,37 +47,19 @@ export default class ModelView {
   }
 
   refreshData() {
-    this.filter = this._currentFilter;
+    this.didSelectTabItem(this._currentFilterItem);
   }
 
-  set filter(tabItem) {
-    this._currentFilter = tabItem;
-    switch (tabItem) {
-      case TABS.ALLPOSTS:
-        this.fetchData(0);
-        break;
-      case TABS.MYPOSTS:
-        this.fetchData(1);
-        break;
-    }
+  didSelectTabItem(tabItemIndex) {
+    this._currentFilterItem = PostsTabs[tabItemIndex].filterItem;
+    this.fetchData(this._currentFilterItem);
   }
 
-  onChangeTab(newTab) {
-    switch (newTab) {
-      case 0:
-        this.filter = TABS.ALLPOSTS;
-        break;
-      case 1:
-        this.filter = TABS.MYPOSTS;
-        break;
-    }
-  }
-
-  fetchData(i) {
+  fetchData(filterItem: FilerItem) {
     this.loaded = false;
     this._refreshing = true;
     this.updateView();
-    fetchPosts(i)
+    fetchPosts(filterItem)
       .then((items) => {
         this._dataSource = items;
         this.loaded = true;

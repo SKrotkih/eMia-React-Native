@@ -32,9 +32,10 @@ import React, {
   useState,
 } from 'react';
 import {color} from '../../../theme/styles';
-import {TabAllPosts} from './TabAllPosts';
+import {PostsList} from './PostsList';
 import {styles} from './styles';
 import * as Permissions from 'expo-permissions';
+import {PostsTabs} from './Tabs';
 
 import {
   Container,
@@ -57,12 +58,13 @@ let _modelView: ModelView;
 export const Home: FunctionComponent = (props) => {
   const navigation: object = props.navigation;
 
+  const [tabItemIndex, setTabItemIndex] = useState(0)
   const [state, setState] = useState(false);
   const [active, setActive] = useState(false);
 
   useEffect(() => {
     setUpPermissions();
-    onChangeTab(0);
+    didSelectTabItem(0);
   }, []);
 
   if (_modelView === undefined) {
@@ -87,8 +89,9 @@ export const Home: FunctionComponent = (props) => {
     });
   }, [navigation]);
 
-  function onChangeTab(newTab) {
-    _modelView.onChangeTab(newTab);
+  function didSelectTabItem(newTabItemIndex) {
+    setTabItemIndex(newTabItemIndex);
+    _modelView.didSelectTabItem(tabItemIndex);
   }
 
   const RightBarButtonItem = () => {
@@ -140,23 +143,17 @@ export const Home: FunctionComponent = (props) => {
         tabBarBackgroundColor={'transparent'}
         tabBarUnderlineStyle={styles.tabUnderlined}
         renderTabBar={() => <ScrollableTab/>}
-        onChangeTab={({i}) => onChangeTab(i)}>
-        <Tab
-          heading="All Posts"
-          tabStyle={styles.tab}
-          textStyle={styles.tabText}
-          activeTabStyle={darkTheme ? styles.activeTabDark : styles.activeTab}
-          activeTextStyle={darkTheme ? styles.activeTextTabDark : styles.activeTextTab}>
-          {TabAllPosts(_modelView, navigation, darkTheme)}
-        </Tab>
-        <Tab
-          heading="My Posts"
-          tabStyle={styles.tab}
-          textStyle={styles.tabText}
-          activeTabStyle={darkTheme ? styles.activeTabDark : styles.activeTab}
-          activeTextStyle={darkTheme ? styles.activeTextTabDark : styles.activeTextTab}>
-          {TabAllPosts(_modelView, navigation, darkTheme)}
-        </Tab>
+        onChangeTab={({i}) => didSelectTabItem(i)}>
+        {PostsTabs.map((item, index) => (
+          <Tab
+            heading={item.title}
+            tabStyle={styles.tab}
+            textStyle={styles.tabText}
+            activeTabStyle={darkTheme ? styles.activeTabDark : styles.activeTab}
+            activeTextStyle={darkTheme ? styles.activeTextTabDark : styles.activeTextTab}>
+            {PostsList(_modelView, navigation, darkTheme)}
+          </Tab>
+        ))}
       </Tabs>
       {ActionsButton()}
     </Container>

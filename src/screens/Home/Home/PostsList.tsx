@@ -17,7 +17,7 @@ import PostGridItem from "./Components/GridPostItem";
 
 const {View} = ReactNative;
 
-export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => {
+export const PostsList: FunctionComponent = (props, navigation, darkTheme) => {
   const modelView: ModelView = props as ModelView;
 
   function renderGrid() {
@@ -36,9 +36,6 @@ export const TabAllPosts: FunctionComponent = (props, navigation, darkTheme) => 
           modelView.refreshData();
         }}
         onEndReached={() => {
-          // setState(({ data }) => ({
-          //   data: [...data, ...generateRandomColorsArray(ITEMS_COUNT)],
-          // }));
         }}
       />
     );
