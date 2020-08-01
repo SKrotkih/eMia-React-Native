@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {getCurrentUserAsync, getFirebaseUserId, registerNewUser} from '../../firebase/auth/api';
 import {updateUser, fetchAllUsers, getUser} from '../../firebase/database/users';
 

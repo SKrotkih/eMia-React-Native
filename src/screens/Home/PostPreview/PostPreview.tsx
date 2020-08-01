@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {FunctionComponent} from 'react';
 import {Container, Content} from 'native-base';
 import ModelView from './modelView';

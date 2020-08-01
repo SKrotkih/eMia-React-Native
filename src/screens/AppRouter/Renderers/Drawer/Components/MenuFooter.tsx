@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React from 'react';
 import {Switch, Text, TouchableRipple, useTheme} from 'react-native-paper';
 import {StyleSheet, View} from 'react-native';

@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {FunctionComponent, useEffect, useState} from 'react';
 import {StyleSheet, View, Modal, ActivityIndicator} from 'react-native';
 import {color} from '../../theme/styles';

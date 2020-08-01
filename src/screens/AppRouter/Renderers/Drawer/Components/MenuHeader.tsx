@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Avatar, Caption, Paragraph, Title} from 'react-native-paper';

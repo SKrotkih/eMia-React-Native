@@ -1,4 +1,11 @@
-// Must be on top of:
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import {YellowBox} from 'react-native';

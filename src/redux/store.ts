@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {createStore, applyMiddleware, compose} from 'redux';
 import thunk from 'redux-thunk';
 

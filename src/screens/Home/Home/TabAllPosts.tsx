@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {FunctionComponent} from 'react';
 import ReactNative, {StyleSheet} from 'react-native';
 import Grid from 'react-native-grid-component';

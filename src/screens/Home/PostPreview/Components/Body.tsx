@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {Text} from "native-base";
 import {color} from "../../../../theme/styles";
 import React from "react";

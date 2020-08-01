@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {FunctionComponent} from 'react';
 import {Text, View, TouchableOpacity, Image, StyleSheet, useWindowDimensions} from 'react-native';
 import {Button} from 'react-native-elements';

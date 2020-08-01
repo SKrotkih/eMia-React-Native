@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React from 'react';
 import ReactNative, {TouchableHighlight} from 'react-native';
 import {Button, Icon, Label, Text} from 'native-base';

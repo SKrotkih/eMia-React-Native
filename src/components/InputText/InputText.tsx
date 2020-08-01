@@ -1,8 +1,14 @@
-import {Label} from 'native-base';
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {StyleSheet, TextInput, View} from 'react-native';
 import {color} from '../../theme/styles';
 import React from 'react';
-import DataPicker from '../DataPicker';
 
 export default function inputText(
   key: string,
@@ -11,7 +17,6 @@ export default function inputText(
   value: any,
   darkTheme: boolean,
   onChangeText: (string) => void,
-  onSelectCategory: (string) => void,
 ) {
   function getText() {
     return (

@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {FunctionComponent} from 'react';
 import {View, TextInput, Text, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';

@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {FunctionComponent, useState} from 'react';
 import {Alert} from 'react-native';
 import {actions as auth} from '../index';

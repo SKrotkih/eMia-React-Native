@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import ImagePicker from "react-native-image-picker";
 
 export default function takePhoto(): Promise<string> {

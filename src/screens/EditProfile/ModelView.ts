@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {User} from '../../model/entities/user';
 import {isEmpty} from '../../utils/validate';
 import {EditProfile} from './EditProfile';

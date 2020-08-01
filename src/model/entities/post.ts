@@ -1,8 +1,15 @@
-// Post
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {Alert} from 'react-native';
-import {uploadImage} from '../../model/firebase/utils/uploadImage';
-import {uploadData} from '../../model/firebase/database/posts';
-import {getCurrentUserAsync} from '../../model/firebase/auth/api';
+import {uploadImage} from '../firebase/utils/uploadImage';
+import {uploadData} from '../firebase/database/posts';
+import {getCurrentUserAsync} from '../firebase/auth/api';
 import {storage} from '../../model/firebase/config';
 import {isEmpty} from "../../utils/validate";
 

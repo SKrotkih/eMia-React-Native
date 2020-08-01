@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {PureComponent} from 'react';
 import moment from 'moment';
 import {Text} from 'native-base';

@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {Platform} from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import FirebaseClient from 'firebase';

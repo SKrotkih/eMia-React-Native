@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React from 'react';
 import {requireNativeComponent, Platform} from 'react-native';
 import {windowHeight} from '../../../theme/styles';

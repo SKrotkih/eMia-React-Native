@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {Root} from "native-base";
 import {NavigationContainer} from "@react-navigation/native";
 import {Dimensions, ImageBackground, StatusBar, StyleSheet} from "react-native";

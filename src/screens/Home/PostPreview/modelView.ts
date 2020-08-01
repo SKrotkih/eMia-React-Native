@@ -1,4 +1,11 @@
-// Post preview Model View
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {Post} from '../../../model/entities/post';
 import {User} from '../../../model/entities/user';
 

@@ -2,7 +2,6 @@ import React, {Children} from 'react';
 import PropTypes from 'prop-types';
 import {TouchableNativeFeedback, TouchableOpacity, View} from 'react-native';
 import DeviceInfo from 'react-native-device-info';
-import s from './styles';
 
 import {OLD_ANDROID_VERSIONS} from '../../config/constants';
 
@@ -50,7 +49,6 @@ Button.defaultProps = {
   onLongPress: noop,
   onLayout: noop,
   rippleColor: '#f0eef0',
-  // style: s.button
 }
 
 Button.propTypes = {

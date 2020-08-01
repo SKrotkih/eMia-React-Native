@@ -9,9 +9,7 @@ const Button = ({
   onLongPress = noop,
   onLayout = noop,
   children,
-  rippleColor,
   style,
-  background,
 }) => (
   <TouchableOpacity
     onLongPress={onLongPress}
@@ -28,7 +26,6 @@ Button.defaultProps = {
   onLongPress: noop,
   onLayout: noop,
   rippleColor: '#f0eef0',
-  // style: s.button
 };
 
 Button.propTypes = {

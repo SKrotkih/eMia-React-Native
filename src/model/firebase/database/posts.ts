@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {database} from '../config';
 import {getUser} from './users';
 import {getFirebaseUserId} from '../auth/api';
@@ -116,7 +124,7 @@ function parsePosts(snapshot, items, testPost) {
 
 function putUrlsPhoto(items, completion) {
   console.log('API. putUrlsPhoto');
-  var bufferLength = items.length;
+  let bufferLength = items.length;
   if (bufferLength === 0) {
     const data = {items};
     completion(data, null);

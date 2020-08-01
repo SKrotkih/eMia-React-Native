@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {Root, StyleProvider} from "native-base";
 import store from "../../../../redux/store";
 import getTheme from "../../../../components";

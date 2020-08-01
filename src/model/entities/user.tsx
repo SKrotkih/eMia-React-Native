@@ -1,6 +1,14 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {Alert} from 'react-native';
-import {uploadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
-import {uploadImage} from '../../model/firebase/utils/uploadImage';
+import {uploadCurrentUserData} from '../dbinteractor/users/dbinteractor';
+import {uploadImage} from '../firebase/utils/uploadImage';
 import {storage} from '../../model/firebase/config';
 
 export class User {

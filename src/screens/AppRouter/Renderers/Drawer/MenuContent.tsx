@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {FunctionComponent} from 'react';
 import {View, StyleSheet, Alert} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';

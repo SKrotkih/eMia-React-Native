@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import React, {FunctionComponent} from 'react';
 import {Picker, View, StyleSheet} from 'react-native';
 import {color} from '../../theme/styles';
@@ -8,6 +16,7 @@ interface DataPickerProps {
   value: string;
 }
 
+// Call example
 // <DataPicker
 //   data={this.modelView.genderCategories}
 //   onSelectItem={item.onSelectItem}

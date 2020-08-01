@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {StyleSheet, TouchableHighlight, View} from "react-native";
 import {CheckBox} from "react-native-elements";
 import {color} from "../../theme/styles";

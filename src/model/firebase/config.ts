@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import * as firebase from 'firebase';
 import * as firebaseConstants from '../../config/GoogleService-Info';
 

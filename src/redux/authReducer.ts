@@ -1,3 +1,11 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
+
 import {LOGGED_IN, LOGGED_OUT, REGISTERED_NEW_USER} from './actionTypes';
 import {User} from "../model/entities/user";
 
