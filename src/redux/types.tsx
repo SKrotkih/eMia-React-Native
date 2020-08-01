@@ -11,7 +11,7 @@ const Types = {
   LOGGED_OUT: 'auth/LOGGED_OUT',
   REGISTERED_NEW_USER: 'auth/REGISTERED_NEW_USER',
   ADD_POST: 'post/ADD_POST',
-}
+};
 
 const isAuthAction = (action) => {
   const actions = [Types.LOGGED_IN, Types.LOGGED_OUT, Types.REGISTERED_NEW_USER];
@@ -33,10 +33,16 @@ const registeredNewUser = (user) => ({
   payload: user,
 });
 
+const addPost = (post) => ({
+  type: Types.ADD_POST,
+  payload: post,
+});
+
 export default {
   Types,
   isAuthAction,
   loggedIn,
   loggedOut,
   registeredNewUser,
+  addPost,
 };

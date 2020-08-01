@@ -18,7 +18,7 @@ import Photo from "./Components/PostPhoto";
 import takePhoto from "./Utils/TakePhoto";
 import {isEmpty} from "../../../utils/validate";
 import store from "../../../redux/store";
-import {ADD_POST} from "../../../redux/types";
+import ACTIONS from "../../../redux/types";
 
 const {View} = ReactNative;
 
@@ -60,7 +60,7 @@ export const AddNewPost: FunctionComponent = (props) => {
     newPost
       .submitOnServer()
       .then(() => {
-        store.dispatch({type: ADD_POST, payload: newPost});
+        store.dispatch(ACTIONS.addPost(newPost));
         navigation.goBack();
       })
       .catch((error) => {
