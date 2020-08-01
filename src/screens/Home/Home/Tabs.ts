@@ -15,5 +15,3 @@ export class PostsTabItem {
   title: string;
   filterItem: FilerItem;
 }
-
-export const PostsTabs: Array<PostsTabItem> = [{title: 'All Posts', filterItem: FilerItem.ALL_POSTS}, {title: 'My Posts', filterItem: FilerItem.MY_POSTS}];

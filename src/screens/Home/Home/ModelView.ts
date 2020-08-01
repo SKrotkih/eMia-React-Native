@@ -8,7 +8,7 @@
 
 import {Alert} from 'react-native';
 import * as actions from '../../../model/dbinteractor/posts/dbinteractor';
-import {PostsTabs, FilerItem} from './Tabs';
+import {FilerItem, PostsTabItem} from './Tabs';
 
 const {fetchPosts} = actions;
 
@@ -25,6 +25,19 @@ export default class ModelView {
     this._loaded = false;
     this._refreshing = false;
     this._currentFilterItem = FilerItem.ALL_POSTS;
+  }
+
+  get tabs(): Array<PostsTabItem> {
+    return [
+      {
+        title: 'All Posts',
+        filterItem: FilerItem.ALL_POSTS,
+      },
+      {
+        title: 'My Posts',
+        filterItem: FilerItem.MY_POSTS,
+      },
+    ];
   }
 
   updateView() {
@@ -51,14 +64,19 @@ export default class ModelView {
   }
 
   didSelectTabItem(tabItemIndex) {
-    this._currentFilterItem = PostsTabs[tabItemIndex].filterItem;
-    this.fetchData(this._currentFilterItem);
+    if (tabItemIndex < this.tabs.length) {
+      this._currentFilterItem = this.tabs[tabItemIndex].filterItem;
+      this.fetchData(this._currentFilterItem);
+    }
   }
 
   fetchData(filterItem: FilerItem) {
     this.loaded = false;
     this._refreshing = true;
     this.updateView();
+
+    console.log(filterItem);
+
     fetchPosts(filterItem)
       .then((items) => {
         this._dataSource = items;

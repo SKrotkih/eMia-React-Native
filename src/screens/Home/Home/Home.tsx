@@ -35,7 +35,6 @@ import {color} from '../../../theme/styles';
 import {PostsList} from './PostsList';
 import {styles} from './styles';
 import * as Permissions from 'expo-permissions';
-import {PostsTabs} from './Tabs';
 
 import {
   Container,
@@ -58,7 +57,6 @@ let _modelView: ModelView;
 export const Home: FunctionComponent = (props) => {
   const navigation: object = props.navigation;
 
-  const [tabItemIndex, setTabItemIndex] = useState(0)
   const [state, setState] = useState(false);
   const [active, setActive] = useState(false);
 
@@ -83,15 +81,12 @@ export const Home: FunctionComponent = (props) => {
 
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => (
-        <RightBarButtonItem />
-      ),
+      headerRight: () => <RightBarButtonItem />,
     });
   }, [navigation]);
 
-  function didSelectTabItem(newTabItemIndex) {
-    setTabItemIndex(newTabItemIndex);
-    _modelView.didSelectTabItem(tabItemIndex);
+  function didSelectTabItem(index: number) {
+    _modelView.didSelectTabItem(index);
   }
 
   const RightBarButtonItem = () => {
@@ -103,8 +98,8 @@ export const Home: FunctionComponent = (props) => {
           optionsButtonPressed();
         }}
       />
-    )
-  }
+    );
+  };
 
   const ActionsButton = () => {
     return (
@@ -125,7 +120,7 @@ export const Home: FunctionComponent = (props) => {
         </Button>
       </Fab>
     );
-  }
+  };
 
   function createNewPostButtonPressed() {
     navigation.navigate('AddNewPost');
@@ -144,7 +139,7 @@ export const Home: FunctionComponent = (props) => {
         tabBarUnderlineStyle={styles.tabUnderlined}
         renderTabBar={() => <ScrollableTab/>}
         onChangeTab={({i}) => didSelectTabItem(i)}>
-        {PostsTabs.map((item, index) => (
+        {_modelView.tabs.map((item, index) => (
           <Tab
             heading={item.title}
             tabStyle={styles.tab}
