@@ -57,7 +57,7 @@ export function resetPassword(email: string): Promise<any> {
         resolve();
       })
       .catch((error) => {
-        reject(error)
+        reject(error);
       });
   });
 }
@@ -80,13 +80,13 @@ export function checkLoginStatus(): Promise<boolean> {
     getCurrentUserAsync()
       .then((user) => {
         if (user === null) {
-          reject('');
+          resolve(false);
         } else {
           resolve(true);
         }
       })
       .catch(() => {
-        reject('');
+        resolve(false);
       });
   });
 }

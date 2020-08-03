@@ -29,7 +29,7 @@ export const Login: FunctionComponent = ({navigation}) => {
       })
       .catch((error) => {
         userDidFailLogIn(error);
-      })
+      });
   }
 
   function getCredentials(fields: AuthInputModel.AuthInputItem[]): Credentials {

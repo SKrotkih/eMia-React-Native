@@ -25,8 +25,7 @@ export default function App() {
   useEffect(() => {
     setUpIgnoreYellowMessage();
     subscribeOnActionDispatch();
-    checkLoginStatus((_isLoggedIn) => {
-      // TODO: Make current user instead of null:
+    checkLoginStatus().then((_isLoggedIn) => {
       if (_isLoggedIn) {
         store.dispatch(ACTIONS.loggedIn(null));
       } else {

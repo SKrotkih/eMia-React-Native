@@ -15,7 +15,7 @@ import {color} from '../../theme/styles';
 import {User} from '../../model/entities/user';
 import inputText from '../../components/InputText/InputText';
 import Photo from '../Home/AddNewPost/Components/PostPhoto';
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const {View, ScrollView} = ReactNative;
 
