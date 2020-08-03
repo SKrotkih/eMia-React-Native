@@ -11,21 +11,22 @@ import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
   DarkTheme as NavigationDarkTheme,
-} from "@react-navigation/native";
+} from '@react-navigation/native';
 import {
   Provider as PaperProvider,
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme,
 } from 'react-native-paper';
 import {Appearance} from 'react-native';
-import {createStackNavigator} from "@react-navigation/stack";
-import {color} from "../../../../theme/styles";
-import WelkomeScreen from '../../../WelkomeScreen'
-import Register from "../../../Auth/Register";
-import EditProfile from "../../../EditProfile";
-import Login from "../../../Auth/Login";
-import ForgotPassword from "../../../Auth/ForgotPassword";
+import {createStackNavigator} from '@react-navigation/stack';
+import {color} from '../../../../theme/styles';
+import WelkomeScreen from '../../../WelkomeScreen';
+import Register from '../../../Auth/Register';
+import EditProfile from '../../../EditProfile';
+import Login from '../../../Auth/Login';
+import ForgotPassword from '../../../Auth/ForgotPassword';
 import HomeNavigator from '../../Renderers/Home/navigationStack';
+import CategoryPicker from '../../../../components/CategoryPicker';
 import {AppContext} from '../../../../components/context';
 
 const Stack = createStackNavigator();
@@ -107,6 +108,16 @@ export default function authNavigationStack() {
               name="Home"
               component={HomeNavigator}
               options={{title: 'Home'}}
+            />
+            <Stack.Screen
+              name="CategoryPicker"
+              component={CategoryPicker}
+              options={{title: ''}}
+            />
+            <Stack.Screen
+              name="YearsPicker"
+              component={CategoryPicker}
+              options={{title: ''}}
             />
           </Stack.Navigator>
         </NavigationContainer>
