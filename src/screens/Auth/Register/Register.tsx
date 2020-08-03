@@ -13,6 +13,7 @@ import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import * as StateStorage from '../../../redux/authActionsStorage';
+import {Credentials} from "../../../model/firebase/auth/api";
 
 const {register} = auth;
 
@@ -38,11 +39,7 @@ export const Register: FunctionComponent = ({navigation}) => {
 
   function getUserCredentials(
     fields: AuthInputModel.AuthInputItem[],
-  ): {
-    email: string;
-    password: string;
-    confirm_password: string;
-  } {
+  ): Credentials {
     let email: string = null;
     let password: string = null;
     let confirm_password: string = null;
@@ -55,11 +52,7 @@ export const Register: FunctionComponent = ({navigation}) => {
         confirm_password = field.value;
       }
     });
-    return {
-      email: email,
-      password: password,
-      confirm_password: confirm_password,
-    };
+    return {email: email, password: password};
   }
 
   const params = new AuthInputModel.AuthParameters(

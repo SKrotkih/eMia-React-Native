@@ -8,14 +8,36 @@
 
 import {auth} from '../config';
 import {getUser} from '../database/users';
+import {User} from "../../entities/user";
+
+export interface Credentials {
+  email: string;
+  password: string;
+}
 
 // Sign user in with their email and password
-export function signIn(data) {
-  return new Promise((resolve, reject) => {
-    const {email, password} = data;
-    console.log('API. LOGIN email: ', email, 'password: ', password);
+// returns uid
+export function signIn(credentials: Credentials): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    console.log('API. LOGIN email: ', credentials.email, 'password: ', credentials.password);
     auth
-      .signInWithEmailAndPassword(email, password)
+      .signInWithEmailAndPassword(credentials.email, credentials.password)
+      .then((value) => {
+        const uid = value.user.uid;
+        resolve(uid);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
+
+// Register the user using email and password
+export function registerNewUser(credentials: Credentials): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    console.log('API. REGISTER email: ', credentials.email, 'password: ', credentials.password);
+    auth
+      .createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then((value) => {
         const uid = value.user.uid;
         resolve(uid);
@@ -27,9 +49,8 @@ export function signIn(data) {
 }
 
 // Send Password Reset Email
-export function resetPassword(data) {
+export function resetPassword(email: string): Promise<any> {
   return new Promise((resolve, reject) => {
-    const {email} = data;
     auth
       .sendPasswordResetEmail(email)
       .then((user) => {
@@ -41,7 +62,7 @@ export function resetPassword(data) {
   });
 }
 
-export function signOut() {
+export function signOut(): Promise<any> {
   return new Promise((resolve, reject) => {
     auth
       .signOut()
@@ -54,44 +75,43 @@ export function signOut() {
   });
 }
 
-// Register the user using email and password
-export function registerNewUser(credentials): Promise<string> {
-  return new Promise<string>((resolve, reject) => {
-    const {email, password} = credentials;
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((data) => {
-        resolve(data.user.uid);
+export function checkLoginStatus(): Promise<boolean> {
+  return new Promise((resolve, reject) => {
+    getCurrentUserAsync()
+      .then((user) => {
+        if (user === null) {
+          reject('');
+        } else {
+          resolve(true);
+        }
       })
-      .catch((error) => {
-        reject(error);
+      .catch(() => {
+        reject('');
       });
   });
 }
 
-export function checkLoginStatus(callback: (boolean) => void) {
-  getCurrentUserAsync()
-    .then((user) => {
+export function getFirebaseUserId(): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    auth.onAuthStateChanged((user) => {
       if (user === null) {
-        callback(false);
+        reject('The User has not signed in yet');
       } else {
-        callback(true);
+        resolve(user.uid);
       }
-    })
-    .catch(() => {
-      callback(false);
     });
+  });
 }
 
 // Get current registered user from the Authentication Firebase database
-export function getCurrentUserAsync() {
+export function getCurrentUserAsync(): Promise<User> {
   console.log('API. getCurrentUserAsync');
   return new Promise((resolve, reject) => {
     getFirebaseUserId()
       .then((uid) => {
         fetchUserData(uid)
-          .then((currentUser) => {
-            resolve(currentUser);
+          .then((user) => {
+            resolve(user);
           })
           .catch((error) => {
             reject(`Error while fetch user data: ${error}`);
@@ -103,26 +123,14 @@ export function getCurrentUserAsync() {
   });
 }
 
-export function getFirebaseUserId() {
-  return new Promise((resolve, reject) => {
-    auth.onAuthStateChanged((user) => {
-      if (user === null) {
-        reject('The User has not signed in yet');
-      } else {
-        resolve(user.uid);
-      }
-    });
-  });
-}
-
-export function fetchUserData(uid) {
-  return new Promise((resolve, reject) => {
+export function fetchUserData(uid: string): Promise<User> {
+  return new Promise<User>((resolve, reject) => {
     getUser(uid)
-      .then((currentUser) => {
-        if (currentUser === null) {
+      .then((user) => {
+        if (user === null) {
           reject(`User with uid=${uid} is not presented in the data base`);
         } else {
-          resolve(currentUser);
+          resolve(user);
         }
       })
       .catch((error) => {

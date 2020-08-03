@@ -20,7 +20,7 @@ export const ForgotPassword: FunctionComponent = ({navigation}) => {
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
-    remindPassword(getCredentials(fields))
+    remindPassword(getEmail(fields))
       .then(() => {
         Alert.alert('Please check email box. Te password was sent to you.');
         navigation.goBack();
@@ -32,14 +32,14 @@ export const ForgotPassword: FunctionComponent = ({navigation}) => {
       });
   }
 
-  function getCredentials(fields: AuthInputModel.AuthInputItem[]): {email: string} {
+  function getEmail(fields: AuthInputModel.AuthInputItem[]): string {
     let email: string = null;
     fields.forEach((field) => {
       if (field.type === AuthInputModel.AuthInputType.Email) {
         email = field.value;
       }
     });
-    return {email: email};
+    return email;
   }
 
   const params = new AuthInputModel.AuthParameters(

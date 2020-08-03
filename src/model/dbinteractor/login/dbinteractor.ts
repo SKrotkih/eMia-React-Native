@@ -7,6 +7,7 @@
  */
 
 import {
+  Credentials,
   signIn,
   signOut,
   registerNewUser,
@@ -14,9 +15,9 @@ import {
   fetchUserData,
 } from '../../firebase/auth/api';
 
-export function login(data) {
+export function login(credentials: Credentials) {
   return new Promise<{}>((resolve, reject) => {
-    signIn(data)
+    signIn(credentials)
       .then((uid) => {
         console.log('LOGIN SUCCESS. User UID=', uid);
         fetchUserData(uid)
@@ -35,14 +36,14 @@ export function login(data) {
   });
 }
 
-export function register(data): Promise<string> {
-  return registerNewUser(data);
+export function register(credentials: Credentials): Promise<string> {
+  return registerNewUser(credentials);
 }
 
 export function logOut(): Promise<any> {
   return signOut();
 }
 
-export function remindPassword(data): Promise<any> {
-  return resetPassword(data);
+export function remindPassword(email: string): Promise<any> {
+  return resetPassword(email);
 }

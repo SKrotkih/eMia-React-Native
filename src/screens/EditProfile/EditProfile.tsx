@@ -46,7 +46,7 @@ export class EditProfile extends React.Component<
     this.newUser = route.params.newUser;
     this.completion = route.params.completion;
     this.darkTheme = route.params.darkTheme;
-    //this.setUpState();
+    this.setUpState();
     this.setUpModelView();
   }
 
@@ -85,7 +85,7 @@ export class EditProfile extends React.Component<
           style={styles.rightBarButton}
           name={'ios-done-all'}
           onPress={() => {
-            this.doneButtonPressed();
+            this.userDidPressOnDone();
           }}
         />
       ),
@@ -105,11 +105,11 @@ export class EditProfile extends React.Component<
   }
 
   // User Activity
-  takePhotoButtonPressed() {
+  userDidPressOnPhotoPicker() {
     this.modelView.selectAvatar();
   }
 
-  openCategoryPicker() {
+  userDidSelectCategory() {
     this.navigation.navigate('Root', {
       screen: 'CategoryPicker',
       params: {
@@ -124,7 +124,7 @@ export class EditProfile extends React.Component<
     });
   }
 
-  openYearsPicker() {
+  userDidSelectYears() {
     this.navigation.navigate('Root', {
       screen: 'YearsPicker',
       params: {
@@ -139,7 +139,7 @@ export class EditProfile extends React.Component<
     });
   }
 
-  doneButtonPressed() {
+  userDidPressOnDone() {
     this.modelView.submitData().then(() => {
       if (this.completion === null) {
         this.navigation.goBack();
@@ -154,7 +154,7 @@ export class EditProfile extends React.Component<
       <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#DDDDDD"
-        onPress={() => this.openCategoryPicker()}>
+        onPress={() => this.userDidSelectCategory()}>
         <View style={styles.category}>
           <Label
             style={[
@@ -174,7 +174,7 @@ export class EditProfile extends React.Component<
       <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#DDDDDD"
-        onPress={() => this.openYearsPicker()}>
+        onPress={() => this.userDidSelectYears()}>
         <View style={styles.category}>
           <Label
             style={[
@@ -234,7 +234,7 @@ export class EditProfile extends React.Component<
               block
               info
               style={styles.button}
-              onPress={() => this.takePhotoButtonPressed()}>
+              onPress={() => this.userDidPressOnPhotoPicker()}>
               <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
             </Button>
             <Photo url={this.modelView.imageUrl} darkTheme={this.darkTheme} />

@@ -10,7 +10,7 @@ import {database} from '../config';
 import {User} from '../../entities/user';
 
 // Create new user object in realtime database
-export function updateUser(user) {
+export function updateUser(user): Promise<any> {
   return new Promise((resolve, reject) => {
     database
       .ref('main')
@@ -28,9 +28,9 @@ export function updateUser(user) {
 }
 
 // Get user object from the realtime database
-export function getUser(uid) {
+export function getUser(uid: string): Promise<User> {
   console.log('API. getUser uid=', uid);
-  return new Promise((resolve, reject) => {
+  return new Promise<User>((resolve, reject) => {
     database
       .ref('main')
       .child('users')
@@ -53,7 +53,7 @@ export function getUser(uid) {
   });
 }
 
-export function fetchAllUsers() {
+export function fetchAllUsers(): Promise<Array<User>> {
   console.log('API. fetchAllUsers');
   return new Promise((resolve, reject) => {
     database
