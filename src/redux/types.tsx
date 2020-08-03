@@ -5,6 +5,8 @@
  * @format
  * @flow
  */
+import {User} from "../model/entities/user";
+import {Post} from "../model/entities/post";
 
 const Types = {
   LOGGED_IN: 'auth/LOGGED_IN',
@@ -19,7 +21,7 @@ const isAuthAction = (action) => {
 };
 
 // Actions
-const loggedIn = user => ({
+const loggedIn = (user: User) => ({
   type: Types.LOGGED_IN,
   payload: user,
 });
@@ -28,12 +30,12 @@ const loggedOut = () => ({
   type: Types.LOGGED_OUT,
 });
 
-const registeredNewUser = (user) => ({
+const registeredNewUser = (user: User) => ({
   type: Types.REGISTERED_NEW_USER,
   payload: user,
 });
 
-const addPost = (post) => ({
+const addPost = (post: Post) => ({
   type: Types.ADD_POST,
   payload: post,
 });

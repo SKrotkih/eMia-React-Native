@@ -17,7 +17,7 @@ import {logOut} from '../../../../model/dbinteractor/login/dbinteractor';
 import MenuHeader from './Components/MenuHeader';
 import MenuFooter from './Components/MenuFooter';
 import {useTheme} from 'react-native-paper';
-import {logOut as logOutAction} from '../../../../redux/authActions';
+import * as StateStorage from '../../../../redux/authActionsStorage';
 
 interface ContentDriverItem {
   key: string;
@@ -101,7 +101,7 @@ function editProfile({navigation, darkTheme}) {
 function handleLogOut(props) {
   logOut(
     () => {
-      store.dispatch(logOutAction());
+      StateStorage.logOut();
     },
     (error) => {
       Alert.alert('Oops!', error.message);

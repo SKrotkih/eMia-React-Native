@@ -12,8 +12,7 @@ import AuthForm from '../AuthForm';
 import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
-import store from '../../../redux/store';
-import {signUp} from "../../../redux/authActions";
+import * as StateStorage from "../../../redux/authActionsStorage";
 
 const {register} = auth;
 
@@ -41,7 +40,7 @@ export const Register: FunctionComponent = ({navigation}) => {
     navigation.navigate('EditProfile', {
       newUser: newUser,
       completion: () => {
-        store.dispatch(signUp(newUser));
+        StateStorage.signUp(newUser);
       },
     });
   }
