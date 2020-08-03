@@ -28,8 +28,10 @@ interface EditProfileProps {
   navigation: any;
 }
 
-export class EditProfile extends React.Component<EditProfileProps,
-  EditProfileState> {
+export class EditProfile extends React.Component<
+  EditProfileProps,
+  EditProfileState
+> {
   private readonly navigation = null;
   private readonly completion = null;
   private modelView = null;
@@ -41,13 +43,10 @@ export class EditProfile extends React.Component<EditProfileProps,
 
     let route = this.props.route;
     this.navigation = this.props.navigation;
-    this.newUser = route.newUser;
+    this.newUser = route.params.newUser;
     this.completion = route.params.completion;
     this.darkTheme = route.params.darkTheme;
-
-    console.log(this.darkTheme);
-
-    this.setUpState();
+    //this.setUpState();
     this.setUpModelView();
   }
 
@@ -230,8 +229,7 @@ export class EditProfile extends React.Component<EditProfileProps,
                   {this.renderItem(item)}
                 </>
               );
-            }
-            )}
+            })}
             <Button
               block
               info

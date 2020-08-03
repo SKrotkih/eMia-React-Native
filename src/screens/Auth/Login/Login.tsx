@@ -21,6 +21,17 @@ export const Login: FunctionComponent = ({navigation}) => {
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
+    login(getCredentials(fields))
+      .then((result) => {
+        let {uid, user} = result;
+        userDidSuccessLogIn(uid, user);
+      })
+      .catch((error) => {
+        userDidFailLogIn(error);
+      })
+  }
+
+  function getCredentials(fields: AuthInputModel.AuthInputItem[]): {email: string; password: string} {
     let email = '';
     let password = '';
     fields.forEach((field) => {
@@ -30,10 +41,10 @@ export const Login: FunctionComponent = ({navigation}) => {
         password = field.value;
       }
     });
-    login({email, password}, onSuccess, onError);
+    return {email: email, password: password};
   }
 
-  function onSuccess(uid, currentUser) {
+  function userDidSuccessLogIn(uid, currentUser) {
     if (currentUser === null) {
       let newUser = new User(uid, '');
       navigation.navigate('EditProfile', {
@@ -47,7 +58,7 @@ export const Login: FunctionComponent = ({navigation}) => {
     }
   }
 
-  function onError(_error) {
+  function userDidFailLogIn(_error) {
     setError(AuthError.parseMessage(_error));
   }
 

@@ -12,7 +12,7 @@ import AuthForm from '../AuthForm';
 import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
-import * as StateStorage from "../../../redux/authActionsStorage";
+import * as StateStorage from '../../../redux/authActionsStorage';
 
 const {register} = auth;
 
@@ -21,32 +21,45 @@ export const Register: FunctionComponent = ({navigation}) => {
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
-    let data = {email: null, password: null, confirm_password: null};
+    register(getUserCredentials(fields))
+      .then((uid: string) => {
+        const newUser = new User(uid, '');
+        navigation.navigate('EditProfile', {
+          newUser: newUser,
+          completion: () => {
+            StateStorage.signUp(newUser);
+          },
+        });
+      })
+      .catch((_error) => {
+        setError(AuthError.parseMessage(_error));
+      });
+  }
+
+  function getUserCredentials(
+    fields: AuthInputModel.AuthInputItem[],
+  ): {
+    email: string;
+    password: string;
+    confirm_password: string;
+  } {
+    let email: string = null;
+    let password: string = null;
+    let confirm_password: string = null;
     fields.forEach((field) => {
       if (field.type === AuthInputModel.AuthInputType.Email) {
-        data.email = field.value;
+        email = field.value;
       } else if (field.type === AuthInputModel.AuthInputType.Password) {
-        data.password = field.value;
+        password = field.value;
       } else if (field.type === AuthInputModel.AuthInputType.ConfirmPassword) {
-        data.confirm_password = field.value;
+        confirm_password = field.value;
       }
     });
-    register(data, onSuccess, onError);
-  }
-
-  function onSuccess(data) {
-    const uid = data.user.uid;
-    const newUser = new User(uid, '');
-    navigation.navigate('EditProfile', {
-      newUser: newUser,
-      completion: () => {
-        StateStorage.signUp(newUser);
-      },
-    });
-  }
-
-  function onError(_error) {
-    setError(AuthError.parseMessage(_error));
+    return {
+      email: email,
+      password: password,
+      confirm_password: confirm_password,
+    };
   }
 
   const params = new AuthInputModel.AuthParameters(

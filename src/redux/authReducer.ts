@@ -19,7 +19,7 @@ let initialState: IAuthModel = {
   user: null,
 };
 
-// Redux reducer for the authentication on the Firebase server
+// The Redux reducer used for the authentication on the Firebase server
 
 const authReducer = (state = initialState, action) => {
   switch (action.type) {

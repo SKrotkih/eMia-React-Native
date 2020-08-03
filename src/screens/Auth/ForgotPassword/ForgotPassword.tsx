@@ -20,24 +20,26 @@ export const ForgotPassword: FunctionComponent = ({navigation}) => {
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
-    let data = {email: null};
+    remindPassword(getCredentials(fields))
+      .then(() => {
+        Alert.alert('Please check email box. Te password was sent to you.');
+        navigation.goBack();
+      })
+      .catch((error) => {
+        setError((prevState) => {
+          return {...prevState, email: error.message};
+        });
+      });
+  }
+
+  function getCredentials(fields: AuthInputModel.AuthInputItem[]): {email: string} {
+    let email: string = null;
     fields.forEach((field) => {
       if (field.type === AuthInputModel.AuthInputType.Email) {
-        data.email = field.value;
+        email = field.value;
       }
     });
-    remindPassword(data, onSuccess, onError);
-  }
-
-  function onSuccess() {
-    Alert.alert('Password Reminder Sent');
-    navigation.goBack();
-  }
-
-  function onError(_error) {
-    setError((prevState) => {
-      return {...prevState, email: _error.message};
-    });
+    return {email: email};
   }
 
   const params = new AuthInputModel.AuthParameters(

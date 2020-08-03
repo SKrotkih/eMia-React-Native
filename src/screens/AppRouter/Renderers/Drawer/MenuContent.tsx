@@ -99,14 +99,13 @@ function editProfile({navigation, darkTheme}) {
 }
 
 function handleLogOut(props) {
-  logOut(
-    () => {
+  logOut()
+    .then(() => {
       StateStorage.logOut();
-    },
-    (error) => {
+    })
+    .catch((error) => {
       Alert.alert('Oops!', error.message);
-    },
-  );
+    });
 }
 
 const styles = StyleSheet.create({

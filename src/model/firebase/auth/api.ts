@@ -55,13 +55,13 @@ export function signOut() {
 }
 
 // Register the user using email and password
-export function registerNewUser(data) {
-  return new Promise((resolve, reject) => {
-    const {email, password} = data;
+export function registerNewUser(credentials): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
+    const {email, password} = credentials;
     auth
       .createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        resolve(user);
+      .then((data) => {
+        resolve(data.user.uid);
       })
       .catch((error) => {
         reject(error);
