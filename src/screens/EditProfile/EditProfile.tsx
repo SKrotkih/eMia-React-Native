@@ -34,7 +34,7 @@ export class EditProfile extends React.Component<
 > {
   private readonly navigation = null;
   private readonly completion = null;
-  private modelView = null;
+  private modelView: ModelView = null;
   private readonly newUser = null;
   private readonly darkTheme = null;
   private readonly isItNewUser: boolean = false;
@@ -113,56 +113,48 @@ export class EditProfile extends React.Component<
 
   userDidSelectCategory() {
     if (this.isItNewUser) {
-      this.navigation.navigate('CategoryPicker', {
-        categories: this.modelView.genderCategories,
-        value: this.modelView.gender,
-        title: 'Gender',
-        onSelectItem: (id) => {
-          this.modelView.gender = id;
-        },
-        darkTheme: this.darkTheme,
-      });
+      this.navigation.navigate('CategoryPicker', this.genderParameters());
     } else {
       this.navigation.navigate('Root', {
         screen: 'CategoryPicker',
-        params: {
-          categories: this.modelView.genderCategories,
-          value: this.modelView.gender,
-          title: 'Gender',
-          onSelectItem: (id) => {
-            this.modelView.gender = id;
-          },
-          darkTheme: this.darkTheme,
-        },
+        params: this.genderParameters(),
       });
     }
   }
 
+  genderParameters(): {} {
+    return {
+      categories: this.modelView.genderCategories,
+      value: this.modelView.gender,
+      title: 'Gender',
+      onSelectItem: (id) => {
+        this.modelView.gender = id;
+      },
+      darkTheme: this.darkTheme,
+    };
+  }
+
   userDidSelectYears() {
     if (this.isItNewUser) {
-      this.navigation.navigate('YearsPicker', {
-        categories: this.modelView.years,
-        value: this.modelView.yearBirth,
-        title: 'Year Birthday',
-        onSelectItem: (year) => {
-          this.modelView.yearBirth = +year;
-        },
-        darkTheme: this.darkTheme,
-      });
+      this.navigation.navigate('YearsPicker', this.yearsParameters());
     } else {
       this.navigation.navigate('Root', {
         screen: 'YearsPicker',
-        params: {
-          categories: this.modelView.years,
-          value: this.modelView.yearBirth,
-          title: 'Year Birthday',
-          onSelectItem: (year) => {
-            this.modelView.yearBirth = +year;
-          },
-          darkTheme: this.darkTheme,
-        },
+        params: this.yearsParameters(),
       });
     }
+  }
+
+  yearsParameters(): {} {
+    return {
+      categories: this.modelView.years,
+      value: this.modelView.yearBirth,
+      title: 'Year Birthday',
+      onSelectItem: (year) => {
+        this.modelView.yearBirth = year;
+      },
+      darkTheme: this.darkTheme,
+    };
   }
 
   userDidPressOnDone() {
@@ -228,7 +220,6 @@ export class EditProfile extends React.Component<
         item.value,
         this.darkTheme,
         item.onChangeText,
-        item.onSelectItem,
       );
     }
   }

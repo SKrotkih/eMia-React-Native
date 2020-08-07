@@ -32,7 +32,7 @@ export class Post {
 
   static getDownloadURL(postId) {
     console.log('Post. getDownloadURL');
-    return new Promise((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       const photoName = postId + '.jpg';
       const imageRef = storage.ref(photoName);
       imageRef
@@ -46,7 +46,7 @@ export class Post {
     })
   }
 
-  submitOnServer() {
+  submitOnServer(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.title === null || isEmpty(this.title)) {
         reject('Please, enter post title');
@@ -57,7 +57,7 @@ export class Post {
           if (success) {
             resolve();
           }  else {
-            reject('');
+            reject('System Error: Post has not uploaded on server');
           }
         });
       }
@@ -70,25 +70,29 @@ export class Post {
       .then((user) => {
         _this.uid = user.id;
         _this.author = user.username;
-        uploadData(_this, (id) => {
-          let pictureUri = _this.pictureUri;
-          if (pictureUri === null || pictureUri.length === 0) {
-            completed(true);
-          } else {
-            uploadImage(pictureUri, id)
-              .then((pictureUrl) => {
-                _this.url = pictureUrl;
-                console.log(`Image's url: ${_this.url}`);
-                completed(true);
-              })
-              .catch((error) => {
-                if (error !== null) {
-                  Alert.alert('Error', `${error}`);
-                }
-                completed(false);
-              });
-          }
-        });
+        uploadData(_this)
+          .then((id) => {
+            let pictureUri = _this.pictureUri;
+            if (pictureUri === null || pictureUri.length === 0) {
+              completed(true);
+            } else {
+              uploadImage(pictureUri, id)
+                .then((pictureUrl) => {
+                  _this.url = pictureUrl;
+                  console.log(`Image's url: ${_this.url}`);
+                  completed(true);
+                })
+                .catch((error) => {
+                  if (error !== null) {
+                    Alert.alert('Error', `${error}`);
+                  }
+                  completed(false);
+                });
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         Alert.alert('Error', `${error}`);

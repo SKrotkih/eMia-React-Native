@@ -11,8 +11,8 @@ import RNFetchBlob from 'rn-fetch-blob';
 import FirebaseClient from 'firebase';
 import {isEmpty} from 'lodash';
 
-export function uploadImage(uri, id) {
-  return new Promise((resolve, reject) => {
+export function uploadImage(uri, id): Promise<string> {
+  return new Promise<string>((resolve, reject) => {
     if (isEmpty(uri)) {
       reject(null);
     } else {
