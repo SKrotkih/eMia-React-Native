@@ -2,11 +2,18 @@
   "name": "eMia",
   "version": "0.1.1",
   "description": "eMia React Native server side",
-  "main": "index.js",
+  "main": "app.js",
   "author": "Sergey Krotkih <sergey.krotkih@gmail.com>",
   "license": "ISC",
   "scripts": {
-    "start": "node ./bin/www"
+    "start_": "node ./bin/www",
+    "start": "node app.js",
+    "server": "nodemon app.js",
+    "startserver": "cross-env NODE_ENV=production node app.js",
+    "client": "npm run start --prefix client",
+    "client:install": "npm install --prefix client",
+    "client:build": "npm run build --prefix client",
+    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

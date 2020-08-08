@@ -6,8 +6,21 @@ const {check, validationResult} = require('express-validator')
 const User = require('../models/User')
 const router = Router()
 
+// npm run startserver
+// http://localhost:5000/api/auth/test
+router.get(
+  '/test',
+  [],
+  async (req, res) => {
+    try {
+      res.json({result: 'OK', userId: '001111'})
+    } catch (e) {
+      res.status(500).json({message: 'Something went wrong. Please try it again.'})
+    }
+  }
+)
 
-// /api/auth/register
+// http://localhost:5000/api/auth/register
 router.post(
   '/register',
   [

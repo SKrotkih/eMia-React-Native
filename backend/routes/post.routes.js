@@ -28,7 +28,7 @@ router.post('/generate', auth, async (req, res) => {
 
     res.status(201).json({ post })
   } catch (e) {
-    res.status(500).json({ message: 'Something went wrong. Please ry it again.' })
+    res.status(500).json({ message: 'Something went wrong. Please try it again.' })
   }
 })
 
@@ -37,7 +37,7 @@ router.get('/', auth, async (req, res) => {
     const links = await Post.find({ owner: req.user.userId })
     res.json(links)
   } catch (e) {
-    res.status(500).json({ message: 'Something went wrong. Please ry it again.' })
+    res.status(500).json({ message: 'Something went wrong. Please try it again.' })
   }
 })
 
@@ -46,7 +46,7 @@ router.get('/:id', auth, async (req, res) => {
     const post = await Post.findById(req.params.id)
     res.json(post)
   } catch (e) {
-    res.status(500).json({ message: 'Something went wrong. Please ry it again.' })
+    res.status(500).json({ message: 'Something went wrong. Please try it again.' })
   }
 })
 

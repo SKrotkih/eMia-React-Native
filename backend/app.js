@@ -15,11 +15,11 @@ if (process.env.NODE_ENV === 'production') {
   app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
   app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    res.sendFile(path.resolve(__dirname, 'about.html'))
   })
 }
 
-const PORT = config.get('port') || 8000
+const PORT = config.get('port') || 5000
 
 async function start() {
   try {
