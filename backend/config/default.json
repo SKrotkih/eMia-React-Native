@@ -1,7 +1,0 @@
-{
-  "host": "localhost",
-  "port": "5000",
-  "baseUrl": "http://localhost:5000",
-  "jwtSecret": "eMia react native server side",
-  "mongoUri": "mongodb+srv://emiadb:brooemnv123@cluster0.hkgro.azure.mongodb.net/emia?retryWrites=true&w=majority"
-}

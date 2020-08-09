@@ -21,9 +21,7 @@ DerivedData
 .idea/
 #React Native
 node_modules/
-backend/node_modules/
 #package-lock.json
-backend/package-lock.json
 .expo
 .iml
 .vscode
@@ -49,6 +47,3 @@ android/app/.settings
 android/app/.project
 android/java_pid*
 android/.gradle
-
-backend/logs/current.log
-backend/tmp
