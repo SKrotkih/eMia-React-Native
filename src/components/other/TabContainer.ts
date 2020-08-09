@@ -1,4 +1,4 @@
-import variable from "../theme/variables/platform";
+import variable from "../../theme/variables/platform";
 import { Platform } from "react-native";
 
 export default (variables = variable) => {

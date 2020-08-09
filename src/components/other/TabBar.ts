@@ -1,4 +1,4 @@
-import variable from "../theme/variables/platform";
+import variable from "../../theme/variables/platform";
 
 export default (variables = variable) => {
   const tabBarTheme = {

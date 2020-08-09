@@ -1,5 +1,5 @@
 import { PixelRatio, StatusBar } from "react-native";
-import variable from "../theme/variables/platform";
+import variable from "../../theme/variables/platform";
 
 export default (variables = variable) => {
   const platformStyle = variables.platformStyle;

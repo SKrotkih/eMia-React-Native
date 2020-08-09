@@ -30,7 +30,7 @@ import {
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme,
 } from 'react-native-paper';
-import {AppContext} from '../../../../components/context';
+import {AppContext} from '../../../../components/other/context';
 import CategoryPicker from '../../../../components/CategoryPicker';
 
 const Drawer = createDrawerNavigator();

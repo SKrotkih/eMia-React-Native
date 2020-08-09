@@ -8,7 +8,7 @@
 
 import {Root, StyleProvider} from "native-base";
 import store from "../../../../redux/store";
-import getTheme from "../../../../components";
+import getTheme from "../../../../components/other";
 import variables from "../../../../theme/variables/commonColor";
 import React from "react";
 import {Provider} from 'react-redux';

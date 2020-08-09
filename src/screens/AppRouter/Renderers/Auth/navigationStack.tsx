@@ -27,7 +27,7 @@ import Login from '../../../Auth/Login';
 import ForgotPassword from '../../../Auth/ForgotPassword';
 import HomeNavigator from '../../Renderers/Home/navigationStack';
 import CategoryPicker from '../../../../components/CategoryPicker';
-import {AppContext} from '../../../../components/context';
+import {AppContext} from '../../../../components/other/context';
 
 const Stack = createStackNavigator();
 

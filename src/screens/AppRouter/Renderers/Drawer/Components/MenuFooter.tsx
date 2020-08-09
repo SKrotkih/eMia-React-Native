@@ -9,7 +9,7 @@
 import React from 'react';
 import {Switch, Text, TouchableRipple, useTheme} from 'react-native-paper';
 import {StyleSheet, View} from 'react-native';
-import {AppContext} from '../../../../../components/context';
+import {AppContext} from '../../../../../components/other/context';
 
 export default function MenuFooter() {
   const paperTheme = useTheme();
