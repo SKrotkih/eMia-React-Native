@@ -6,8 +6,8 @@
  * @flow
  */
 
-import ACTIONS from './types';
-import {User} from '../model/entities/user';
+import ACTIONS from '../types';
+import {User} from '../../model/entities/user';
 
 interface IAuthModel {
   isLoggedIn: boolean,
@@ -21,7 +21,7 @@ let initialState: IAuthModel = {
 
 // The Redux reducer used for the authentication on the Firebase server
 
-const authReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.Types.LOGGED_IN:
       const user = action.payload;
@@ -36,4 +36,4 @@ const authReducer = (state = initialState, action) => {
   }
 };
 
-export default authReducer;
+export default reducer;

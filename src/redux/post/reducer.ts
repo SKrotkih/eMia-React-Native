@@ -6,8 +6,8 @@
  * @flow
  */
 
-import ACTIONS from './types';
-import {Post} from '../model/entities/post';
+import ACTIONS from '../types';
+import {Post} from '../../model/entities/post';
 
 interface IPostModel {
   newPost: Post,
@@ -15,7 +15,7 @@ interface IPostModel {
 
 let initialState: IPostModel = {newPost: null};
 
-const postReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case ACTIONS.Types.ADD_POST:
       const post = action.payload;
@@ -25,4 +25,4 @@ const postReducer = (state = initialState, action) => {
   }
 };
 
-export default postReducer;
+export default reducer;

@@ -6,9 +6,9 @@
  * @flow
  */
 
-import {Post} from "../model/entities/post";
-import store from "./store";
-import ACTIONS from "./types";
+import {Post} from "../../model/entities/post";
+import store from "../store";
+import ACTIONS from "../types";
 
 export function savePost(post: Post) {
   return new Promise((resolve, reject) => {

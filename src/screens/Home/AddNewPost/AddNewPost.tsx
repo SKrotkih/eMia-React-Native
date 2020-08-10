@@ -17,7 +17,7 @@ import InputData from "./Components/InputPostTextItem";
 import Photo from "./Components/PostPhoto";
 import takePhoto from "./Utils/TakePhoto";
 import {isEmpty} from "../../../utils/validate";
-import * as StateStorage from "../../../redux/postActionsStorage";
+import * as StateStorage from "../../../redux/post/actions";
 
 const {View} = ReactNative;
 

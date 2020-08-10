@@ -17,7 +17,7 @@ import {logOut} from '../../../../model/dbinteractor/login/dbinteractor';
 import MenuHeader from './Components/MenuHeader';
 import MenuFooter from './Components/MenuFooter';
 import {useTheme} from 'react-native-paper';
-import * as StateStorage from '../../../../redux/authActionsStorage';
+import * as StateStorage from '../../../../redux/auth/actions';
 
 interface ContentDriverItem {
   key: string;

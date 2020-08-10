@@ -6,13 +6,13 @@
  * @flow
  */
 
-import ACTIONS from './types';
-import {User} from '../model/entities/user';
+import ACTIONS from '../types';
+import {User} from '../../model/entities/user';
 import {
   removeStorageItem,
   setStorageObjectItem,
-} from '../model/LocalStorage/storage';
-import store from '../redux/store';
+} from '../../model/LocalStorage/storage';
+import store from '../store';
 
 export function logIn(user: User) {
   setStorageObjectItem('user', user)
@@ -24,20 +24,20 @@ export function logIn(user: User) {
     });
 }
 
-export function logOut() {
-  removeStorageItem('user')
+export function signUp(user: User) {
+  setStorageObjectItem('user', user)
     .then(() => {
-      store.dispatch(ACTIONS.loggedOut());
+      store.dispatch(ACTIONS.registeredNewUser(user));
     })
     .catch((error) => {
       console.log(error);
     });
 }
 
-export function signUp(user: User) {
-  setStorageObjectItem('user', user)
+export function logOut() {
+  removeStorageItem('user')
     .then(() => {
-      store.dispatch(ACTIONS.registeredNewUser(user));
+      store.dispatch(ACTIONS.loggedOut());
     })
     .catch((error) => {
       console.log(error);

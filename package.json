@@ -14,6 +14,7 @@
   "jest": {
     "preset": "react-native"
   },
+  "proxy": "http://localhost:5000",
   "dependencies": {
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.9.6",
