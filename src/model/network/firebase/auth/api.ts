@@ -8,7 +8,7 @@
 
 import {auth} from '../config';
 import {getUser} from '../database/users';
-import {User} from "../../entities/user";
+import {User} from "../../../entities/user";
 
 export interface Credentials {
   email: string;

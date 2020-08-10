@@ -7,7 +7,7 @@
  */
 
 import {database} from '../config';
-import {User} from '../../entities/user';
+import {User} from '../../../entities/user';
 
 // Create new user object in realtime database
 export function updateUser(user): Promise<any> {

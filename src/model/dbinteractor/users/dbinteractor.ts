@@ -6,8 +6,8 @@
  * @flow
  */
 
-import {getCurrentUserAsync, getFirebaseUserId, registerNewUser} from '../../firebase/auth/api';
-import {updateUser, fetchAllUsers, getUser} from '../../firebase/database/users';
+import {getCurrentUserAsync, getFirebaseUserId, registerNewUser} from '../../network/firebase/auth/api';
+import {updateUser, fetchAllUsers, getUser} from '../../network/firebase/database/users';
 
 export function register(data, successCB, errorCB) {
   registerNewUser(data)

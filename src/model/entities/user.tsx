@@ -8,8 +8,8 @@
 
 import {Alert} from 'react-native';
 import {uploadCurrentUserData} from '../dbinteractor/users/dbinteractor';
-import {uploadImage} from '../firebase/utils/uploadImage';
-import {storage} from '../../model/firebase/config';
+import {uploadImage} from '../network/firebase/utils/uploadImage';
+import {storage} from '../network/firebase/config';
 
 export class User {
   address: string;

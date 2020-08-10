@@ -13,7 +13,7 @@ import store from './src/redux/store';
 import splashScreenRenderer from './src/screens/AppRouter/Renderers/Splash/renderer';
 import homeScreenRenderer from './src/screens/AppRouter/Renderers/Home/renderer';
 import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer';
-import {checkLoginStatus} from './src/model/firebase/auth/api';
+import {checkLoginStatus} from './src/model/network/firebase/auth/api';
 import ACTIONS from './src/redux/types';
 
 export default function App() {

@@ -13,7 +13,7 @@ import {
   registerNewUser,
   resetPassword,
   fetchUserData,
-} from '../../firebase/auth/api';
+} from '../../network/firebase/auth/api';
 
 export function login(credentials: Credentials) {
   return new Promise<{}>((resolve, reject) => {

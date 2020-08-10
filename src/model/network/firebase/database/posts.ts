@@ -9,8 +9,8 @@
 import {database} from '../config';
 import {getUser} from './users';
 import {getFirebaseUserId} from '../auth/api';
-import {Post} from '../../entities/post';
-import {User} from "../../entities/user";
+import {Post} from '../../../entities/post';
+import {User} from "../../../entities/user";
 
 export interface PostItemModel {
   post: Post;

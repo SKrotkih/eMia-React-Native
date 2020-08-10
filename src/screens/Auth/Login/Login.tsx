@@ -13,7 +13,7 @@ import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import * as StateStorage from '../../../redux/auth/actions';
-import {Credentials} from '../../../model/firebase/auth/api';
+import {Credentials} from '../../../model/network/firebase/auth/api';
 
 const {login} = auth;
 

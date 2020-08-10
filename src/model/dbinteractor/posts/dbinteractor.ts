@@ -6,7 +6,7 @@
  * @flow
  */
 
-import {fetchAllPosts, fetchMyPosts} from '../../firebase/database/posts';
+import {fetchAllPosts, fetchMyPosts} from '../../network/firebase/database/posts';
 
 export function fetchPosts(i) {
   if (i === 0) {

@@ -7,10 +7,10 @@
  */
 
 import {Alert} from 'react-native';
-import {uploadImage} from '../firebase/utils/uploadImage';
-import {uploadData} from '../firebase/database/posts';
-import {getCurrentUserAsync} from '../firebase/auth/api';
-import {storage} from '../../model/firebase/config';
+import {uploadImage} from '../network/firebase/utils/uploadImage';
+import {uploadData} from '../network/firebase/database/posts';
+import {getCurrentUserAsync} from '../network/firebase/auth/api';
+import {storage} from '../network/firebase/config';
 import {isEmpty} from "../../utils/validate";
 
 export class Post {

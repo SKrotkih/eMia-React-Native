@@ -7,7 +7,7 @@
  */
 
 import * as firebase from 'firebase';
-import * as firebaseConstants from '../../config/GoogleService-Info';
+import * as firebaseConstants from '../../../config/GoogleService-Info';
 
 // Initialize Firebase
 const config = {
