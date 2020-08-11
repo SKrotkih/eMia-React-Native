@@ -11,7 +11,7 @@ import {User} from '../../model/entities/user';
 import {
   removeStorageItem,
   setStorageObjectItem,
-} from '../../model/LocalStorage/storage';
+} from '../../model/localStorage/storage';
 import store from '../store';
 
 export function logIn(user: User) {

@@ -13,45 +13,57 @@ import store from './src/redux/store';
 import splashScreenRenderer from './src/screens/AppRouter/Renderers/Splash/renderer';
 import homeScreenRenderer from './src/screens/AppRouter/Renderers/Home/renderer';
 import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer';
-import {checkLoginStatus} from './src/model/network/firebase/auth/api';
+import {isUserAuthenticated} from './src/model/network/firebase/auth/api';
 import ACTIONS from './src/redux/types';
 
 export default function App() {
-  const [viewState, setViewState] = useState({
-    isReady: false,
-    isLoggedIn: false,
-  });
+  const [isDownloading, setIsDownloading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     setUpIgnoreYellowMessage();
     subscribeOnActionDispatch();
-    checkLoginStatus().then((_isLoggedIn) => {
-      if (_isLoggedIn) {
-        store.dispatch(ACTIONS.loggedIn(null));
-      } else {
-        store.dispatch(ACTIONS.loggedOut());
-      }
-      setViewState((prevState) => {
-        return {...prevState, isReady: true, isLoggedIn: _isLoggedIn};
-      });
-    });
+    checkIfUserAuthenticated().catch((error) => console.error(error));
   }, []);
+
+  async function checkIfUserAuthenticated() {
+    try {
+      if (await isUserAuthenticated()) {
+        handleUerIsAuthenticated();
+      } else {
+        handleUerIsNotAuthenticated();
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  function handleUerIsAuthenticated() {
+    store.dispatch(ACTIONS.loggedIn(null));
+    setIsDownloading(false);
+    setIsAuthenticated(true);
+  }
+
+  function handleUerIsNotAuthenticated() {
+    store.dispatch(ACTIONS.loggedOut());
+    setIsDownloading(false);
+    setIsAuthenticated(false);
+  }
 
   function subscribeOnActionDispatch() {
     store.subscribe(() => {
       if (ACTIONS.isAuthAction(store.getState().lastAction)) {
         const state = store.getState().auth;
-        setViewState((prevState) => {
-          return {...prevState, isReady: true, isLoggedIn: state.isLoggedIn};
-        });
+        setIsDownloading(false);
+        setIsAuthenticated(state.isLoggedIn);
       }
     });
   }
 
   return (
-    (!viewState.isReady && splashScreenRenderer()) ||
-    (viewState.isLoggedIn && homeScreenRenderer()) ||
-    authScreenRenderer()
+    (isDownloading && splashScreenRenderer()) ||
+    (!isAuthenticated && authScreenRenderer()) ||
+    homeScreenRenderer()
   );
 }
 

@@ -75,20 +75,14 @@ export function signOut(): Promise<any> {
   });
 }
 
-export function checkLoginStatus(): Promise<boolean> {
-  return new Promise((resolve, reject) => {
-    getCurrentUserAsync()
-      .then((user) => {
-        if (user === null) {
-          resolve(false);
-        } else {
-          resolve(true);
-        }
-      })
-      .catch(() => {
-        resolve(false);
-      });
-  });
+export async function isUserAuthenticated(): Promise<boolean> {
+  try {
+    const user = await getCurrentUserAsync();
+    return Promise.resolve(user !== null);
+  } catch (error) {
+    console.log(error);
+    return Promise.resolve(false);
+  }
 }
 
 export function getFirebaseUserId(): Promise<string> {
