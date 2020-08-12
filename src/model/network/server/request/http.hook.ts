@@ -1,5 +1,5 @@
 import {useState, useCallback} from 'react';
-import Config from "react-native-config";
+import {BASE_URL} from '../../../../config/constants';
 
 export const useHttp = () => {
   const [loading, setLoading] = useState(false);
@@ -14,7 +14,11 @@ export const useHttp = () => {
           headers['Content-Type'] = 'application/json';
         }
 
-        url =  Config.BASE_URL + url;
+        console.log(body);
+
+        url = BASE_URL + url;
+
+        console.log(url);
 
         const response = await fetch(url, {method, body, headers});
         const data = await response.json();

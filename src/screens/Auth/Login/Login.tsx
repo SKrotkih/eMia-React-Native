@@ -13,16 +13,13 @@ import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import * as StateStorage from '../../../redux/auth/actions';
 import {Credentials} from '../../../model/network/firebase/auth/api';
-import {LoginCredentials, LoginFunction, LoginResults, ServerType} from "./interface";
+import {LoginCredentials, LoginFunction, LoginResults} from "./interface";
 import {AuthContext} from "../../../model/context/AuthContext";
 import {useHttp} from "../../../model/network/server/request/http.hook";
 import {login} from "../../../model/dbinteractor/login/dbinteractor";
-import Config from "react-native-config";
+import {MODEL_TYPE_SERVER, MODEL_TYPE, MODEL_TYPE_FIREBASE} from '../../../config/constants';
 
 export const Login: FunctionComponent = ({navigation}) => {
-
-  const MODEL_TYPE = Config.MODEL_TYPE;
-
   const [error, setError] = useState<AuthError>(new AuthError());
 
   const authContext = useContext(AuthContext);
@@ -30,18 +27,17 @@ export const Login: FunctionComponent = ({navigation}) => {
   const {loading, request, networkError, clearError} = useHttp();
 
   function model(): LoginFunction {
-    switch (MODEL_TYPE) {
-      case Config.MODEL_TYPE_SERVER:
-        return onServerLogIn;
-      case Config.MODEL_TYPE_FIREBASE:
-        return onFirebaseLogIn;
+    if (MODEL_TYPE === MODEL_TYPE_SERVER) {
+      return signInOnServer;
+    } else if (MODEL_TYPE === MODEL_TYPE_FIREBASE) {
+      return signInOnFirebase;
     }
   }
 
-  const success = useCallback((result) => userDidSuccessLogIn(result), []);
-  const failed = useCallback((error) => userDidFailLogIn(error), []);
+  const success = useCallback((result) => userDidSuccess(result), []);
+  const failed = useCallback((error) => userDidFail(error), []);
 
-  const onServerLogIn = async (credentials: LoginCredentials) => {
+  const signInOnServer = async (credentials: LoginCredentials) => {
     try {
       const {token, userId} = await request('/api/auth/login', 'POST', credentials);
       authContext.login(token, userId);
@@ -52,7 +48,7 @@ export const Login: FunctionComponent = ({navigation}) => {
     }
   };
 
-  const onFirebaseLogIn = async (credentials: LoginCredentials) => {
+  const signInOnFirebase = async (credentials: LoginCredentials) => {
     try {
       const {uid, user} = await login(credentials)
       const result = {uid: uid, user: user};
@@ -81,7 +77,7 @@ export const Login: FunctionComponent = ({navigation}) => {
     return {email: email, password: password};
   }
 
-  function userDidSuccessLogIn(result: LoginResults) {
+  function userDidSuccess(result: LoginResults) {
     if (result.user === null) {
       let newUser = new User(result.uid, '');
       navigation.navigate('EditProfile', {
@@ -95,7 +91,7 @@ export const Login: FunctionComponent = ({navigation}) => {
     }
   }
 
-  function userDidFailLogIn(_error) {
+  function userDidFail(_error) {
     setError(AuthError.parseMessage(_error));
   }
 

@@ -12,6 +12,11 @@ export const FIREBASE_STORAGE_BUCKET = ''
 export const FIREBASE_MESSAGING_SENDER_ID = ''
 */
 
+export const BASE_URL = 'http://localhost:5000';
+export const MODEL_TYPE_SERVER = 'server';
+export const MODEL_TYPE_FIREBASE = 'firebase';
+export const MODEL_TYPE = MODEL_TYPE_SERVER;
+
 export const FACEBOOK_APP_ID = '';
 export const APP_NAME = 'eMia - React Native';
 
