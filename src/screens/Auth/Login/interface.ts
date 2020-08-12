@@ -1,4 +1,3 @@
-import {AuthInputModel} from "../../AuthModel";
 import {User} from "../../../../model/entities/user";
 
 export enum ServerType {
@@ -16,6 +15,4 @@ export interface LoginResults {
   user: User;
 }
 
-export interface LoginViewModel {
-  action(credentials: LoginCredentials): Promise<LoginResults>;
-}
+export type LoginFunction = (credentials: LoginCredentials) => void;
