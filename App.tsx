@@ -6,7 +6,7 @@
  * @flow
  */
 
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import 'react-native-gesture-handler';
 import {YellowBox} from 'react-native';
 import store from './src/redux/store';
@@ -16,6 +16,7 @@ import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer'
 import {isUserAuthenticated} from './src/model/network/firebase/auth/api';
 import ACTIONS from './src/redux/types';
 import {useAuth} from './src/model/localStorage/auth.hook';
+import {AuthContext} from './src/model/context/AuthContext';
 
 export default function App() {
   const [isDownloading, setIsDownloading] = useState(true);
@@ -63,13 +64,17 @@ export default function App() {
     });
   }
 
-  if (isDownloading) {
-    return splashScreenRenderer();
-  } else if (isAuthenticated) {
-    return homeScreenRenderer();
-  } else {
-    return authScreenRenderer();
-  }
+  return (
+    <AuthContext.Provider value={{
+      token, login, logout, userId, isAuthenticated
+    }}>
+      {
+        (isDownloading && splashScreenRenderer()) ||
+        (isAuthenticated && homeScreenRenderer()) ||
+        authScreenRenderer()
+      }
+    </AuthContext.Provider>
+  )
 }
 
 function setUpIgnoreYellowMessage() {

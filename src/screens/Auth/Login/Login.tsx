@@ -7,25 +7,38 @@
  */
 
 import React, {FunctionComponent, useState} from 'react';
-import {actions as auth} from '../index';
 import AuthForm from '../AuthForm';
 import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import * as StateStorage from '../../../redux/auth/actions';
 import {Credentials} from '../../../model/network/firebase/auth/api';
-
-const {login} = auth;
+import {LoginResults, LoginViewModel, ServerType} from "./viewModel/interface";
+import {ServerViewModel} from "./viewModel/server";
+import {FirebaseViewModel} from "./viewModel/firebase";
 
 export const Login: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState<AuthError>(new AuthError());
 
+  // TODO: Remove to the config
+  const MODEL_TYPE: ServerType = ServerType.Firebase;
+
+  function model(): LoginViewModel {
+    switch (MODEL_TYPE) {
+      case ServerType.Server:
+        return new ServerViewModel();
+      case ServerType.Firebase:
+        return new FirebaseViewModel();
+    }
+  }
+
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
-    login(getCredentials(fields))
+    const credentials = getCredentials(fields);
+    model()
+      .action(credentials)
       .then((result) => {
-        let {uid, user} = result;
-        userDidSuccessLogIn(uid, user);
+        userDidSuccessLogIn(result);
       })
       .catch((error) => {
         userDidFailLogIn(error);
@@ -45,9 +58,9 @@ export const Login: FunctionComponent = ({navigation}) => {
     return {email: email, password: password};
   }
 
-  function userDidSuccessLogIn(uid, currentUser) {
-    if (currentUser === null) {
-      let newUser = new User(uid, '');
+  function userDidSuccessLogIn(result: LoginResults) {
+    if (result.user === null) {
+      let newUser = new User(result.uid, '');
       navigation.navigate('EditProfile', {
         newUser: newUser,
         completion: () => {
@@ -55,7 +68,7 @@ export const Login: FunctionComponent = ({navigation}) => {
         },
       });
     } else {
-      StateStorage.logIn(currentUser);
+      StateStorage.logIn(result.user);
     }
   }
 
