@@ -8,7 +8,7 @@
 
 import {database} from '../config';
 import {getUser} from './users';
-import {getFirebaseUserId} from '../auth/api';
+import {AuthApi} from '../../interfaces';
 import {Post} from '../../../entities/post';
 import {User} from "../../../entities/user";
 
@@ -48,7 +48,7 @@ export function fetchAllPosts(): Promise<PostItemModel[]> {
 export function fetchMyPosts(): Promise<PostItemModel[]> {
   console.log('API. fetchMyPosts');
   return new Promise<PostItemModel[]>((resolve, reject) => {
-    getFirebaseUserId()
+    AuthApi().getFirebaseUserId()
       .then((uid) => {
         database
           .ref('main')

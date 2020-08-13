@@ -6,11 +6,11 @@
  * @flow
  */
 
-import {getCurrentUserAsync, getFirebaseUserId, registerNewUser} from '../../network/firebase/auth/api';
+import {AuthApi} from '../../network/interfaces';
 import {updateUser, fetchAllUsers, getUser} from '../../network/firebase/database/users';
 
 export function register(data, successCB, errorCB) {
-  registerNewUser(data)
+  AuthApi().registerNewUser(data)
     .then((user) => {
       successCB(user);
     })
@@ -20,7 +20,7 @@ export function register(data, successCB, errorCB) {
 }
 
 export function getCurrentUserId(callback) {
-  getFirebaseUserId()
+  AuthApi().getFirebaseUserId()
     .then((uid) => {
       callback(uid);
     })
@@ -31,7 +31,7 @@ export function getCurrentUserId(callback) {
 }
 
 export function downloadCurrentUserData(callback) {
-  getCurrentUserAsync()
+  AuthApi().getCurrentUserAsync()
     .then((user) => {
       callback(user);
     })

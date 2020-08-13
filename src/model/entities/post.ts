@@ -9,7 +9,7 @@
 import {Alert} from 'react-native';
 import {uploadImage} from '../network/firebase/utils/uploadImage';
 import {uploadData} from '../network/firebase/database/posts';
-import {getCurrentUserAsync} from '../network/firebase/auth/api';
+import {AuthApi} from '../network/interfaces';
 import {storage} from '../network/firebase/config';
 import {isEmpty} from "../../utils/validate";
 
@@ -66,7 +66,7 @@ export class Post {
 
   private addPost(completed) {
     let _this = this;
-    getCurrentUserAsync()
+    AuthApi().getCurrentUserAsync()
       .then((user) => {
         _this.uid = user.id;
         _this.author = user.username;

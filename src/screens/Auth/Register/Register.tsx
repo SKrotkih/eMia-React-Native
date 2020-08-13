@@ -7,20 +7,17 @@
  */
 
 import React, {FunctionComponent, useCallback, useContext, useState} from 'react';
-import {actions as auth} from '../index';
 import AuthForm from '../AuthForm';
 import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import * as StateStorage from '../../../redux/auth/actions';
-import {Credentials} from "../../../model/network/firebase/auth/api";
+import {AuthApi, Credentials} from "../../../model/network/interfaces";
 import {AuthContext} from "../../../model/context/AuthContext";
 import {useHttp} from "../../../model/network/server/request/http.hook";
 import {LoginCredentials, LoginFunction} from "../Login/interface";
 import {MODEL_TYPE_SERVER, MODEL_TYPE, MODEL_TYPE_FIREBASE} from '../../../config/constants';
 import {LoginData} from "../../../model/localStorage/auth.hook";
-
-const {register} = auth;
 
 export const Register: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState<AuthError>(new AuthError());
@@ -49,7 +46,7 @@ export const Register: FunctionComponent = ({navigation}) => {
       );
       const loginData = new LoginData(uid, token);
       authContext.login(loginData);
-      const result = {uid, email, user: null};
+      const result = {uid, email};
       success(result);
     } catch (e) {
       failed(e);
@@ -58,7 +55,7 @@ export const Register: FunctionComponent = ({navigation}) => {
 
   const registerOnFirebase = async (credentials: LoginCredentials) => {
     try {
-      const uid = await register(credentials);
+      const uid = await AuthApi().registerNewUser(credentials);
       success(uid);
     } catch (e) {
       failed(e);
@@ -72,7 +69,7 @@ export const Register: FunctionComponent = ({navigation}) => {
   }
 
   function userDidSuccess(response) {
-    const {uid, email, user} = response;
+    const {uid, email} = response;
     const newUser = new User(uid, '');
     newUser.email = email;
     navigation.navigate('EditProfile', {

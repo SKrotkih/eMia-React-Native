@@ -96,14 +96,13 @@ export class EditProfile extends React.Component<
 
   // Configure the Model View
   setUpModelView() {
-    let user = this.newUser === null ? new User('', '') : this.newUser;
-    this.modelView = new ModelView(this, user, () => {
+    this.modelView = new ModelView(this, () => {
       this.updateView();
     });
   }
 
   configureModelView() {
-    this.modelView.configure();
+    this.modelView.configure(this.newUser);
   }
 
   // User Activity
@@ -158,12 +157,13 @@ export class EditProfile extends React.Component<
   }
 
   userDidPressOnDone() {
-    this.modelView.submitData().then(() => {
-      if (this.completion === null) {
-        this.navigation.goBack();
-      } else {
-        this.completion();
-      }
+    this.modelView.submitData()
+      .then(() => {
+        if (this.completion === null) {
+          this.navigation.goBack();
+        } else {
+          this.completion();
+        }
     });
   }
 

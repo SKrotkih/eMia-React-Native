@@ -13,7 +13,7 @@ import store from './src/redux/store';
 import splashScreenRenderer from './src/screens/AppRouter/Renderers/Splash/renderer';
 import homeScreenRenderer from './src/screens/AppRouter/Renderers/Home/renderer';
 import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer';
-import {isUserAuthenticated} from './src/model/network/firebase/auth/api';
+import {AuthApi} from './src/model/network/interfaces';
 import ACTIONS from './src/redux/types';
 import {useAuth} from './src/model/localStorage/auth.hook';
 import {AuthContext} from './src/model/context/AuthContext';
@@ -31,7 +31,7 @@ export default function App() {
 
   async function checkIfUserAuthenticated() {
     try {
-      const _isAuthenticated = await isUserAuthenticated();
+      const _isAuthenticated = await AuthApi().isUserAuthenticated();
       if (_isAuthenticated) {
         handleUserIsAuthenticated();
       } else {

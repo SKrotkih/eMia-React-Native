@@ -8,19 +8,19 @@
 
 import React, {FunctionComponent, useState} from 'react';
 import {Alert} from 'react-native';
-import {actions as auth} from '../index';
 import AuthForm from '../AuthForm';
 import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
+import {AuthApi} from "../../../model/network/interfaces";
 
-const {remindPassword} = auth;
+
 
 export const ForgotPassword: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState(new AuthError());
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
-    remindPassword(getEmail(fields))
+    AuthApi().resetPassword(getEmail(fields))
       .then(() => {
         Alert.alert('Please check email box. Te password was sent to you.');
         navigation.goBack();

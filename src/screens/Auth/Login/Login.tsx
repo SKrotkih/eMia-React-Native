@@ -12,11 +12,11 @@ import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import * as StateStorage from '../../../redux/auth/actions';
-import {Credentials} from '../../../model/network/firebase/auth/api';
+import {Credentials} from '../../../model/network/interfaces';
 import {LoginCredentials, LoginFunction, LoginResults} from "./interface";
 import {AuthContext} from "../../../model/context/AuthContext";
 import {useHttp} from "../../../model/network/server/request/http.hook";
-import {login} from "../../../model/dbinteractor/login/dbinteractor";
+import {AuthApi} from "../../../model/network/interfaces";
 import {MODEL_TYPE_SERVER, MODEL_TYPE, MODEL_TYPE_FIREBASE} from '../../../config/constants';
 import {LoginData} from "../../../model/localStorage/auth.hook";
 
@@ -55,7 +55,7 @@ export const Login: FunctionComponent = ({navigation}) => {
 
   const signInOnFirebase = async (credentials: LoginCredentials) => {
     try {
-      const {uid, user} = await login(credentials);
+      const {uid, user} = await AuthApi().login(credentials);
       const result = {uid: uid, user: user};
       success(result);
     } catch (e) {

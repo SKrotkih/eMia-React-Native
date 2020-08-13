@@ -11,9 +11,8 @@ import {View, StyleSheet, Alert} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {Drawer} from 'react-native-paper';
-import store from '../../../../redux/store';
 import {color} from '../../../../theme/styles';
-import {logOut} from '../../../../model/dbinteractor/login/dbinteractor';
+import {AuthApi} from "../../../../model/network/interfaces";
 import MenuHeader from './Components/MenuHeader';
 import MenuFooter from './Components/MenuFooter';
 import {useTheme} from 'react-native-paper';
@@ -99,7 +98,7 @@ function editProfile({navigation, darkTheme}) {
 }
 
 function handleLogOut(props) {
-  logOut()
+  AuthApi().signOut()
     .then(() => {
       StateStorage.logOut();
     })

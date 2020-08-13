@@ -19,26 +19,29 @@ export class ModelView {
   private readonly _update: () => void;
   private readonly _view: EditProfile;
 
-  constructor(view: EditProfile, user: User, update: () => void) {
+  constructor(view: EditProfile, update: () => void) {
     this._view = view;
-    this._user = user;
     this._update = update;
     this._imageUrl = null;
     this._localImagePath = null;
     this.submitData = this.submitData.bind(this);
   }
 
-  configure() {
-    downloadCurrentUserData((_user) => {
-      this.currentUserDataDidDownload(_user);
-    });
-  }
-
   updateView() {
     this._update();
   }
 
-  currentUserDataDidDownload(user: User) {
+  configure(user: User) {
+    if (user === null) {
+      downloadCurrentUserData((_user) => {
+        this.renderUserData(_user);
+      });
+    } else {
+      this.renderUserData(user);
+    }
+  }
+
+  renderUserData(user: User) {
     if (user === null) {
       return;
     }
