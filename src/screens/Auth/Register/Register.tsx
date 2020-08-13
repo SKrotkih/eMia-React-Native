@@ -18,6 +18,7 @@ import {AuthContext} from "../../../model/context/AuthContext";
 import {useHttp} from "../../../model/network/server/request/http.hook";
 import {LoginCredentials, LoginFunction} from "../Login/interface";
 import {MODEL_TYPE_SERVER, MODEL_TYPE, MODEL_TYPE_FIREBASE} from '../../../config/constants';
+import {LoginData} from "../../../model/localStorage/auth.hook";
 
 const {register} = auth;
 
@@ -41,13 +42,14 @@ export const Register: FunctionComponent = ({navigation}) => {
 
   const registerOnServer = async (credentials: LoginCredentials) => {
     try {
-      const {token, userId} = await request(
+      const {uid, token} = await request(
         '/api/auth/register',
         'POST',
         credentials,
       );
-      authContext.login(token, userId);
-      const result = {uid: userId, user: null};
+      const loginData = new LoginData(uid, token);
+      authContext.login(loginData);
+      const result = {uid, user: null};
       success(result);
     } catch (e) {
       failed(e);

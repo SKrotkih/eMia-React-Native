@@ -1,18 +1,18 @@
 import {useState, useCallback, useEffect} from 'react';
 import * as LocalStorage from './storage';
 
-class LoginData {
+export class LoginData {
   private readonly _jwtToken: string;
   private readonly _userId: string;
   get token(): string {
     return this._jwtToken;
   }
-  get id(): string {
+  get uid(): string {
     return this._userId;
   }
-  constructor(jwtToken: string, userId: string) {
-    this._jwtToken = jwtToken;
-    this._userId = userId;
+  constructor(uid: string, token: string) {
+    this._userId = uid;
+    this._jwtToken = token;
   }
 }
 
@@ -26,7 +26,7 @@ export const useAuth = () => {
   const login = useCallback((loginData: LoginData) => {
     LocalStorage.setStorageObjectItem(keyName, loginData).then(() => {
       setToken(loginData.token);
-      setUserId(loginData.id);
+      setUserId(loginData.uid);
     });
   }, []);
 

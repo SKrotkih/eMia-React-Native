@@ -18,6 +18,7 @@ import {AuthContext} from "../../../model/context/AuthContext";
 import {useHttp} from "../../../model/network/server/request/http.hook";
 import {login} from "../../../model/dbinteractor/login/dbinteractor";
 import {MODEL_TYPE_SERVER, MODEL_TYPE, MODEL_TYPE_FIREBASE} from '../../../config/constants';
+import {LoginData} from "../../../model/localStorage/auth.hook";
 
 export const Login: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState<AuthError>(new AuthError());
@@ -39,9 +40,13 @@ export const Login: FunctionComponent = ({navigation}) => {
 
   const signInOnServer = async (credentials: LoginCredentials) => {
     try {
-      const {token, userId} = await request('/api/auth/login', 'POST', credentials);
-      authContext.login(token, userId);
-      const result = {uid: userId, user: null};
+      const {user, token} = await request('/api/auth/login', 'POST', credentials);
+      const loginData = new LoginData(user._id, token);
+      authContext.login(loginData);
+      const result = {uid: user._id, user: user};
+
+      console.log('LOGIN IS OK:' + JSON.stringify(result));
+
       success(result);
     } catch (e) {
       failed(e);
@@ -50,7 +55,7 @@ export const Login: FunctionComponent = ({navigation}) => {
 
   const signInOnFirebase = async (credentials: LoginCredentials) => {
     try {
-      const {uid, user} = await login(credentials)
+      const {uid, user} = await login(credentials);
       const result = {uid: uid, user: user};
       success(result);
     } catch (e) {
