@@ -6,6 +6,7 @@ What else you can found here:
 - TypeScript
 - Redux
 - [Firebase](https://firebase.google.com/docs/) - backend
+- Node.js (Express, MongoDB) second server side of the project ([eMia-Node-js-Server](https://github.com/SKrotkih/eMia-Node-js-Server))
 - React Navigation
 - Native iOS components on Swift
 - current React Native 0.63
