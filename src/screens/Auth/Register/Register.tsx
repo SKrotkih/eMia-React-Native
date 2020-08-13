@@ -42,14 +42,14 @@ export const Register: FunctionComponent = ({navigation}) => {
 
   const registerOnServer = async (credentials: LoginCredentials) => {
     try {
-      const {uid, token} = await request(
+      const {uid, email, token} = await request(
         '/api/auth/register',
         'POST',
         credentials,
       );
       const loginData = new LoginData(uid, token);
       authContext.login(loginData);
-      const result = {uid, user: null};
+      const result = {uid, email, user: null};
       success(result);
     } catch (e) {
       failed(e);
@@ -71,8 +71,10 @@ export const Register: FunctionComponent = ({navigation}) => {
     model()(credentials);
   }
 
-  function userDidSuccess(uid: string) {
+  function userDidSuccess(response) {
+    const {uid, email, user} = response;
     const newUser = new User(uid, '');
+    newUser.email = email;
     navigation.navigate('EditProfile', {
       newUser: newUser,
       completion: () => {
