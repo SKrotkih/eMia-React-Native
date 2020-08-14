@@ -9,8 +9,7 @@ export interface Credentials {
 }
 
 export interface DBInteractor {
-  signIn(credentials: Credentials): Promise<string>;
-  login(credentials: Credentials);
+  login(credentials: Credentials): Promise<{}>;
   registerNewUser(credentials: Credentials): Promise<string>;
   resetPassword(email: string): Promise<any>;
   signOut(): Promise<any>;

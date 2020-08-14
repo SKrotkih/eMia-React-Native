@@ -29,7 +29,7 @@ export class UsersDBInteractor implements DBInteractor {
     });
   }
 
-  login(credentials: Credentials) {
+  login(credentials: Credentials): Promise<{}> {
     return new Promise<{}>((resolve, reject) => {
       this.signIn(credentials)
         .then((uid) => {

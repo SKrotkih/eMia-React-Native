@@ -13,47 +13,23 @@ import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import * as StateStorage from '../../../redux/auth/actions';
 import {AuthApi, Credentials} from "../../../model/network/interfaces";
-import {AuthContext} from "../../../model/context/AuthContext";
-import {useHttp} from "../../../model/network/server/request/http.hook";
-import {LoginCredentials, LoginFunction} from "../Login/interface";
-import {MODEL_TYPE_SERVER, MODEL_TYPE, MODEL_TYPE_FIREBASE} from '../../../config/constants';
-import {LoginData} from "../../../model/localStorage/auth.hook";
+import {LoginCredentials} from "../Login/interface";
 
 export const Register: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState<AuthError>(new AuthError());
 
-  const authContext = useContext(AuthContext);
-
-  const {loading, request, networkError, clearError} = useHttp();
-
-  function model(): LoginFunction {
-    if (MODEL_TYPE === MODEL_TYPE_SERVER) {
-      return registerOnServer;
-    } else if (MODEL_TYPE === MODEL_TYPE_FIREBASE) {
-      return registerOnFirebase;
-    }
-  }
-
   const success = useCallback((result) => userDidSuccess(result), []);
   const failed = useCallback((error) => userDidFail(error), []);
 
-  const registerOnServer = async (credentials: LoginCredentials) => {
-    try {
-      const {uid, email, token} = await request(
-        '/api/auth/register',
-        'POST',
-        credentials,
-      );
-      const loginData = new LoginData(uid, token);
-      authContext.login(loginData);
-      const result = {uid, email};
-      success(result);
-    } catch (e) {
-      failed(e);
-    }
-  };
-
-  const registerOnFirebase = async (credentials: LoginCredentials) => {
+  function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
+    setError(new AuthError()); // clear out error messages
+    const credentials = getCredentials(fields);
+    signUp(credentials)
+      .catch((error) => {
+        console.log(error);
+      })
+  }
+  const signUp = async (credentials: LoginCredentials) => {
     try {
       const uid = await AuthApi().registerNewUser(credentials);
       const result = {uid, email: credentials.email};
@@ -62,12 +38,6 @@ export const Register: FunctionComponent = ({navigation}) => {
       failed(e);
     }
   };
-
-  function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
-    setError(new AuthError()); // clear out error messages
-    const credentials = getCredentials(fields);
-    model()(credentials);
-  }
 
   function userDidSuccess(response) {
     const {uid, email} = response;

@@ -8,23 +8,40 @@
 
 import {Credentials, DBInteractor} from '../interfaces';
 import {User} from '../../entities/user';
+import {httpRequest} from "./request/http.hook";
 
 export class UsersDBInteractor implements DBInteractor {
-  // Sign user in with their email and password
-  // returns uid
-  signIn(credentials: Credentials): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
+
+  login(credentials: Credentials): Promise<{}> {
+    return new Promise<{}>((resolve, reject) => {
+      httpRequest('/api/auth/login', 'POST', credentials)
+        .then((result) => {
+          const {user, token} = result;
+          // const authContext = useContext(AuthContext);
+          //
+          // const loginData = new LoginData(user._id, token);
+          // authContext.login(loginData);
+          resolve({uid: user._id, user: user});
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
-  }
-
-  login(credentials: Credentials) {
-
-
   }
 
 // Register the user using email and password
   registerNewUser(credentials: Credentials): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<{string}>((resolve, reject) => {
+      httpRequest('/api/auth/register', 'POST', credentials)
+        .then((result) => {
+          const {uid, email, token} = result;
+          // const loginData = new LoginData(user._id, token);
+          // authContext.login(loginData);
+          resolve(uid);
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   }
 
