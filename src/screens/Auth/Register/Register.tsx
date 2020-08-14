@@ -56,7 +56,8 @@ export const Register: FunctionComponent = ({navigation}) => {
   const registerOnFirebase = async (credentials: LoginCredentials) => {
     try {
       const uid = await AuthApi().registerNewUser(credentials);
-      success(uid);
+      const result = {uid, email: credentials.email};
+      success(result);
     } catch (e) {
       failed(e);
     }

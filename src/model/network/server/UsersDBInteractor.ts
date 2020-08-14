@@ -6,8 +6,8 @@
  * @flow
  */
 
-import {Credentials, DBInteractor} from "../interfaces";
-import {User} from "../../entities/user";
+import {Credentials, DBInteractor} from '../interfaces';
+import {User} from '../../entities/user';
 
 export class UsersDBInteractor implements DBInteractor {
   // Sign user in with their email and password

@@ -31,7 +31,8 @@ export function getCurrentUserId(callback) {
 }
 
 export function downloadCurrentUserData(callback) {
-  AuthApi().getCurrentUserAsync()
+  AuthApi()
+    .getCurrentUserAsync()
     .then((user) => {
       callback(user);
     })

@@ -8,8 +8,8 @@
 
 import {auth} from './config';
 import {getUser} from './database/users';
-import {User} from "../../entities/user";
-import {AuthApi, Credentials, DBInteractor} from "../interfaces";
+import {User} from '../../entities/user';
+import {Credentials, DBInteractor} from '../interfaces';
 
 export class UsersDBInteractor implements DBInteractor {
   // Sign user in with their email and password
@@ -96,7 +96,7 @@ export class UsersDBInteractor implements DBInteractor {
 
   async isUserAuthenticated(): Promise<boolean> {
     try {
-      const user = await getCurrentUserAsync();
+      const user = await this.getCurrentUserAsync();
       return Promise.resolve(user !== null);
     } catch (error) {
       console.log(error);
