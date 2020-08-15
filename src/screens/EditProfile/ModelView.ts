@@ -9,8 +9,8 @@
 import {User} from '../../model/entities/user';
 import {isEmpty} from '../../utils/validate';
 import {EditProfile} from './EditProfile';
-import {downloadCurrentUserData} from '../../model/dbinteractor/users/dbinteractor';
 import takePhoto from '../Home/AddNewPost/Utils/TakePhoto';
+import {AuthApi} from "../../model/network/interfaces";
 
 export class ModelView {
   private _user: User;
@@ -33,9 +33,14 @@ export class ModelView {
 
   configure(user: User) {
     if (user === null) {
-      downloadCurrentUserData((_user) => {
-        this.renderUserData(_user);
-      });
+      AuthApi()
+        .getCurrentUserAsync()
+        .then((user) => {
+          this.renderUserData(user);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     } else {
       this.renderUserData(user);
     }

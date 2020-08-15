@@ -10,6 +10,7 @@ import {Alert} from 'react-native';
 import {uploadCurrentUserData} from '../dbinteractor/users/dbinteractor';
 import {uploadImage} from '../network/firebase/utils/uploadImage';
 import {storage} from '../network/firebase/config';
+import {AuthApi} from "../network/interfaces";
 
 export class User {
   address: string;
@@ -49,7 +50,8 @@ export class User {
 
   update(photoUrl: string, completed) {
     let _this = this;
-    uploadCurrentUserData(_this)
+    AuthApi()
+      .updateUser(_this)
       .then(() => {
         uploadImage(photoUrl, _this.id)
           .then(() => {

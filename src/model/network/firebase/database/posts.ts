@@ -47,7 +47,7 @@ export function fetchAllPosts(): Promise<PostItemModel[]> {
 export function fetchMyPosts(): Promise<PostItemModel[]> {
   console.log('API. fetchMyPosts');
   return new Promise<PostItemModel[]>((resolve, reject) => {
-    AuthApi().getFirebaseUserId()
+    AuthApi().getCurrentUserId()
       .then((uid) => {
         database
           .ref('main')

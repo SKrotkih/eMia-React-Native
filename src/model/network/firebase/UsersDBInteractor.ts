@@ -104,7 +104,7 @@ export class UsersDBInteractor implements DBInteractor {
     }
   }
 
-  getFirebaseUserId(): Promise<string> {
+  getCurrentUserId(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       auth.onAuthStateChanged((user) => {
         if (user === null) {
@@ -120,7 +120,7 @@ export class UsersDBInteractor implements DBInteractor {
   getCurrentUserAsync(): Promise<User> {
     console.log('API. getCurrentUserAsync');
     return new Promise((resolve, reject) => {
-      this.getFirebaseUserId()
+      this.getCurrentUserId()
         .then((uid) => {
           this.fetchUserData(uid)
             .then((user) => {

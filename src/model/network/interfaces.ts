@@ -24,7 +24,7 @@ export interface DBInteractor {
 
   fetchUserData(uid: string): Promise<User>;
 
-  getFirebaseUserId(): Promise<string>;
+  getCurrentUserId(): Promise<string>;
 
   updateUser(user): Promise<any>;
 

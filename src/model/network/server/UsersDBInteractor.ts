@@ -61,7 +61,7 @@ export class UsersDBInteractor implements DBInteractor {
     return Promise.resolve(false);
   }
 
-  getFirebaseUserId(): Promise<string> {
+  getCurrentUserId(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
     });
   }

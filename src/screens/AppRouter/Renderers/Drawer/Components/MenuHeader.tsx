@@ -9,19 +9,24 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Avatar, Caption, Paragraph, Title} from 'react-native-paper';
-import {downloadCurrentUserData} from '../../../../../model/dbinteractor/users/dbinteractor';
+import {AuthApi} from "../../../../../model/network/interfaces";
 
 export default function MenuHeader() {
   const [avatar, setAvatar] = useState<string>(null);
   const [name, setName] = useState<string>('');
 
   useEffect(() => {
-    downloadCurrentUserData((_user) => {
-      setName(_user.username);
-      _user.getAvatarUrl().then((url) => {
-        setAvatar(url);
+    AuthApi()
+      .getCurrentUserAsync()
+      .then((user) => {
+        setName(user.username);
+        user.getAvatarUrl().then((url) => {
+          setAvatar(url);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
       });
-    });
   });
 
   const avatarUrl: string = avatar === null ? 'Icon-Profile' : avatar;
