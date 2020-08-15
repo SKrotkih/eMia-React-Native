@@ -239,7 +239,6 @@ export class ModelView {
 
   // Send user data on server
   submitData() {
-    // const _this = this;
     return new Promise((resolve, reject) => {
       if (isEmpty(this.name)) {
         reject('Please, enter your name');

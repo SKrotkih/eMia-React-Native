@@ -7,10 +7,10 @@
  */
 
 import {AuthApi} from '../../network/interfaces';
-import {updateUser, fetchAllUsers, getUser} from '../../network/firebase/database/users';
 
 export function register(data, successCB, errorCB) {
-  AuthApi().registerNewUser(data)
+  AuthApi()
+    .registerNewUser(data)
     .then((user) => {
       successCB(user);
     })
@@ -20,7 +20,8 @@ export function register(data, successCB, errorCB) {
 }
 
 export function getCurrentUserId(callback) {
-  AuthApi().getFirebaseUserId()
+  AuthApi()
+    .getFirebaseUserId()
     .then((uid) => {
       callback(uid);
     })
@@ -42,20 +43,13 @@ export function downloadCurrentUserData(callback) {
     });
 }
 
-export function uploadCurrentUserData(user) {
-  return new Promise((resolve, reject) => {
-    updateUser(user)
-      .then(() => {
-        resolve();
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+export function uploadCurrentUserData(user): Promise<void> {
+  return AuthApi().updateUser(user);
 }
 
 export function updateUserProfileData(user, successCB, errorCB) {
-  updateUser(user)
+  AuthApi()
+    .updateUser(user)
     .then(() => {
       successCB();
     })
@@ -65,7 +59,8 @@ export function updateUserProfileData(user, successCB, errorCB) {
 }
 
 export function fetchUser(uid, callback) {
-  getUser(uid)
+  AuthApi()
+    .getUser(uid)
     .then((user) => {
       callback(user);
     })
@@ -75,7 +70,8 @@ export function fetchUser(uid, callback) {
 }
 
 export function fetchUsers(completion, failed) {
-  fetchAllUsers()
+  AuthApi()
+    .fetchAllUsers()
     .then((users) => {
       completion(users);
     })

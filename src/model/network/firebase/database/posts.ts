@@ -7,7 +7,6 @@
  */
 
 import {database} from '../config';
-import {getUser} from './users';
 import {AuthApi} from '../../interfaces';
 import {Post} from '../../../entities/post';
 import {User} from "../../../entities/user";
@@ -160,7 +159,7 @@ function assignImagesUrl(items: PostItemModel[]): Promise<PostItemModel[]> {
               console.log(error);
             })
             .finally(() => {
-              getUser(userId)
+              AuthApi().getUser(userId)
                 .then((user) => {
                   item.author = user;
                   bufferLength -= 1;

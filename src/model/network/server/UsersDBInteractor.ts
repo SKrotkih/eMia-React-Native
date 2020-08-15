@@ -48,6 +48,7 @@ export class UsersDBInteractor implements DBInteractor {
 // Send Password Reset Email
   resetPassword(email: string): Promise<any> {
     return new Promise((resolve, reject) => {
+      reject(Error('This functionality for "Node.js" backend has not implemented yet.'));
     });
   }
 
@@ -74,6 +75,36 @@ export class UsersDBInteractor implements DBInteractor {
 
   fetchUserData(uid: string): Promise<User> {
     return new Promise<User>((resolve, reject) => {
+      this.getUser(uid)
+        .then((user) => {
+          if (user === null) {
+            reject(`User with uid=${uid} is not presented in the data base`);
+          } else {
+            resolve(user);
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   }
+
+  updateUser(user): Promise<any> {
+    return new Promise<User>((resolve, reject) => {
+      reject(Error('Not implemented yet'));
+    });
+  }
+
+  getUser(uid: string): Promise<User> {
+    return new Promise<User>((resolve, reject) => {
+      reject(Error('Not implemented yet'));
+    });
+  }
+
+  fetchAllUsers(): Promise<Array<User>> {
+    return new Promise<User>((resolve, reject) => {
+      reject(Error('Not implemented yet'));
+    });
+  }
+
 }

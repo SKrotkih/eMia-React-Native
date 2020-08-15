@@ -22,13 +22,7 @@ export const useHttp = () => {
           }`;
           throw new Error(message);
         }
-
-        console.log('LOGIN RESPONSE data:');
-        console.log(response);
-        console.log(data);
-
         setLoading(false);
-
         return data;
       } catch (e) {
         setLoading(false);
@@ -51,11 +45,6 @@ export const httpRequest = async (url, method = 'GET', body = null, headers = {}
       headers['Content-Type'] = 'application/json';
     }
     url = BASE_URL + url;
-
-    console.log('LOGIN:');
-    console.log(url);
-    console.log(body);
-
     const response = await fetch(url, {method, body, headers});
     const data = await response.json();
     if (response.status !== 200 || !response.ok) {
@@ -64,17 +53,8 @@ export const httpRequest = async (url, method = 'GET', body = null, headers = {}
       }`;
       throw new Error(message);
     }
-
-    console.log('LOGIN RESPONSE data:');
-    console.log(response);
-    console.log(data);
-
     return data;
   } catch (e) {
-
-    console.log('ERROR!!!!');
-    console.log(e);
-
     throw e;
   }
 }

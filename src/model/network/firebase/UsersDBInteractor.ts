@@ -6,14 +6,14 @@
  * @flow
  */
 
-import {auth} from './config';
-import {getUser} from './database/users';
+import {auth, database} from './config';
 import {User} from '../../entities/user';
 import {Credentials, DBInteractor} from '../interfaces';
 
 export class UsersDBInteractor implements DBInteractor {
   // Sign user in with their email and password
   // returns uid
+  // Private method
   signIn(credentials: Credentials): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       console.log('API. LOGIN email: ', credentials.email, 'password: ', credentials.password);
@@ -138,13 +138,86 @@ export class UsersDBInteractor implements DBInteractor {
 
   fetchUserData(uid: string): Promise<User> {
     return new Promise<User>((resolve, reject) => {
-      getUser(uid)
+      this.getUser(uid)
         .then((user) => {
           if (user === null) {
             reject(`User with uid=${uid} is not presented in the data base`);
           } else {
             resolve(user);
           }
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
+
+
+// Create new user object in realtime database
+  updateUser(user): Promise<any> {
+    return new Promise((resolve, reject) => {
+      database
+        .ref('main')
+        .child('users')
+        .child(user.id)
+        .update({...user})
+        .then(() => {
+          resolve();
+        })
+        .catch((error) => {
+          console.log('API. updateUser error: ', error.message);
+          reject(error);
+        });
+    });
+  }
+
+// Get user object from the realtime database
+  getUser(uid: string): Promise<User> {
+    console.log('API. getUser uid=', uid);
+    return new Promise<User>((resolve, reject) => {
+      database
+        .ref('main')
+        .child('users')
+        .child(uid)
+        .once('value')
+        .then(function (snapshot) {
+          let value = snapshot.val();
+          if (value != null) {
+            let user = new User(value.id, value.username);
+            user.parse(value);
+            resolve(user);
+          } else {
+            resolve(null);
+          }
+        })
+        .catch((error) => {
+          console.log('API. getUser error: ', error.message);
+          reject();
+        });
+    });
+  }
+
+  fetchAllUsers(): Promise<Array<User>> {
+    console.log('API. fetchAllUsers');
+    return new Promise((resolve, reject) => {
+      database
+        .ref('main')
+        .child('users')
+        .once('value')
+        .then(function (snapshot) {
+          let users = [];
+          if (snapshot.val() !== null) {
+            snapshot.forEach((child) => {
+              let value = child.val();
+              let user = new User(value.id, value.username);
+              user.parse(value);
+              users.push({
+                value: user,
+                key: child.key,
+              });
+            });
+          }
+          resolve(users);
         })
         .catch((error) => {
           reject(error);

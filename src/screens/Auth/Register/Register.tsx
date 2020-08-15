@@ -18,9 +18,6 @@ import {LoginCredentials} from "../Login/interface";
 export const Register: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState<AuthError>(new AuthError());
 
-  const success = useCallback((result) => userDidSuccess(result), []);
-  const failed = useCallback((error) => userDidFail(error), []);
-
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
     const credentials = getCredentials(fields);
@@ -29,31 +26,22 @@ export const Register: FunctionComponent = ({navigation}) => {
         console.log(error);
       })
   }
+
   const signUp = async (credentials: LoginCredentials) => {
     try {
       const uid = await AuthApi().registerNewUser(credentials);
-      const result = {uid, email: credentials.email};
-      success(result);
+      const newUser = new User(uid, '');
+      newUser.email = credentials.email;
+      navigation.navigate('EditProfile', {
+        newUser: newUser,
+        completion: () => {
+          StateStorage.signUp(newUser);
+        },
+      });
     } catch (e) {
-      failed(e);
+      setError(AuthError.parseMessage(e));
     }
   };
-
-  function userDidSuccess(response) {
-    const {uid, email} = response;
-    const newUser = new User(uid, '');
-    newUser.email = email;
-    navigation.navigate('EditProfile', {
-      newUser: newUser,
-      completion: () => {
-        StateStorage.signUp(newUser);
-      },
-    });
-  }
-
-  function userDidFail(_error) {
-    setError(AuthError.parseMessage(_error));
-  }
 
   function getCredentials(
     fields: AuthInputModel.AuthInputItem[],
