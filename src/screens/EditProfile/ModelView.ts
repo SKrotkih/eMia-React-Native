@@ -34,7 +34,7 @@ export class ModelView {
   configure(user: User) {
     if (user === null) {
       AuthApi()
-        .getCurrentUserAsync()
+        .getCurrentUser()
         .then((user) => {
           this.renderUserData(user);
         })

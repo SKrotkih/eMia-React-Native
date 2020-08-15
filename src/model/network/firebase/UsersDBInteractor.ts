@@ -34,7 +34,7 @@ export class UsersDBInteractor implements DBInteractor {
       this.signIn(credentials)
         .then((uid) => {
           console.log('LOGIN SUCCESS. User UID=', uid);
-          this.fetchUserData(uid)
+          this.getUser(uid)
             .then((currentUser) => {
               resolve({uid: uid, user: currentUser});
             })
@@ -94,14 +94,16 @@ export class UsersDBInteractor implements DBInteractor {
     });
   }
 
-  async isUserAuthenticated(): Promise<boolean> {
-    try {
-      const user = await this.getCurrentUserAsync();
-      return Promise.resolve(user !== null);
-    } catch (error) {
-      console.log(error);
-      return Promise.resolve(false);
-    }
+  isUserAuthenticated(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.getCurrentUser()
+        .then((_) => {
+          resolve(true);
+        })
+        .catch(()=> {
+          resolve(false);
+        })
+    });
   }
 
   getCurrentUserId(): Promise<string> {
@@ -115,43 +117,6 @@ export class UsersDBInteractor implements DBInteractor {
       });
     });
   }
-
-// Get current registered user from the Authentication Firebase database
-  getCurrentUserAsync(): Promise<User> {
-    console.log('API. getCurrentUserAsync');
-    return new Promise((resolve, reject) => {
-      this.getCurrentUserId()
-        .then((uid) => {
-          this.fetchUserData(uid)
-            .then((user) => {
-              resolve(user);
-            })
-            .catch((error) => {
-              reject(`Error while fetch user data: ${error}`);
-            });
-        })
-        .catch((error) => {
-          reject(`Could not get Auth User response. Error: ${error}`);
-        });
-    });
-  }
-
-  fetchUserData(uid: string): Promise<User> {
-    return new Promise<User>((resolve, reject) => {
-      this.getUser(uid)
-        .then((user) => {
-          if (user === null) {
-            reject(`User with uid=${uid} is not presented in the data base`);
-          } else {
-            resolve(user);
-          }
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  }
-
 
 // Create new user object in realtime database
   updateUser(user): Promise<any> {
@@ -171,6 +136,13 @@ export class UsersDBInteractor implements DBInteractor {
     });
   }
 
+  // Get current registered user from the Authentication Firebase database
+  async getCurrentUser(): Promise<User> {
+    console.log('API. getCurrentUser');
+    const uid = await this.getCurrentUserId()
+    return this.getUser(uid);
+  }
+
 // Get user object from the realtime database
   getUser(uid: string): Promise<User> {
     console.log('API. getUser uid=', uid);
@@ -187,12 +159,11 @@ export class UsersDBInteractor implements DBInteractor {
             user.parse(value);
             resolve(user);
           } else {
-            resolve(null);
+            reject(`User with uid=${uid} is not presented in the data base`);
           }
         })
         .catch((error) => {
-          console.log('API. getUser error: ', error.message);
-          reject();
+          reject(error);
         });
     });
   }

@@ -17,7 +17,7 @@ export default function MenuHeader() {
 
   useEffect(() => {
     AuthApi()
-      .getCurrentUserAsync()
+      .getCurrentUser()
       .then((user) => {
         setName(user.username);
         user.getAvatarUrl().then((url) => {

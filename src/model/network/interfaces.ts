@@ -20,13 +20,11 @@ export interface DBInteractor {
 
   isUserAuthenticated(): Promise<boolean>;
 
-  getCurrentUserAsync(): Promise<User>;
-
-  fetchUserData(uid: string): Promise<User>;
-
   getCurrentUserId(): Promise<string>;
 
   updateUser(user): Promise<any>;
+
+  getCurrentUser(): Promise<User>;
 
   getUser(uid: string): Promise<User>;
 

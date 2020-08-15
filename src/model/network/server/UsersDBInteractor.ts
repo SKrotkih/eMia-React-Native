@@ -31,7 +31,7 @@ export class UsersDBInteractor implements DBInteractor {
 
 // Register the user using email and password
   registerNewUser(credentials: Credentials): Promise<string> {
-    return new Promise<{string}>((resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       httpRequest('/api/auth/register', 'POST', credentials)
         .then((result) => {
           const {uid, email, token} = result;
@@ -57,35 +57,20 @@ export class UsersDBInteractor implements DBInteractor {
     });
   }
 
-  async isUserAuthenticated(): Promise<boolean> {
-    return Promise.resolve(false);
+  isUserAuthenticated(): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.getCurrentUser()
+        .then((_) => {
+          resolve(true);
+        })
+        .catch(()=> {
+          resolve(false);
+        })
+    });
   }
 
   getCurrentUserId(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-    });
-  }
-
-// Get current registered user from the Authentication Firebase database
-  getCurrentUserAsync(): Promise<User> {
-    console.log('API. getCurrentUserAsync');
-    return new Promise((resolve, reject) => {
-    });
-  }
-
-  fetchUserData(uid: string): Promise<User> {
-    return new Promise<User>((resolve, reject) => {
-      this.getUser(uid)
-        .then((user) => {
-          if (user === null) {
-            reject(`User with uid=${uid} is not presented in the data base`);
-          } else {
-            resolve(user);
-          }
-        })
-        .catch((error) => {
-          reject(error);
-        });
     });
   }
 
@@ -95,6 +80,13 @@ export class UsersDBInteractor implements DBInteractor {
     });
   }
 
+// Get current registered user from the Authentication Firebase database
+  async getCurrentUser(): Promise<User> {
+    console.log('API. getCurrentUser');
+    const uid = await this.getCurrentUserId()
+    return this.getUser(uid);
+  }
+
   getUser(uid: string): Promise<User> {
     return new Promise<User>((resolve, reject) => {
       reject(Error('Not implemented yet'));
@@ -102,9 +94,8 @@ export class UsersDBInteractor implements DBInteractor {
   }
 
   fetchAllUsers(): Promise<Array<User>> {
-    return new Promise<User>((resolve, reject) => {
+    return new Promise<Array<User>>((resolve, reject) => {
       reject(Error('Not implemented yet'));
     });
   }
-
 }

@@ -67,7 +67,7 @@ export class Post {
   private addPost(completed) {
     let _this = this;
     AuthApi()
-      .getCurrentUserAsync()
+      .getCurrentUser()
       .then((user) => {
         _this.uid = user.id;
         _this.author = user.username;
