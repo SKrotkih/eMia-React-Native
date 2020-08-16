@@ -14,7 +14,7 @@ export function getStorageItem(key) {
       try {
         const value = await AsyncStorage.getItem(key);
         if (value === null) {
-          reject('Failed parse storage item');
+          reject(Error('Failed parse storage item'));
         } else {
           resolve(value);
         }
@@ -31,7 +31,7 @@ export function getStorageObjectItem(key) {
       try {
         const jsonValue = await AsyncStorage.getItem(key);
         if (jsonValue === null) {
-          reject('Failed parse of the storage item');
+          reject(Error('Failed parse of the storage item'));
         } else {
           resolve(JSON.parse(jsonValue));
         }

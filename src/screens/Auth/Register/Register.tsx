@@ -30,7 +30,7 @@ export const Register: FunctionComponent = ({navigation}) => {
   const signUp = async (credentials: LoginCredentials) => {
     try {
       const uid = await AuthApi().registerNewUser(credentials);
-      const newUser = new User(uid, '');
+      const newUser = new User({_id: uid, username: ''});
       newUser.email = credentials.email;
       navigation.navigate('EditProfile', {
         newUser: newUser,

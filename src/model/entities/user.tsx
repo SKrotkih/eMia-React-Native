@@ -16,26 +16,14 @@ export class User {
   address: string;
   email: string;
   gender: number;
-  id: string;
+  _id: string;
   tokenAndroid: string;
   tokenIOS: string;
   username: string;
   yearbirth: number;
 
-  constructor(uid: string, name: string) {
-    this.address = '';
-    this.email = '';
-    this.gender = 1;
-    this.id = uid;
-    this.tokenAndroid = '';
-    this.tokenIOS = '';
-    this.username = name;
-    this.yearbirth = 1970;
-  }
-
-  // Snapshot from Firebase Users table item
-  parse(snapshot: any) {
-    this.id = snapshot.id;
+  constructor(snapshot: any) {
+    this._id = snapshot._id;
     this.username = snapshot.username;
     this.address = snapshot.address === undefined ? '' : snapshot.address;
     this.email = snapshot.email === undefined ? '' : snapshot.email;
@@ -43,8 +31,8 @@ export class User {
     this.tokenAndroid = snapshot.tokenAndroid === undefined ? '' : snapshot.tokenAndroid;
     this.tokenIOS = snapshot.tokenIOS === undefined ? '' : snapshot.tokenIOS;
     this.yearbirth = snapshot.yearbirth === undefined ? 0 : snapshot.yearbirth;
-    if (this.id === undefined) {
-      this.id = snapshot.uid;
+    if (this._id === undefined) {
+      this._id = snapshot.uid;
     }
   }
 

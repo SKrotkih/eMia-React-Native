@@ -110,7 +110,7 @@ export class UsersDBInteractor implements DBInteractor {
     return new Promise<string>((resolve, reject) => {
       auth.onAuthStateChanged((user) => {
         if (user === null) {
-          reject('The User has not signed in yet');
+          reject(Error('The User has not signed in yet'));
         } else {
           resolve(user.uid);
         }
@@ -155,11 +155,11 @@ export class UsersDBInteractor implements DBInteractor {
         .then(function (snapshot) {
           let value = snapshot.val();
           if (value != null) {
-            let user = new User(value.id, value.username);
+            let user = new User({_id: value.id, username: value.username});
             user.parse(value);
             resolve(user);
           } else {
-            reject(`User with uid=${uid} is not presented in the data base`);
+            reject(Error(`User with uid=${uid} is not presented in the data base`));
           }
         })
         .catch((error) => {
@@ -179,9 +179,8 @@ export class UsersDBInteractor implements DBInteractor {
           let users = [];
           if (snapshot.val() !== null) {
             snapshot.forEach((child) => {
-              let value = child.val();
-              let user = new User(value.id, value.username);
-              user.parse(value);
+              let snapshotItem = child.val();
+              let user = new User(snapshotItem);
               users.push({
                 value: user,
                 key: child.key,

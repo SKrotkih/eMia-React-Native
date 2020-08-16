@@ -13,7 +13,7 @@ import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {AuthApi} from "../../../model/network/interfaces";
 
-
+// We use password reminder only for Firebase backend now
 
 export const ForgotPassword: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState(new AuthError());

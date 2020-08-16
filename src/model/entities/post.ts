@@ -51,13 +51,13 @@ export class Post {
       if (this.title === null || isEmpty(this.title)) {
         reject('Please, enter post title');
       } else if (this.body === null || isEmpty(this.body)) {
-        reject('Please, enter post body');
+        reject(Error('Please, enter post body'));
       } else {
         this.addPost((success) => {
           if (success) {
             resolve();
           }  else {
-            reject('System Error: Post has not uploaded on server');
+            reject(Error('System Error: Post has not uploaded on server'));
           }
         });
       }

@@ -40,21 +40,30 @@ export const useHttp = () => {
 
 export const httpRequest = async (url, method = 'GET', body = null, headers = {}) => {
   try {
+    let options;
     if (body) {
       body = JSON.stringify(body);
       headers['Content-Type'] = 'application/json';
+      options = {method, body, headers};
+    } else {
+      options = {method};
     }
     url = BASE_URL + url;
-    const response = await fetch(url, {method, body, headers});
-    const data = await response.json();
-    if (response.status !== 200 || !response.ok) {
-      const message = `status: ${response.status}: ${
-        data.message || 'Something went wrong'
-      }`;
+
+    console.log(url);
+
+    const response = await fetch(url, options);
+
+    console.log('response=', response);
+
+    if (response.status === 200 && response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      const message = `response status: ${response.status}`;
       throw new Error(message);
     }
-    return data;
   } catch (e) {
     throw e;
   }
-}
+};
