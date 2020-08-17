@@ -97,9 +97,9 @@ export class UsersDBInteractor implements DBInteractor {
     return new Promise<User>((resolve, reject) => {
       httpRequest(`/api/users/${uid}`, 'GET')
         .then((result) => {
-          const {snapshot} = result;
-          if (snapshot) {
-            const userObj = new User(snapshot);
+          const {user} = result;
+          if (user) {
+            const userObj = new User(user);
             resolve(userObj);
           } else {
             reject(Error('User structure data on server is wrong'));
@@ -113,7 +113,7 @@ export class UsersDBInteractor implements DBInteractor {
 
   updateUser(user: User): Promise<void> {
     return new Promise<void>((resolve, reject) => {
-      httpRequest('/api/users/user', 'POST', user)
+      httpRequest('/api/users/user', 'POST', {user})
         .then((result) => {
           console.log(result);
           resolve();

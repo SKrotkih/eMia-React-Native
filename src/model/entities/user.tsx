@@ -21,6 +21,7 @@ export class User {
   tokenIOS: string;
   username: string;
   yearbirth: number;
+  password: string;
 
   constructor(snapshot: any) {
     this._id = snapshot._id;
@@ -31,6 +32,7 @@ export class User {
     this.tokenAndroid = snapshot.tokenAndroid === undefined ? '' : snapshot.tokenAndroid;
     this.tokenIOS = snapshot.tokenIOS === undefined ? '' : snapshot.tokenIOS;
     this.yearbirth = snapshot.yearbirth === undefined ? 0 : snapshot.yearbirth;
+    this.password = snapshot.password === undefined ? '' : snapshot.password;
     if (this._id === undefined) {
       this._id = snapshot.uid;
     }
