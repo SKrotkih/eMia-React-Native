@@ -25,20 +25,18 @@ export function getStorageItem(key) {
   });
 }
 
-export function getStorageObjectItem(key) {
-  return new Promise((resolve, reject) => {
-    const _ = async () => {
-      try {
-        const jsonValue = await AsyncStorage.getItem(key);
-        if (jsonValue === null) {
-          reject(Error('Failed parse of the storage item'));
-        } else {
-          resolve(JSON.parse(jsonValue));
-        }
-      } catch (e) {
-        reject(e);
+export function getStorageObjectItem(key): Promise<any> {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(key);
+      if (jsonValue === null) {
+        reject(Error('Failed parse of the storage item'));
+      } else {
+        resolve(JSON.parse(jsonValue));
       }
-    };
+    } catch (e) {
+      reject(e);
+    }
   });
 }
 

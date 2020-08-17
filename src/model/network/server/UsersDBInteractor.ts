@@ -82,14 +82,18 @@ export class UsersDBInteractor implements DBInteractor {
 
   getCurrentUserId(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-      LocalStorage.getStorageObjectItem(this.keyName).then((data) => {
-        const loginData = data as LoginData;
-        if (loginData) {
-          resolve(loginData.uid);
-        } else {
-          reject(Error('Any user has not signed in yet'));
-        }
-      });
+      LocalStorage.getStorageObjectItem(this.keyName)
+        .then((data) => {
+          const loginData = data as LoginData;
+          if (loginData) {
+            resolve(loginData.uid);
+          } else {
+            reject(Error('Any user has not signed in yet'));
+          }
+        })
+        .catch((error) => {
+          reject(error);
+        });
     });
   }
 

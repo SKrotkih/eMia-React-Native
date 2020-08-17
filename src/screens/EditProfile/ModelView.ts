@@ -31,25 +31,20 @@ export class ModelView {
     this._update();
   }
 
-  configure(user: User) {
+  async configure(user: User) {
     if (user === null) {
-      AuthApi()
-        .getCurrentUser()
-        .then((user) => {
-          this.renderUserData(user);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      try {
+        const currentUser = await AuthApi().getCurrentUser()
+        this.renderUserData(currentUser);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       this.renderUserData(user);
     }
   }
 
   renderUserData(user: User) {
-    if (user === null) {
-      return;
-    }
     this.user = user;
     this._view.setTitle(this.title);
     this.updateView();
