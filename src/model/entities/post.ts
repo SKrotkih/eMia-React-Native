@@ -8,8 +8,8 @@
 
 import {Alert} from 'react-native';
 import {uploadImage} from '../network/firebase/utils/uploadImage';
-import {uploadData} from '../network/firebase/database/posts';
-import {AuthApi} from '../network/interfaces';
+import {uploadData} from '../network/firebase/PostsDBInteractor';
+import {AuthApi, PostsApi} from '../network/interfaces';
 import {storage} from '../network/firebase/config';
 import {isEmpty} from "../../utils/validate";
 
@@ -71,7 +71,7 @@ export class Post {
       .then((user) => {
         _this.uid = user.id;
         _this.author = user.username;
-        uploadData(_this)
+        PostsApi().uploadData(_this)
           .then((id) => {
             let pictureUri = _this.pictureUri;
             if (pictureUri === null || pictureUri.length === 0) {

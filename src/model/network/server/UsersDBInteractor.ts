@@ -6,12 +6,12 @@
  * @flow
  */
 
-import {Credentials, DBInteractor} from '../interfaces';
+import {Credentials, DBUsersInteractor} from '../interfaces';
 import {User} from '../../entities/user';
 import {httpRequest} from "./request/http.hook";
 import * as LocalStorage from "../../localStorage/storage";
 
-export class UsersDBInteractor implements DBInteractor {
+export class UsersDBInteractor implements DBUsersInteractor {
   private keyName = 'login';
 
   login(credentials: Credentials): Promise<{}> {

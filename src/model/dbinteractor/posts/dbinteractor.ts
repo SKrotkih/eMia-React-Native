@@ -6,12 +6,12 @@
  * @flow
  */
 
-import {fetchAllPosts, fetchMyPosts} from '../../network/firebase/database/posts';
+import {PostsApi} from "../../network/interfaces";
 
 export function fetchPosts(i) {
   if (i === 0) {
-    return fetchAllPosts();
+    return PostsApi().fetchAllPosts();
   } else {
-    return fetchMyPosts();
+    return PostsApi().fetchMyPosts();
   }
 }

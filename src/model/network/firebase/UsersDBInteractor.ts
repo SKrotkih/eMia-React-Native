@@ -8,9 +8,9 @@
 
 import {auth, database} from './config';
 import {User} from '../../entities/user';
-import {Credentials, DBInteractor} from '../interfaces';
+import {Credentials, DBUsersInteractor} from '../interfaces';
 
-export class UsersDBInteractor implements DBInteractor {
+export class UsersDBInteractor implements DBUsersInteractor {
   // Sign user in with their email and password
   // returns uid
   // Private method
@@ -155,8 +155,7 @@ export class UsersDBInteractor implements DBInteractor {
         .then(function (snapshot) {
           let value = snapshot.val();
           if (value != null) {
-            let user = new User({_id: value.id, username: value.username});
-            user.parse(value);
+            let user = new User(value);
             resolve(user);
           } else {
             reject(Error(`User with uid=${uid} is not presented in the data base`));
