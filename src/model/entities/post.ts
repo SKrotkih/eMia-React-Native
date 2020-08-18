@@ -69,7 +69,7 @@ export class Post {
     AuthApi()
       .getCurrentUser()
       .then((user) => {
-        _this.uid = user.id;
+        _this.uid = user._id;
         _this.author = user.username;
         PostsApi().uploadData(_this)
           .then((id) => {

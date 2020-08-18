@@ -50,7 +50,6 @@ export class UsersDBInteractor implements DBUsersInteractor {
     });
   }
 
-
 // Register the user using email and password
   registerNewUser(credentials: Credentials): Promise<string> {
     return new Promise<string>((resolve, reject) => {
