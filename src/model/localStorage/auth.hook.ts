@@ -2,17 +2,11 @@ import {useState, useCallback, useEffect} from 'react';
 import * as LocalStorage from './storage';
 
 export class LoginData {
-  private readonly _jwtToken: string;
-  private readonly _userId: string;
-  get token(): string {
-    return this._jwtToken;
-  }
-  get uid(): string {
-    return this._userId;
-  }
+  readonly token: string;
+  readonly uid: string;
   constructor(uid: string, token: string) {
-    this._userId = uid;
-    this._jwtToken = token;
+    this.uid = uid;
+    this.token = token;
   }
 }
 

@@ -27,7 +27,7 @@ export default function App() {
     setUpIgnoreYellowMessage();
     subscribeOnActionDispatch();
     checkIfUserAuthenticated().catch((error) => console.error(error));
-  });
+  }, []);
 
   async function checkIfUserAuthenticated() {
     try {

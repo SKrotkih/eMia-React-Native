@@ -30,7 +30,7 @@ export function getStorageObjectItem(key): Promise<any> {
     try {
       const jsonValue = await AsyncStorage.getItem(key);
       if (jsonValue === null) {
-        reject(Error('Failed parse of the storage item'));
+        reject(Error(`Failed parse of '${key}' storage item`));
       } else {
         resolve(JSON.parse(jsonValue));
       }

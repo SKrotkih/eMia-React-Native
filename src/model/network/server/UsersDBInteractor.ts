@@ -19,10 +19,11 @@ export class UsersDBInteractor implements DBInteractor {
       httpRequest('/api/auth/login', 'POST', credentials)
         .then((result) => {
           const {user, token} = result;
-          const loginData = new LoginData(user._id, token);
-          LocalStorage.setStorageObjectItem(this.keyName, loginData)
-            .then(() => {
-              resolve({uid: user._id, user: user});
+          LocalStorage.setStorageObjectItem(this.keyName, {
+            uid: user._id,
+            token,
+          }).then(() => {
+            resolve({uid: user._id, user: user});
           });
         })
         .catch((error) => {
@@ -37,9 +38,7 @@ export class UsersDBInteractor implements DBInteractor {
       httpRequest('/api/auth/register', 'POST', credentials)
         .then((result) => {
           const {uid, email, token} = result;
-          const loginData = new LoginData(uid, token);
-          LocalStorage.setStorageObjectItem(this.keyName, loginData)
-            .then(() => {
+          LocalStorage.setStorageObjectItem(this.keyName, {uid, token}).then(() => {
               resolve(uid);
             });
         })
@@ -83,12 +82,11 @@ export class UsersDBInteractor implements DBInteractor {
   getCurrentUserId(): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       LocalStorage.getStorageObjectItem(this.keyName)
-        .then((data) => {
-          const loginData = data as LoginData;
-          if (loginData) {
-            resolve(loginData.uid);
-          } else {
+        .then((loginData) => {
+          if (loginData.uid === undefined) {
             reject(Error('Any user has not signed in yet'));
+          } else {
+            resolve(loginData.uid);
           }
         })
         .catch((error) => {
@@ -136,16 +134,10 @@ export class UsersDBInteractor implements DBInteractor {
 }
 
 export class LoginData {
-  private readonly _jwtToken: string;
-  private readonly _userId: string;
-  get token(): string {
-    return this._jwtToken;
-  }
-  get uid(): string {
-    return this._userId;
-  }
-  constructor(uid: string, token: string) {
-    this._userId = uid;
-    this._jwtToken = token;
+  readonly token: string;
+  readonly uid: string;
+  constructor(data: LoginData) {
+    this.uid = data.uid;
+    this.token = data.token;
   }
 }
