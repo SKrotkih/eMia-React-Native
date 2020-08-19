@@ -55,7 +55,7 @@ export const AddNewPost: FunctionComponent = (props) => {
   }
 
   function doneButtonPressed(_post: {}) {
-    const newPost = new Post(_post.title, _post.body, _post.url);
+    const newPost = new Post(post);
     StateStorage.savePost(newPost)
       .then(() => {
         navigation.goBack();

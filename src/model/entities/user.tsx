@@ -13,15 +13,15 @@ import {storage} from '../network/firebase/config';
 import {AuthApi} from "../network/interfaces";
 
 export class User {
-  address: string;
-  email: string;
-  gender: number;
   _id: string;
+  username: string;
+  email: string;
+  password: string;
+  address: string;
+  gender: number;
   tokenAndroid: string;
   tokenIOS: string;
-  username: string;
   yearbirth: number;
-  password: string;
 
   constructor(snapshot: any) {
     this._id = snapshot._id;

@@ -1,11 +1,14 @@
 import {User} from "../entities/user";
-import {MODEL_TYPE_SERVER, MODEL_TYPE, MODEL_TYPE_FIREBASE} from '../../config/constants';
+import {
+  MODEL_TYPE_SERVER,
+  MODEL_TYPE,
+  MODEL_TYPE_FIREBASE,
+} from '../../config/constants';
 import {UsersDBInteractor as FirebaseDBInteractor} from "./firebase/UsersDBInteractor";
 import {UsersDBInteractor as ServerDBInteractor} from "./server/UsersDBInteractor";
 import {PostsDBInteractor as FirebasePostsDBInteractor} from "./firebase/PostsDBInteractor";
 import {PostsDBInteractor as ServerPostsDBInteractor} from "./server/PostsDBInteractor";
-import {Post} from "../entities/post";
-import {PostItemModel} from "./firebase/PostsDBInteractor";
+import {Post} from '../entities/post';
 
 export interface Credentials {
   email: string;
@@ -47,8 +50,14 @@ export function AuthApi(): DBUsersInteractor {
 
 // Posts database Interface
 
-export interface DBPostsInteractor {
+export interface PostItemModel {
+  post: Post;
+  imageUrl: string;
+  avatarUrl: string;
+  author: User;
+}
 
+export interface DBPostsInteractor {
   fetchAllPosts(): Promise<PostItemModel[]>;
 
   fetchMyPosts(): Promise<PostItemModel[]>;
@@ -58,7 +67,6 @@ export interface DBPostsInteractor {
   parsePosts(snapshot, items: PostItemModel[], testPost);
 
   assignImagesUrl(items: PostItemModel[]): Promise<PostItemModel[]>;
-
 }
 
 const firebasePostsInteractor = new FirebasePostsDBInteractor();

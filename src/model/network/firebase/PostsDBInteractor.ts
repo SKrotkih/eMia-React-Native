@@ -7,19 +7,11 @@
  */
 
 import {database} from './config';
-import {AuthApi, DBPostsInteractor} from '../interfaces';
+import {AuthApi, DBPostsInteractor, PostItemModel} from '../interfaces';
 import {Post} from '../../entities/post';
 import {User} from "../../entities/user";
 
-export interface PostItemModel {
-  post: Post;
-  imageUrl: string;
-  avatarUrl: string;
-  author: User;
-}
-
 export class PostsDBInteractor implements DBPostsInteractor {
-
   fetchAllPosts(): Promise<PostItemModel[]> {
     console.log('API. fetchAllPosts');
     return new Promise<PostItemModel[]>((resolve, reject) => {
@@ -38,7 +30,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
             })
             .catch((error) => {
               reject(error);
-            })
+            });
         })
         .catch((error) => {
           reject(error);

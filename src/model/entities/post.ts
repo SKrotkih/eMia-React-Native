@@ -8,12 +8,12 @@
 
 import {Alert} from 'react-native';
 import {uploadImage} from '../network/firebase/utils/uploadImage';
-import {uploadData} from '../network/firebase/PostsDBInteractor';
 import {AuthApi, PostsApi} from '../network/interfaces';
 import {storage} from '../network/firebase/config';
 import {isEmpty} from "../../utils/validate";
 
 export class Post {
+  _id: string;
   author: string;
   body: string;
   title: string;
@@ -21,13 +21,14 @@ export class Post {
   pictureUri: string;
   uid: string;
 
-  constructor(title, body, pictureUri) {
-    this.author = '';
-    this.body = body;
-    this.title = title;
-    this.url = '';
-    this.pictureUri = pictureUri;
-    this.uid = '';
+  constructor(snapshot: any) {
+    this._id = snapshot._id === undefined ? '' : snapshot._id;
+    this.author = snapshot.author === undefined ? '' : snapshot.author;
+    this.body = snapshot.body === undefined ? '' : snapshot.body;
+    this.title = snapshot.title === undefined ? '' : snapshot.title;
+    this.url = snapshot.url === undefined ? '' : snapshot.url;
+    this.pictureUri = snapshot.pictureUri === undefined ? '' : snapshot.pictureUri;
+    this.uid = snapshot.uid === undefined ? '' : snapshot.uid;
   }
 
   static getDownloadURL(postId) {
@@ -43,7 +44,7 @@ export class Post {
         .catch((error) => {
           reject(error);
         });
-    })
+    });
   }
 
   submitOnServer(): Promise<any> {

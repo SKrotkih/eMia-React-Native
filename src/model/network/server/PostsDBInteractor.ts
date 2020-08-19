@@ -6,21 +6,27 @@
  * @flow
  */
 
-import {DBPostsInteractor} from '../interfaces';
-import {PostItemModel} from '../firebase/PostsDBInteractor';
+import {DBPostsInteractor, PostItemModel} from '../interfaces';
 import {Post} from '../../entities/post';
 import {httpRequest} from './request/http.hook';
-import {User} from '../../entities/user';
 
 export class PostsDBInteractor implements DBPostsInteractor {
   fetchAllPosts(): Promise<PostItemModel[]> {
     return new Promise<PostItemModel[]>((resolve, reject) => {
       httpRequest('/api/posts/posts', 'GET')
         .then((result) => {
-
-         console.log(result)
-
-          resolve([]);
+          let allPosts: PostItemModel[] = [];
+          result.forEach((element) => {
+            const _post = new Post(element);
+            const postItem = {
+              post: _post,
+              imageUrl: '',
+              avatarUrl: '',
+              author: null,
+            };
+            allPosts.push(postItem);
+          });
+          resolve(allPosts);
         })
         .catch((error) => {
           reject(error);
@@ -57,4 +63,3 @@ export class PostsDBInteractor implements DBPostsInteractor {
     });
   }
 }
-
