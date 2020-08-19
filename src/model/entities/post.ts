@@ -22,7 +22,9 @@ export class Post {
   uid: string;
 
   constructor(snapshot: any) {
-    this._id = snapshot._id === undefined ? '' : snapshot._id;
+    if (snapshot._id !== undefined) {
+      this._id = snapshot._id;
+    }
     this.author = snapshot.author === undefined ? '' : snapshot.author;
     this.body = snapshot.body === undefined ? '' : snapshot.body;
     this.title = snapshot.title === undefined ? '' : snapshot.title;
