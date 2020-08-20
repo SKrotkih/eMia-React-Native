@@ -66,17 +66,4 @@ export class User {
         completed(false);
       });
   }
-
-  getAvatarUrl(): Promise<string> {
-    return new Promise((resolve, reject) => {
-      AuthApi()
-        .getDownloadURL(this.id)
-        .then((url) => {
-          resolve(url);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  }
 }

@@ -126,7 +126,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
   }
 
   getDownloadURL(id: string): Promise<string> {
-    console.log('Post. getDownloadURL');
+    console.log('API. getDownloadURL');
     return new Promise<string>((resolve, reject) => {
       const photoName = id + '.jpg';
       const imageRef = storage.ref(photoName);

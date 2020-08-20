@@ -66,7 +66,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
 
   getDownloadURL(postId: string): Promise<string> {
     return new Promise((resolve, reject) => {
-      resolve('');
+      reject();
     });
   };
 }

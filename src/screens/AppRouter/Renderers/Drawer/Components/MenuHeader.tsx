@@ -20,14 +20,14 @@ export default function MenuHeader() {
       .getCurrentUser()
       .then((user) => {
         setName(user.username);
-        user.getAvatarUrl().then((url) => {
+        AuthApi().getDownloadURL(user.id).then((url) => {
           setAvatar(url);
         });
       })
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
 
   const avatarUrl: string = avatar === null ? 'Icon-Profile' : avatar;
 

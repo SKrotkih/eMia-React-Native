@@ -134,7 +134,7 @@ export class UsersDBInteractor implements DBUsersInteractor {
 
   getDownloadURL(uid: string): Promise<string> {
     return new Promise((resolve, reject) => {
-      resolve('');
+      reject();
     });
   };
 }

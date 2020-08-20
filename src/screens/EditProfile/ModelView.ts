@@ -48,7 +48,7 @@ export class ModelView {
     this.user = user;
     this._view.setTitle(this.title);
     this.updateView();
-    this.getAvatarUrl().then((url) => {
+    AuthApi().getDownloadURL(this._user.id).then((url) => {
       this._imageUrl = url;
       this.updateView();
     });
@@ -174,10 +174,6 @@ export class ModelView {
 
   set localImagePath(newValue: string) {
     this._localImagePath = newValue;
-  }
-
-  getAvatarUrl(): Promise<string> {
-    return this._user.getAvatarUrl();
   }
 
   textEditFields(): Array<TextEditItem> {
