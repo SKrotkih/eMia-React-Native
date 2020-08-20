@@ -11,7 +11,7 @@ import ReactNative, {useWindowDimensions} from 'react-native';
 import {StyleSheet} from 'react-native';
 import {color} from '../../../../theme/styles';
 import {Body, Text} from 'native-base';
-import {isEmpty} from "../../../../utils/validate";
+import {isEmpty} from '../../../../utils/validate';
 
 const {Image, TouchableOpacity, View} = ReactNative;
 
@@ -44,15 +44,20 @@ export default function PostGridItem(props) {
 // Components
 
 function AttachedImage(props) {
-  const screenWidth = useWindowDimensions().width
+  const screenWidth = useWindowDimensions().width;
   const {url} = props;
   return (
-    (isEmpty(url) && <View style={[styles.image, {height: 160}, {width: (screenWidth - 8) / 2}]} />) ||
-    <Image
-      style={[styles.image, {height: 160}, {width: (screenWidth - 8) / 2}]}
-      source={{cache: 'force-cache', uri: url}}
-    />
-  )
+    ((!url || isEmpty(url)) && (
+      <View
+        style={[styles.image, {height: 160}, {width: (screenWidth - 8) / 2}]}
+      />
+    )) || (
+      <Image
+        style={[styles.image, {height: 160}, {width: (screenWidth - 8) / 2}]}
+        source={{cache: 'force-cache', uri: url}}
+      />
+    )
+  );
 }
 
 function AttachedTitle(props) {
@@ -63,17 +68,18 @@ function AttachedTitle(props) {
       numberOfLines={1}>
       {title}
     </Text>
-  )
+  );
 }
 
 function AttachedBody(props) {
   const {body, darkTheme} = props;
   return (
-    <Text style={[styles.description, {color: darkTheme ? color.white : color.black}]}
-          numberOfLines={3}>
+    <Text
+      style={[styles.description, {color: darkTheme ? color.white : color.black}]}
+      numberOfLines={3}>
       {body}
     </Text>
-  )
+  );
 }
 
 // Actions

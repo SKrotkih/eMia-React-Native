@@ -6,13 +6,12 @@
  * @flow
  */
 
-import {database} from './config';
+import {database, storage} from './config';
 import {AuthApi, DBPostsInteractor, PostItemModel} from '../interfaces';
 import {Post} from '../../entities/post';
-import {User} from "../../entities/user";
 
 export class PostsDBInteractor implements DBPostsInteractor {
-  fetchAllPosts(): Promise<PostItemModel[]> {
+  fetchAllPosts(_: string): Promise<PostItemModel[]> {
     console.log('API. fetchAllPosts');
     return new Promise<PostItemModel[]>((resolve, reject) => {
       database
@@ -126,6 +125,22 @@ export class PostsDBInteractor implements DBPostsInteractor {
     }
   }
 
+  getDownloadURL(id: string): Promise<string> {
+    console.log('Post. getDownloadURL');
+    return new Promise<string>((resolve, reject) => {
+      const photoName = id + '.jpg';
+      const imageRef = storage.ref(photoName);
+      imageRef
+        .getDownloadURL()
+        .then((url) => {
+          resolve(url);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  }
+
   assignImagesUrl(items: PostItemModel[]): Promise<PostItemModel[]> {
     console.log('API. assignImagesUrl');
     return new Promise((resolve, reject) => {
@@ -137,7 +152,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
       items.forEach((item) => {
         let postId = item.post.id;
         let userId = item.post.uid;
-        Post.getDownloadURL(postId)
+        this.getDownloadURL(postId)
           .then((url) => {
             item.imageUrl = url;
           })
@@ -145,7 +160,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
             console.log(error);
           })
           .finally(() => {
-            Post.getDownloadURL(userId)
+            this.getDownloadURL(userId)
               .then((url) => {
                 item.avatarUrl = url;
               })

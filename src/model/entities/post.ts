@@ -9,9 +9,8 @@
 import {Alert} from 'react-native';
 import {uploadImage} from '../network/firebase/utils/uploadImage';
 import {AuthApi, PostsApi} from '../network/interfaces';
-import {storage} from '../network/firebase/config';
 import {isEmpty} from "../../utils/validate";
-import { User } from './user';
+import {User} from './user';
 
 export class Post {
   _id: string;
@@ -38,22 +37,6 @@ export class Post {
     this.owner = snapshot.owner ? snapshot.owner : null;
   }
 
-  static getDownloadURL(postId) {
-    console.log('Post. getDownloadURL');
-    return new Promise<string>((resolve, reject) => {
-      const photoName = postId + '.jpg';
-      const imageRef = storage.ref(photoName);
-      imageRef
-        .getDownloadURL()
-        .then((url) => {
-          resolve(url);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  }
-
   submitOnServer(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.title === null || isEmpty(this.title)) {
@@ -61,7 +44,7 @@ export class Post {
       } else if (this.body === null || isEmpty(this.body)) {
         reject(Error('Please, enter post body'));
       } else {
-        this.addPost((success) => {
+        this.uploadPost((success) => {
           if (success) {
             resolve();
           } else {
@@ -72,14 +55,15 @@ export class Post {
     });
   }
 
-  private addPost(completed) {
+  private uploadPost(completed) {
     let _this = this;
     AuthApi()
       .getCurrentUser()
       .then((user) => {
         _this.uid = user._id;
         _this.author = user.username;
-        PostsApi().uploadData(_this)
+        PostsApi()
+          .uploadData(_this)
           .then((id) => {
             let pictureUri = _this.pictureUri;
             if (pictureUri === null || pictureUri.length === 0) {
@@ -107,5 +91,23 @@ export class Post {
         Alert.alert('Error', `${error}`);
         console.log(error);
       });
+  }
+
+  update(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      if (this.title === null || isEmpty(this.title)) {
+        reject('Please, enter post title');
+      } else if (this.body === null || isEmpty(this.body)) {
+        reject(Error('Please, enter post body'));
+      } else {
+        this.uploadPost((success) => {
+          if (success) {
+            resolve();
+          } else {
+            reject(Error('System Error: Post has not uploaded on server'));
+          }
+        });
+      }
+    });
   }
 }

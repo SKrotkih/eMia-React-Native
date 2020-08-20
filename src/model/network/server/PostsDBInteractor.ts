@@ -58,13 +58,15 @@ export class PostsDBInteractor implements DBPostsInteractor {
     });
   }
 
-  parsePosts(snapshot, items: PostItemModel[], testPost) {
-
-  }
-
   assignImagesUrl(items: PostItemModel[]): Promise<PostItemModel[]> {
     return new Promise((resolve, reject) => {
       resolve([]);
     });
   }
+
+  getDownloadURL(postId: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      resolve('');
+    });
+  };
 }

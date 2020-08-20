@@ -35,6 +35,8 @@ export interface DBUsersInteractor {
   getUser(uid: string): Promise<User>;
 
   fetchAllUsers(): Promise<Array<User>>;
+
+  getDownloadURL(uid: string): Promise<string>;
 }
 
 const firebaseInteractor = new FirebaseDBInteractor();
@@ -58,15 +60,15 @@ export interface PostItemModel {
 }
 
 export interface DBPostsInteractor {
-  fetchAllPosts(): Promise<PostItemModel[]>;
+  fetchAllPosts(uid: string): Promise<PostItemModel[]>;
 
   fetchMyPosts(): Promise<PostItemModel[]>;
 
   uploadData(post: Post): Promise<string>;
 
-  parsePosts(snapshot, items: PostItemModel[], testPost);
-
   assignImagesUrl(items: PostItemModel[]): Promise<PostItemModel[]>;
+
+  getDownloadURL(postId: string): Promise<string>;
 }
 
 const firebasePostsInteractor = new FirebasePostsDBInteractor();

@@ -35,8 +35,7 @@ export const PostsList: FunctionComponent = (props, navigation, darkTheme) => {
         onRefresh={() => {
           modelView.refreshData();
         }}
-        onEndReached={() => {
-        }}
+        onEndReached={() => {}}
       />
     );
   }
@@ -44,7 +43,7 @@ export const PostsList: FunctionComponent = (props, navigation, darkTheme) => {
   function renderItem(item, sectionID, rowID) {
     return (
       <PostGridItem item={item} navigation={navigation} darkTheme={darkTheme} />
-    )
+    );
   }
 
   function renderPlaceholder(sectionID, rowID) {
@@ -60,7 +59,7 @@ export const PostsList: FunctionComponent = (props, navigation, darkTheme) => {
   function renderSeparator(sectionID, rowID, adjacentRowHighlighted) {
     // TODO: The same. Need a key
     let key = '' + sectionID + '-' + rowID;
-    return <View key={key}/>;
+    return <View key={key} />;
   }
 
   return (!modelView.loaded && <Loader loading={true} />) || renderGrid();

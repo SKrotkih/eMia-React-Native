@@ -95,7 +95,7 @@ export const Home: FunctionComponent = (props) => {
         style={{color: color.white, marginRight: 8}}
         name={'ios-options'}
         onPress={() => {
-          optionsButtonPressed();
+          didPressOnOptionsButton();
         }}
       />
     );
@@ -114,7 +114,7 @@ export const Home: FunctionComponent = (props) => {
         <Button
           style={styles.actionButton}
           onPress={() => {
-            createNewPostButtonPressed();
+            didPressOnCreateNewPostButton();
           }}>
           <IconNB name="ios-create" />
         </Button>
@@ -122,11 +122,11 @@ export const Home: FunctionComponent = (props) => {
     );
   };
 
-  function createNewPostButtonPressed() {
+  function didPressOnCreateNewPostButton() {
     navigation.navigate('AddNewPost');
   }
 
-  function optionsButtonPressed() {
+  function didPressOnOptionsButton() {
     navigation.navigate('Options');
   }
 

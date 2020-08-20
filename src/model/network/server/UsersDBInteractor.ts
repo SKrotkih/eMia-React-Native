@@ -131,6 +131,12 @@ export class UsersDBInteractor implements DBUsersInteractor {
       reject(Error('Not implemented yet'));
     });
   }
+
+  getDownloadURL(uid: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      resolve('');
+    });
+  };
 }
 
 export class LoginData {

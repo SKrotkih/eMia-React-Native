@@ -25,28 +25,29 @@ export default class ModelView {
 
   get avatarUrl(): {} {
     let avatarUrl = this.postModel.avatarUrl;
-    if (avatarUrl === null) {
-      return {uri: 'Icon-Profile'};
-    } else {
+    if (avatarUrl) {
       return {uri: avatarUrl};
+    } else {
+      return {uri: 'Icon-Profile'};
     }
   }
 
   get imageUrl(): {} {
     let imageUrl = this.postModel.imageUrl;
-    if (imageUrl === null) {
-      return {uri: 'Icon-Profile'};
-    } else {
+    if (imageUrl) {
       return {uri: imageUrl};
+    } else {
+      return {uri: 'Icon-Profile'};
     }
   }
 
   get publishedAt(): Date {
-    if (this.postModel.post.created) {
-      if (typeof this.postModel.post.created === 'string') {
-        return new Date(this.postModel.post.created);
+    const createdAt = this.postModel.post.created;
+    if (createdAt) {
+      if (typeof createdAt === 'string') {
+        return new Date(createdAt);
       } else {
-        return new Date(1000 * this.postModel.post.created);
+        return new Date(1000 * createdAt);
       }
     } else {
       return new Date(null);
@@ -54,8 +55,9 @@ export default class ModelView {
   }
 
   get userName(): string {
-    if (this.postModel.author) {
-      return this.postModel.author.username === null ? '' : this.postModel.author.username;
+    const author = this.postModel.author;
+    if (author) {
+      return author.username ? author.username : '';
     } else {
       return '';
     }

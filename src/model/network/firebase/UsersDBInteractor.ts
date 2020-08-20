@@ -6,7 +6,7 @@
  * @flow
  */
 
-import {auth, database} from './config';
+import {auth, database, storage} from './config';
 import {User} from '../../entities/user';
 import {Credentials, DBUsersInteractor} from '../interfaces';
 
@@ -192,4 +192,20 @@ export class UsersDBInteractor implements DBUsersInteractor {
         });
     });
   }
+
+  getDownloadURL(id: string): Promise<string> {
+    console.log('User. getDownloadURL');
+    return new Promise<string>((resolve, reject) => {
+      const photoName = id + '.jpg';
+      const imageRef = storage.ref(photoName);
+      imageRef
+        .getDownloadURL()
+        .then((url) => {
+          resolve(url);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
 }

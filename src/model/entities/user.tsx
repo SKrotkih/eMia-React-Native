@@ -7,10 +7,8 @@
  */
 
 import {Alert} from 'react-native';
-import {uploadCurrentUserData} from '../dbinteractor/users/dbinteractor';
 import {uploadImage} from '../network/firebase/utils/uploadImage';
-import {storage} from '../network/firebase/config';
-import {AuthApi} from "../network/interfaces";
+import {AuthApi} from '../network/interfaces';
 
 export class User {
   _id: string;
@@ -63,31 +61,16 @@ export class User {
             `${error}`,
             [],
             { cancelable: false }
-          )
+          );
         }
         completed(false);
       });
   }
 
   getAvatarUrl(): Promise<string> {
-      return new Promise((resolve, reject) => {
-        this.getDownloadURL()
-          .then((url) => {
-            resolve(url);
-          })
-          .catch((error) => {
-            reject(error);
-          });
-      });
-  }
-
-  getDownloadURL() {
-    console.log('User. getDownloadURL');
-    return new Promise<string>((resolve, reject) => {
-      const photoName = this.id + '.jpg';
-      const imageRef = storage.ref(photoName);
-      imageRef
-        .getDownloadURL()
+    return new Promise((resolve, reject) => {
+      AuthApi()
+        .getDownloadURL(this.id)
         .then((url) => {
           resolve(url);
         })
