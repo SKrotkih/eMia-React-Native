@@ -80,7 +80,7 @@ export const AddNewPost: FunctionComponent = (props) => {
     return (
       <Icon
         style={styles.rightBarButton}
-        name={'ios-done-all'}
+        name={'md-checkmark-done-sharp'}
         onPress={() => {
           doneButtonPressed(post);
         }}

@@ -141,6 +141,7 @@ export const Home: FunctionComponent = (props) => {
         onChangeTab={({i}) => didSelectTabItem(i)}>
         {_modelView.tabs.map((item, index) => (
           <Tab
+            key={item.title}
             heading={item.title}
             tabStyle={styles.tab}
             textStyle={styles.tabText}

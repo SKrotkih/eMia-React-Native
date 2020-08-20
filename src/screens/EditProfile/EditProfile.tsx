@@ -84,7 +84,7 @@ export class EditProfile extends React.Component<
       headerRight: () => (
         <Icon
           style={styles.rightBarButton}
-          name={'ios-done-all'}
+          name={'md-checkmark-done-sharp'}
           onPress={() => {
             this.userDidPressOnDone();
           }}
@@ -237,13 +237,13 @@ export class EditProfile extends React.Component<
           <ScrollView style={[styles.content]}>
             {this.modelView.textEditFields().map((item, _) => {
               return (
-                <>
+                <View key={item.key}>
                   <Label
                     style={[styles.label, {color: this.darkTheme ? color.white : color.black}]}>
                     {item.label}
                   </Label>
                   {this.renderItem(item)}
-                </>
+                </View>
               );
             })}
             <Button

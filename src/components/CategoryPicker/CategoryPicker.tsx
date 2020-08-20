@@ -7,11 +7,7 @@
  */
 
 import React from 'react';
-import {
-  FlatList,
-  SafeAreaView,
-  StyleSheet,
-} from 'react-native';
+import {FlatList, SafeAreaView, StyleSheet} from 'react-native';
 import {Icon} from 'native-base';
 import {color} from '../../theme/styles';
 import {Item} from './CategoryPickerItem';
@@ -68,7 +64,7 @@ export class CategoryPicker extends React.Component<
       headerRight: () => (
         <Icon
           style={styles.rightBarButton}
-          name={'ios-done-all'}
+          name={'md-checkmark-done-sharp'}
           onPress={() => {
             this.doneButtonPressed();
           }}
