@@ -6,14 +6,20 @@
  * @flow
  */
 
-import {DBPostsInteractor, PostItemModel} from '../interfaces';
+import {AuthApi, DBPostsInteractor, PostItemModel} from '../interfaces';
 import {Post} from '../../entities/post';
 import {httpRequest} from './request/http.hook';
 
 export class PostsDBInteractor implements DBPostsInteractor {
-  fetchAllPosts(): Promise<PostItemModel[]> {
+  fetchAllPosts(uid: string): Promise<PostItemModel[]> {
     return new Promise<PostItemModel[]>((resolve, reject) => {
-      httpRequest('/api/posts/posts', 'GET')
+      let endPoint = '';
+      if (uid) {
+        endPoint = `/api/posts/posts/${uid}`;
+      } else {
+        endPoint = '/api/posts/posts';
+      }
+      httpRequest(endPoint, 'GET')
         .then((result) => {
           let allPosts: PostItemModel[] = [];
           result.forEach((element) => {
@@ -22,7 +28,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
               post: _post,
               imageUrl: '',
               avatarUrl: '',
-              author: null,
+              author: _post.owner,
             };
             allPosts.push(postItem);
           });
@@ -34,10 +40,9 @@ export class PostsDBInteractor implements DBPostsInteractor {
     });
   }
 
-  fetchMyPosts(): Promise<PostItemModel[]> {
-    return new Promise<PostItemModel[]>((resolve, reject) => {
-      resolve([]);
-    });
+  async fetchMyPosts(): Promise<PostItemModel[]> {
+    const uid = await AuthApi().getCurrentUserId();
+    return this.fetchAllPosts(uid);
   }
 
   uploadData(post: Post): Promise<string> {

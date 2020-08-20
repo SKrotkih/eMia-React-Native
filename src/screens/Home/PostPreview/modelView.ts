@@ -6,32 +6,25 @@
  * @flow
  */
 
-import {Post} from '../../../model/entities/post';
-import {User} from '../../../model/entities/user';
+import {PostItemModel} from '../../../model/network/interfaces';
 
 export default class ModelView {
-  private _post: Post;
-  private _author: User;
-  private readonly _avatarUrl: string;
-  private readonly _imageUrl: string;
+  private postModel: PostItemModel;
 
-  constructor(postItem) {
-    this._post = postItem.post;
-    this._author = postItem.author;
-    this._avatarUrl = postItem.avatarUrl;
-    this._imageUrl = postItem.imageUrl;
+  constructor(postModel: PostItemModel) {
+    this.postModel = postModel;
   }
 
   get title(): string {
-    return this._post.title;
+    return this.postModel.post.title;
   }
 
   get body(): string {
-    return this._post.body;
+    return this.postModel.post.body;
   }
 
   get avatarUrl(): {} {
-    let avatarUrl = this._avatarUrl;
+    let avatarUrl = this.postModel.avatarUrl;
     if (avatarUrl === null) {
       return {uri: 'Icon-Profile'};
     } else {
@@ -40,7 +33,7 @@ export default class ModelView {
   }
 
   get imageUrl(): {} {
-    let imageUrl = this._imageUrl;
+    let imageUrl = this.postModel.imageUrl;
     if (imageUrl === null) {
       return {uri: 'Icon-Profile'};
     } else {
@@ -49,10 +42,22 @@ export default class ModelView {
   }
 
   get publishedAt(): Date {
-    return new Date(1000 * this._post.created);
+    if (this.postModel.post.created) {
+      if (typeof this.postModel.post.created === 'string') {
+        return new Date(this.postModel.post.created);
+      } else {
+        return new Date(1000 * this.postModel.post.created);
+      }
+    } else {
+      return new Date(null);
+    }
   }
 
   get userName(): string {
-    return this._author.username == null ? '' : this._author.username;
+    if (this.postModel.author) {
+      return this.postModel.author.username === null ? '' : this.postModel.author.username;
+    } else {
+      return '';
+    }
   }
 }

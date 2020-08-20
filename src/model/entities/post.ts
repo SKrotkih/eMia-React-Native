@@ -11,6 +11,7 @@ import {uploadImage} from '../network/firebase/utils/uploadImage';
 import {AuthApi, PostsApi} from '../network/interfaces';
 import {storage} from '../network/firebase/config';
 import {isEmpty} from "../../utils/validate";
+import { User } from './user';
 
 export class Post {
   _id: string;
@@ -20,6 +21,8 @@ export class Post {
   url: string;
   pictureUri: string;
   uid: string;
+  created: string;
+  owner: User;
 
   constructor(snapshot: any) {
     if (snapshot._id !== undefined) {
@@ -31,6 +34,8 @@ export class Post {
     this.url = snapshot.url === undefined ? '' : snapshot.url;
     this.pictureUri = snapshot.pictureUri === undefined ? '' : snapshot.pictureUri;
     this.uid = snapshot.uid === undefined ? '' : snapshot.uid;
+    this.created = snapshot.updatedAt === undefined ? null : snapshot.updatedAt;
+    this.owner = snapshot.owner ? snapshot.owner : null;
   }
 
   static getDownloadURL(postId) {
@@ -59,12 +64,12 @@ export class Post {
         this.addPost((success) => {
           if (success) {
             resolve();
-          }  else {
+          } else {
             reject(Error('System Error: Post has not uploaded on server'));
           }
         });
       }
-    })
+    });
   }
 
   private addPost(completed) {

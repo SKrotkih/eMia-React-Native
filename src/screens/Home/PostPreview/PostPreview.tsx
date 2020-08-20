@@ -21,7 +21,7 @@ import PostsHeader from "./Components/Header";
 export const PostPreview: FunctionComponent = ({route, navigation}) => {
   const darkTheme = useTheme().dark;
   const postItem = route.params;
-  const modelView = new ModelView(postItem);
+  const modelView: ModelView = new ModelView(postItem);
 
   function setTitle() {
     navigation.setOptions({title: modelView.title});
@@ -39,11 +39,11 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
       <Content style={[styles.content, {backgroundColor: darkTheme ? color.dark : color.white}]}>
         <AuthorName authorAvatarUrl={authorAvatarUrl} authorName={authorName} darkTheme={darkTheme} />
         <Body text={textBody} darkTheme={darkTheme}/>
-        <AttachedImage url={attachedImageUrl} darkTheme={darkTheme}/>
-        <DatePublished date={datePublished} darkTheme={darkTheme}/>
+        <AttachedImage url={attachedImageUrl} darkTheme={darkTheme} />
+        <DatePublished date={datePublished} darkTheme={darkTheme} />
       </Content>
-    )
-  }
+    );
+  };
 
   return (
     <Container
@@ -51,10 +51,7 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
         styles.container,
         {backgroundColor: darkTheme ? color.dark : color.white},
       ]}>
-      <PostsHeader
-        title={modelView.title}
-        darkTheme={darkTheme}
-      />
+      <PostsHeader title={modelView.title} darkTheme={darkTheme} />
       {renderContent()}
     </Container>
   );
