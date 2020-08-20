@@ -64,7 +64,8 @@ function Root(props) {
           headerLeft: () => (
             <Icon
               style={{color: color.white, marginLeft: 8}}
-              name={'ios-menu'}
+              name={'list'}
+              type="Foundation"
               onPress={() => {
                 toggleDrawer(props);
               }}

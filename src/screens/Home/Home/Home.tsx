@@ -93,7 +93,8 @@ export const Home: FunctionComponent = (props) => {
     return (
       <Icon
         style={{color: color.white, marginRight: 8}}
-        name={'ios-options'}
+        name={'filter'}
+        type="Foundation"
         onPress={() => {
           didPressOnOptionsButton();
         }}
@@ -110,13 +111,13 @@ export const Home: FunctionComponent = (props) => {
         style={{backgroundColor: color.brand}}
         position="bottomRight"
         onPress={() => setActive(active => !active)}>
-        <IconNB name="ios-menu" />
+        <IconNB name="list" type="Foundation" />
         <Button
           style={styles.actionButton}
           onPress={() => {
             didPressOnCreateNewPostButton();
           }}>
-          <IconNB name="ios-create" />
+          <IconNB name="page-add" type="Foundation" />
         </Button>
       </Fab>
     );
@@ -141,7 +142,7 @@ export const Home: FunctionComponent = (props) => {
         onChangeTab={({i}) => didSelectTabItem(i)}>
         {_modelView.tabs.map((item, index) => (
           <Tab
-            key={item.title}
+            key={index}
             heading={item.title}
             tabStyle={styles.tab}
             textStyle={styles.tabText}
