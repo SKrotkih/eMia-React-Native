@@ -22,7 +22,6 @@ export class User {
   yearbirth: number;
 
   constructor(snapshot: any) {
-    this._id = snapshot._id;
     this.username = snapshot.username;
     this.address = snapshot.address === undefined ? '' : snapshot.address;
     this.email = snapshot.email === undefined ? '' : snapshot.email;
@@ -31,9 +30,15 @@ export class User {
     this.tokenIOS = snapshot.tokenIOS === undefined ? '' : snapshot.tokenIOS;
     this.yearbirth = snapshot.yearbirth === undefined ? 0 : snapshot.yearbirth;
     this.password = snapshot.password === undefined ? '' : snapshot.password;
-    if (this._id === undefined) {
-      this._id = snapshot.uid;
+    if (snapshot._id) {
+      this._id = snapshot._id;
+    } else if (snapshot.id) {
+      this._id = snapshot.id;
     }
+  }
+
+  get id(): string {
+    return this._id;
   }
 
   update(photo: ImagePickerResponse, completed) {

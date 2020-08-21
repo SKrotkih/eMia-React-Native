@@ -119,6 +119,9 @@ export class UsersDBInteractor implements DBUsersInteractor {
 
 // Create new user object in realtime database
   updateUser(user): Promise<any> {
+
+    console.log(user);
+
     return new Promise((resolve, reject) => {
       database
         .ref('main')
