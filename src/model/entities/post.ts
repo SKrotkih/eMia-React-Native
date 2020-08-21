@@ -7,8 +7,7 @@
  */
 
 import {Alert} from 'react-native';
-import {uploadImage} from '../network/firebase/utils/uploadImage';
-import {AuthApi, PostsApi} from '../network/interfaces';
+import {AuthApi, PostsApi, StorageApi} from '../network/interfaces';
 import {isEmpty} from "../../utils/validate";
 import {User} from './user';
 
@@ -69,7 +68,7 @@ export class Post {
             if (pictureUri === null || pictureUri.length === 0) {
               completed(true);
             } else {
-              uploadImage(pictureUri, id)
+              StorageApi().uploadImage(pictureUri, id)
                 .then((pictureUrl) => {
                   _this.url = pictureUrl;
                   console.log(`Image's url: ${_this.url}`);

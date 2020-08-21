@@ -106,7 +106,7 @@ function Root(props) {
 export function homeNavigationStack() {
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen name="Root" component={Root}/>
+      <Drawer.Screen name="Root" component={Root} />
     </Drawer.Navigator>
   );
 }

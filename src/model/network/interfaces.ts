@@ -8,12 +8,16 @@ import {UsersDBInteractor as FirebaseDBInteractor} from "./firebase/UsersDBInter
 import {UsersDBInteractor as ServerDBInteractor} from "./server/UsersDBInteractor";
 import {PostsDBInteractor as FirebasePostsDBInteractor} from "./firebase/PostsDBInteractor";
 import {PostsDBInteractor as ServerPostsDBInteractor} from "./server/PostsDBInteractor";
+import {StorageDBInteractor as FirebaseStorageDBInteractor} from "./firebase/StorageDBInteractor";
+import {StorageDBInteractor as ServerStorageDBInteractor} from "./server/StorageDBInteractor";
 import {Post} from '../entities/post';
 
 export interface Credentials {
   email: string;
   password: string;
 }
+
+// Users
 
 export interface DBUsersInteractor {
   login(credentials: Credentials): Promise<{}>;
@@ -39,6 +43,8 @@ export interface DBUsersInteractor {
   getDownloadURL(uid: string): Promise<string>;
 }
 
+// Auth
+
 const firebaseInteractor = new FirebaseDBInteractor();
 const serverInteractor = new ServerDBInteractor();
 
@@ -58,6 +64,8 @@ export interface PostItemModel {
   avatarUrl: string;
   author: User;
 }
+
+// Posts
 
 export interface DBPostsInteractor {
   fetchAllPosts(uid: string): Promise<PostItemModel[]>;
@@ -79,5 +87,22 @@ export function PostsApi(): DBPostsInteractor {
     return serverPostsInteractor;
   } else if (MODEL_TYPE === MODEL_TYPE_FIREBASE) {
     return firebasePostsInteractor;
+  }
+}
+
+// Storage
+
+export interface DBStorageInteractor {
+  uploadImage(uri, id): Promise<string>;
+}
+
+const firebaseStorageInteractor = new FirebaseStorageDBInteractor();
+const serverStorageInteractor = new ServerStorageDBInteractor();
+
+export function StorageApi(): DBStorageInteractor {
+  if (MODEL_TYPE === MODEL_TYPE_SERVER) {
+    return serverStorageInteractor;
+  } else if (MODEL_TYPE === MODEL_TYPE_FIREBASE) {
+    return firebaseStorageInteractor;
   }
 }

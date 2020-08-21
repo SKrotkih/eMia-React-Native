@@ -7,8 +7,7 @@
  */
 
 import {Alert} from 'react-native';
-import {uploadImage} from '../network/firebase/utils/uploadImage';
-import {AuthApi} from '../network/interfaces';
+import {AuthApi, StorageApi} from '../network/interfaces';
 
 export class User {
   _id: string;
@@ -41,7 +40,7 @@ export class User {
     AuthApi()
       .updateUser(_this)
       .then(() => {
-        uploadImage(photoUrl, _this.id)
+        StorageApi().uploadImage(photoUrl, _this.id)
           .then(() => {
             completed(true);
           })
