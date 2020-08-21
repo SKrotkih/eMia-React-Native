@@ -10,7 +10,8 @@ import {PostsDBInteractor as FirebasePostsDBInteractor} from "./firebase/PostsDB
 import {PostsDBInteractor as ServerPostsDBInteractor} from "./server/PostsDBInteractor";
 import {StorageDBInteractor as FirebaseStorageDBInteractor} from "./firebase/StorageDBInteractor";
 import {StorageDBInteractor as ServerStorageDBInteractor} from "./server/StorageDBInteractor";
-import {Post} from '../entities/post';
+import {Post, PostDocument} from '../entities/post';
+import {ImagePickerResponse} from "react-native-image-picker";
 
 export interface Credentials {
   email: string;
@@ -72,7 +73,7 @@ export interface DBPostsInteractor {
 
   fetchMyPosts(): Promise<PostItemModel[]>;
 
-  uploadData(post: Post): Promise<string>;
+  uploadData(post: PostDocument): Promise<string>;
 
   assignImagesUrl(items: PostItemModel[]): Promise<PostItemModel[]>;
 
@@ -93,7 +94,7 @@ export function PostsApi(): DBPostsInteractor {
 // Storage
 
 export interface DBStorageInteractor {
-  uploadImage(uri, id): Promise<string>;
+  uploadImage(photo: ImagePickerResponse, id: string): Promise<string>;
 }
 
 const firebaseStorageInteractor = new FirebaseStorageDBInteractor();

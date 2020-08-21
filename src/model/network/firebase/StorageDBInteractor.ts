@@ -11,15 +11,16 @@ import RNFetchBlob from 'rn-fetch-blob';
 import FirebaseClient from 'firebase';
 import {isEmpty} from 'lodash';
 import {DBStorageInteractor} from "../interfaces";
+import {ImagePickerResponse} from "react-native-image-picker";
 
 export class StorageDBInteractor implements DBStorageInteractor {
 
-  uploadImage(uri, id): Promise<string> {
+  uploadImage(photo: ImagePickerResponse, id: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
-      if (isEmpty(uri)) {
+      if (isEmpty(photo.uri)) {
         reject(null);
       } else {
-        const uploadUri = Platform.OS === 'ios' ? uri.replace('file://', '') : uri;
+        const uploadUri = Platform.OS === 'ios' ? photo.uri.replace('file://', '') : photo.uri;
         const Blob = RNFetchBlob.polyfill.Blob;
         const fs = RNFetchBlob.fs;
         window.XMLHttpRequest = RNFetchBlob.polyfill.XMLHttpRequest;

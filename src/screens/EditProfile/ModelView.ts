@@ -11,11 +11,12 @@ import {isEmpty} from '../../utils/validate';
 import {EditProfile} from './EditProfile';
 import takePhoto from '../Home/AddNewPost/Utils/TakePhoto';
 import {AuthApi} from "../../model/network/interfaces";
+import {ImagePickerResponse} from "react-native-image-picker";
 
 export class ModelView {
   private _user: User;
   private _imageUrl: string;
-  private _localImagePath: string;
+  private _imagePickerPhoto: ImagePickerResponse;
   private readonly _update: () => void;
   private readonly _view: EditProfile;
 
@@ -23,7 +24,7 @@ export class ModelView {
     this._view = view;
     this._update = update;
     this._imageUrl = null;
-    this._localImagePath = null;
+    this._imagePickerPhoto = null;
     this.submitData = this.submitData.bind(this);
   }
 
@@ -56,9 +57,9 @@ export class ModelView {
 
   selectAvatar() {
     takePhoto()
-      .then((url) => {
-        this.imageUrl = url;
-        this.localImagePath = url;
+      .then((response) => {
+        this.imageUrl = response.uri;   // Replace current photo by photo from Library/Camera
+        this.imagePickerPhoto = response;
         this.updateView();
       })
       .catch((error) => {
@@ -172,8 +173,8 @@ export class ModelView {
     return this._imageUrl;
   }
 
-  set localImagePath(newValue: string) {
-    this._localImagePath = newValue;
+  set imagePickerPhoto(newValue: ImagePickerResponse) {
+    this._imagePickerPhoto = newValue;
   }
 
   textEditFields(): Array<TextEditItem> {
@@ -239,7 +240,7 @@ export class ModelView {
       if (isEmpty(this.name)) {
         reject('Please, enter your name');
       } else {
-        this._user.update(this._localImagePath, (result) => {
+        this._user.update(this._imagePickerPhoto, (result) => {
           resolve();
         });
       }

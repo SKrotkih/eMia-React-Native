@@ -30,7 +30,7 @@ export const AddNewPost: FunctionComponent = (props) => {
   const darkTheme = useTheme().dark;
 
   function getPostTemplate(): {} {
-    return {title: '', body: '', url: ''};
+    return {title: '', body: '', imagePickerResponse: null};
   }
 
   const [post, setPost] = useState(getPostTemplate());
@@ -46,8 +46,8 @@ export const AddNewPost: FunctionComponent = (props) => {
 
   function takePhotoButtonPressed() {
     takePhoto()
-      .then((url) => {
-        updateField('url', url);
+      .then((response) => {
+        updateField('imagePickerResponse', response);
       })
       .catch((error) => {
         console.log(error);
@@ -67,7 +67,7 @@ export const AddNewPost: FunctionComponent = (props) => {
       });
   }
 
-  function updateField(name: string, value: string) {
+  function updateField(name: string, value: any) {
     setPost({
       ...post,
       [name]: value,

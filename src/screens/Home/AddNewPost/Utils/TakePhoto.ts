@@ -6,9 +6,10 @@
  * @flow
  */
 
-import ImagePicker from "react-native-image-picker";
+import ImagePicker, {ImagePickerResponse} from "react-native-image-picker";
 
-export default function takePhoto(): Promise<string> {
+// Returns image uri
+export default function takePhoto(): Promise<ImagePickerResponse> {
   const options = {
     quality: 1.0,
     maxWidth: 500,
@@ -17,7 +18,7 @@ export default function takePhoto(): Promise<string> {
       skipBackup: true,
     },
   };
-  return new Promise<string>((resolve, reject) => {
+  return new Promise<ImagePickerResponse>((resolve, reject) => {
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
       if (response.didCancel) {
@@ -27,7 +28,7 @@ export default function takePhoto(): Promise<string> {
       } else if (response.customButton) {
         reject(`User tapped custom button: ${response.customButton}`);
       } else {
-        resolve(response.uri);
+        resolve(response);
       }
     });
   })

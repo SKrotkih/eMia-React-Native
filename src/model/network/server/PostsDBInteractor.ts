@@ -7,7 +7,7 @@
  */
 
 import {AuthApi, DBPostsInteractor, PostItemModel} from '../interfaces';
-import {Post} from '../../entities/post';
+import {Post, PostDocument} from '../../entities/post';
 import {httpRequest} from './request/http.hook';
 
 export class PostsDBInteractor implements DBPostsInteractor {
@@ -45,7 +45,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
     return this.fetchAllPosts(uid);
   }
 
-  uploadData(post: Post): Promise<string> {
+  uploadData(post: PostDocument): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       httpRequest('/api/posts/post', 'POST', {post})
         .then((result) => {

@@ -8,7 +8,7 @@
 
 import {database, storage} from './config';
 import {AuthApi, DBPostsInteractor, PostItemModel} from '../interfaces';
-import {Post} from '../../entities/post';
+import {Post, PostDocument} from '../../entities/post';
 
 export class PostsDBInteractor implements DBPostsInteractor {
   fetchAllPosts(_: string): Promise<PostItemModel[]> {
@@ -69,7 +69,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
     });
   }
 
-  uploadData(post: Post): Promise<string> {
+  uploadData(post: PostDocument): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       database
         .ref('main')

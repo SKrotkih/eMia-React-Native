@@ -8,6 +8,7 @@
 
 import {Alert} from 'react-native';
 import {AuthApi, StorageApi} from '../network/interfaces';
+import {ImagePickerResponse} from "react-native-image-picker";
 
 export class User {
   _id: string;
@@ -35,12 +36,12 @@ export class User {
     }
   }
 
-  update(photoUrl: string, completed) {
+  update(photo: ImagePickerResponse, completed) {
     let _this = this;
     AuthApi()
       .updateUser(_this)
       .then(() => {
-        StorageApi().uploadImage(photoUrl, _this.id)
+        StorageApi().uploadImage(photo, _this.id)
           .then(() => {
             completed(true);
           })
