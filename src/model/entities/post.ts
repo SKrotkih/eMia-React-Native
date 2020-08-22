@@ -65,22 +65,18 @@ export class Post {
   }
 
   submitOnServer(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      if (this.title === null || isEmpty(this.title)) {
-        reject('Please, enter post title');
-      } else if (this.body === null || isEmpty(this.body)) {
-        reject(Error('Please, enter post body'));
-      } else {
-        try {
-          const run = async () => {
-            await this.uploadPost();
-            resolve();
-          };
-          run();
-        } catch (error) {
-          Alert.alert('Error', `${error}`);
-          reject();
+    return new Promise<void>(async (resolve, reject) => {
+      try {
+        if (this.title === null || isEmpty(this.title)) {
+          reject('Please, enter post title');
+        } else if (this.body === null || isEmpty(this.body)) {
+          reject(Error('Please, enter post body'));
+        } else {
+          await this.uploadPost();
+          resolve();
         }
+      } catch (error) {
+        reject(error);
       }
     });
   }

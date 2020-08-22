@@ -62,7 +62,7 @@ export const AddNewPost: FunctionComponent = (props) => {
       })
       .catch((error) => {
         if (!isEmpty(error)) {
-          Alert.alert(error);
+          Alert.alert('Error', `${error}`);
         }
       });
   }
