@@ -124,7 +124,9 @@ export const AddNewPost: FunctionComponent = (props) => {
         onPress={() => takePhotoButtonPressed()}>
         <Text>Attach a Photo</Text>
       </Button>
-      <AttachedPhoto url={post.url} />
+      {post.imagePickerResponse && (
+        <AttachedPhoto url={post.imagePickerResponse.uri} />
+      )}
     </View>
   );
 };

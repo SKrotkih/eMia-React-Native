@@ -8,9 +8,9 @@
 
 import {Alert} from 'react-native';
 import {AuthApi, PostsApi, StorageApi} from '../network/interfaces';
-import {isEmpty} from "../../utils/validate";
+import {isEmpty} from '../../utils/validate';
 import {User} from './user';
-import {ImagePickerResponse} from "react-native-image-picker";
+import {ImagePickerResponse} from 'react-native-image-picker';
 
 export class PostDocument {
   _id: string;
@@ -59,79 +59,52 @@ export class Post {
     this.uid = snapshot.uid === undefined ? '' : snapshot.uid;
     this.created = snapshot.updatedAt === undefined ? null : snapshot.updatedAt;
     this.owner = snapshot.owner ? snapshot.owner : null;
+    this.imagePickerResponse = snapshot.imagePickerResponse ? snapshot.imagePickerResponse : null;
+
+    this.uploadPost = this.uploadPost.bind(this);
   }
 
-  submitOnServer(): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
+  submitOnServer(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
       if (this.title === null || isEmpty(this.title)) {
         reject('Please, enter post title');
       } else if (this.body === null || isEmpty(this.body)) {
         reject(Error('Please, enter post body'));
       } else {
-        this.uploadPost((success) => {
-          if (success) {
+        try {
+          const run = async () => {
+            await this.uploadPost();
             resolve();
-          } else {
-            reject(Error('System Error: Post has not uploaded on server'));
-          }
-        });
+          };
+          run();
+        } catch (error) {
+          Alert.alert('Error', `${error}`);
+          reject();
+        }
       }
     });
   }
 
-  private uploadPost(completed) {
-    let _this = this;
-    AuthApi()
-      .getCurrentUser()
-      .then((user) => {
-        _this.uid = user._id;
-        _this.author = user.username;
-        PostsApi()
-          .uploadData(this.postDocument())
-          .then((id) => {
-            let imagePickerResponse = _this.imagePickerResponse;
-            if (imagePickerResponse === null || imagePickerResponse.length === 0) {
-              completed(true);
-            } else {
-              StorageApi().uploadImage(imagePickerResponse, id)
-                .then((pictureUrl) => {
-                  _this.url = pictureUrl;
-                  console.log(`Image's url: ${_this.url}`);
-                  completed(true);
-                })
-                .catch((error) => {
-                  if (error !== null) {
-                    Alert.alert('Error', `${error}`);
-                  }
-                  completed(false);
-                });
-            }
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      })
-      .catch((error) => {
-        Alert.alert('Error', `${error}`);
-        console.log(error);
-      });
+  async uploadPost() {
+    try {
+      const user = await AuthApi().getCurrentUser();
+      this.uid = user._id;
+      this.author = user.username;
+      const id = await PostsApi().uploadData(this.postDocument());
+      if (this.imagePickerResponse) {
+        const pictureUrl = await StorageApi().uploadImage(
+          this.imagePickerResponse,
+          id,
+        );
+        this.url = pictureUrl;
+        console.log(`Image's url: ${this.url}`);
+      }
+    } catch (error) {
+      throw error;
+    }
   }
 
   update(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      if (this.title === null || isEmpty(this.title)) {
-        reject('Please, enter post title');
-      } else if (this.body === null || isEmpty(this.body)) {
-        reject(Error('Please, enter post body'));
-      } else {
-        this.uploadPost((success) => {
-          if (success) {
-            resolve();
-          } else {
-            reject(Error('System Error: Post has not uploaded on server'));
-          }
-        });
-      }
-    });
+    return this.submitOnServer();
   }
 }
