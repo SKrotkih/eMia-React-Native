@@ -8,7 +8,7 @@
 
 import {Alert} from 'react-native';
 import {AuthApi, StorageApi} from '../network/interfaces';
-import {ImagePickerResponse} from "react-native-image-picker";
+import {ImagePickerResponse} from 'react-native-image-picker';
 
 export class User {
   _id: string;
@@ -35,40 +35,23 @@ export class User {
     } else if (snapshot.id) {
       this._id = snapshot.id;
     }
+    this.update = this.update.bind(this);
   }
 
   get id(): string {
     return this._id;
   }
 
-  update(photo: ImagePickerResponse, completed) {
-    let _this = this;
-    AuthApi()
-      .updateUser(_this)
-      .then(() => {
-        StorageApi().uploadImage(photo, _this.id)
-          .then(() => {
-            completed(true);
-          })
-          .catch((error) => {
-            if (error !== null) {
-              Alert.alert('Error while uploading photo', `${error}`, [], {
-                cancelable: false,
-              });
-            }
-            completed(true); // Return OK in case of failed uploading photo
-          });
-      })
-      .catch((error) => {
-        if (error !== null) {
-          Alert.alert(
-            `Error while uploading data on the server`,
-            `${error}`,
-            [],
-            { cancelable: false }
-          );
-        }
-        completed(false);
+  async update(photo: ImagePickerResponse, completed) {
+    try {
+      await AuthApi().updateUser(this);
+      await StorageApi().uploadImage(photo, this.id);
+      completed(true);
+    } catch (error) {
+      Alert.alert('Failed uploading photo!', `${error}`, [], {
+        cancelable: false,
       });
+      completed(false);
+    }
   }
 }
