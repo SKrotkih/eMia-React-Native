@@ -87,7 +87,7 @@ export class Post {
       this.uid = user._id;
       this.author = user.username;
       const id = await PostsApi().uploadData(this.postDocument());
-      if (this.imagePickerResponse) {
+      if (this.imagePickerResponse && this.imagePickerResponse.uri) {
         const pictureUrl = await StorageApi().uploadImage(
           this.imagePickerResponse,
           id,

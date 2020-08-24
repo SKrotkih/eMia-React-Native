@@ -45,7 +45,9 @@ export class User {
   async update(photo: ImagePickerResponse, completed) {
     try {
       await AuthApi().updateUser(this);
-      await StorageApi().uploadImage(photo, this.id);
+      if (photo && photo.uri) {
+        await StorageApi().uploadImage(photo, this.id);
+      }
       completed(true);
     } catch (error) {
       Alert.alert('Failed uploading photo!', `${error}`, [], {
