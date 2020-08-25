@@ -6,12 +6,14 @@ import RNFetchBlob from 'rn-fetch-blob/index';
 
 export class StorageDBInteractor implements DBStorageInteractor {
   // Upload image to the Cloudinary
+  // Almost works. The image appears on the Cloudinary Dashboard but i don't get its URL
   async uploadImage(photo: ImagePickerResponse, id: string): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
-      const body = this.createFormData(photo, id);
+      const body = this.createBody(photo, id);
       const url = 'https://api.cloudinary.com/v1_1/emia/image/upload';
       fetch(url, {method: 'POST', body})
         .then((res) => {
+          // I don't have Body here so i don't have the image url :(
           console.log(res);
           res.json();
         })
@@ -27,7 +29,7 @@ export class StorageDBInteractor implements DBStorageInteractor {
     });
   }
 
-  createFormData(photo: ImagePickerResponse, id: string): FormData {
+  createBody(photo: ImagePickerResponse, id: string): FormData {
     const uploadPreset = 'emiaapppreset';
     const cloudName = 'emia';
 
@@ -44,10 +46,9 @@ export class StorageDBInteractor implements DBStorageInteractor {
     return body;
   }
 
-  // Upload to the app server
-  // Form Data
+  // Form Data (does not work. Don't get body on the server side)
 
-  async uploadImage3(photo: ImagePickerResponse, id: string): Promise<string> {
+  async sendImageOnServerAsFormData(photo: ImagePickerResponse, id: string): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
       if (!(photo && photo.uri)) {
         reject(Error('The Image is not presented so it has not uploaded on server'));
@@ -86,7 +87,7 @@ export class StorageDBInteractor implements DBStorageInteractor {
     });
   }
 
-  createFormData3(photo: ImagePickerResponse, id: string): FormData {
+  createFormData(photo: ImagePickerResponse, id: string): FormData {
     const formData: FormData = new FormData();
     const uri: string =
       Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', '');
@@ -96,10 +97,10 @@ export class StorageDBInteractor implements DBStorageInteractor {
     return formData;
   }
 
-  // BLOB
+  // BLOB (does not work. Don't get body on the server side)
   // https://github.com/joltup/rn-fetch-blob#user-content-upload-example--dropbox-files-upload-api
 
-  async uploadImage2(photo: ImagePickerResponse, id: string): Promise<string> {
+  async sendImageOnServerAsBlobData(photo: ImagePickerResponse, id: string): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
       const apiUrl = BASE_URL + '/api/images/upload';
       console.log('URL ' + apiUrl);
