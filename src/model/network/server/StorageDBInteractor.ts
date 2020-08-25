@@ -5,9 +5,48 @@ import {ImagePickerResponse} from 'react-native-image-picker';
 import RNFetchBlob from 'rn-fetch-blob/index';
 
 export class StorageDBInteractor implements DBStorageInteractor {
-  // Upload image to the Cloudinary
-  // Almost works. The image appears on the Cloudinary Dashboard but i don't get its URL
   async uploadImage(photo: ImagePickerResponse, id: string): Promise<string> {
+    return new Promise<string>(async (resolve, reject) => {
+      const file =
+       Platform.OS === 'android' ? photo.uri : photo.uri.replace('file://', '');
+      const cloudName = 'emia';
+      const unsignedUploadPreset = 'emiaapppreset';
+      const url = `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`;
+
+      const request = new XMLHttpRequest();
+      const body = new FormData();
+      request.open('POST', url, true);
+      request.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+      request.onreadystatechange = (event) => {
+        if (request.readyState === 4 && request.status === 200) {
+          // File uploaded successfully
+          const response = JSON.parse(request.responseText);
+          // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
+          const imageUrl = response.secure_url;
+          resolve(imageUrl);
+        } else {
+          try {
+            const response = JSON.parse(request.responseText);
+            const message = `Status ${request.status}: ${response.error.message}`;
+            console.log(message);
+            reject(Error(message));
+          } catch (error) {
+            console.log(error);
+          }
+        }
+      };
+      body.append('upload_preset', unsignedUploadPreset);
+      body.append('tags', 'eMia_react_native_upload'); // Optional - add tag for image admin in Cloudinary
+      body.append('file', file);
+      body.append('name', `eMia${id}`);
+      request.send(body);
+    });
+  }
+
+  // Upload image to the Cloudinary
+  // https://dev.to/godswillokokon/react-native-how-to-upload-an-image-to-cloudinary-4okg
+  // Almost works. The image appears on the Cloudinary Dashboard but i don't get its URL
+  async uploadImage2(photo: ImagePickerResponse, id: string): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
       const body = this.createBody(photo, id);
       const url = 'https://api.cloudinary.com/v1_1/emia/image/upload';
@@ -47,6 +86,7 @@ export class StorageDBInteractor implements DBStorageInteractor {
   }
 
   // Form Data (does not work. Don't get body on the server side)
+  // https://github.com/g6ling/React-Native-Tips/tree/master/How_to_upload_photo%2Cfile_in%20react-native
 
   async sendImageOnServerAsFormData(photo: ImagePickerResponse, id: string): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
