@@ -9,11 +9,13 @@
 import {Alert} from 'react-native';
 import {AuthApi, StorageApi} from '../network/interfaces';
 import {ImagePickerResponse} from 'react-native-image-picker';
+import {isEmpty} from "../../utils/validate";
 
 export class User {
   _id: string;
   username: string;
   email: string;
+  avatarUrl: string;
   password: string;
   address: string;
   gender: number;
@@ -23,6 +25,7 @@ export class User {
 
   constructor(snapshot: any) {
     this.username = snapshot.username;
+    this.avatarUrl = snapshot.avatarUrl === undefined ? '' : snapshot.avatarUrl;
     this.address = snapshot.address === undefined ? '' : snapshot.address;
     this.email = snapshot.email === undefined ? '' : snapshot.email;
     this.gender = snapshot.gender === undefined ? 1 : snapshot.gender;
@@ -44,10 +47,13 @@ export class User {
 
   async update(photo: ImagePickerResponse, completed) {
     try {
-      await AuthApi().updateUser(this);
       if (photo && photo.uri) {
-        await StorageApi().uploadImage(photo, this.id);
+        const avatarUrl = await StorageApi().uploadImage(photo, this.id);
+        if (avatarUrl && !isEmpty(avatarUrl)) {
+          this.avatarUrl = avatarUrl;
+        }
       }
+      await AuthApi().updateUser(this);
       completed(true);
     } catch (error) {
       Alert.alert('Failed uploading photo!', `${error}`, [], {

@@ -49,7 +49,7 @@ export class ModelView {
     this.user = user;
     this._view.setTitle(this.title);
     this.updateView();
-    AuthApi().getDownloadURL(this._user.id).then((url) => {
+    AuthApi().getUserAvatarURL(this._user.id).then((url) => {
       this._imageUrl = url;
       this.updateView();
     });

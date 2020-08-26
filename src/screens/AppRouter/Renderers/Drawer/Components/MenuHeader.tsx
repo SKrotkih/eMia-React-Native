@@ -20,7 +20,7 @@ export default function MenuHeader() {
       .getCurrentUser()
       .then((user) => {
         setName(user.username);
-        AuthApi().getDownloadURL(user.id).then((url) => {
+        AuthApi().getUserAvatarURL(user.id).then((url) => {
           setAvatar(url);
         });
       })

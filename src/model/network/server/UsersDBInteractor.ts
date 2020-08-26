@@ -132,9 +132,14 @@ export class UsersDBInteractor implements DBUsersInteractor {
     });
   }
 
-  getDownloadURL(uid: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-      reject();
+  getUserAvatarURL(uid: string): Promise<string> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const user: User = await this.getUser(uid);
+        resolve(user.avatarUrl);
+      } catch (error) {
+        reject(error);
+      }
     });
   };
 }

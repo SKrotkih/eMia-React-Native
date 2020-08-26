@@ -41,7 +41,7 @@ export interface DBUsersInteractor {
 
   fetchAllUsers(): Promise<Array<User>>;
 
-  getDownloadURL(uid: string): Promise<string>;
+  getUserAvatarURL(uid: string): Promise<string>;
 }
 
 // Auth

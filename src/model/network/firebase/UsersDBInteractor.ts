@@ -196,7 +196,7 @@ export class UsersDBInteractor implements DBUsersInteractor {
     });
   }
 
-  getDownloadURL(id: string): Promise<string> {
+  getUserAvatarURL(id: string): Promise<string> {
     console.log('User. getDownloadURL');
     return new Promise<string>((resolve, reject) => {
       const photoName = id + '.jpg';
