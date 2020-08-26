@@ -11,6 +11,8 @@ import ImagePicker, {ImagePickerResponse} from "react-native-image-picker";
 // Returns image uri
 export default function takePhoto(): Promise<ImagePickerResponse> {
   const options = {
+    allowsEditing: true,
+    base64: true,
     quality: 1.0,
     maxWidth: 500,
     maxHeight: 500,
@@ -18,6 +20,7 @@ export default function takePhoto(): Promise<ImagePickerResponse> {
       skipBackup: true,
     },
   };
+
   return new Promise<ImagePickerResponse>((resolve, reject) => {
     ImagePicker.showImagePicker(options, (response) => {
       console.log('Response = ', response);
