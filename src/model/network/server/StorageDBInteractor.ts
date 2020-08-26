@@ -66,8 +66,12 @@ export class StorageDBInteractor implements DBStorageInteractor {
           // File uploaded successfully
           const response = JSON.parse(request.responseText);
           // https://res.cloudinary.com/cloudName/image/upload/v1483481128/public_id.jpg
-          const imageUrl = response.secure_url;
-          resolve(imageUrl);
+          const url = response.secure_url;
+          if (url) {
+            resolve(url);
+          } else {
+            reject(Error('Image Url is not defined'));
+          }
         } else {
           try {
             const response = JSON.parse(request.responseText);

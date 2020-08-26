@@ -26,7 +26,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
             const _post = new Post(element);
             const postItem = {
               post: _post,
-              imageUrl: '',
+              imageUrl: _post.url,
               avatarUrl: '',
               author: _post.owner,
             };
@@ -43,6 +43,20 @@ export class PostsDBInteractor implements DBPostsInteractor {
   async fetchMyPosts(): Promise<PostItemModel[]> {
     const uid = await AuthApi().getCurrentUserId();
     return this.fetchAllPosts(uid);
+  }
+
+  fetchPost(id: string): Promise<Post> {
+    return new Promise<Post>((resolve, reject) => {
+      let endPoint = `/api/posts/${id}`;
+      httpRequest(endPoint, 'GET')
+        .then((result) => {
+          const post = new Post(result.post);
+          resolve(post);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    })
   }
 
   uploadData(post: PostDocument): Promise<string> {
@@ -64,9 +78,14 @@ export class PostsDBInteractor implements DBPostsInteractor {
     });
   }
 
-  getDownloadURL(postId: string): Promise<string> {
-    return new Promise((resolve, reject) => {
-      reject();
+  getImageURL(postId: string): Promise<string> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const post = await this.fetchPost(postId);
+        resolve(post.url);
+      } catch (e) {
+        reject(e);
+      }
     });
   };
 }

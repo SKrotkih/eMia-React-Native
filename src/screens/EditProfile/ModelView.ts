@@ -15,7 +15,7 @@ import {ImagePickerResponse} from "react-native-image-picker";
 
 export class ModelView {
   private _user: User;
-  private _imageUrl: string;
+  private _avatarUrl: string;
   private _imagePickerPhoto: ImagePickerResponse;
   private readonly _update: () => void;
   private readonly _view: EditProfile;
@@ -23,7 +23,7 @@ export class ModelView {
   constructor(view: EditProfile, update: () => void) {
     this._view = view;
     this._update = update;
-    this._imageUrl = null;
+    this._avatarUrl = null;
     this._imagePickerPhoto = null;
     this.submitData = this.submitData.bind(this);
   }
@@ -50,7 +50,7 @@ export class ModelView {
     this._view.setTitle(this.title);
     this.updateView();
     AuthApi().getUserAvatarURL(this._user.id).then((url) => {
-      this._imageUrl = url;
+      this._avatarUrl = url;
       this.updateView();
     });
   }
@@ -58,7 +58,7 @@ export class ModelView {
   selectAvatar() {
     takePhoto()
       .then((response) => {
-        this.imageUrl = response.uri;   // Replace current photo by photo from Library/Camera
+        this.avatarUrl = response.uri;   // Replace current photo by photo from Library/Camera
         this.imagePickerPhoto = response;
         this.updateView();
       })
@@ -165,12 +165,12 @@ export class ModelView {
   }
 
   // Image
-  set imageUrl(newValue: string) {
-    this._imageUrl = newValue;
+  set avatarUrl(newValue: string) {
+    this._avatarUrl = newValue;
   }
 
-  get imageUrl(): string {
-    return this._imageUrl;
+  get avatarUrl(): string {
+    return this._avatarUrl;
   }
 
   set imagePickerPhoto(newValue: ImagePickerResponse) {

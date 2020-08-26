@@ -119,9 +119,6 @@ export class UsersDBInteractor implements DBUsersInteractor {
 
 // Create new user object in realtime database
   updateUser(user): Promise<any> {
-
-    console.log(user);
-
     return new Promise((resolve, reject) => {
       database
         .ref('main')
@@ -132,7 +129,7 @@ export class UsersDBInteractor implements DBUsersInteractor {
           resolve();
         })
         .catch((error) => {
-          console.log('API. updateUser error: ', error.message);
+          console.log('Failed to update Users data: ', error.message);
           reject(error);
         });
     });
@@ -197,7 +194,7 @@ export class UsersDBInteractor implements DBUsersInteractor {
   }
 
   getUserAvatarURL(id: string): Promise<string> {
-    console.log('User. getDownloadURL');
+    console.log('User. getUserAvatarURL');
     return new Promise<string>((resolve, reject) => {
       const photoName = id + '.jpg';
       const imageRef = storage.ref(photoName);

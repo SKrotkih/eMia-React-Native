@@ -64,6 +64,10 @@ export class Post {
     this.uploadPost = this.uploadPost.bind(this);
   }
 
+  update(): Promise<any> {
+    return this.submitOnServer();
+  }
+
   submitOnServer(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
       try {
@@ -93,14 +97,11 @@ export class Post {
           id,
         );
         this.url = pictureUrl;
+        await PostsApi().uploadData(this.postDocument());
         console.log(`Image's url: ${this.url}`);
       }
     } catch (error) {
       throw error;
     }
-  }
-
-  update(): Promise<any> {
-    return this.submitOnServer();
   }
 }

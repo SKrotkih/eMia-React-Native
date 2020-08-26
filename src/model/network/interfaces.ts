@@ -77,7 +77,7 @@ export interface DBPostsInteractor {
 
   assignImagesUrl(items: PostItemModel[]): Promise<PostItemModel[]>;
 
-  getDownloadURL(postId: string): Promise<string>;
+  getImageURL(postId: string): Promise<string>;
 }
 
 const firebasePostsInteractor = new FirebasePostsDBInteractor();

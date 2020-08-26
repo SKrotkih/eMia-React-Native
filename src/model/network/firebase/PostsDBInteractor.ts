@@ -125,8 +125,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
     }
   }
 
-  getDownloadURL(id: string): Promise<string> {
-    console.log('API. getDownloadURL');
+  getImageURL(id: string): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       const photoName = id + '.jpg';
       const imageRef = storage.ref(photoName);
@@ -152,7 +151,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
       items.forEach((item) => {
         let postId = item.post.id;
         let userId = item.post.uid;
-        this.getDownloadURL(postId)
+        this.getImageURL(postId)
           .then((url) => {
             item.imageUrl = url;
           })
@@ -160,7 +159,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
             console.log(error);
           })
           .finally(() => {
-            this.getDownloadURL(userId)
+            this.getImageURL(userId)
               .then((url) => {
                 item.avatarUrl = url;
               })
