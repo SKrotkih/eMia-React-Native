@@ -17,7 +17,7 @@ import PostGridItem from "./PostGridItem";
 
 const {View} = ReactNative;
 
-export const PostGrid: FunctionComponent = (props, navigation, darkTheme) => {
+export const PostGrid = (props, navigation, darkTheme) => {
   const modelView: ModelView = props as ModelView;
 
   function renderGrid() {

@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, {FunctionComponent} from 'react';
+import React, {FunctionComponent, useEffect, useState} from 'react';
 import {Container, Content} from 'native-base';
 import ModelView from './modelView';
 import {color} from "../../../theme/styles";
@@ -23,21 +23,37 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
   const postItem = route.params;
   const modelView: ModelView = new ModelView(postItem);
 
+  const [ownerAvatarUrl, setOwnerAvatarUrl] = useState<any>();
+
   function setTitle() {
     navigation.setOptions({title: modelView.title});
   }
 
+  useEffect(() => {
+    if (modelView.avatarUrl) {
+      setOwnerAvatarUrl(ownerAvatarUrl);
+    } else {
+      modelView
+        .getUserAvatar()
+        .then((url) => {
+          setOwnerAvatarUrl({uri: url});
+        })
+        .catch(() => {
+          setOwnerAvatarUrl({uri: 'Icon-Profile'});
+        });
+    }
+  }, []);
+
   setTitle();
 
-  const renderContent = () => {
-    const authorAvatarUrl = modelView.avatarUrl;
+  const renderBody = () => {
     const authorName = modelView.userName;
     const textBody = modelView.body;
     const attachedImageUrl = modelView.imageUrl;
     const datePublished = modelView.publishedAt;
     return (
       <Content style={[styles.content, {backgroundColor: darkTheme ? color.dark : color.white}]}>
-        <AuthorName authorAvatarUrl={authorAvatarUrl} authorName={authorName} darkTheme={darkTheme} />
+        <AuthorName authorAvatarUrl={ownerAvatarUrl} authorName={authorName} darkTheme={darkTheme} />
         <Body text={textBody} darkTheme={darkTheme}/>
         <AttachedImage url={attachedImageUrl} darkTheme={darkTheme} />
         <DatePublished date={datePublished} darkTheme={darkTheme} />
@@ -52,7 +68,7 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
         {backgroundColor: darkTheme ? color.dark : color.white},
       ]}>
       <PostsHeader title={modelView.title} darkTheme={darkTheme} />
-      {renderContent()}
+      {renderBody()}
     </Container>
   );
 };

@@ -11,8 +11,8 @@ import {AuthApi, DBPostsInteractor, PostItemModel} from '../interfaces';
 import {Post, PostDocument} from '../../entities/post';
 
 export class PostsDBInteractor implements DBPostsInteractor {
-  fetchAllPosts(_: string): Promise<PostItemModel[]> {
-    console.log('API. fetchAllPosts');
+  fetchPosts(uid: string): Promise<PostItemModel[]> {
+    console.log('API. fetchPosts');
     return new Promise<PostItemModel[]>((resolve, reject) => {
       database
         .ref('main')

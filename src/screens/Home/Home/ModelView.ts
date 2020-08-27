@@ -74,9 +74,6 @@ export default class ModelView {
     this.loaded = false;
     this._refreshing = true;
     this.updateView();
-
-    console.log(filterItem);
-
     fetchPosts(filterItem)
       .then((items) => {
         this._dataSource = items;

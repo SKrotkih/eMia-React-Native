@@ -69,7 +69,7 @@ export interface PostItemModel {
 // Posts
 
 export interface DBPostsInteractor {
-  fetchAllPosts(uid: string): Promise<PostItemModel[]>;
+  fetchPosts(uid: string): Promise<PostItemModel[]>;
 
   fetchMyPosts(): Promise<PostItemModel[]>;
 

@@ -6,7 +6,7 @@
  * @flow
  */
 
-import {PostItemModel} from '../../../model/network/interfaces';
+import {AuthApi, PostItemModel} from '../../../model/network/interfaces';
 
 export default class ModelView {
   private postModel: PostItemModel;
@@ -28,8 +28,12 @@ export default class ModelView {
     if (avatarUrl) {
       return {uri: avatarUrl};
     } else {
-      return {uri: 'Icon-Profile'};
+      return null;
     }
+  }
+
+  async getUserAvatar(): Promise<string> {
+    return AuthApi().getUserAvatarURL(this.postModel.post.uid);
   }
 
   get imageUrl(): {} {

@@ -11,7 +11,7 @@ import {Post, PostDocument} from '../../entities/post';
 import {httpRequest} from './request/http.hook';
 
 export class PostsDBInteractor implements DBPostsInteractor {
-  fetchAllPosts(uid: string): Promise<PostItemModel[]> {
+  fetchPosts(uid: string): Promise<PostItemModel[]> {
     return new Promise<PostItemModel[]>((resolve, reject) => {
       let endPoint = '';
       if (uid) {
@@ -24,10 +24,10 @@ export class PostsDBInteractor implements DBPostsInteractor {
           let allPosts: PostItemModel[] = [];
           result.forEach((element) => {
             const _post = new Post(element);
-            const postItem = {
+            const postItem: PostItemModel = {
               post: _post,
               imageUrl: _post.url,
-              avatarUrl: '',
+              avatarUrl: null,
               author: _post.owner,
             };
             allPosts.push(postItem);
@@ -42,7 +42,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
 
   async fetchMyPosts(): Promise<PostItemModel[]> {
     const uid = await AuthApi().getCurrentUserId();
-    return this.fetchAllPosts(uid);
+    return this.fetchPosts(uid);
   }
 
   fetchPost(id: string): Promise<Post> {

@@ -12,6 +12,7 @@ import {StyleSheet} from 'react-native';
 import {color} from '../../../../theme/styles';
 import {Body, Text} from 'native-base';
 import {isEmpty} from '../../../../utils/validate';
+import {PostItemModel} from "../../../../model/network/interfaces";
 
 const {Image, TouchableOpacity, View} = ReactNative;
 
@@ -84,7 +85,7 @@ function AttachedBody(props) {
 
 // Actions
 
-function selectPostItem(postItem: any, navigation) {
+function selectPostItem(postItem: PostItemModel, navigation) {
   navigation.navigate('PostPreview', postItem);
 }
 

@@ -6,11 +6,11 @@
  * @flow
  */
 
-import {PostsApi} from '../../network/interfaces';
+import {PostItemModel, PostsApi} from '../../network/interfaces';
 
-export function fetchPosts(tabIndex: number): Promise<[Post]> {
+export function fetchPosts(tabIndex: number): Promise<PostItemModel[]> {
   if (tabIndex === 0) {
-    return PostsApi().fetchAllPosts();
+    return PostsApi().fetchPosts(null);
   } else {
     return PostsApi().fetchMyPosts();
   }
