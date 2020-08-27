@@ -24,9 +24,10 @@ import {ImagePickerResponse} from 'react-native-image-picker';
 const {View} = ReactNative;
 
 interface PostFields {
+  _id: string;
   title: string;
   body: string;
-  imageUrl: string;
+  url: string;
   imagePickerResponse: ImagePickerResponse;
 }
 
@@ -40,20 +41,24 @@ export const AddNewPost: FunctionComponent = (props) => {
   const darkTheme = useTheme().dark;
 
   const [post, setPost] = useState<PostFields>({
+    _id: null,
     title: '',
     body: '',
-    imageUrl: null,
+    url: null,
     imagePickerResponse: null,
   });
+  const [needSavePost, setNeedSavePost] = useState<boolean>(false);
 
   useEffect(() => {
     let title;
     if (postItem) {
       title = postItem.post.title;
       setPost({
+        ...post,
+        _id: postItem.post._id,
         title: postItem.post.title,
         body: postItem.post.body,
-        imageUrl: postItem.imageUrl,
+        url: postItem.imageUrl,
         imagePickerResponse: null,
       });
     } else {
@@ -65,12 +70,31 @@ export const AddNewPost: FunctionComponent = (props) => {
     });
   }, []);
 
+  useEffect(() => {
+    if (needSavePost) {
+      savePost();
+    }
+  }, [needSavePost]);
+
   function getImageUrl(): string {
     if (post.imagePickerResponse) {
       return post.imagePickerResponse.uri;
     } else {
-      return post.imageUrl;
+      return post.url;
     }
+  }
+
+  function savePost() {
+    const newPost = new Post(post);
+    StateStorage.savePost(newPost)
+      .then(() => {
+        navigation.goBack();
+      })
+      .catch((error) => {
+        if (!isEmpty(error)) {
+          Alert.alert('Error', `${error}`);
+        }
+      });
   }
 
   // Actions
@@ -85,17 +109,8 @@ export const AddNewPost: FunctionComponent = (props) => {
       });
   }
 
-  function doneButtonPressed(_post: {}) {
-    const newPost = new Post(post);
-    StateStorage.savePost(newPost)
-      .then(() => {
-        navigation.goBack();
-      })
-      .catch((error) => {
-        if (!isEmpty(error)) {
-          Alert.alert('Error', `${error}`);
-        }
-      });
+  function doneButtonPressed() {
+    setNeedSavePost(true);
   }
 
   function updateField(name: string, value: any) {
@@ -114,7 +129,7 @@ export const AddNewPost: FunctionComponent = (props) => {
         name="check"
         type="Foundation"
         onPress={() => {
-          doneButtonPressed(post);
+          doneButtonPressed();
         }}
       />
     );
