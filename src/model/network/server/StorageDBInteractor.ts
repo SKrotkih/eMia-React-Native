@@ -7,31 +7,28 @@ import RNFetchBlob from 'rn-fetch-blob/index';
 export class StorageDBInteractor implements DBStorageInteractor {
   async uploadImage(photo: ImagePickerResponse, id: string): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
-      if (!(photo && photo.uri)) {
+      if (!photo) {
         reject(Error('Photo is not presented'));
         return;
       }
-      const apiUrl = BASE_URL + '/api/images/upload';
-
+      const url = BASE_URL + '/api/images/upload';
       const headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       };
-
-      const body = this.getBase64Body(photo, id);
+      const body = this.getBody(photo, id);
 
       const options = {
         method: 'POST',
         body: body,
         headers: headers,
       };
-
-      fetch(apiUrl, options)
+      fetch(url, options)
         .then((response) => response.json())
         .then((response) => {
-          const url = response.secure_url;
-          console.log('Uploaded successfully. Url=', url);
-          resolve(url);
+          const secureUrl = response.secure_url;
+          console.log('Uploaded successfully. Url=', secureUrl);
+          resolve(secureUrl);
         })
         .catch((error) => {
           const message = `Failed uploading. Error=${error}`;
@@ -41,7 +38,7 @@ export class StorageDBInteractor implements DBStorageInteractor {
     });
   }
 
-  getBase64Body(photo: ImagePickerResponse, id: string): string {
+  getBody(photo: ImagePickerResponse, id: string): string {
     return JSON.stringify({
       img: photo.data,
       name: `eMia${id}.jpeg`,

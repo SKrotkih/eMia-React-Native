@@ -23,7 +23,7 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
   const postItem = route.params;
   const modelView: ModelView = new ModelView(postItem);
 
-  const [ownerAvatarUrl, setOwnerAvatarUrl] = useState<any>();
+  const [ownerAvatarUrl, setOwnerAvatarUrl] = useState<Object>();
 
   function setTitle() {
     navigation.setOptions({title: modelView.title});
@@ -46,7 +46,7 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
 
   setTitle();
 
-  const renderBody = () => {
+  const PostBody = () => {
     const authorName = modelView.userName;
     const textBody = modelView.body;
     const attachedImageUrl = modelView.imageUrl;
@@ -68,7 +68,7 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
         {backgroundColor: darkTheme ? color.dark : color.white},
       ]}>
       <PostsHeader title={modelView.title} darkTheme={darkTheme} />
-      {renderBody()}
+      {PostBody()}
     </Container>
   );
 };
