@@ -7,7 +7,7 @@
  */
 
 import React, {FunctionComponent, useEffect, useState} from 'react';
-import {Container, Content} from 'native-base';
+import {Container, Content, Icon} from 'native-base';
 import ModelView from './modelView';
 import {color} from "../../../theme/styles";
 import {useTheme} from "react-native-paper";
@@ -17,17 +17,14 @@ import Body from "./Components/Body";
 import DatePublished from "./Components/DatePublished";
 import {StyleSheet} from "react-native";
 import PostsHeader from "./Components/Header";
+import {PostItemModel} from "../../../model/network/interfaces";
 
 export const PostPreview: FunctionComponent = ({route, navigation}) => {
   const darkTheme = useTheme().dark;
-  const postItem = route.params;
+  const postItem: PostItemModel = route.params;
   const modelView: ModelView = new ModelView(postItem);
 
   const [ownerAvatarUrl, setOwnerAvatarUrl] = useState<Object>();
-
-  function setTitle() {
-    navigation.setOptions({title: modelView.title});
-  }
 
   useEffect(() => {
     if (modelView.avatarUrl) {
@@ -44,7 +41,29 @@ export const PostPreview: FunctionComponent = ({route, navigation}) => {
     }
   }, []);
 
-  setTitle();
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <RightBarButtonItem />,
+      title: modelView.title,
+    });
+  }, []);
+
+  const RightBarButtonItem = () => {
+    return (
+      <Icon
+        style={styles.rightBarButton}
+        name="pencil"
+        type="Foundation"
+        onPress={() => {
+          userDidPressOnEditButton();
+        }}
+      />
+    );
+  };
+
+  function userDidPressOnEditButton() {
+    navigation.navigate('EditPost', postItem);
+  }
 
   const PostBody = () => {
     const authorName = modelView.userName;
@@ -81,5 +100,9 @@ const styles = StyleSheet.create({
   content: {
     margin: 15,
     marginBottom: 15,
+  },
+  rightBarButton: {
+    color: color.white,
+    marginRight: 8,
   },
 });

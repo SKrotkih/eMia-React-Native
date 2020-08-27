@@ -18,29 +18,60 @@ import Photo from "./Components/Photo";
 import takePhoto from "../../../components/ImagePicker/TakePhoto";
 import {isEmpty} from "../../../utils/validate";
 import * as StateStorage from "../../../redux/post/actions";
+import {PostItemModel} from "../../../model/network/interfaces";
+import {ImagePickerResponse} from 'react-native-image-picker';
 
 const {View} = ReactNative;
 
-export const AddNewPost: FunctionComponent = (props) => {
-  const {navigation} = props;
+interface PostFields {
+  title: string;
+  body: string;
+  imageUrl: string;
+  imagePickerResponse: ImagePickerResponse;
+}
 
-  const title = 'New Post';
+export const AddNewPost: FunctionComponent = (props) => {
+  const {navigation, route} = props;
+
+  const postItem: PostItemModel = route.params;
+
   const titleLabelText = 'Title:';
   const bodyLabelText = 'Body:';
   const darkTheme = useTheme().dark;
 
-  function getPostTemplate(): {} {
-    return {title: '', body: '', imagePickerResponse: null};
-  }
-
-  const [post, setPost] = useState(getPostTemplate());
+  const [post, setPost] = useState<PostFields>({
+    title: '',
+    body: '',
+    imageUrl: null,
+    imagePickerResponse: null,
+  });
 
   useEffect(() => {
+    let title;
+    if (postItem) {
+      title = postItem.post.title;
+      setPost({
+        title: postItem.post.title,
+        body: postItem.post.body,
+        imageUrl: postItem.imageUrl,
+        imagePickerResponse: null,
+      });
+    } else {
+      title = 'New Post';
+    }
     navigation.setOptions({
       headerRight: () => <RightBarButtonItem />,
       title: title,
     });
-  }, [post]);
+  }, []);
+
+  function getImageUrl(): string {
+    if (post.imagePickerResponse) {
+      return post.imagePickerResponse.uri;
+    } else {
+      return post.imageUrl;
+    }
+  }
 
   // Actions
 
@@ -124,9 +155,7 @@ export const AddNewPost: FunctionComponent = (props) => {
         onPress={() => takePhotoButtonPressed()}>
         <Text>Attach a Photo</Text>
       </Button>
-      {post.imagePickerResponse && (
-        <AttachedPhoto url={post.imagePickerResponse.uri} />
-      )}
+      {getImageUrl() && <AttachedPhoto url={getImageUrl()} />}
     </View>
   );
 };

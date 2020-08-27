@@ -93,6 +93,11 @@ function Root(props) {
         component={AddNewPost}
         options={{title: 'New Post'}}
       />
+      <Stack.Screen
+        name="EditPost"
+        component={AddNewPost}
+        options={{title: ''}}
+      />
       <Stack.Screen name="Options" component={Options} options={{title: 'Filter'}}/>
       <Stack.Screen
         name="EditProfile"
