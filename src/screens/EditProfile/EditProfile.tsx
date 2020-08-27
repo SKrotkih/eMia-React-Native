@@ -13,7 +13,7 @@ import styles from './styles';
 import {ModelView, TextEditItem} from './ModelView';
 import {color} from '../../theme/styles';
 import inputText from '../../components/InputText/InputText';
-import Photo from '../Home/AddNewPost/Components/PostPhoto';
+import Photo from '../Home/AddNewPost/Components/Photo';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 const {View, ScrollView} = ReactNative;
@@ -253,7 +253,7 @@ export class EditProfile extends React.Component<
               onPress={() => this.userDidPressOnPhotoPicker()}>
               <Text style={styles.buttonText}>Update/Add Profile Photo</Text>
             </Button>
-            <Photo url={this.modelView.imageUrl} darkTheme={this.darkTheme} />
+            <Photo url={this.modelView.avatarUrl} darkTheme={this.darkTheme} />
           </ScrollView>
         </View>
       );

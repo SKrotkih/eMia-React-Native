@@ -6,12 +6,12 @@
  * @flow
  */
 
-export enum FilerItem {
+export enum PostsFilterCondition {
   ALL_POSTS,
   MY_POSTS,
 }
 
 export class PostsTabItem {
   title: string;
-  filterItem: FilerItem;
+  filterItem: PostsFilterCondition;
 }

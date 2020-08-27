@@ -13,9 +13,9 @@ import styles from './styles';
 import {Post} from '../../../model/entities/post';
 import {useTheme} from "react-native-paper";
 import {color} from "../../../theme/styles";
-import InputData from "./Components/InputPostTextItem";
-import Photo from "./Components/PostPhoto";
-import takePhoto from "./Utils/TakePhoto";
+import InputField from "./Components/InputField";
+import Photo from "./Components/Photo";
+import takePhoto from "../../../components/ImagePicker/TakePhoto";
 import {isEmpty} from "../../../utils/validate";
 import * as StateStorage from "../../../redux/post/actions";
 
@@ -99,7 +99,7 @@ export const AddNewPost: FunctionComponent = (props) => {
 
   return (
     <View style={[styles.container, {backgroundColor: darkTheme ? color.dark : color.white}]}>
-      <InputData
+      <InputField
         title={titleLabelText}
         placeholder={'Type title'}
         fieldName={'title'}
@@ -108,7 +108,7 @@ export const AddNewPost: FunctionComponent = (props) => {
         darkTheme={darkTheme}
         updateField={updateField}
       />
-      <InputData
+      <InputField
         title={bodyLabelText}
         placeholder={'Type body'}
         fieldName={'body'}

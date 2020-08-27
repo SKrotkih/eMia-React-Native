@@ -9,15 +9,15 @@
 import React, {FunctionComponent} from 'react';
 import ReactNative, {StyleSheet} from 'react-native';
 import Grid from 'react-native-grid-component';
-import {Loader} from '../../../components/Loader';
+import {Loader} from '../../../../components/Loader';
 import {Text} from 'native-base';
-import ModelView from './ModelView';
-import {color} from '../../../theme/styles';
-import PostGridItem from "./Components/GridPostItem";
+import ModelView from '../ModelView';
+import {color} from '../../../../theme/styles';
+import PostGridItem from "./PostGridItem";
 
 const {View} = ReactNative;
 
-export const PostsList: FunctionComponent = (props, navigation, darkTheme) => {
+export const PostGrid: FunctionComponent = (props, navigation, darkTheme) => {
   const modelView: ModelView = props as ModelView;
 
   function renderGrid() {

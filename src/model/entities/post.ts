@@ -6,7 +6,6 @@
  * @flow
  */
 
-import {Alert} from 'react-native';
 import {AuthApi, PostsApi, StorageApi} from '../network/interfaces';
 import {isEmpty} from '../../utils/validate';
 import {User} from './user';
@@ -90,15 +89,16 @@ export class Post {
       const user = await AuthApi().getCurrentUser();
       this.uid = user._id;
       this.author = user.username;
-      const id = await PostsApi().uploadData(this.postDocument());
+      const postId = await PostsApi().uploadData(this.postDocument());
+      this._id = postId;
       if (this.imagePickerResponse && this.imagePickerResponse.uri) {
-        const pictureUrl = await StorageApi().uploadImage(
+        const imageUrl = await StorageApi().uploadImage(
           this.imagePickerResponse,
-          id,
+          postId,
         );
-        this.url = pictureUrl;
+        this.url = imageUrl;
+        // Update Post (new imageUrl and _id):
         await PostsApi().uploadData(this.postDocument());
-        console.log(`Image's url: ${this.url}`);
       }
     } catch (error) {
       throw error;

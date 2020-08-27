@@ -32,7 +32,7 @@ import React, {
   useState,
 } from 'react';
 import {color} from '../../../theme/styles';
-import {PostsList} from './PostsList';
+import {PostGrid} from './Components/PostGrid';
 import {styles} from './styles';
 import * as Permissions from 'expo-permissions';
 
@@ -148,7 +148,7 @@ export const Home: FunctionComponent = (props) => {
             textStyle={styles.tabText}
             activeTabStyle={darkTheme ? styles.activeTabDark : styles.activeTab}
             activeTextStyle={darkTheme ? styles.activeTextTabDark : styles.activeTextTab}>
-            {PostsList(_modelView, navigation, darkTheme)}
+            {PostGrid(_modelView, navigation, darkTheme)}
           </Tab>
         ))}
       </Tabs>

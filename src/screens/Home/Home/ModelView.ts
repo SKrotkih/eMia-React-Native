@@ -8,7 +8,7 @@
 
 import {Alert} from 'react-native';
 import * as actions from '../../../model/dbinteractor/posts/dbinteractor';
-import {FilerItem, PostsTabItem} from './Tabs';
+import {PostsFilterCondition, PostsTabItem} from './TabsModel/PostsTabItem';
 
 const {fetchPosts} = actions;
 
@@ -16,7 +16,7 @@ export default class ModelView {
   private _dataSource: any;
   private _loaded: boolean;
   private _refreshing: boolean;
-  private _currentFilterItem: FilerItem;
+  private _currentFilterItem: PostsFilterCondition;
   private _updateView: () => void;
 
   constructor(updateView: () => void) {
@@ -24,18 +24,18 @@ export default class ModelView {
     this._dataSource = null;
     this._loaded = false;
     this._refreshing = false;
-    this._currentFilterItem = FilerItem.ALL_POSTS;
+    this._currentFilterItem = PostsFilterCondition.ALL_POSTS;
   }
 
   get tabs(): Array<PostsTabItem> {
     return [
       {
         title: 'All Posts',
-        filterItem: FilerItem.ALL_POSTS,
+        filterItem: PostsFilterCondition.ALL_POSTS,
       },
       {
         title: 'My Posts',
-        filterItem: FilerItem.MY_POSTS,
+        filterItem: PostsFilterCondition.MY_POSTS,
       },
     ];
   }
@@ -70,7 +70,7 @@ export default class ModelView {
     }
   }
 
-  fetchData(filterItem: FilerItem) {
+  fetchData(filterItem: PostsFilterCondition) {
     this.loaded = false;
     this._refreshing = true;
     this.updateView();

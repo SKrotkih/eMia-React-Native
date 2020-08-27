@@ -9,7 +9,7 @@
 import {User} from '../../model/entities/user';
 import {isEmpty} from '../../utils/validate';
 import {EditProfile} from './EditProfile';
-import takePhoto from '../Home/AddNewPost/Utils/TakePhoto';
+import takePhoto from '../../components/ImagePicker/TakePhoto';
 import {AuthApi} from "../../model/network/interfaces";
 import {ImagePickerResponse} from "react-native-image-picker";
 
