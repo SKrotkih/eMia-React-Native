@@ -59,7 +59,6 @@ export const AddNewPost: FunctionComponent = (props) => {
         title: postItem.post.title,
         body: postItem.post.body,
         url: postItem.imageUrl,
-        imagePickerResponse: null,
       });
     } else {
       title = 'New Post';
@@ -79,8 +78,10 @@ export const AddNewPost: FunctionComponent = (props) => {
   function getImageUrl(): string {
     if (post.imagePickerResponse) {
       return post.imagePickerResponse.uri;
-    } else {
+    } else if (post.url) {
       return post.url;
+    } else {
+      return null;
     }
   }
 
