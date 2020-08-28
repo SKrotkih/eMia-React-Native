@@ -1,17 +1,6 @@
 import {Platform} from 'react-native';
 const iOS = Platform.OS === 'ios';
 
-// You should register your own app on the Firebase console, create
-// file GoogleService-Info.js and put constants from your Firebase app like this (just copy/past next some lines and replace values with yours):
-/*
-export const FIREBASE_API_KEY = ''
-export const FIREBASE_AUTH_DOMAIN = ''
-export const FIREBASE_DATABASE_URL = ''
-export const FIREBASE_PROJECT_ID = ''
-export const FIREBASE_STORAGE_BUCKET = ''
-export const FIREBASE_MESSAGING_SENDER_ID = ''
-*/
-
 export const BASE_URL = 'http://localhost:5000';
 export const MODEL_TYPE_SERVER = 'server';
 export const MODEL_TYPE_FIREBASE = 'firebase';

@@ -41,8 +41,12 @@ export class StorageDBInteractor implements DBStorageInteractor {
   getBody(photo: ImagePickerResponse, id: string): string {
     return JSON.stringify({
       img: photo.data,
-      name: `eMia${id}.jpeg`,
+      name: `eMia${id}.${this.getFileExtension(photo.uri)}`,
     });
+  }
+
+  getFileExtension(filename) {
+    return filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
   }
 
   // Some different ways which were used to try upload image on Cloudinary direction and on the app server
