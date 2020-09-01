@@ -1,3 +1,6 @@
+/*
+  Custom Hook
+ */
 import {useState, useCallback, useEffect} from 'react';
 import * as LocalStorage from './storage';
 
