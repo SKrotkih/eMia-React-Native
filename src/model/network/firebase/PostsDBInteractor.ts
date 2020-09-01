@@ -40,32 +40,33 @@ export class PostsDBInteractor implements DBPostsInteractor {
   fetchMyPosts(): Promise<PostItemModel[]> {
     console.log('API. fetchMyPosts');
     return new Promise<PostItemModel[]>((resolve, reject) => {
-      AuthApi().getCurrentUserId()
-        .then((uid) => {
-          database
-            .ref('main')
-            .child('posts')
-            .once('value')
-            .then((snapshot) => {
-              let items: PostItemModel[] = [];
-              this.parsePosts(snapshot, items, function (post) {
-                return post.uid === uid;
+      AuthApi().then((api) =>
+        api.getCurrentUserId()
+          .then((uid) => {
+            database
+              .ref('main')
+              .child('posts')
+              .once('value')
+              .then((snapshot) => {
+                let items: PostItemModel[] = [];
+                this.parsePosts(snapshot, items, function (post) {
+                  return post.uid === uid;
+                });
+                this.assignImagesUrl(items)
+                  .then((items) => {
+                    resolve(items);
+                  })
+                  .catch((error) => {
+                    reject(error);
+                  })
+              })
+              .catch((error) => {
+                reject(error);
               });
-              this.assignImagesUrl(items)
-                .then((items) => {
-                  resolve(items);
-                })
-                .catch((error) => {
-                  reject(error);
-                })
-            })
-            .catch((error) => {
-              reject(error);
-            });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+          })
+          .catch((error) => {
+            console.log(error);
+          }));
     });
   }
 
@@ -167,20 +168,21 @@ export class PostsDBInteractor implements DBPostsInteractor {
                 console.log(error);
               })
               .finally(() => {
-                AuthApi().getUser(userId)
-                  .then((user) => {
-                    item.author = user;
-                    bufferLength -= 1;
-                    if (bufferLength === 0) {
-                      resolve(items);
-                    }
-                  })
-                  .catch(() => {
-                    bufferLength -= 1;
-                    if (bufferLength === 0) {
-                      resolve(items);
-                    }
-                  });
+                AuthApi().then((api) =>
+                  api.getUser(userId)
+                    .then((user) => {
+                      item.author = user;
+                      bufferLength -= 1;
+                      if (bufferLength === 0) {
+                        resolve(items);
+                      }
+                    })
+                    .catch(() => {
+                      bufferLength -= 1;
+                      if (bufferLength === 0) {
+                        resolve(items);
+                      }
+                    }));
               });
           });
       });

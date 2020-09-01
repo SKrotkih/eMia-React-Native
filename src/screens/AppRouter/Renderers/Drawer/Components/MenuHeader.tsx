@@ -16,17 +16,21 @@ export default function MenuHeader() {
   const [name, setName] = useState<string>('');
 
   useEffect(() => {
-    AuthApi()
-      .getCurrentUser()
-      .then((user) => {
-        setName(user.username);
-        AuthApi().getUserAvatarURL(user.id).then((url) => {
-          setAvatar(url);
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    AuthApi().then((api) =>
+      api
+        .getCurrentUser()
+        .then((user) => {
+          setName(user.username);
+          AuthApi().then((api) =>
+            api
+              .getUserAvatarURL(user.id).then((url) => {
+              setAvatar(url);
+            }));
+        })
+        .catch((error) => {
+          console.log(error);
+        })
+    );
   }, []);
 
   const avatarUrl: string = avatar === null ? 'Icon-Profile' : avatar;

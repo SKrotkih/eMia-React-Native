@@ -14,6 +14,7 @@ import {
   TypeBackend,
   useBackend,
 } from '../../../../../model/localStorage/backend.dispatch.hook';
+import {warningToast} from "../../../../../components/Toast/WarningToast";
 
 export default function MenuFooter() {
   const paperTheme = useTheme();
@@ -34,12 +35,14 @@ export default function MenuFooter() {
       </TouchableRipple>
       <TouchableRipple
         onPress={() => {
-          toggleBackend();
+          toggleBackend().catch((error) => {
+            warningToast(error);
+            });
         }}>
         <View style={styles.preference}>
-          <Text>{backend === TypeBackend.Firebase ? 'Firebase' : 'NodeJS'}</Text>
+          <Text>{backend === TypeBackend.Firebase ? 'NodeJS' : 'Firebase'}</Text>
           <View pointerEvents="none">
-            <Switch value={backend === TypeBackend.Nodejs} />
+            <Switch value={false} />
           </View>
         </View>
       </TouchableRipple>

@@ -33,7 +33,7 @@ export default class ModelView {
   }
 
   async getUserAvatar(): Promise<string> {
-    return AuthApi().getUserAvatarURL(this.postModel.post.uid);
+    return AuthApi().then((api) => api.getUserAvatarURL(this.postModel.post.uid));
   }
 
   get imageUrl(): {} {

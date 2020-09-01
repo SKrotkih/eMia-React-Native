@@ -35,7 +35,7 @@ export class ModelView {
   async configure(user: User) {
     if (user === null) {
       try {
-        const currentUser = await AuthApi().getCurrentUser()
+        const currentUser = await AuthApi().then((api) => api.getCurrentUser());
         this.renderUserData(currentUser);
       } catch (error) {
         console.log(error);
@@ -49,10 +49,13 @@ export class ModelView {
     this.user = user;
     this._view.setTitle(this.title);
     this.updateView();
-    AuthApi().getUserAvatarURL(this._user.id).then((url) => {
-      this._avatarUrl = url;
-      this.updateView();
-    });
+    AuthApi().then((api) =>
+      api
+        .getUserAvatarURL(this._user.id).then((url) => {
+        this._avatarUrl = url;
+        this.updateView();
+      })
+    );
   }
 
   selectAvatar() {

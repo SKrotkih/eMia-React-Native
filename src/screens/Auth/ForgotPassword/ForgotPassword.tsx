@@ -20,16 +20,19 @@ export const ForgotPassword: FunctionComponent = ({navigation}) => {
 
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
-    AuthApi().resetPassword(getEmail(fields))
-      .then(() => {
-        Alert.alert('Please check email box. Te password was sent to you.');
-        navigation.goBack();
-      })
-      .catch((error) => {
-        setError((prevState) => {
-          return {...prevState, email: error.message};
-        });
-      });
+    AuthApi().then((api) =>
+      api
+        .resetPassword(getEmail(fields))
+        .then(() => {
+          Alert.alert('Please check email box. Te password was sent to you.');
+          navigation.goBack();
+        })
+        .catch((error) => {
+          setError((prevState) => {
+            return {...prevState, email: error.message};
+          });
+        })
+    );
   }
 
   function getEmail(fields: AuthInputModel.AuthInputItem[]): string {

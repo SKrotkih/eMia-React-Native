@@ -31,7 +31,7 @@ export default function App() {
 
   async function checkIfUserAuthenticated() {
     try {
-      const _isAuthenticated = await AuthApi().isUserAuthenticated();
+      const _isAuthenticated = await AuthApi().then((api) => api.isUserAuthenticated());
       if (_isAuthenticated) {
         handleUserIsAuthenticated();
       } else {

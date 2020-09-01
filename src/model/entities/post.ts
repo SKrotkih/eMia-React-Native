@@ -86,19 +86,19 @@ export class Post {
 
   async uploadPost() {
     try {
-      const user = await AuthApi().getCurrentUser();
+      const user = await AuthApi().then((api) => api.getCurrentUser());
       this.uid = user._id;
       this.author = user.username;
-      const postId = await PostsApi().uploadData(this.postDocument());
+      const postId = await PostsApi().then((api) => api.uploadData(this.postDocument()));
       this._id = postId;
       if (this.imagePickerResponse && this.imagePickerResponse.uri) {
-        const imageUrl = await StorageApi().uploadImage(
+        const imageUrl = await StorageApi().then((api) => api.uploadImage(
           this.imagePickerResponse,
           postId,
-        );
+        ));
         this.url = imageUrl;
         // Update Post (new imageUrl and _id):
-        await PostsApi().uploadData(this.postDocument());
+        await PostsApi().then((api) => api.uploadData(this.postDocument()));
       }
     } catch (error) {
       throw error;

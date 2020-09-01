@@ -41,7 +41,7 @@ export class PostsDBInteractor implements DBPostsInteractor {
   }
 
   async fetchMyPosts(): Promise<PostItemModel[]> {
-    const uid = await AuthApi().getCurrentUserId();
+    const uid = await AuthApi().then((api) => api.getCurrentUserId());
     return this.fetchPosts(uid);
   }
 

@@ -28,7 +28,7 @@ export const Login: FunctionComponent = ({navigation}) => {
 
   async function login(credentials) {
     try {
-      const {uid, user} = await AuthApi().login(credentials);
+      const {uid, user} = await AuthApi().then((api) => api.login(credentials));
       StateStorage.logIn(user);
     } catch (e) {
       setError(AuthError.parseMessage(e));

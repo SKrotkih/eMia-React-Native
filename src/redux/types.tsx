@@ -7,12 +7,14 @@
  */
 import {User} from "../model/entities/user";
 import {Post} from "../model/entities/post";
+import {TypeBackend} from "../model/localStorage/backend.dispatch.hook";
 
 const Types = {
   LOGGED_IN: 'auth/LOGGED_IN',
   LOGGED_OUT: 'auth/LOGGED_OUT',
   REGISTERED_NEW_USER: 'auth/REGISTERED_NEW_USER',
   ADD_POST: 'post/ADD_POST',
+  CHANGE_BACKEND: 'control/CHANGE_BACKEND',
 };
 
 const isTypeAuthAction = (action) => {
@@ -40,6 +42,10 @@ const addPost = (post: Post) => ({
   payload: post,
 });
 
+const changeBackendType = (backend: TypeBackend) => ({
+  type: Types.CHANGE_BACKEND,
+});
+
 export default {
   Types,
   isTypeAuthAction,
@@ -47,4 +53,5 @@ export default {
   loggedOut,
   registeredNewUser,
   addPost,
+  changeBackendType,
 };

@@ -48,12 +48,12 @@ export class User {
   async update(photo: ImagePickerResponse, completed) {
     try {
       if (photo && photo.uri) {
-        const avatarUrl = await StorageApi().uploadImage(photo, this.id);
+        const avatarUrl = await StorageApi().then((api) => api.uploadImage(photo, this.id));
         if (avatarUrl && !isEmpty(avatarUrl)) {
           this.avatarUrl = avatarUrl;
         }
       }
-      await AuthApi().updateUser(this);
+      await AuthApi().then((api) => api.updateUser(this));
       completed(true);
     } catch (error) {
       Alert.alert('Failed uploading photo!', `${error}`, [], {

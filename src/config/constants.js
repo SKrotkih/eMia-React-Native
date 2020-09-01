@@ -2,6 +2,7 @@ import {Platform} from 'react-native';
 const iOS = Platform.OS === 'ios';
 
 export const BASE_URL = 'http://localhost:5000';
+
 export const MODEL_TYPE_SERVER = 'server';
 export const MODEL_TYPE_FIREBASE = 'firebase';
 export const MODEL_TYPE = MODEL_TYPE_SERVER;

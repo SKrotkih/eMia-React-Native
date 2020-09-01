@@ -12,6 +12,7 @@ import {StorageDBInteractor as FirebaseStorageDBInteractor} from "./firebase/Sto
 import {StorageDBInteractor as ServerStorageDBInteractor} from "./server/StorageDBInteractor";
 import {Post, PostDocument} from '../entities/post';
 import {ImagePickerResponse} from "react-native-image-picker";
+import {BackendTypeState, TypeBackend} from "../localStorage/backend.dispatch.hook";
 
 export interface Credentials {
   email: string;
@@ -49,12 +50,19 @@ export interface DBUsersInteractor {
 const firebaseInteractor = new FirebaseDBInteractor();
 const serverInteractor = new ServerDBInteractor();
 
-export function AuthApi(): DBUsersInteractor {
-  if (MODEL_TYPE === MODEL_TYPE_SERVER) {
-    return serverInteractor;
-  } else if (MODEL_TYPE === MODEL_TYPE_FIREBASE) {
-    return firebaseInteractor;
-  }
+export function AuthApi(): Promise<DBUsersInteractor> {
+  return new Promise<DBUsersInteractor>((resolve, reject) => {
+    BackendTypeState.getBackend().then((backend) => {
+      switch (backend) {
+        case TypeBackend.Nodejs:
+          resolve(serverInteractor);
+          break;
+        case TypeBackend.Firebase:
+          resolve(firebaseInteractor);
+          break;
+      }
+    });
+  });
 }
 
 // Posts database Interface
@@ -83,12 +91,19 @@ export interface DBPostsInteractor {
 const firebasePostsInteractor = new FirebasePostsDBInteractor();
 const serverPostsInteractor = new ServerPostsDBInteractor();
 
-export function PostsApi(): DBPostsInteractor {
-  if (MODEL_TYPE === MODEL_TYPE_SERVER) {
-    return serverPostsInteractor;
-  } else if (MODEL_TYPE === MODEL_TYPE_FIREBASE) {
-    return firebasePostsInteractor;
-  }
+export function PostsApi(): Promise<DBPostsInteractor> {
+  return new Promise<DBPostsInteractor>((resolve, reject) => {
+    BackendTypeState.getBackend().then((backend) => {
+      switch (backend) {
+        case TypeBackend.Nodejs:
+          resolve(serverPostsInteractor);
+          break;
+        case TypeBackend.Firebase:
+          resolve(firebasePostsInteractor);
+          break;
+      }
+    });
+  });
 }
 
 // Storage
@@ -100,10 +115,17 @@ export interface DBStorageInteractor {
 const firebaseStorageInteractor = new FirebaseStorageDBInteractor();
 const serverStorageInteractor = new ServerStorageDBInteractor();
 
-export function StorageApi(): DBStorageInteractor {
-  if (MODEL_TYPE === MODEL_TYPE_SERVER) {
-    return serverStorageInteractor;
-  } else if (MODEL_TYPE === MODEL_TYPE_FIREBASE) {
-    return firebaseStorageInteractor;
-  }
+export function StorageApi(): Promise<DBStorageInteractor> {
+  return new Promise<DBStorageInteractor>((resolve, reject) => {
+    BackendTypeState.getBackend().then((backend) => {
+      switch (backend) {
+        case TypeBackend.Nodejs:
+          resolve(serverStorageInteractor);
+          break;
+        case TypeBackend.Firebase:
+          resolve(firebaseStorageInteractor);
+          break;
+      }
+    });
+  });
 }

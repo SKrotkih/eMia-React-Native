@@ -98,13 +98,15 @@ function editProfile({navigation, darkTheme}) {
 }
 
 function handleLogOut(props) {
-  AuthApi().signOut()
-    .then(() => {
-      StateStorage.logOut();
-    })
-    .catch((error) => {
-      Alert.alert('Oops!', error.message);
-    });
+  AuthApi().then((api) =>
+    api
+      .signOut()
+      .then(() => {
+        StateStorage.logOut();
+      })
+      .catch((error) => {
+        Alert.alert('Oops!', error.message);
+      }));
 }
 
 const styles = StyleSheet.create({

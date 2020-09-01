@@ -1,8 +1,12 @@
 /*
   Custom Hook
  */
-import {useState, useCallback, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import * as LocalStorage from './storage';
+import * as StateActionsStorage from "../../redux/control/actions";
+import * as StateAuthStorage from "../../redux/auth/actions";
+import {AuthApi} from "../network/interfaces";
+import {Alert} from "react-native";
 
 export enum TypeBackend {
   Firebase = 'firebase',
@@ -41,16 +45,29 @@ export class BackendTypeState {
   static defaultBackendType: TypeBackend = TypeBackend.Firebase;
 
   static async setBackend(value: TypeBackend) {
-    await LocalStorage.setStorageObjectItem(this.keyName, value)
+    await LocalStorage.setStorageObjectItem(this.keyName, value);
+    StateActionsStorage.changeBackendType(value);
+    setTimeout(() => {
+      AuthApi().then((api) =>
+        api
+          .signOut()
+          .then(() => {
+            StateAuthStorage.logOut();
+          })
+          .catch((error) => {
+            Alert.alert('Oops!', error.message);
+          })
+      );
+    }, 500);
   }
 
   static async getBackend(): Promise<TypeBackend> {
     try {
-      const backend =  await LocalStorage.getStorageObjectItem(this.keyName);
+      const backend = await LocalStorage.getStorageObjectItem(this.keyName);
       return backend;
     } catch (e) {
       await this.setBackend(this.defaultBackendType);
     }
-    return this.defaultBackendType;
+    return Promise.resolve(this.defaultBackendType);
   }
 }
