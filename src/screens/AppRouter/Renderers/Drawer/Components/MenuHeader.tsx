@@ -10,10 +10,12 @@ import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Avatar, Caption, Paragraph, Title} from 'react-native-paper';
 import {AuthApi} from "../../../../../model/network/interfaces";
+import {BackendTypeState, TypeBackend} from "../../../../../model/localStorage/backend.dispatch.hook";
 
 export default function MenuHeader() {
   const [avatar, setAvatar] = useState<string>(null);
   const [name, setName] = useState<string>('');
+  const [backend, setBackend] = useState<TypeBackend>(null);
 
   useEffect(() => {
     AuthApi().then((api) =>
@@ -31,6 +33,7 @@ export default function MenuHeader() {
           console.log(error);
         })
     );
+    BackendTypeState.getBackend().then((_backend) => setBackend(_backend));
   }, []);
 
   const avatarUrl: string = avatar === null ? 'Icon-Profile' : avatar;
@@ -38,7 +41,7 @@ export default function MenuHeader() {
   return (
     <View style={{flexDirection: 'column', marginTop: 15, marginLeft: 30}}>
       <Title style={styles.title}>eMia React Native</Title>
-      <Caption style={styles.caption}>ver. 1.0.1</Caption>
+      <Caption style={styles.caption}>{`ver. 1.0.1 (${backend})`}</Caption>
       <View style={{flexDirection: 'row', marginTop: 15, marginLeft: 0}}>
       <Avatar.Image source={{uri: avatarUrl}} size={35} />
         <View style={{marginLeft: 25, flexDirection: 'column'}}>

@@ -20,10 +20,9 @@ export const Login: FunctionComponent = ({navigation}) => {
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
     const credentials = getCredentials(fields);
-    login(credentials)
-      .catch((error) => {
-        console.log(error);
-      })
+    login(credentials).catch((error) => {
+      console.log(error);
+    });
   }
 
   async function login(credentials) {

@@ -6,17 +6,19 @@
  * @flow
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {Switch, Text, TouchableRipple, useTheme} from 'react-native-paper';
 import {StyleSheet, View} from 'react-native';
 import {AppContext} from '../../../../../components/other/context';
 import {
+  BackendTypeState,
   TypeBackend,
   useBackend,
 } from '../../../../../model/localStorage/backend.dispatch.hook';
 import {warningToast} from "../../../../../components/Toast/WarningToast";
 
 export default function MenuFooter() {
+  const [backendValue, setBackendValue] = useState<TypeBackend>(null)
   const paperTheme = useTheme();
   const {toggleTheme} = React.useContext(AppContext);
   const {backend, ready, toggleBackend} = useBackend();
@@ -35,14 +37,22 @@ export default function MenuFooter() {
       </TouchableRipple>
       <TouchableRipple
         onPress={() => {
-          toggleBackend().catch((error) => {
+          toggleBackend()
+            .then(() => {
+              BackendTypeState.getBackend()
+                .then((_backend) => {
+                  // Update UI
+                  setBackendValue(_backend);
+                });
+            })
+            .catch((error) => {
             warningToast(error);
             });
         }}>
         <View style={styles.preference}>
           <Text>{backend === TypeBackend.Firebase ? 'NodeJS' : 'Firebase'}</Text>
           <View pointerEvents="none">
-            <Switch value={false} />
+            <Switch value={backendValue === backend} />
           </View>
         </View>
       </TouchableRipple>

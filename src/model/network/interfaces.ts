@@ -1,9 +1,4 @@
 import {User} from "../entities/user";
-import {
-  MODEL_TYPE_SERVER,
-  MODEL_TYPE,
-  MODEL_TYPE_FIREBASE,
-} from '../../config/constants';
 import {UsersDBInteractor as FirebaseDBInteractor} from "./firebase/UsersDBInteractor";
 import {UsersDBInteractor as ServerDBInteractor} from "./server/UsersDBInteractor";
 import {PostsDBInteractor as FirebasePostsDBInteractor} from "./firebase/PostsDBInteractor";

@@ -1,11 +1,8 @@
 import {Platform} from 'react-native';
 const iOS = Platform.OS === 'ios';
+const Production = false;
 
-export const BASE_URL = 'http://localhost:5000';
-
-export const MODEL_TYPE_SERVER = 'server';
-export const MODEL_TYPE_FIREBASE = 'firebase';
-export const MODEL_TYPE = MODEL_TYPE_SERVER;
+export const BASE_URL = Production ? 'http://localhost:5000' : 'http://krotkih.su:8000';
 
 export const FACEBOOK_APP_ID = '';
 export const APP_NAME = 'eMia - React Native';
