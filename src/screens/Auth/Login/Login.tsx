@@ -20,18 +20,21 @@ export const Login: FunctionComponent = ({navigation}) => {
   function onSubmit(fields: AuthInputModel.AuthInputItem[]) {
     setError(new AuthError()); // clear out error messages
     const credentials = getCredentials(fields);
-    login(credentials).catch((error) => {
-      console.log(error);
-    });
+    login(credentials);
   }
 
-  async function login(credentials) {
-    try {
-      const {uid, user} = await AuthApi().then((api) => api.login(credentials));
-      StateStorage.logIn(user);
-    } catch (e) {
-      setError(AuthError.parseMessage(e));
-    }
+  function login(credentials: Credentials) {
+    AuthApi().then((api) =>
+      api
+        .login(credentials)
+        .then((res) => {
+          const {uid, user} = res;
+          StateStorage.logIn(user);
+        })
+        .catch((e) => {
+          setError(AuthError.parseMessage(e));
+        }),
+    );
   }
 
   function getCredentials(fields: AuthInputModel.AuthInputItem[]): Credentials {

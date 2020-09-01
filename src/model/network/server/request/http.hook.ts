@@ -13,7 +13,7 @@ export const useHttp = () => {
           body = JSON.stringify(body);
           headers['Content-Type'] = 'application/json';
         }
-        url = BASE_URL + url;
+        url = BASE_URL() + url;
         const response = await fetch(url, {method, body, headers});
         const data = await response.json();
         if (response.status !== 200 || !response.ok) {
@@ -48,7 +48,7 @@ export const httpRequest = async (url, method = 'GET', body = null, headers = {}
     } else {
       options = {method};
     }
-    url = BASE_URL + url;
+    url = BASE_URL() + url;
 
     console.log(url);
 

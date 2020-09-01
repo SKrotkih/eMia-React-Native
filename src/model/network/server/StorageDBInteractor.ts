@@ -11,7 +11,7 @@ export class StorageDBInteractor implements DBStorageInteractor {
         reject(Error('Photo is not presented'));
         return;
       }
-      const url = BASE_URL + '/api/images/upload';
+      const url = BASE_URL() + '/api/images/upload';
       const headers = {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ export class StorageDBInteractor implements DBStorageInteractor {
   // https://github.com/joltup/rn-fetch-blob#user-content-upload-example--dropbox-files-upload-api
   async sendImageOnServerAsBlobData(photo: ImagePickerResponse, id: string): Promise<string> {
     return new Promise<string>(async (resolve, reject) => {
-      const url = BASE_URL + '/api/images/upload';
+      const url = BASE_URL() + '/api/images/upload';
       console.log('URL ' + url);
 
       const headers = {
