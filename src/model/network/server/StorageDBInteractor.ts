@@ -3,6 +3,8 @@ import {BASE_URL} from '../../../config/constants';
 import {Platform} from 'react-native';
 import {ImagePickerResponse} from 'react-native-image-picker';
 import RNFetchBlob from 'rn-fetch-blob/index';
+import ImageResizer from 'react-native-image-resizer';
+import RNFS from 'react-native-fs';
 
 export class StorageDBInteractor implements DBStorageInteractor {
   async uploadImage(photo: ImagePickerResponse, id: string): Promise<string> {
@@ -11,37 +13,65 @@ export class StorageDBInteractor implements DBStorageInteractor {
         reject(Error('Photo is not presented'));
         return;
       }
-      const url = BASE_URL() + '/api/images/upload';
-      const headers = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      };
-      const body = this.getBody(photo, id);
-
-      const options = {
-        method: 'POST',
-        body: body,
-        headers: headers,
-      };
-      fetch(url, options)
-        .then((response) => response.json())
-        .then((response) => {
-          const secureUrl = response.secure_url;
-          console.log('Uploaded successfully. Url=', secureUrl);
-          resolve(secureUrl);
+      this.getBody(photo, id)
+        .then((body) => {
+          const headers = {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          };
+          const options = {
+            method: 'POST',
+            body: body,
+            headers: headers,
+          };
+          fetch(`${BASE_URL()}/api/images/upload`, options)
+            .then((response) => response.json())
+            .then((response) => {
+              const secureUrl = response.secure_url;
+              console.log('Uploaded successfully. Url=', secureUrl);
+              resolve(secureUrl);
+            })
+            .catch((error) => {
+              const message = `Failed uploading. Error=${error}`;
+              console.log(message);
+              reject(Error(message));
+            });
         })
         .catch((error) => {
-          const message = `Failed uploading. Error=${error}`;
-          console.log(message);
-          reject(Error(message));
+          reject(error);
         });
     });
   }
 
-  getBody(photo: ImagePickerResponse, id: string): string {
-    return JSON.stringify({
-      img: photo.data,
-      name: `eMia${id}.${this.getFileExtension(photo.uri)}`,
+  getBody(photo: ImagePickerResponse, id: string): Promise<string> {
+    return new Promise((resolve, reject) => {
+      if (photo.fileSize < 100000) {
+        resolve(
+          JSON.stringify({
+            img: photo.data,
+            name: `eMia${id}.${this.getFileExtension(photo.uri)}`,
+          })
+        );
+      } else {
+        ImageResizer.createResizedImage(photo.uri, 400, 400, 'JPEG', 80)
+          .then(({uri}) => {
+            RNFS.readFile(uri, 'base64')
+              .then((data) => {
+                resolve(
+                  JSON.stringify({
+                    img: data,
+                    name: `eMia${id}.${this.getFileExtension(photo.uri)}`,
+                  })
+                );
+              })
+              .catch((error) => {
+                reject(error);
+              });
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      }
     });
   }
 
