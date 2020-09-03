@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, {FunctionComponent} from 'react';
+import React from 'react';
 import ReactNative, {StyleSheet} from 'react-native';
 import Grid from 'react-native-grid-component';
 import {Loader} from '../../../../components/Loader';

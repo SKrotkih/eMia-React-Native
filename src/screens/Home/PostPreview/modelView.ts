@@ -6,7 +6,8 @@
  * @flow
  */
 
-import {AuthApi, PostItemModel} from '../../../model/network/interfaces';
+import AuthApi from '../../../model/network/APIfactory/AuthApi';
+import {PostItemModel} from '../../../model/network/interfaces/DBPostsInteractor';
 
 export default class ModelView {
   private postModel: PostItemModel;

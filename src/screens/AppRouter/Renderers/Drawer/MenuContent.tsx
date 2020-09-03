@@ -12,7 +12,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import {Drawer} from 'react-native-paper';
 import {color} from '../../../../theme/styles';
-import {AuthApi} from "../../../../model/network/interfaces";
+import AuthApi from "../../../../model/network/APIfactory/AuthApi";
 import MenuHeader from './Components/MenuHeader';
 import MenuFooter from './Components/MenuFooter';
 import {useTheme} from 'react-native-paper';

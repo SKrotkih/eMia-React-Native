@@ -8,7 +8,7 @@
 
 import React, {PureComponent} from 'react';
 
-import {Dimensions, Modal, WebView, Share, Image} from 'react-native';
+import {Dimensions, Modal, Share, Image} from 'react-native';
 
 import {
   Header,
@@ -20,6 +20,7 @@ import {
   Title,
   Button,
 } from 'native-base';
+import {WebView} from "expo/build/removed.web";
 
 const webViewHeight = Dimensions.get('window').height - 56;
 

@@ -1,20 +1,20 @@
 # eMia - React Native
 
 Here is an entire source code cross-platform mobile application something like easy social network, developed with using [React Native](https://facebook.github.io/react-native/docs/getting-started.html). 
-What else you can found here:
+What else can you find here? 
 - JavaScript
 - TypeScript
 - Redux
-- [Firebase](https://firebase.google.com/docs/) - backend
-- Node.js (Express, MongoDB) second server side of the project ([eMia-Node-js-Server](https://github.com/SKrotkih/eMia-Node-js-Server))
+- [Firebase](https://firebase.google.com/docs/) - backend (first from the two backends)
+- Node.js (Express, MongoDB) - second backend implementation of the project you can find here: [eMia-Node-js-Server](https://github.com/SKrotkih/eMia-Node-js-Server)
 - React Navigation
 - Native iOS components on Swift
-- current React Native 0.63
-- custom components
+- current React Native is 0.63 version
+- some custom components
 - async Redux actions 
 - Function components with hooks
 
-How it looks on an iOS device (on the left side) and on Android (on the right): 
+How it looks like on an iOS device (on the left side) and on Android (on the right): 
 
 ![emia1](https://user-images.githubusercontent.com/2775621/89017559-29fd3e80-d323-11ea-9372-f9680df561f6.gif)
 
@@ -23,12 +23,12 @@ How it looks on an iOS device (on the left side) and on Android (on the right):
 ## Introduction
 
 eMia is a simple social network. 
-You can sign in, sign up, sign out, restore password, edit profile, add a new post (title, body, photo),  filter posts.
+You can sign in, sign up, sign out, restore the password, edit profile, add a new post (title, body, photo),  filter posts.
 You will get  push-notification if another user likes your post.
 
 eMia uses Firebase database, storage, authentication and cloud messages.
 
-Notes. This React Native version contains also some native things. For example there is Filter View Controller (iOS) which is launched with using 'Options' menu button.  
+Notes. The current version contains also some native stuff. For example: Filter View Controller (iOS) which is appeared with using 'Options' menu button.  
 
 ## Requirements
 

@@ -1,3 +1,10 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
 import {createContext} from 'react';
 import {LoginData} from '../../model/localStorage/auth.hook';
 

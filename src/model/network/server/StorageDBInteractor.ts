@@ -1,4 +1,4 @@
-import {DBStorageInteractor} from '../interfaces';
+import {DBStorageInteractor} from '../interfaces/DBStorageInteractor';
 import {BASE_URL} from '../../../config/constants';
 import {Platform} from 'react-native';
 import {ImagePickerResponse} from 'react-native-image-picker';

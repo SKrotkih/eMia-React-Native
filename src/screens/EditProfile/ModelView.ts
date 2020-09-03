@@ -10,7 +10,7 @@ import {User} from '../../model/entities/user';
 import {isEmpty} from '../../utils/validate';
 import {EditProfile} from './EditProfile';
 import takePhoto from '../../components/ImagePicker/TakePhoto';
-import {AuthApi} from "../../model/network/interfaces";
+import AuthApi from "../../model/network/APIfactory/AuthApi";
 import {ImagePickerResponse} from "react-native-image-picker";
 
 export class ModelView {

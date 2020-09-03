@@ -6,7 +6,8 @@
  * @flow
  */
 
-import {AuthApi, DBPostsInteractor, PostItemModel} from '../interfaces';
+import AuthApi from '../APIfactory/AuthApi';
+import {DBPostsInteractor, PostItemModel} from '../interfaces/DBPostsInteractor';
 import {Post, PostDocument} from '../../entities/post';
 import {httpRequest} from './request/http.hook';
 

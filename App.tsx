@@ -13,7 +13,7 @@ import store from './src/redux/store';
 import splashScreenRenderer from './src/screens/AppRouter/Renderers/Splash/renderer';
 import homeScreenRenderer from './src/screens/AppRouter/Renderers/Home/renderer';
 import authScreenRenderer from './src/screens/AppRouter/Renderers/Auth/renderer';
-import {AuthApi} from './src/model/network/interfaces';
+import AuthApi from './src/model/network/APIfactory/AuthApi';
 import ACTIONS from './src/redux/types';
 import {useAuth} from './src/model/localStorage/auth.hook';
 import {AuthContext} from './src/model/context/AuthContext';
@@ -65,16 +65,19 @@ export default function App() {
   }
 
   return (
-    <AuthContext.Provider value={{
-      token, login, logout, userId, isAuthenticated
-    }}>
-      {
-        (isDownloading && splashScreenRenderer()) ||
+    <AuthContext.Provider
+      value={{
+        token,
+        login,
+        logout,
+        userId,
+        isAuthenticated,
+      }}>
+      {(isDownloading && splashScreenRenderer()) ||
         (isAuthenticated && homeScreenRenderer()) ||
-        authScreenRenderer()
-      }
+        authScreenRenderer()}
     </AuthContext.Provider>
-  )
+  );
 }
 
 function setUpIgnoreYellowMessage() {

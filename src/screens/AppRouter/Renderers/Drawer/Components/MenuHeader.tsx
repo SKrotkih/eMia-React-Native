@@ -9,7 +9,7 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Avatar, Caption, Paragraph, Title} from 'react-native-paper';
-import {AuthApi} from "../../../../../model/network/interfaces";
+import AuthApi from "../../../../../model/network/APIfactory/AuthApi";
 import {BackendTypeState, TypeBackend} from "../../../../../model/network/backend.dispatch.hook";
 
 export default function MenuHeader() {

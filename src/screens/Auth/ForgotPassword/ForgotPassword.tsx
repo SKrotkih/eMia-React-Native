@@ -11,7 +11,7 @@ import {Alert} from 'react-native';
 import AuthForm from '../AuthForm';
 import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
-import {AuthApi} from "../../../model/network/interfaces";
+import AuthApi from "../../../model/network/APIfactory/AuthApi";
 
 // We use password reminder only for Firebase backend now
 

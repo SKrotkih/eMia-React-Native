@@ -1,3 +1,10 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
 /*
   Custom Hook
  */
@@ -5,7 +12,7 @@ import {useState, useEffect} from 'react';
 import * as LocalStorage from '../localStorage/storage';
 import * as StateActionsStorage from "../../redux/control/actions";
 import * as StateAuthStorage from "../../redux/auth/actions";
-import {AuthApi} from "./interfaces";
+import AuthApi from "./APIfactory/AuthApi";
 import {Alert} from "react-native";
 
 export enum TypeBackend {

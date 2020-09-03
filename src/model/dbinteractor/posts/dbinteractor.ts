@@ -6,7 +6,8 @@
  * @flow
  */
 
-import {PostItemModel, PostsApi} from '../../network/interfaces';
+import PostsApi from '../../network/APIfactory/PostsApi';
+import {PostItemModel} from '../../network/interfaces/DBPostsInteractor';
 
 export function fetchPosts(tabIndex: number): Promise<PostItemModel[]> {
   if (tabIndex === 0) {

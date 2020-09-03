@@ -16,10 +16,14 @@ import {
   useBackend,
 } from '../../../../../model/network/backend.dispatch.hook';
 import {warningToast} from "../../../../../components/Toast/WarningToast";
-
-/*
-  Preferences section on the Main menu
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
  */
+
 export default function MenuFooter() {
   const [backendValue, setBackendValue] = useState<TypeBackend>(null)
   const paperTheme = useTheme();

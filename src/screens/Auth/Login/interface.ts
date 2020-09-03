@@ -1,4 +1,4 @@
-import {User} from "../../../../model/entities/user";
+import {User} from "../../../model/entities/user";
 
 export enum ServerType {
   Firebase,

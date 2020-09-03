@@ -6,7 +6,9 @@
  * @flow
  */
 
-import {AuthApi, PostsApi, StorageApi} from '../network/interfaces';
+import AuthApi from '../network/APIfactory/AuthApi';
+import PostsApi from '../network/APIfactory/PostsApi';
+import StorageApi from '../network/APIfactory/StorageApi';
 import {isEmpty} from '../../utils/validate';
 import {User} from './user';
 import {ImagePickerResponse} from 'react-native-image-picker';

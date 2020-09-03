@@ -7,7 +7,8 @@
  */
 
 import {Alert} from 'react-native';
-import {AuthApi, StorageApi} from '../network/interfaces';
+import AuthApi from '../network/APIfactory/AuthApi';
+import StorageApi from '../network/APIfactory/StorageApi';
 import {ImagePickerResponse} from 'react-native-image-picker';
 import {isEmpty} from "../../utils/validate";
 

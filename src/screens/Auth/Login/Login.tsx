@@ -11,8 +11,8 @@ import AuthForm from '../AuthForm';
 import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import * as StateStorage from '../../../redux/auth/actions';
-import {Credentials} from '../../../model/network/interfaces';
-import {AuthApi} from "../../../model/network/interfaces";
+import {Credentials} from '../../../model/network/interfaces/DBUsersInteractor';
+import AuthApi from "../../../model/network/APIfactory/AuthApi";
 
 export const Login: FunctionComponent = ({navigation}) => {
   const [error, setError] = useState<AuthError>(new AuthError());

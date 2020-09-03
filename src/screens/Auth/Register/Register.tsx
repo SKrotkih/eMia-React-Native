@@ -12,7 +12,8 @@ import AuthError from '../AuthError';
 import {AuthInputModel} from '../AuthModel';
 import {User} from '../../../model/entities/user';
 import * as StateStorage from '../../../redux/auth/actions';
-import {AuthApi, Credentials} from "../../../model/network/interfaces";
+import AuthApi from "../../../model/network/APIfactory/AuthApi";
+import {Credentials} from "../../../model/network/interfaces/DBUsersInteractor";
 import {LoginCredentials} from "../Login/interface";
 
 export const Register: FunctionComponent = ({navigation}) => {

@@ -7,8 +7,9 @@
  */
 
 import {database, storage} from './config';
-import {AuthApi, DBPostsInteractor, PostItemModel} from '../interfaces';
-import {Post, PostDocument} from '../../entities/post';
+import AuthApi from '../APIfactory/AuthApi';
+import {DBPostsInteractor, PostItemModel} from '../interfaces/DBPostsInteractor';
+import {PostDocument} from '../../entities/post';
 
 export class PostsDBInteractor implements DBPostsInteractor {
   fetchPosts(uid: string): Promise<PostItemModel[]> {

@@ -10,7 +10,7 @@ import {Platform} from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
 import FirebaseClient from 'firebase';
 import {isEmpty} from 'lodash';
-import {DBStorageInteractor} from '../interfaces';
+import {DBStorageInteractor} from '../interfaces/DBStorageInteractor';
 import {ImagePickerResponse} from 'react-native-image-picker';
 
 export class StorageDBInteractor implements DBStorageInteractor {

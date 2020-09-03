@@ -8,7 +8,7 @@
 
 import {auth, database, storage} from './config';
 import {User} from '../../entities/user';
-import {Credentials, DBUsersInteractor} from '../interfaces';
+import {Credentials, DBUsersInteractor} from '../interfaces/DBUsersInteractor';
 
 export class UsersDBInteractor implements DBUsersInteractor {
   // Sign user in with their email and password

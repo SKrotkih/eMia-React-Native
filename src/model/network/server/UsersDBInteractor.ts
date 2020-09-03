@@ -6,10 +6,10 @@
  * @flow
  */
 
-import {Credentials, DBUsersInteractor} from '../interfaces';
+import {Credentials, DBUsersInteractor} from '../interfaces/DBUsersInteractor';
 import {User} from '../../entities/user';
-import {httpRequest} from "./request/http.hook";
-import * as LocalStorage from "../../localStorage/storage";
+import {httpRequest} from './request/http.hook';
+import * as LocalStorage from '../../localStorage/storage';
 
 export class UsersDBInteractor implements DBUsersInteractor {
   private keyName = 'login';

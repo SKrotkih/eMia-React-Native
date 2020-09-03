@@ -6,7 +6,7 @@ const UNTRACKED_ERRORS = [
 ];
 
 /**
- * Save  error in to Log.
+ * Show Log item.
  *
  */
 export function errorLog(namespace: string) {

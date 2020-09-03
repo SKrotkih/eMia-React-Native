@@ -1,3 +1,10 @@
+/**
+ * Sample React Native App
+ * https://github.com/SKrotkih/eMia-React-Native
+ *
+ * @format
+ * @flow
+ */
 import {useState, useCallback} from 'react';
 import {BASE_URL} from '../../../../config/constants';
 
