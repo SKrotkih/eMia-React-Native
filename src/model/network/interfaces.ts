@@ -7,7 +7,7 @@ import {StorageDBInteractor as FirebaseStorageDBInteractor} from "./firebase/Sto
 import {StorageDBInteractor as ServerStorageDBInteractor} from "./server/StorageDBInteractor";
 import {Post, PostDocument} from '../entities/post';
 import {ImagePickerResponse} from "react-native-image-picker";
-import {BackendTypeState, TypeBackend} from "../localStorage/backend.dispatch.hook";
+import {BackendTypeState, TypeBackend} from "./backend.dispatch.hook";
 
 export interface Credentials {
   email: string;

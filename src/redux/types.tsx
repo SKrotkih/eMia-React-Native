@@ -7,7 +7,7 @@
  */
 import {User} from "../model/entities/user";
 import {Post} from "../model/entities/post";
-import {TypeBackend} from "../model/localStorage/backend.dispatch.hook";
+import {TypeBackend} from "../model/network/backend.dispatch.hook";
 
 const Types = {
   LOGGED_IN: 'auth/LOGGED_IN',

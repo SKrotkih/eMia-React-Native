@@ -33,7 +33,7 @@ Pods/
 Podfile.lock
 Podfile.zip
 
-GoogleService-Info.js
+src/config/App-Info.js
 GoogleService-Info.plist
 
 tsbuild/

@@ -42,8 +42,8 @@ If you are going to try eMia by yourself, you should register app on Firebase. F
 For iOS
 Sign in your Google account, open Firebase console https://console.firebase.google.com
 Create a new project. Follow documentations https://firebase.google.com/docs/ios/setup#add_firebase_to_your_app.
-Download GoogleService-Info.plist. Then with using GoogleService-Info.plist fill constants in \src\config\GoogleService-Info.js file
-(rename of file \src\config\GoogleService-Info.js.example to \src\config\GoogleService-Info.js).
+Download GoogleService-Info.plist. Then with using GoogleService-Info.plist fill constants in \src\config\App-Info.js file
+(copy file \src\config\App-Info.js.example to \src\config\App-Info.js before).
 
 For Android
 Sign in your Google account, open Firebase console https://console.firebase.google.com

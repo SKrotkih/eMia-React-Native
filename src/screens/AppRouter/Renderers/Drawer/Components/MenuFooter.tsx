@@ -14,20 +14,23 @@ import {
   BackendTypeState,
   TypeBackend,
   useBackend,
-} from '../../../../../model/localStorage/backend.dispatch.hook';
+} from '../../../../../model/network/backend.dispatch.hook';
 import {warningToast} from "../../../../../components/Toast/WarningToast";
 
+/*
+  Preferences section on the Main menu
+ */
 export default function MenuFooter() {
   const [backendValue, setBackendValue] = useState<TypeBackend>(null)
   const paperTheme = useTheme();
   const {toggleTheme} = React.useContext(AppContext);
   const {backend, ready, toggleBackend} = useBackend();
-
-  return (
-    <View style={styles.container}>
-      <TouchableRipple onPress={() => {
-          toggleTheme();
-        }}>
+  /*
+    Select Dark/Light theme
+   */
+  const toggleTypeTheme = () => {
+    return (
+      <TouchableRipple onPress={toggleTheme}>
         <View style={styles.preference}>
           <Text>{paperTheme.dark ? 'Light Theme' : 'Dark Theme'}</Text>
           <View pointerEvents="none">
@@ -35,20 +38,29 @@ export default function MenuFooter() {
           </View>
         </View>
       </TouchableRipple>
-      <TouchableRipple
-        onPress={() => {
-          toggleBackend()
-            .then(() => {
-              BackendTypeState.getBackend()
-                .then((_backend) => {
-                  // Update UI
-                  setBackendValue(_backend);
-                });
-            })
-            .catch((error) => {
-            warningToast(error);
-            });
-        }}>
+    )
+  }
+
+  /*
+    Select Type of the Backend: Firebase or Node.js
+   */
+  const handleSwitchTypeOfBackend = () => {
+    toggleBackend()
+      .then(() => {
+        BackendTypeState.getBackend()
+          .then((_backend) => {
+            // Update UI
+            setBackendValue(_backend);
+          });
+      })
+      .catch((error) => {
+        warningToast(error);
+      });
+  }
+
+  const toggleTypeBackend = () => {
+    return (
+      <TouchableRipple onPress={handleSwitchTypeOfBackend}>
         <View style={styles.preference}>
           <Text>{backend === TypeBackend.Firebase ? 'NodeJS' : 'Firebase'}</Text>
           <View pointerEvents="none">
@@ -56,6 +68,13 @@ export default function MenuFooter() {
           </View>
         </View>
       </TouchableRipple>
+    )
+  }
+
+  return (
+    <View style={styles.container}>
+      {toggleTypeTheme()}
+      {toggleTypeBackend()}
     </View>
   );
 }

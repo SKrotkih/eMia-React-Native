@@ -7,10 +7,11 @@
  */
 
 import ACTIONS from '../types';
-import {TypeBackend} from "../../model/localStorage/backend.dispatch.hook";
+import {TypeBackend} from "../../model/network/backend.dispatch.hook";
 
-// The Redux reducer used for flow control
-
+/*
+    The Redux reducer used for flow control
+ */
 const reducer = (state = null, action) => {
   switch (action.type) {
     case ACTIONS.Types.CHANGE_BACKEND:

@@ -2,10 +2,10 @@
   Custom Hook
  */
 import {useState, useEffect} from 'react';
-import * as LocalStorage from './storage';
+import * as LocalStorage from '../localStorage/storage';
 import * as StateActionsStorage from "../../redux/control/actions";
 import * as StateAuthStorage from "../../redux/auth/actions";
-import {AuthApi} from "../network/interfaces";
+import {AuthApi} from "./interfaces";
 import {Alert} from "react-native";
 
 export enum TypeBackend {

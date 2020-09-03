@@ -8,7 +8,7 @@
 
 import ACTIONS from '../types';
 import store from '../store';
-import {TypeBackend} from "../../model/localStorage/backend.dispatch.hook";
+import {TypeBackend} from "../../model/network/backend.dispatch.hook";
 
 export function changeBackendType(backendType: TypeBackend) {
   store.dispatch(ACTIONS.changeBackendType(backendType));

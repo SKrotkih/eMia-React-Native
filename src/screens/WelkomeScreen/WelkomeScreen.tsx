@@ -9,7 +9,7 @@
 import React, {FunctionComponent} from 'react';
 import {Text, View, TouchableOpacity, Image, StyleSheet, useWindowDimensions} from 'react-native';
 import {Button} from 'react-native-elements';
-import * as config from '../../config/constants';
+import {APP_NAME} from '../../config/App-Info';
 import {color, fontFamily, fontSize, normalize, padding} from "../../theme/styles";
 
 export const WelkomeScreen: FunctionComponent = (props) => {
@@ -31,7 +31,7 @@ export const WelkomeScreen: FunctionComponent = (props) => {
           style={styles.image}
           source={require('../../assets/images/logo.png')}
         />
-        <Text style={styles.title}>{config.APP_NAME}</Text>
+        <Text style={styles.title}>{APP_NAME}</Text>
       </View>
       <View style={styles.bottomContainer}>
         <View style={[styles.buttonContainer]}>

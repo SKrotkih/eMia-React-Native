@@ -1,12 +1,11 @@
+import {Platform} from 'react-native';
+import {REMOTE_REST_API_SERVER, LOCAL_REST_API_SERVER} from './App-Info';
+
 const Production = true;
 
-import {Platform} from 'react-native';
 const iOS = Platform.OS === 'ios';
 
-export const BASE_URL = () => Production ? 'http://159.253.21.84:5000' : 'http://localhost:5000';
-
-export const FACEBOOK_APP_ID = '';
-export const APP_NAME = 'eMia - React Native';
+export const BASE_URL = () => Production ? REMOTE_REST_API_SERVER : LOCAL_REST_API_SERVER;
 
 export const IS_ERRORS_LOG_SET_UP = true;
 
